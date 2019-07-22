@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "carpet-extra",
+  "version": "0.0.1",
+
+  "name": "Carpet Extra",
+  "description": "Additional, less vanilla additions to the carpet mod",
+  "authors": [
+    "gnembon ... "
+  ],
+  "contact": {
+    "homepage": "https://github.com/gnembon/carpet-extra",
+    "sources": "https://github.com/gnembon/carpet-extra"
+  },
+
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+    ]
+  },
+  "mixins": [
+    "carpet-extra.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "carpet": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

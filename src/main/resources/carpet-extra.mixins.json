@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "carpetextra.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MinecraftServer_noopMixin"
+  ],
+  "client": [
+    "MinecraftClient_noopMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
