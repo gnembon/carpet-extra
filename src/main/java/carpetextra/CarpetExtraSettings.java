@@ -11,16 +11,8 @@ public class CarpetExtraSettings
 {
     public static final String EXTRA = "extras";
 
-    /**
-     *  Simple numeric setting, no use otherwise
-     */
-    @Rule(
-            desc = "Example numerical setting",
-            options = {"32768", "250000", "1000000"},
-            validate = {Validator.POSITIVE_NUMBER.class, CheckValue.class},
-            category = {CREATIVE, "examplemod"}
-    )
-    public static int uselessNumericalSetting = 32768;
+    @Rule(desc = "Auto-crafting table", category = {CREATIVE, EXTRA})
+    public static boolean autoCraftingTable = false;
 
 
     @Rule(desc="Dispensers can place blocks", category = {CREATIVE, EXTRA})

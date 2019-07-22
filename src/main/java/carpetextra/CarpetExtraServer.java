@@ -2,6 +2,7 @@ package carpetextra;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+import carpetextra.utils.ExtrasRegistry;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
@@ -10,8 +11,10 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class CarpetExtraServer implements CarpetExtension
 {
     public static void noop() { }
+
     static
     {
+        ExtrasRegistry.noop();
         CarpetServer.manageExtension(new CarpetExtraServer());
     }
 
