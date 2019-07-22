@@ -1,10 +1,6 @@
 package carpetextra;
 
-import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
-import carpet.settings.Validator;
-import carpet.utils.Messenger;
-import net.minecraft.server.command.ServerCommandSource;
 
 import static carpet.settings.RuleCategory.CREATIVE;
 
@@ -13,18 +9,7 @@ import static carpet.settings.RuleCategory.CREATIVE;
  */
 public class CarpetExtraSettings
 {
-    /**
-     *  Custom validator class for your setting. If validate returns null - settings is not changed.
-     */
-    private static class CheckValue extends Validator<Integer>
-    {
-        @Override
-        public Integer validate(ServerCommandSource source, ParsedRule<Integer> currentRule, Integer newValue, String typedString)
-        {
-            Messenger.m(source, "rb Congrats, you just changed a setting to "+newValue);
-            return newValue < 20000000 ? newValue : null;
-        }
-    }
+    public static final String EXTRA = "extras";
 
     /**
      *  Simple numeric setting, no use otherwise
@@ -38,10 +23,7 @@ public class CarpetExtraSettings
     public static int uselessNumericalSetting = 32768;
 
 
-    /**
-     * You can define your own catergories. It makes sense to create new category for all settings in your mod.
-     */
-    @Rule(desc="makes mobs dance Makarena", category = {"fun", "examplemod"})
-    public static boolean makarena = false;
+    @Rule(desc="Dispensers can place blocks", category = {CREATIVE, EXTRA})
+    public static boolean dispenserPlacesBlocks = false;
 
 }
