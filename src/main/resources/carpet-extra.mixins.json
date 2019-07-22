@@ -5,7 +5,8 @@
   "mixins": [
     "MinecraftServer_noopMixin",
     "DispenserBlockMixin",
-    "CraftingTableBlockMixin"
+    "CraftingTableBlockMixin",
+    "CraftingInventoryMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"

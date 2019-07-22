@@ -1,6 +1,7 @@
 package carpetextra.utils;
 
 import carpetextra.mixins.CraftingInventoryMixin;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.container.Container;
@@ -17,13 +18,19 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.Direction;
-//import quickcarpet.utils.CarpetRegistry;
+import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CraftingTableBlockEntity extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider {
+public class CraftingTableBlockEntity extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider
+{
+    public static final BlockEntityType<CraftingTableBlockEntity> TYPE = Registry.register(
+            Registry.BLOCK_ENTITY,
+            "carpet:crafting_table",
+            BlockEntityType.Builder.create(CraftingTableBlockEntity::new, Blocks.CRAFTING_TABLE).build(null)
+    );
     private static final int[] OUTPUT_SLOTS = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     private static final int[] INPUT_SLOTS = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     public DefaultedList<ItemStack> inventory;
@@ -31,7 +38,7 @@ public class CraftingTableBlockEntity extends LockableContainerBlockEntity imple
     private List<AutoCraftingTableContainer> openContainers = new ArrayList<>();
 
     public CraftingTableBlockEntity() {  //this(BlockEntityType.BARREL);
-        this(ExtrasRegistry.CRAFTING_TABLE_BLOCK_ENTITY_TYPE);
+        this(TYPE);
     }
 
     private CraftingInventory craftingInventory = new CraftingInventory(null, 3, 3);
@@ -41,6 +48,8 @@ public class CraftingTableBlockEntity extends LockableContainerBlockEntity imple
         this.inventory = DefaultedList.ofSize(9, ItemStack.EMPTY);
         ((CraftingInventoryMixin) craftingInventory).setInventory(this.inventory);
     }
+
+    public static void init() { } // registers BE type
 
     @Override
     public CompoundTag toTag(CompoundTag tag) {

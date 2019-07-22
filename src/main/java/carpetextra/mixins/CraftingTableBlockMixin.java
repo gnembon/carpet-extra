@@ -33,8 +33,9 @@ public class CraftingTableBlockMixin extends Block implements BlockEntityProvide
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockView var1) {
-        return new CraftingTableBlockEntity();
+    public BlockEntity createBlockEntity(BlockView var1)
+    {
+        return CarpetExtraSettings.autoCraftingTable ? new CraftingTableBlockEntity() : null;
     }
 
     @Inject(method = "activate", at = @At("HEAD"), cancellable = true)
@@ -82,6 +83,7 @@ public class CraftingTableBlockMixin extends Block implements BlockEntityProvide
                 }
                 world.updateHorizontalAdjacent(pos, this);
             }
+            world.removeBlockEntity(pos);
 
             super.onBlockRemoved(state1, world, pos, state2, boolean_1);
         }
