@@ -8,7 +8,6 @@
     "CraftingTableBlockMixin",
     "CraftingInventoryMixin",
 
-    //2No2Name's mixins
     "ItemFrameEntity_comparatorReadsClockMixin",
     "HopperMinecartEntity_cooldownFixMixin",
     "HopperMinecartEntity_transferItemsOutFeatureMixin"
