@@ -4,7 +4,9 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MinecraftServer_noopMixin",
-    "DispenserBlockMixin"
+    "DispenserBlockMixin",
+    "CraftingTableBlockMixin",
+    "CraftingInventoryMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"

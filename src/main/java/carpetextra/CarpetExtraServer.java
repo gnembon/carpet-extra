@@ -2,6 +2,7 @@ package carpetextra;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+import carpetextra.utils.CraftingTableBlockEntity;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
@@ -10,8 +11,10 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class CarpetExtraServer implements CarpetExtension
 {
     public static void noop() { }
+
     static
     {
+        CraftingTableBlockEntity.init();
         CarpetServer.manageExtension(new CarpetExtraServer());
     }
 
