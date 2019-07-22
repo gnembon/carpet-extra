@@ -3,7 +3,8 @@
   "package": "carpetextra.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MinecraftServer_noopMixin"
+    "MinecraftServer_noopMixin",
+    "DispenserBlockMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
