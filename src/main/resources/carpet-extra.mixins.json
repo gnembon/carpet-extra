@@ -6,7 +6,11 @@
     "MinecraftServer_noopMixin",
     "DispenserBlockMixin",
     "CraftingTableBlockMixin",
-    "CraftingInventoryMixin"
+    "CraftingInventoryMixin",
+
+    "ItemFrameEntity_comparatorReadsClockMixin",
+    "HopperMinecartEntity_cooldownFixMixin",
+    "HopperMinecartEntity_transferItemsOutFeatureMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
