@@ -36,4 +36,10 @@ public class CarpetExtraSettings
         category = {BUGFIX,FEATURE,EXTRA,EXPERIMENTAL}
     )
     public static boolean hopperMinecartItemTransfer= false;
+    
+    @Rule(
+            desc = "Water bottles in dispensers fill with water when dispensed with water in front.",
+            category = {EXPERIMENTAL, FEATURE, EXTRA}
+    )
+    public static boolean dispensersFillBottles;
 }
