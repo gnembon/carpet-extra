@@ -42,4 +42,11 @@ public class CarpetExtraSettings
             category = {EXPERIMENTAL, FEATURE, EXTRA}
     )
     public static boolean dispensersFillBottles;
+    
+    @Rule(
+            desc = "Minecarts can be filled with hoppers, chests, tnt and furnace.",
+            category = {EXPERIMENTAL, FEATURE, EXTRA}
+    )
+    public static boolean dispensersFillMinecarts = false;
+    
 }
