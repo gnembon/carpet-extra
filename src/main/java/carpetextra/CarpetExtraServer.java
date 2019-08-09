@@ -2,6 +2,7 @@ package carpetextra;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+import carpetextra.commands.PingCommand;
 import carpetextra.utils.CraftingTableBlockEntity;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.MinecraftServer;
@@ -49,6 +50,7 @@ public class CarpetExtraServer implements CarpetExtension
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher)
     {
         // here goes extra stuff
+        PingCommand.register(dispatcher);
     }
 
     @Override

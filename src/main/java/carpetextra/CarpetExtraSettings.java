@@ -37,6 +37,9 @@ public class CarpetExtraSettings
     )
     public static boolean hopperMinecartItemTransfer= false;
     
+    @Rule(desc = "Enables /ping for players to get their ping", category = {COMMAND, EXTRA})
+    public static boolean commandPing = true;
+    
     @Rule(
             desc = "Water bottles in dispensers fill with water when dispensed with water in front.",
             category = {EXPERIMENTAL, FEATURE, EXTRA}
