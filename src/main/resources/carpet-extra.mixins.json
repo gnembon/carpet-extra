@@ -8,6 +8,7 @@
     "CraftingTableBlockMixin",
     "CraftingInventoryMixin",
     "DispenserBehaviourMixin",
+    "FallingBlockEntityMixin",
 
     "ItemFrameEntity_comparatorReadsClockMixin",
     "HopperMinecartEntity_cooldownFixMixin",
