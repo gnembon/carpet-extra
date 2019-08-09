@@ -52,4 +52,7 @@ public class CarpetExtraSettings
     )
     public static boolean dispensersFillMinecarts = false;
     
+    @Rule(desc = "Multiple ice crushed by falling anvils make packed ice", category = {EXTRA, EXPERIMENTAL, FEATURE})
+    public static boolean renewablePackedIce = false;
+    
 }
