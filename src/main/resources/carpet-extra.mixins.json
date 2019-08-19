@@ -9,6 +9,7 @@
     "CraftingInventoryMixin",
     "DispenserBehaviourMixin",
     "FallingBlockEntityMixin",
+    "WetSpongeBlockMixin",
 
     "ItemFrameEntity_comparatorReadsClockMixin",
     "HopperMinecartEntity_cooldownFixMixin",
