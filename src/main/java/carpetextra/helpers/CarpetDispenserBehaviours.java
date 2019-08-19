@@ -5,13 +5,16 @@ import net.minecraft.block.*;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.block.entity.JukeboxBlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.MusicDiscItem;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
@@ -20,6 +23,7 @@ import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -33,6 +37,42 @@ public class CarpetDispenserBehaviours
         DispenserBlock.registerBehavior(Items.HOPPER, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.HOPPER));
         DispenserBlock.registerBehavior(Items.FURNACE, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.FURNACE));
         DispenserBlock.registerBehavior(Items.TNT, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.TNT));
+        Registry.ITEM.forEach(record -> {
+            if (record instanceof MusicDiscItem)
+            {
+                DispenserBlock.registerBehavior(record, new DispenserRecords());
+            }
+        });
+    }
+    
+    public static class DispenserRecords extends ItemDispenserBehavior
+    {
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
+        {
+            if (!CarpetExtraSettings.dispensersPlayRecords)
+                return super.dispenseSilently(source, stack);
+            
+            Direction direction = source.getBlockState().get(DispenserBlock.FACING);
+            BlockPos pos = source.getBlockPos().offset(direction);
+            World world = source.getWorld();
+            BlockState state = world.getBlockState(pos);
+            
+            if (state.getBlock() == Blocks.JUKEBOX)
+            {
+                JukeboxBlockEntity jukebox = (JukeboxBlockEntity) world.getBlockEntity(pos);
+                if (jukebox != null)
+                {
+                    ItemStack itemStack = jukebox.getRecord();
+                    ((JukeboxBlock) state.getBlock()).setRecord(world, pos, state, stack);
+                    world.playLevelEvent(null, 1010, pos, Item.getRawId(stack.getItem()));
+                    
+                    return itemStack;
+                }
+            }
+            
+            return super.dispenseSilently(source, stack);
+        }
     }
     
     public static class WaterBottleDispenserBehaviour extends FallibleItemDispenserBehavior
