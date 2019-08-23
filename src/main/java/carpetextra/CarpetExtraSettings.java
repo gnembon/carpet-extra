@@ -58,4 +58,11 @@ public class CarpetExtraSettings
     @Rule(desc = "Multiple ice crushed by falling anvils make packed ice", category = {EXTRA, EXPERIMENTAL, FEATURE})
     public static boolean renewablePackedIce = false;
     
+    @Rule(
+            desc = "Dispensers can play records if there's a jukebox in front of them",
+            extra = "If record already exists in the jukebox, it gets placed back in the dispenser",
+            category = {EXTRA, FEATURE}
+    )
+    public static boolean dispensersPlayRecords = false;
+    
 }
