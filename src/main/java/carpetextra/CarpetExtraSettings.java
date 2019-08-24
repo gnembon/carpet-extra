@@ -16,7 +16,7 @@ public class CarpetExtraSettings
 
 
     @Rule(desc="Dispensers can place blocks", category = {CREATIVE, EXTRA})
-    public static boolean dispenserPlacesBlocks = false;
+    public static boolean dispenserPlacesBlocks = true;
 
 
     @Rule(
@@ -63,6 +63,8 @@ public class CarpetExtraSettings
             extra = "If record already exists in the jukebox, it gets placed back in the dispenser",
             category = {EXTRA, FEATURE}
     )
-    public static boolean dispensersPlayRecords = false;
+    public static boolean dispensersPlayRecords = true;
     
+    @Rule(desc = "Dispensers can feed animals", category = {EXTRA, EXPERIMENTAL, FEATURE})
+    public static boolean dispensersFeedAnimals = true;
 }

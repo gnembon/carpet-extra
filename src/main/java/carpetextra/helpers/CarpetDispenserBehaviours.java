@@ -1,6 +1,7 @@
 package carpetextra.helpers;
 
 import carpetextra.CarpetExtraSettings;
+import carpetextra.utils.FakePlayerEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -11,6 +12,7 @@ import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,6 +21,7 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -33,10 +36,40 @@ public class CarpetDispenserBehaviours
     public static void registerCarpetBehaviours()
     {
         DispenserBlock.registerBehavior(Items.GLASS_BOTTLE, new WaterBottleDispenserBehaviour());
+        
         DispenserBlock.registerBehavior(Items.CHEST, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.CHEST));
         DispenserBlock.registerBehavior(Items.HOPPER, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.HOPPER));
         DispenserBlock.registerBehavior(Items.FURNACE, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.FURNACE));
         DispenserBlock.registerBehavior(Items.TNT, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.TNT));
+        /* This consumes too much space, must seek alternative */
+        DispenserBlock.registerBehavior(Items.GOLDEN_APPLE, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.GOLDEN_CARROT, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.SWEET_BERRIES, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.DANDELION, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.SEAGRASS, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.HAY_BLOCK, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.WHEAT, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.CARROT, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.POTATO, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.BEETROOT, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.WHEAT_SEEDS, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.BEETROOT_SEEDS, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.MELON_SEEDS, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.PUMPKIN_SEEDS, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.COD, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.SALMON, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.ROTTEN_FLESH, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.PORKCHOP, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.CHICKEN, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.RABBIT, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.BEEF, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.MUTTON, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.COOKED_PORKCHOP, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.COOKED_CHICKEN, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.COOKED_RABBIT, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.COOKED_BEEF, new FeedAnimalDispenserBehavior());
+        DispenserBlock.registerBehavior(Items.COOKED_MUTTON, new FeedAnimalDispenserBehavior());
+
         Registry.ITEM.forEach(record -> {
             if (record instanceof MusicDiscItem)
             {
@@ -184,6 +217,34 @@ public class CarpetDispenserBehaviours
         protected void playSound(BlockPointer source)
         {
             source.getWorld().playLevelEvent(1000, source.getBlockPos(), 0);
+        }
+    }
+
+    public static class FeedAnimalDispenserBehavior extends ItemDispenserBehavior {
+
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
+            if(!CarpetExtraSettings.dispensersFeedAnimals) {
+                return super.dispenseSilently(source, stack);
+            }
+
+            BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
+            
+            List<AnimalEntity> list = source.getWorld().<AnimalEntity>getEntities(AnimalEntity.class, new Box(pos));
+            boolean failure = false;
+            for(AnimalEntity mob : list) {
+                if(!mob.isBreedingItem(stack)) continue;
+                if(mob.isInLove()) {
+                    failure = true;
+                    continue;
+                }
+                FakePlayerEntity dispenser = new FakePlayerEntity(source.getWorld(), "dispenser");
+                dispenser.setStackInHand(Hand.MAIN_HAND, stack);
+                mob.interact(dispenser, Hand.MAIN_HAND);
+                return stack;
+            }
+            if(failure) return stack;
+            return super.dispenseSilently(source, stack);
         }
     }
 }
