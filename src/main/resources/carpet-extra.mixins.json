@@ -10,7 +10,9 @@
     "DispenserBehaviourMixin",
     "FallingBlockEntityMixin",
     "WetSpongeBlockMixin",
-
+    "AnimalMateGoalMixin",
+    "FoxMateGoalMixin",
+    "TurtleMateGoalMixin",
     "ItemFrameEntity_comparatorReadsClockMixin",
     "HopperMinecartEntity_cooldownFixMixin",
     "HopperMinecartEntity_transferItemsOutFeatureMixin"
