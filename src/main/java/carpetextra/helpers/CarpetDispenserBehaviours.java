@@ -1,7 +1,6 @@
 package carpetextra.helpers;
 
 import carpetextra.CarpetExtraSettings;
-import carpetextra.utils.FakePlayerEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -21,7 +20,6 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -229,18 +227,17 @@ public class CarpetDispenserBehaviours
             }
 
             BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
-            
             List<AnimalEntity> list = source.getWorld().<AnimalEntity>getEntities(AnimalEntity.class, new Box(pos));
             boolean failure = false;
+
             for(AnimalEntity mob : list) {
                 if(!mob.isBreedingItem(stack)) continue;
-                if(mob.isInLove()) {
+                if(mob.getBreedingAge() != 0 || mob.isInLove()) {
                     failure = true;
                     continue;
                 }
-                FakePlayerEntity dispenser = new FakePlayerEntity(source.getWorld(), "dispenser");
-                dispenser.setStackInHand(Hand.MAIN_HAND, stack);
-                mob.interact(dispenser, Hand.MAIN_HAND);
+                stack.decrement(1);
+                mob.lovePlayer(null);
                 return stack;
             }
             if(failure) return stack;
