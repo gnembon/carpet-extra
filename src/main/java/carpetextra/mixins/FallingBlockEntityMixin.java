@@ -44,7 +44,7 @@ public abstract class FallingBlockEntityMixin extends Entity
         {
             if (iceCount < 2)
             {
-                world.breakBlock(blockPos_2.down(), false);
+                world.breakBlock(blockPos_2.down(), false, null);
                 this.onGround = false;
                 iceCount++;
                 ci.cancel();
