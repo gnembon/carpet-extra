@@ -64,5 +64,11 @@ public class CarpetExtraSettings
             category = {EXTRA, FEATURE}
     )
     public static boolean dispensersPlayRecords = false;
+
+    @Rule(
+            desc = "Client can provide alternative block placement",
+            category = {EXTRA, SURVIVAL}
+    )
+    public static boolean accurateBlockPlacement = false;
     
 }
