@@ -25,7 +25,6 @@ public abstract class AnimalMateGoalMixin {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
-            shift = At.Shift.AFTER,
             ordinal = 1
         ),
         cancellable = true

@@ -18,7 +18,7 @@ public abstract class TurtleMateGoalMixin extends AnimalMateGoal {
     }
 
     @Inject(
-        method = "breed",
+        method = "breed()V",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
