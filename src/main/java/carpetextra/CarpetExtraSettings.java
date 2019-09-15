@@ -70,5 +70,7 @@ public class CarpetExtraSettings
             category = {EXTRA, SURVIVAL}
     )
     public static boolean accurateBlockPlacement = false;
-    
+
+    @Rule(desc = "Dispensers can toggle with a stick things like buttons, doors, repeaters", category = {EXTRA, EXPERIMENTAL, FEATURE})
+    public static boolean dispensersToggleThings = false;
 }
