@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.MusicDiscItem;
+import net.minecraft.item.HoeItem;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
@@ -42,6 +43,10 @@ public class CarpetDispenserBehaviours
             {
                 DispenserBlock.registerBehavior(record, new DispenserRecords());
             }
+        });
+        Registry.ITEM.forEach(hoe -> {
+            if (hoe instanceof HoeItem)
+                DispenserBlock.registerBehavior(hoe, new TillSoilDispenserBehaviour());
         });
     }
     
@@ -184,6 +189,50 @@ public class CarpetDispenserBehaviours
         protected void playSound(BlockPointer source)
         {
             source.getWorld().playLevelEvent(1000, source.getBlockPos(), 0);
+        }
+    }
+    
+    public static class TillSoilDispenserBehaviour extends ItemDispenserBehavior
+    {
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer blockPointer_1, ItemStack itemStack_1)
+        {
+            if (!CarpetExtraSettings.dispensersTillSoil)
+                return super.dispenseSilently(blockPointer_1, itemStack_1);
+            
+            World world = blockPointer_1.getWorld();
+            Direction direction = blockPointer_1.getBlockState().get(DispenserBlock.FACING);
+            BlockPos front = blockPointer_1.getBlockPos().offset(direction);
+            BlockPos down = blockPointer_1.getBlockPos().down().offset(direction);
+            BlockState frontState = world.getBlockState(front);
+            BlockState downState = world.getBlockState(down);
+            
+            if (isFarmland(frontState) || isFarmland(downState))
+                return itemStack_1;
+            
+            if (canDirectlyTurnToFarmland(frontState))
+                world.setBlockState(front, Blocks.FARMLAND.getDefaultState());
+            else if (canDirectlyTurnToFarmland(downState))
+                world.setBlockState(down, Blocks.FARMLAND.getDefaultState());
+            else if (frontState.getBlock() == Blocks.COARSE_DIRT)
+                world.setBlockState(front, Blocks.DIRT.getDefaultState());
+            else if (downState.getBlock() == Blocks.COARSE_DIRT)
+                world.setBlockState(down, Blocks.DIRT.getDefaultState());
+            
+            if (itemStack_1.damage(1, world.random, null))
+                itemStack_1.setCount(0);
+            
+            return itemStack_1;
+        }
+    
+        private boolean canDirectlyTurnToFarmland(BlockState state)
+        {
+            return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.GRASS_PATH;
+        }
+        
+        private boolean isFarmland(BlockState state)
+        {
+            return state.getBlock() == Blocks.FARMLAND;
         }
     }
 }

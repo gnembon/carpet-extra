@@ -71,4 +71,7 @@ public class CarpetExtraSettings
     )
     public static boolean accurateBlockPlacement = false;
     
+    @Rule(desc = "Dispensers with hoes can till soil", category = {EXTRA, FEATURE})
+    public static boolean dispensersTillSoil = false;
+    
 }
