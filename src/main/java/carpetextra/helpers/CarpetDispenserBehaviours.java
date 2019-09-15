@@ -16,7 +16,6 @@ import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.MusicDiscItem;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
@@ -37,22 +36,6 @@ import java.util.Set;
 
 public class CarpetDispenserBehaviours
 {
-    public static void registerCarpetBehaviours()
-    {
-        DispenserBlock.registerBehavior(Items.GLASS_BOTTLE, new WaterBottleDispenserBehaviour());
-        DispenserBlock.registerBehavior(Items.CHEST, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.CHEST));
-        DispenserBlock.registerBehavior(Items.HOPPER, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.HOPPER));
-        DispenserBlock.registerBehavior(Items.FURNACE, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.FURNACE));
-        DispenserBlock.registerBehavior(Items.TNT, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.TNT));
-        DispenserBlock.registerBehavior(Items.STICK, new TogglingDispenserBehaviour());
-        Registry.ITEM.forEach(record -> {
-            if (record instanceof MusicDiscItem)
-            {
-                DispenserBlock.registerBehavior(record, new DispenserRecords());
-            }
-        });
-    }
-    
     public static class DispenserRecords extends ItemDispenserBehavior
     {
         @Override
@@ -194,7 +177,7 @@ public class CarpetDispenserBehaviours
             source.getWorld().playLevelEvent(1000, source.getBlockPos(), 0);
         }
     }
-
+  
     public static class TogglingDispenserBehaviour extends ItemDispenserBehavior {
 
         private FakePlayerEntity player;
@@ -235,6 +218,50 @@ public class CarpetDispenserBehaviours
                 if(bool) return stack;
             }
             return super.dispenseSilently(source, stack);
+        }
+    }
+    
+    public static class TillSoilDispenserBehaviour extends ItemDispenserBehavior
+    {
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer blockPointer_1, ItemStack itemStack_1)
+        {
+            if (!CarpetExtraSettings.dispensersTillSoil)
+                return super.dispenseSilently(blockPointer_1, itemStack_1);
+            
+            World world = blockPointer_1.getWorld();
+            Direction direction = blockPointer_1.getBlockState().get(DispenserBlock.FACING);
+            BlockPos front = blockPointer_1.getBlockPos().offset(direction);
+            BlockPos down = blockPointer_1.getBlockPos().down().offset(direction);
+            BlockState frontState = world.getBlockState(front);
+            BlockState downState = world.getBlockState(down);
+            
+            if (isFarmland(frontState) || isFarmland(downState))
+                return itemStack_1;
+            
+            if (canDirectlyTurnToFarmland(frontState))
+                world.setBlockState(front, Blocks.FARMLAND.getDefaultState());
+            else if (canDirectlyTurnToFarmland(downState))
+                world.setBlockState(down, Blocks.FARMLAND.getDefaultState());
+            else if (frontState.getBlock() == Blocks.COARSE_DIRT)
+                world.setBlockState(front, Blocks.DIRT.getDefaultState());
+            else if (downState.getBlock() == Blocks.COARSE_DIRT)
+                world.setBlockState(down, Blocks.DIRT.getDefaultState());
+            
+            if (itemStack_1.damage(1, world.random, null))
+                itemStack_1.setCount(0);
+            
+            return itemStack_1;
+        }
+    
+        private boolean canDirectlyTurnToFarmland(BlockState state)
+        {
+            return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.GRASS_PATH;
+        }
+        
+        private boolean isFarmland(BlockState state)
+        {
+            return state.getBlock() == Blocks.FARMLAND;
         }
     }
 }
