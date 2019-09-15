@@ -14,8 +14,6 @@ import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.MusicDiscItem;
-import net.minecraft.item.HoeItem;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
@@ -24,32 +22,12 @@ import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public class CarpetDispenserBehaviours
 {
-    public static void registerCarpetBehaviours()
-    {
-        DispenserBlock.registerBehavior(Items.GLASS_BOTTLE, new WaterBottleDispenserBehaviour());
-        DispenserBlock.registerBehavior(Items.CHEST, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.CHEST));
-        DispenserBlock.registerBehavior(Items.HOPPER, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.HOPPER));
-        DispenserBlock.registerBehavior(Items.FURNACE, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.FURNACE));
-        DispenserBlock.registerBehavior(Items.TNT, new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.TNT));
-        Registry.ITEM.forEach(record -> {
-            if (record instanceof MusicDiscItem)
-            {
-                DispenserBlock.registerBehavior(record, new DispenserRecords());
-            }
-        });
-        Registry.ITEM.forEach(hoe -> {
-            if (hoe instanceof HoeItem)
-                DispenserBlock.registerBehavior(hoe, new TillSoilDispenserBehaviour());
-        });
-    }
-    
     public static class DispenserRecords extends ItemDispenserBehavior
     {
         @Override
