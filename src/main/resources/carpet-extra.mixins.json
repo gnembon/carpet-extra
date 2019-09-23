@@ -7,7 +7,6 @@
     "DispenserBlockMixin",
     "CraftingTableBlockMixin",
     "CraftingInventoryMixin",
-    "DispenserBehaviourMixin",
     "FallingBlockEntityMixin",
     "WetSpongeBlockMixin",
 
