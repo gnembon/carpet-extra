@@ -123,7 +123,7 @@ public class CarpetDispenserBehaviours
             else
             {
                 BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
-                List<MinecartEntity> list = source.getWorld().<MinecartEntity>getEntities(MinecartEntity.class, new Box(pos));
+                List<MinecartEntity> list = source.getWorld().<MinecartEntity>getEntities(MinecartEntity.class, new Box(pos), null);
     
                 if (list.isEmpty())
                 {
