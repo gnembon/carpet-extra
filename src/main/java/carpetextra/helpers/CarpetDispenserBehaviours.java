@@ -171,7 +171,7 @@ public class CarpetDispenserBehaviours
         }
     }
 
-    public static class FeedAnimalDispenserBehavior extends ItemDispenserBehavior {
+    public static class FeedAnimalDispenserBehaviour extends ItemDispenserBehavior {
 
         @Override
         protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
