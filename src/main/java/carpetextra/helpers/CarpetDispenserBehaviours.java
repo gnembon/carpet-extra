@@ -180,7 +180,7 @@ public class CarpetDispenserBehaviours
   
     public static class TogglingDispenserBehaviour extends ItemDispenserBehavior {
 
-        private FakePlayerEntity player;
+        private static FakePlayerEntity player;
         private static Set<Block> toggleable = Sets.newHashSet(
             Blocks.STONE_BUTTON, Blocks.ACACIA_BUTTON, Blocks.BIRCH_BUTTON, Blocks.DARK_OAK_BUTTON,
             Blocks.JUNGLE_BUTTON, Blocks.OAK_BUTTON, Blocks.SPRUCE_BUTTON, Blocks.ACACIA_DOOR,
