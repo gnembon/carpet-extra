@@ -9,6 +9,8 @@
     "CraftingInventoryMixin",
     "FallingBlockEntityMixin",
     "WetSpongeBlockMixin",
+    "AbstractPressurePlateBlock_variableWoodMixin",
+    "AbstractButtonBlock_variableWoodMixin",
 
     "ItemFrameEntity_comparatorReadsClockMixin",
     "BlockItemMixin_accurateBlockPlacement",
