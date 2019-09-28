@@ -81,4 +81,6 @@ public class CarpetExtraSettings
     @Rule(desc = "Dispensers with hoes can till soil", category = {EXTRA, FEATURE})
     public static boolean dispensersTillSoil = false;
     
+    @Rule(desc = "Dispensers can feed animals", category = {EXTRA, EXPERIMENTAL, FEATURE})
+    public static boolean dispensersFeedAnimals = false;
 }
