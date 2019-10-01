@@ -9,7 +9,9 @@
     "CraftingInventoryMixin",
     "FallingBlockEntityMixin",
     "WetSpongeBlockMixin",
-
+    "RepeaterBlockMixin",
+    "ComparatorBlockMixin",
+    "DaylightDetectorBlockMixin",
     "ItemFrameEntity_comparatorReadsClockMixin",
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",

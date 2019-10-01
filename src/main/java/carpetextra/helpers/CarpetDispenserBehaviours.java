@@ -1,7 +1,6 @@
 package carpetextra.helpers;
 
 import carpetextra.CarpetExtraSettings;
-import carpetextra.utils.FakePlayerEntity;
 import com.google.common.collect.Sets;
 import net.minecraft.block.*;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
@@ -28,7 +27,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -180,16 +178,11 @@ public class CarpetDispenserBehaviours
   
     public static class TogglingDispenserBehaviour extends ItemDispenserBehavior {
 
-        private static FakePlayerEntity player;
         private static Set<Block> toggleable = Sets.newHashSet(
             Blocks.STONE_BUTTON, Blocks.ACACIA_BUTTON, Blocks.BIRCH_BUTTON, Blocks.DARK_OAK_BUTTON,
-            Blocks.JUNGLE_BUTTON, Blocks.OAK_BUTTON, Blocks.SPRUCE_BUTTON, Blocks.ACACIA_DOOR,
-            Blocks.BIRCH_DOOR, Blocks.DARK_OAK_DOOR, Blocks.JUNGLE_DOOR, Blocks.OAK_DOOR,
-            Blocks.SPRUCE_DOOR, Blocks.ACACIA_TRAPDOOR, Blocks.BIRCH_TRAPDOOR, Blocks.DARK_OAK_TRAPDOOR,
-            Blocks.JUNGLE_TRAPDOOR, Blocks.OAK_TRAPDOOR, Blocks.SPRUCE_TRAPDOOR, Blocks.ACACIA_FENCE_GATE, 
-            Blocks.BIRCH_FENCE_GATE, Blocks.DARK_OAK_FENCE_GATE, Blocks.JUNGLE_FENCE_GATE, Blocks.OAK_FENCE_GATE, 
-            Blocks.SPRUCE_FENCE_GATE, Blocks.REPEATER, Blocks.COMPARATOR, Blocks.LEVER,
-            Blocks.DAYLIGHT_DETECTOR, Blocks.NOTE_BLOCK, Blocks.REDSTONE_ORE, Blocks.BELL
+            Blocks.JUNGLE_BUTTON, Blocks.OAK_BUTTON, Blocks.SPRUCE_BUTTON, Blocks.REPEATER, 
+            Blocks.COMPARATOR, Blocks.LEVER, Blocks.DAYLIGHT_DETECTOR, Blocks.REDSTONE_ORE, Blocks.BELL,
+            Blocks.JUKEBOX
         );
 
         @Override
@@ -199,14 +192,13 @@ public class CarpetDispenserBehaviours
             }
 
             World world = source.getWorld();
-            if(player == null) player = new FakePlayerEntity(world, "toggling");
             Direction direction = (Direction) source.getBlockState().get(DispenserBlock.FACING);
             BlockPos pos = source.getBlockPos().offset(direction);
             BlockState state = world.getBlockState(pos);  
             if(toggleable.contains(state.getBlock())) {
                 boolean bool = state.activate(
                     world, 
-                    player,
+                    null,
                     Hand.MAIN_HAND,
                     new BlockHitResult(
                         new Vec3d(new Vec3i(pos.getX(), pos.getY(), pos.getZ())), 
