@@ -210,6 +210,7 @@ public class CarpetDispenserBehaviours
                 );
                 if(bool) return stack;
             }
+            return super.dispenseSilently(source, stack);
         }
     }
 
