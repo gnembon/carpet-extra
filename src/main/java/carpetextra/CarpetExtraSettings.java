@@ -18,6 +18,13 @@ public class CarpetExtraSettings
     @Rule(desc="Dispensers can place blocks", category = {CREATIVE, EXTRA})
     public static boolean dispenserPlacesBlocks = false;
 
+    @Rule(
+            desc = "variable delays on wooden components",
+            extra = "buttons, pressure plates",
+            category = {EXTRA, FEATURE}
+    )
+    public static boolean variableWoodDelays = false;
+
 
     @Rule(
         desc = "Allows Comparators to read the daytime instead of the rotation of clocks in item frames",
@@ -76,4 +83,7 @@ public class CarpetExtraSettings
 
     @Rule(desc = "Dispensers with hoes can till soil", category = {EXTRA, FEATURE})
     public static boolean dispensersTillSoil = false;
+
+    @Rule(desc = "Dispensers can feed animals", category = {EXTRA, EXPERIMENTAL, FEATURE})
+    public static boolean dispensersFeedAnimals = false;
 }

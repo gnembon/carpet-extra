@@ -12,6 +12,7 @@ import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -209,6 +210,32 @@ public class CarpetDispenserBehaviours
                 );
                 if(bool) return stack;
             }
+        }
+    }
+
+    public static class FeedAnimalDispenserBehaviour extends ItemDispenserBehavior {
+
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
+            if(!CarpetExtraSettings.dispensersFeedAnimals) {
+                return super.dispenseSilently(source, stack);
+            }
+
+            BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
+            List<AnimalEntity> list = source.getWorld().<AnimalEntity>getEntities(AnimalEntity.class, new Box(pos));
+            boolean failure = false;
+
+            for(AnimalEntity mob : list) {
+                if(!mob.isBreedingItem(stack)) continue;
+                if(mob.getBreedingAge() != 0 || mob.isInLove()) {
+                    failure = true;
+                    continue;
+                }
+                stack.decrement(1);
+                mob.lovePlayer(null);
+                return stack;
+            }
+            if(failure) return stack;
             return super.dispenseSilently(source, stack);
         }
     }
