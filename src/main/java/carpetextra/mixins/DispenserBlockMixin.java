@@ -56,12 +56,15 @@ public abstract class DispenserBlockMixin
         if (item == Items.TNT)
             cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.TNT));
         
+        if (item == Items.STICK)
+            cir.setReturnValue(new TogglingDispenserBehaviour());
+
         if (item instanceof MusicDiscItem)
             cir.setReturnValue(new DispenserRecords());
         
         if (item instanceof HoeItem)
             cir.setReturnValue(new TillSoilDispenserBehaviour());
-        
+
         if (ANIMALFEEDABLE.contains(item.asItem()))
             cir.setReturnValue(new FeedAnimalDispenserBehaviour());
     }
