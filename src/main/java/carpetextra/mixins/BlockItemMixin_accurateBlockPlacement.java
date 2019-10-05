@@ -13,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(BlockItem.class)
 public class BlockItemMixin_accurateBlockPlacement
 {
-    @Redirect(method = "getPlacementState", at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/block/Block;getPlacementState(Lnet/minecraft/item/ItemPlacementContext;)Lnet/minecraft/block/BlockState;"
-    ))
-    private BlockState getAlternatePlacement(Block block, ItemPlacementContext itemPlacementContext_1)
+    @Shadow
+    private Block block //It's deprecated,but it's convenience
+    
+    @SoftOverride
+    private BlockState getAlternatePlacement(ItemPlacementContext itemPlacementContext_1)
     {
         if (CarpetExtraSettings.accurateBlockPlacement)
         {
