@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(BlockItem.class)
 public class BlockItemMixin_accurateBlockPlacement
 {
-    @Shadow
-    private Block block //It's deprecated,but it's convenience
+    @Shadow @Deprecated @Final
+    private Block block; //It's deprecated,but it's convenience
     
     @SoftOverride
     private BlockState getAlternatePlacement(ItemPlacementContext itemPlacementContext_1)
