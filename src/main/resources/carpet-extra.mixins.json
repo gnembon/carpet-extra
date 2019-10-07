@@ -20,7 +20,8 @@
     "ItemFrameEntity_comparatorReadsClockMixin",
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",
-    "HopperMinecartEntity_transferItemsOutFeatureMixin"
+    "HopperMinecartEntity_transferItemsOutFeatureMixin",
+    "PlayerEntityMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
