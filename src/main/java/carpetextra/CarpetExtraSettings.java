@@ -86,4 +86,7 @@ public class CarpetExtraSettings
 
     @Rule(desc = "Dispensers can feed animals", category = {EXTRA, EXPERIMENTAL, FEATURE})
     public static boolean dispensersFeedAnimals = false;
+    
+    @Rule(desc = "Disables player entity collision", category = {EXTRA, CREATIVE, EXPERIMENTAL})
+    public static boolean disablePlayerCollision = false;
 }
