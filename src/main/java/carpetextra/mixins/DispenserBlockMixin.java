@@ -2,6 +2,7 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import carpetextra.helpers.CarpetDispenserBehaviours.*;
+import carpetextra.helpers.FeedableItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
@@ -14,19 +15,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 @Mixin(DispenserBlock.class)
 public abstract class DispenserBlockMixin
 {
-    private static final Item[] FEEDABLEITEMS = new Item[] { Items.GOLDEN_APPLE, Items.GOLDEN_CARROT, Items.SWEET_BERRIES, Items.SEAGRASS,
-    Items.DANDELION, Items.HAY_BLOCK, Items.WHEAT, Items.CARROT, Items.POTATO, Items.BEETROOT, Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS,
-    Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.COD, Items.SALMON, Items.ROTTEN_FLESH, Items.PORKCHOP, Items.CHICKEN, Items.RABBIT,
-    Items.BEEF, Items.MUTTON, Items.COOKED_BEEF, Items.COOKED_CHICKEN, Items.COOKED_MUTTON, Items.COOKED_PORKCHOP, Items.COOKED_RABBIT };
-    private static final Set<Item> ANIMALFEEDABLE = new HashSet<Item>(Arrays.asList(FEEDABLEITEMS));
     @Shadow @Final private static Map<Item, DispenserBehavior> BEHAVIORS;
 
     @Inject(method = "getBehaviorForItem", at = @At("HEAD"), cancellable = true)
@@ -65,7 +58,7 @@ public abstract class DispenserBlockMixin
         if (item instanceof HoeItem)
             cir.setReturnValue(new TillSoilDispenserBehaviour());
 
-        if (ANIMALFEEDABLE.contains(item.asItem()))
+        if (FeedableItems.ITEMS.contains(item.asItem()))
             cir.setReturnValue(new FeedAnimalDispenserBehaviour());
     }
 }
