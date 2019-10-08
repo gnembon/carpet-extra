@@ -1,6 +1,7 @@
 package carpetextra.helpers;
 
 import carpetextra.CarpetExtraSettings;
+import com.google.common.collect.Sets;
 import net.minecraft.block.*;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -11,6 +12,7 @@ import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -18,13 +20,18 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Set;
 
 public class CarpetDispenserBehaviours
 {
@@ -167,6 +174,70 @@ public class CarpetDispenserBehaviours
         protected void playSound(BlockPointer source)
         {
             source.getWorld().playLevelEvent(1000, source.getBlockPos(), 0);
+        }
+    }
+  
+    public static class TogglingDispenserBehaviour extends ItemDispenserBehavior {
+
+        private static Set<Block> toggleable = Sets.newHashSet(
+            Blocks.STONE_BUTTON, Blocks.ACACIA_BUTTON, Blocks.BIRCH_BUTTON, Blocks.DARK_OAK_BUTTON,
+            Blocks.JUNGLE_BUTTON, Blocks.OAK_BUTTON, Blocks.SPRUCE_BUTTON, Blocks.REPEATER, 
+            Blocks.COMPARATOR, Blocks.LEVER, Blocks.DAYLIGHT_DETECTOR, Blocks.REDSTONE_ORE, Blocks.BELL,
+            Blocks.JUKEBOX
+        );
+
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
+            if(!CarpetExtraSettings.dispensersToggleThings) {
+                return super.dispenseSilently(source, stack);
+            }
+
+            World world = source.getWorld();
+            Direction direction = (Direction) source.getBlockState().get(DispenserBlock.FACING);
+            BlockPos pos = source.getBlockPos().offset(direction);
+            BlockState state = world.getBlockState(pos);  
+            if(toggleable.contains(state.getBlock())) {
+                boolean bool = state.activate(
+                    world, 
+                    null,
+                    Hand.MAIN_HAND,
+                    new BlockHitResult(
+                        new Vec3d(new Vec3i(pos.getX(), pos.getY(), pos.getZ())), 
+                        direction, 
+                        pos,
+                        false
+                    )
+                );
+                if(bool) return stack;
+            }
+            return super.dispenseSilently(source, stack);
+        }
+    }
+
+    public static class FeedAnimalDispenserBehaviour extends ItemDispenserBehavior {
+
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
+            if(!CarpetExtraSettings.dispensersFeedAnimals) {
+                return super.dispenseSilently(source, stack);
+            }
+
+            BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
+            List<AnimalEntity> list = source.getWorld().<AnimalEntity>getEntities(AnimalEntity.class, new Box(pos));
+            boolean failure = false;
+
+            for(AnimalEntity mob : list) {
+                if(!mob.isBreedingItem(stack)) continue;
+                if(mob.getBreedingAge() != 0 || mob.isInLove()) {
+                    failure = true;
+                    continue;
+                }
+                stack.decrement(1);
+                mob.lovePlayer(null);
+                return stack;
+            }
+            if(failure) return stack;
+            return super.dispenseSilently(source, stack);
         }
     }
     

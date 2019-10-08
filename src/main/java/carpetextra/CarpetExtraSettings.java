@@ -77,8 +77,16 @@ public class CarpetExtraSettings
             category = {EXTRA, SURVIVAL}
     )
     public static boolean accurateBlockPlacement = false;
-    
+
+    @Rule(desc = "Dispensers can toggle with a stick things like buttons, doors, repeaters", category = {EXTRA, EXPERIMENTAL, FEATURE})
+    public static boolean dispensersToggleThings = false;
+
     @Rule(desc = "Dispensers with hoes can till soil", category = {EXTRA, FEATURE})
     public static boolean dispensersTillSoil = false;
+
+    @Rule(desc = "Dispensers can feed animals", category = {EXTRA, EXPERIMENTAL, FEATURE})
+    public static boolean dispensersFeedAnimals = false;
     
+    @Rule(desc = "Disables player entity collision", category = {EXTRA, CREATIVE, EXPERIMENTAL})
+    public static boolean disablePlayerCollision = false;
 }

@@ -2,6 +2,7 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import carpetextra.helpers.CarpetDispenserBehaviours.*;
+import carpetextra.helpers.FeedableItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
@@ -33,26 +34,34 @@ public abstract class DispenserBlockMixin
                 cir.cancel();
             }
         }
-        if (item == Items.GLASS_BOTTLE)
+        if (item == Items.GLASS_BOTTLE && CarpetExtraSettings.dispensersFillBottles)
             cir.setReturnValue(new WaterBottleDispenserBehaviour());
         
-        if (item == Items.CHEST)
-            cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.CHEST));
-        
-        if (item == Items.HOPPER)
-            cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.HOPPER));
-        
-        if (item == Items.FURNACE)
-            cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.FURNACE));
-        
-        if (item == Items.TNT)
-            cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.TNT));
-        
-        if (item instanceof MusicDiscItem)
+        if (CarpetExtraSettings.dispensersFillMinecarts)
+        {
+            if (item == Items.CHEST)
+                cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.CHEST));
+
+            if (item == Items.HOPPER)
+                cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.HOPPER));
+
+            if (item == Items.FURNACE)
+                cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.FURNACE));
+
+            if (item == Items.TNT)
+                cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.TNT));
+        }
+
+        if (CarpetExtraSettings.dispensersToggleThings && item == Items.STICK)
+            cir.setReturnValue(new TogglingDispenserBehaviour());
+
+        if (CarpetExtraSettings.dispensersPlayRecords && item instanceof MusicDiscItem)
             cir.setReturnValue(new DispenserRecords());
         
-        if (item instanceof HoeItem)
+        if (CarpetExtraSettings.dispensersTillSoil && item instanceof HoeItem)
             cir.setReturnValue(new TillSoilDispenserBehaviour());
-        
+
+        if (CarpetExtraSettings.dispensersFeedAnimals &&  FeedableItems.ITEMS.contains(item.asItem()))
+            cir.setReturnValue(new FeedAnimalDispenserBehaviour());
     }
 }

@@ -9,13 +9,19 @@
     "CraftingInventoryMixin",
     "FallingBlockEntityMixin",
     "WetSpongeBlockMixin",
+    "RepeaterBlockMixin",
+    "ComparatorBlockMixin",
+    "DaylightDetectorBlockMixin",
+    "AnimalMateGoalMixin",
+    "FoxMateGoalMixin",
+    "TurtleMateGoalMixin",
     "AbstractPressurePlateBlock_variableWoodMixin",
     "AbstractButtonBlock_variableWoodMixin",
-
     "ItemFrameEntity_comparatorReadsClockMixin",
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",
-    "HopperMinecartEntity_transferItemsOutFeatureMixin"
+    "HopperMinecartEntity_transferItemsOutFeatureMixin",
+    "PlayerEntityMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
