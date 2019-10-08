@@ -64,7 +64,7 @@ public class CarpetDispenserBehaviours
             return super.dispenseSilently(source, stack);
         }
     }
-    
+    /* not needed in 1.15
     public static class WaterBottleDispenserBehaviour extends FallibleItemDispenserBehavior
     {
         @Override
@@ -109,7 +109,7 @@ public class CarpetDispenserBehaviours
                 }
             }
         }
-    }
+    }*/
     
     public static class MinecartDispenserBehaviour extends ItemDispenserBehavior
     {
@@ -223,7 +223,7 @@ public class CarpetDispenserBehaviours
             }
 
             BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
-            List<AnimalEntity> list = source.getWorld().<AnimalEntity>getEntities(AnimalEntity.class, new Box(pos));
+            List<AnimalEntity> list = source.getWorld().getEntities(AnimalEntity.class, new Box(pos),null);
             boolean failure = false;
 
             for(AnimalEntity mob : list) {

@@ -34,8 +34,8 @@ public abstract class DispenserBlockMixin
                 cir.cancel();
             }
         }
-        if (item == Items.GLASS_BOTTLE && CarpetExtraSettings.dispensersFillBottles)
-            cir.setReturnValue(new WaterBottleDispenserBehaviour());
+        //if (item == Items.GLASS_BOTTLE && CarpetExtraSettings.dispensersFillBottles) / implemented in vanilla 1.15
+        //    cir.setReturnValue(new WaterBottleDispenserBehaviour());
         
         if (CarpetExtraSettings.dispensersFillMinecarts)
         {
