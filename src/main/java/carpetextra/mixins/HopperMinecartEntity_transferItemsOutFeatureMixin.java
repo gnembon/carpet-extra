@@ -60,7 +60,7 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
     private static final Vec3d ascending_south_offset= new Vec3d( 0,1,-1).normalize().multiply(-1);
 
     private Vec3d getBlockBelowCartOffset(){
-        BlockState blockState_1 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.x), MathHelper.floor(this.y), MathHelper.floor(this.z)));
+        BlockState blockState_1 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.method_23317()), MathHelper.floor(this.method_23318()), MathHelper.floor(this.method_23321())));
         if (blockState_1.matches(BlockTags.RAILS)) {
             RailShape railShape = (RailShape)blockState_1.get(((AbstractRailBlock)blockState_1.getBlock()).getShapeProperty());
             switch (railShape){
@@ -85,20 +85,20 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
         Vec3d offsetToInventory = getBlockBelowCartOffset();
         //The visual rotation point of the minecart is roughly 0.5 above its feet (determined visually ingame)
         //Search 0.5 Blocks below the feet for an inventory
-        Inventory inv =  HopperBlockEntity.getInventoryAt(this.world, this.x + offsetToInventory.x, this.y + 0.5 + offsetToInventory.y, this.z + offsetToInventory.z);
+        Inventory inv =  HopperBlockEntity.getInventoryAt(this.world, this.method_23317() + offsetToInventory.x, this.method_23318() + 0.5 + offsetToInventory.y, this.method_23321() + offsetToInventory.z);
 
         //There is probably a way nicer way to determine the access side of the target inventory
         if(inv instanceof BlockEntity){
             BlockPos pos = ((BlockEntity) inv).getPos();
-            if(pos.getY() < MathHelper.floor(this.y))
+            if(pos.getY() < MathHelper.floor(this.method_23318()))
                 outputDirection = Direction.DOWN;
-            else if(pos.getX() > MathHelper.floor(this.x))
+            else if(pos.getX() > MathHelper.floor(this.method_23317()))
                 outputDirection = Direction.EAST;
-            else if(pos.getX() < MathHelper.floor(this.x))
+            else if(pos.getX() < MathHelper.floor(this.method_23317()))
                 outputDirection = Direction.WEST;
-            else if(pos.getZ() > MathHelper.floor(this.z))
+            else if(pos.getZ() > MathHelper.floor(this.method_23321()))
                 outputDirection = Direction.SOUTH;
-            else if(pos.getZ() < MathHelper.floor(this.z))
+            else if(pos.getZ() < MathHelper.floor(this.method_23321()))
                 outputDirection = Direction.NORTH;
             else outputDirection = Direction.DOWN;
         }else

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ComparatorBlock.class)
 public abstract class ComparatorBlockMixin {
     @Redirect(
-        method = "activate", 
+        method = "onUse",
         at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/entity/player/PlayerEntity;abilities:Lnet/minecraft/entity/player/PlayerAbilities;"

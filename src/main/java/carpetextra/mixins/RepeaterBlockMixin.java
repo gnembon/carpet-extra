@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(RepeaterBlock.class)
 public abstract class RepeaterBlockMixin {
     @Redirect(
-        method = "activate", 
+        method = "onUse",
         at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/entity/player/PlayerEntity;abilities:Lnet/minecraft/entity/player/PlayerAbilities;"

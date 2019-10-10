@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(DaylightDetectorBlock.class)
 public abstract class DaylightDetectorBlockMixin {
     @Redirect(
-        method = "activate", 
+        method = "onUse",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/entity/player/PlayerEntity;canModifyWorld()Z"

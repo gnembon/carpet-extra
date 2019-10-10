@@ -38,7 +38,7 @@ public class CraftingTableBlockMixin extends Block implements BlockEntityProvide
         return CarpetExtraSettings.autoCraftingTable ? new CraftingTableBlockEntity() : null;
     }
 
-    @Inject(method = "activate", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     private void onActivate(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<Boolean> cir) {
         if (!hasBlockEntity()) return;
         if (!world.isClient) {
