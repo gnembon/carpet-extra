@@ -18,6 +18,14 @@ Auto-crafting table
 * Required options: `true`, `false`
 * Categories: `CREATIVE`, `EXTRAS`
 
+## blockStateSyncing
+Fixes block states in F3 debug mode not updating for some blocks. May cause increased network traffic  
+Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`  
+
 ## commandPing
 Enables /ping for players to get their ping
 * Type: `boolean`
@@ -34,12 +42,26 @@ Allows Comparators to read the daytime instead of the rotation of clocks in item
 * Required options: `true`, `false`
 * Categories: `FEATURE`, `EXTRAS`, `EXPERIMENTAL`
 
+## disablePlayerCollision
+Disables player entity collision  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `CREATIVE`, `EXPERIMENTAL`  
+
 ## dispenserPlacesBlocks
 Dispensers can place blocks
 * Type: `boolean`
 * Default value: `false`
 * Required options: `true`, `false`
 * Categories: `CREATIVE`, `EXTRAS`
+
+## dispensersFeedAnimals
+Dispensers can feed animals  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
 
 ## dispensersFillBottles
 Water bottles in dispensers fill with water when dispensed with water in front.
@@ -76,20 +98,6 @@ Dispensers can toggle with a stick things like buttons, doors, repeaters
 * Default value: `false`
 * Required options: `true`, `false`
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`
-
-## dispensersFeedAnimals
-Dispensers can feed animals
-* Type: `boolean`
-* Default value: `false`
-* Required options: `true`, `false`
-* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`
-
-## disablePlayerCollision
-Disables player entity collision
-* Type: `boolean`
-* Default value: `false`
-* Required options: `true`, `false`
-* Categories: `EXTRAS`, `CREATIVE`, `EXPERIMENTAL`
 
 ## doubleRetraction
 1.8 double retraction from pistons
