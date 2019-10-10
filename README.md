@@ -70,6 +70,35 @@ Dispensers with hoes can till soil
 * Required options: `true`, `false`
 * Categories: `EXTRAS`, `FEATURE`
 
+## dispensersToggleThings
+Dispensers can toggle with a stick things like buttons, doors, repeaters
+* Type: `boolean`
+* Default value: `false`
+* Required options: `true`, `false`
+* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`
+
+## dispensersFeedAnimals
+Dispensers can feed animals
+* Type: `boolean`
+* Default value: `false`
+* Required options: `true`, `false`
+* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`
+
+## disablePlayerCollision
+Disables player entity collision
+* Type: `boolean`
+* Default value: `false`
+* Required options: `true`, `false`
+* Categories: `EXTRAS`, `CREATIVE`, `EXPERIMENTAL`
+
+## doubleRetraction
+1.8 double retraction from pistons
+Gives pistons the ability to double retract without side effects
+* Type: `boolean`
+* Default value: `false`
+* Required options: `true`, `false`
+* Categories: `EXTRAS`, `EXPERIMENTAL`
+
 ## hopperMinecart8gtCooldown
 Makes Hopper Minecarts have an 8gt cooldown like hoppers.
 * Type: `boolean`
