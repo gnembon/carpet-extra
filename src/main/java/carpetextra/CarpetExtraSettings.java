@@ -89,4 +89,11 @@ public class CarpetExtraSettings
     
     @Rule(desc = "Disables player entity collision", category = {EXTRA, CREATIVE, EXPERIMENTAL})
     public static boolean disablePlayerCollision = false;
+    
+    @Rule(
+            desc = "1.8 double retraction from pistons",
+            category = {EXTRA, EXPERIMENTAL},
+            extra = { "Gives pistons the ability to double retract without side effects" }
+    )
+    public static boolean doubleRetraction = false;
 }

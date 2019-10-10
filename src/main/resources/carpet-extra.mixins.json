@@ -21,7 +21,8 @@
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",
     "HopperMinecartEntity_transferItemsOutFeatureMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "PistonBlockMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
