@@ -103,4 +103,7 @@ public class CarpetExtraSettings
             extra = "Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers."
     )
     public static boolean blockStateSyncing = false;
+    
+    @Rule(desc = "Reintroduce Dragon Egg Bedrock breaking bug from 1.12", category = {EXTRA, EXPERIMENTAL})
+    public static boolean dragonEggBedrockBreaking = false;
 }
