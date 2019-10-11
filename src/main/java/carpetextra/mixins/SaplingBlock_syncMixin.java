@@ -13,7 +13,7 @@ public abstract class SaplingBlock_syncMixin
     private int onGenerate(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return 2;
+            return 6;
         else
             return original;
     }

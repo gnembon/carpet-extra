@@ -13,7 +13,7 @@ public abstract class DispenserBlock_syncMixin
     private int onNeighborUpdate1(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return 2;
+            return 6;
         else
             return original;
     }
@@ -22,7 +22,7 @@ public abstract class DispenserBlock_syncMixin
     private int onNeighborUpdate2(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return 2;
+            return 6;
         else
             return original;
     }

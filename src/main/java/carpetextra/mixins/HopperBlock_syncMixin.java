@@ -13,7 +13,7 @@ public abstract class HopperBlock_syncMixin
     private int onUpdateEnabled(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return 2;
+            return 6;
         else
             return original;
     }

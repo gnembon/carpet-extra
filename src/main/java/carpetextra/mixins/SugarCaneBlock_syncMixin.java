@@ -13,7 +13,7 @@ public abstract class SugarCaneBlock_syncMixin
     private int onOnScheduledTick1(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return 2;
+            return 6;
         else
             return original;
     }
@@ -22,7 +22,7 @@ public abstract class SugarCaneBlock_syncMixin
     private int onOnScheduledTick2(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return 2;
+            return 6;
         else
             return original;
     }
