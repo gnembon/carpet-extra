@@ -30,7 +30,8 @@
     "SugarCaneBlock_syncMixin",
     "BlocksMixin",
     "ChunkGeneratorMixin",
-    "FallingBlockMixin"
+    "FallingBlockMixin",
+    "DispenserBehaviorFireChargeMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
