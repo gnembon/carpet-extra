@@ -40,19 +40,27 @@ public abstract class FallingBlockEntityMixin extends Entity
     )
     private void onTick(CallbackInfo ci, Block block_1, BlockPos blockPos_2, BlockState blockState_1)
     {
-        if (block_1.matches(BlockTags.ANVIL) && CarpetExtraSettings.renewablePackedIce && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock() == Blocks.ICE)
+        if (block_1.matches(BlockTags.ANVIL))
         {
-            if (iceCount < 2)
+            if (CarpetExtraSettings.renewablePackedIce && this.world.getBlockState(new BlockPos(this.x, this.y - 0.059999999776482582D, this.z)).getBlock() == Blocks.ICE)
             {
-                world.breakBlock(blockPos_2.method_10074(), false, null);
-                this.onGround = false;
-                iceCount++;
-                ci.cancel();
+                if (iceCount < 2)
+                {
+                    world.breakBlock(blockPos_2.method_10074(), false, null);
+                    this.onGround = false;
+                    iceCount++;
+                    ci.cancel();
+                }
+                else
+                {
+                    world.setBlockState(blockPos_2.method_10074(), Blocks.PACKED_ICE.getDefaultState(), 3);
+                    world.playLevelEvent(2001, blockPos_2.method_10074(), Block.getRawIdFromState(Blocks.PACKED_ICE.getDefaultState()));
+                }
             }
-            else
+            else if (CarpetExtraSettings.renewableSand && this.world.getBlockState(new BlockPos(this.x, this.y - 0.06, this.z)).getBlock() == Blocks.COBBLESTONE)
             {
-                world.setBlockState(blockPos_2.method_10074(), Blocks.PACKED_ICE.getDefaultState(), 3);
-                world.playLevelEvent(2001, blockPos_2.method_10074(), Block.getRawIdFromState(Blocks.PACKED_ICE.getDefaultState()));
+                world.breakBlock(blockPos_2.down(), false);
+                world.setBlockState(blockPos_2.down(), Blocks.SAND.getDefaultState(), 3);
             }
         }
     }

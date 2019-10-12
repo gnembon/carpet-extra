@@ -114,6 +114,14 @@ Reintroduce Dragon Egg Bedrock breaking
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
 
+## fireChargeConvertsToNetherrack
+Fire charges from dispensers convert cobblestone to netherrack  
+Credits: Skyrising (Quickcarpet)  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`  
+
 ## hopperMinecart8gtCooldown
 Makes Hopper Minecarts have an 8gt cooldown like hoppers.
 * Type: `boolean`
@@ -128,12 +136,27 @@ Allows Hopper Minecarts to transfer items out.
 * Required options: `true`, `false`
 * Categories: `BUGFIX`, `FEATURE`, `EXTRAS`, `EXPERIMENTAL`
 
+## renewableLava
+Obsidian surrounded by 6 lava sources has a chance of converting to lava  
+Credits: Skyrising (Quickcarpet)  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
+
 ## renewablePackedIce
 Multiple ice crushed by falling anvils make packed ice
 * Type: `boolean`
 * Default value: `false`
 * Required options: `true`, `false`
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`
+
+## renewableSand
+Cobblestone crushed by falling anvils makes sand  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
 
 ## spongesDryInTheNether
 Wet sponges dry in the nether dimension
