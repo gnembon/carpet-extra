@@ -128,6 +128,14 @@ Allows Hopper Minecarts to transfer items out.
 * Required options: `true`, `false`
 * Categories: `BUGFIX`, `FEATURE`, `EXTRAS`, `EXPERIMENTAL`
 
+## renewableLava
+Obsidian surrounded by 6 lava sources has a chance of converting to lava  
+Credits: Skyrising (Quickcarpet)  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
+
 ## renewablePackedIce
 Multiple ice crushed by falling anvils make packed ice
 * Type: `boolean`
