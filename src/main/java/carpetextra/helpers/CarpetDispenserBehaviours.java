@@ -140,7 +140,7 @@ public class CarpetDispenserBehaviours
                 {
                     MinecartEntity minecart = list.get(0);
                     minecart.remove();
-                    AbstractMinecartEntity minecartEntity = AbstractMinecartEntity.create(minecart.world, minecart.method_23317(), minecart.method_23318(), minecart.method_23321(), this.minecartType);
+                    AbstractMinecartEntity minecartEntity = AbstractMinecartEntity.create(minecart.world, minecart.getX(), minecart.getY(), minecart.getZ(), this.minecartType);
                     minecartEntity.setVelocity(minecart.getVelocity());
                     minecartEntity.pitch = minecart.pitch;
                     minecartEntity.yaw = minecart.yaw;
@@ -160,7 +160,7 @@ public class CarpetDispenserBehaviours
                 BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
                 TntEntity tntEntity = new TntEntity(world, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, (LivingEntity)null);
                 world.spawnEntity(tntEntity);
-                world.playSound((PlayerEntity)null, tntEntity.method_23317(), tntEntity.method_23318(), tntEntity.method_23321(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound((PlayerEntity)null, tntEntity.getX(), tntEntity.getY(), tntEntity.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 stack.decrement(1);
                 return stack;
             }

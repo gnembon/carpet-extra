@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(CactusBlock.class)
 public abstract class CactusBlock_syncMixin
 {
-    @ModifyConstant(method = "onScheduledTick", constant = @Constant(intValue = 4, ordinal = 0))
+    @ModifyConstant(method = "scheduledTick", constant = @Constant(intValue = 4, ordinal = 0))
     private int onOnScheduledTick1(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)
@@ -18,7 +18,7 @@ public abstract class CactusBlock_syncMixin
             return original;
     }
     
-    @ModifyConstant(method = "onScheduledTick", constant = @Constant(intValue = 4, ordinal = 1))
+    @ModifyConstant(method = "scheduledTick", constant = @Constant(intValue = 4, ordinal = 1))
     private int onOnScheduledTick2(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)

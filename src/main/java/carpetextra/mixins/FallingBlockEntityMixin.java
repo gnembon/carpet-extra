@@ -40,7 +40,7 @@ public abstract class FallingBlockEntityMixin extends Entity
     )
     private void onTick(CallbackInfo ci, Block block_1, BlockPos blockPos_2, BlockState blockState_1)
     {
-        if (block_1.matches(BlockTags.ANVIL) && CarpetExtraSettings.renewablePackedIce && this.world.getBlockState(new BlockPos(this.method_23317(), this.method_23318() - 0.059999999776482582D, this.method_23321())).getBlock() == Blocks.ICE)
+        if (block_1.matches(BlockTags.ANVIL) && CarpetExtraSettings.renewablePackedIce && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock() == Blocks.ICE)
         {
             if (iceCount < 2)
             {
