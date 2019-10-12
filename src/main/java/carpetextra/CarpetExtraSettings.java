@@ -123,4 +123,11 @@ public class CarpetExtraSettings
             extra = "Credits: Skyrising (Quickcarpet)"
     )
     public static boolean fireChargeConvertsToNetherrack = false;
+    
+    @Rule(
+            desc = "Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!",
+            category = {EXTRA, FEATURE},
+            extra = "Baby chickens can't be sheared"
+    )
+    public static boolean chickenShearing = false;
 }
