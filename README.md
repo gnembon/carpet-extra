@@ -135,6 +135,13 @@ Multiple ice crushed by falling anvils make packed ice
 * Required options: `true`, `false`
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`
 
+## renewableSand
+Cobblestone crushed by falling anvils makes sand  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
+
 ## spongesDryInTheNether
 Wet sponges dry in the nether dimension
 * Type: `boolean`
