@@ -27,7 +27,9 @@
     "DispenserBlock_syncMixin",
     "HopperBlock_syncMixin",
     "SaplingBlock_syncMixin",
-    "SugarCaneBlock_syncMixin"
+    "SugarCaneBlock_syncMixin",
+    "ChunkGeneratorMixin",
+    "FallingBlockMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"

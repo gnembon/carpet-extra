@@ -107,6 +107,13 @@ Gives pistons the ability to double retract without side effects
 * Required options: `true`, `false`
 * Categories: `EXTRAS`, `EXPERIMENTAL`
 
+## dragonEggBedrockBreaking
+Reintroduce Dragon Egg Bedrock breaking  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`  
+
 ## hopperMinecart8gtCooldown
 Makes Hopper Minecarts have an 8gt cooldown like hoppers.
 * Type: `boolean`
