@@ -42,7 +42,7 @@ public abstract class FallingBlockEntityMixin extends Entity
     {
         if (block_1.matches(BlockTags.ANVIL))
         {
-            if (CarpetExtraSettings.renewablePackedIce && this.world.getBlockState(new BlockPos(this.x, this.y - 0.059999999776482582D, this.z)).getBlock() == Blocks.ICE)
+            if (CarpetExtraSettings.renewablePackedIce && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock() == Blocks.ICE)
             {
                 if (iceCount < 2)
                 {
@@ -57,10 +57,10 @@ public abstract class FallingBlockEntityMixin extends Entity
                     world.playLevelEvent(2001, blockPos_2.method_10074(), Block.getRawIdFromState(Blocks.PACKED_ICE.getDefaultState()));
                 }
             }
-            else if (CarpetExtraSettings.renewableSand && this.world.getBlockState(new BlockPos(this.x, this.y - 0.06, this.z)).getBlock() == Blocks.COBBLESTONE)
+            else if (CarpetExtraSettings.renewableSand && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
             {
-                world.breakBlock(blockPos_2.down(), false);
-                world.setBlockState(blockPos_2.down(), Blocks.SAND.getDefaultState(), 3);
+                world.breakBlock(blockPos_2.down(1), false);
+                world.setBlockState(blockPos_2.down(1), Blocks.SAND.getDefaultState(), 3);
             }
         }
     }
