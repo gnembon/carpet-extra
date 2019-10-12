@@ -28,6 +28,7 @@
     "HopperBlock_syncMixin",
     "SaplingBlock_syncMixin",
     "SugarCaneBlock_syncMixin",
+    "BlocksMixin",
     "ChunkGeneratorMixin",
     "FallingBlockMixin"
   ],
