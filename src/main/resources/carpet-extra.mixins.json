@@ -29,7 +29,8 @@
     "SaplingBlock_syncMixin",
     "SugarCaneBlock_syncMixin",
     "ChunkGeneratorMixin",
-    "FallingBlockMixin"
+    "FallingBlockMixin",
+    "DispenserBehaviorFireChargeMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"

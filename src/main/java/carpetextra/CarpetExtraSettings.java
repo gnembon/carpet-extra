@@ -106,4 +106,11 @@ public class CarpetExtraSettings
     
     @Rule(desc = "Reintroduce Dragon Egg Bedrock breaking bug from 1.12", category = {EXTRA, EXPERIMENTAL})
     public static boolean dragonEggBedrockBreaking = false;
+    
+    @Rule(
+            desc = "Fire charges from dispensers convert cobblestone to netherrack",
+            category = {EXTRA, EXPERIMENTAL},
+            extra = "Credits: Skyrising (Quickcarpet)"
+    )
+    public static boolean fireChargeConvertsToNetherrack = false;
 }
