@@ -96,4 +96,11 @@ public class CarpetExtraSettings
             extra = { "Gives pistons the ability to double retract without side effects" }
     )
     public static boolean doubleRetraction = false;
+    
+    @Rule(
+            desc = "Fixes block states in F3 debug mode not updating for some blocks. May cause increased network traffic",
+            category = {EXTRA, EXPERIMENTAL},
+            extra = "Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers."
+    )
+    public static boolean blockStateSyncing = false;
 }

@@ -22,7 +22,12 @@
     "HopperMinecartEntity_cooldownFixMixin",
     "HopperMinecartEntity_transferItemsOutFeatureMixin",
     "PlayerEntityMixin",
-    "PistonBlockMixin"
+    "PistonBlockMixin",
+    "CactusBlock_syncMixin",
+    "DispenserBlock_syncMixin",
+    "HopperBlock_syncMixin",
+    "SaplingBlock_syncMixin",
+    "SugarCaneBlock_syncMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
