@@ -114,6 +114,14 @@ Reintroduce Dragon Egg Bedrock breaking
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
 
+## fireChargeConvertsToNetherrack
+Fire charges from dispensers convert cobblestone to netherrack  
+Credits: Skyrising (Quickcarpet)  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`  
+
 ## hopperMinecart8gtCooldown
 Makes Hopper Minecarts have an 8gt cooldown like hoppers.
 * Type: `boolean`
