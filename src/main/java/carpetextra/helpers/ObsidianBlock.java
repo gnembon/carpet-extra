@@ -6,9 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -25,19 +25,19 @@ public class ObsidianBlock extends Block
     {
         return CarpetExtraSettings.renewableLava;
     }
-    
+
     @Override
-    public void onScheduledTick(BlockState state, World world, BlockPos pos, Random random)
+    public void scheduledTick(BlockState blockState_1, ServerWorld serverWorld_1, BlockPos blockPos_1, Random random_1)
     {
         for (Direction dir : Direction.values())
         {
-            FluidState neighbor = world.getFluidState(pos.offset(dir));
+            FluidState neighbor = serverWorld_1.getFluidState(blockPos_1.offset(dir));
             if (neighbor.getFluid() != Fluids.LAVA || !neighbor.isStill())
                 return;
         }
-        if (random.nextInt(10) == 0)
+        if (random_1.nextInt(10) == 0)
         {
-            world.setBlockState(pos, Blocks.LAVA.getDefaultState());
+            serverWorld_1.setBlockState(blockPos_1, Blocks.LAVA.getDefaultState());
         }
     }
 }
