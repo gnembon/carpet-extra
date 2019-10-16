@@ -20,6 +20,7 @@ import net.minecraft.potion.PotionUtil;
 import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPointer;
@@ -197,7 +198,7 @@ public class CarpetDispenserBehaviours
             BlockPos pos = source.getBlockPos().offset(direction);
             BlockState state = world.getBlockState(pos);  
             if(toggleable.contains(state.getBlock())) {
-                boolean bool = state.onUse(
+                ActionResult result = state.onUse(
                     world, 
                     null,
                     Hand.MAIN_HAND,
@@ -208,7 +209,7 @@ public class CarpetDispenserBehaviours
                         false
                     )
                 );
-                if(bool) return stack;
+                if(result.method_23665()) return stack; // success or consume
             }
             return super.dispenseSilently(source, stack);
         }
