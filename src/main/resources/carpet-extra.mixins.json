@@ -31,7 +31,8 @@
     "BlocksMixin",
     "ChunkGeneratorMixin",
     "FallingBlockMixin",
-    "DispenserBehaviorFireChargeMixin"
+    "DispenserBehaviorFireChargeMixin",
+    "ChickenEntityMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"

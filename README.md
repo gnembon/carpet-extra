@@ -26,6 +26,14 @@ Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
 
+## chickenShearing
+Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!  
+Baby chickens can't be sheared
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`  
+
 ## commandPing
 Enables /ping for players to get their ping
 * Type: `boolean`
