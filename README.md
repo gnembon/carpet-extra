@@ -144,6 +144,13 @@ Allows Hopper Minecarts to transfer items out.
 * Required options: `true`, `false`
 * Categories: `BUGFIX`, `FEATURE`, `EXTRAS`, `EXPERIMENTAL`
 
+## mobInFireConvertsSandToSoulsand
+If a living entity dies on sand with fire on top the sand will convert into soul sand  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
+
 ## renewableLava
 Obsidian surrounded by 6 lava sources has a chance of converting to lava  
 Credits: Skyrising (Quickcarpet)  
