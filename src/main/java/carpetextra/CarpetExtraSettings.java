@@ -130,4 +130,10 @@ public class CarpetExtraSettings
             extra = "Baby chickens can't be sheared"
     )
     public static boolean chickenShearing = false;
+    
+    @Rule(
+            desc = "If a living entity dies on sand with fire on top the sand will convert into soul sand",
+            category = {EXTRA, FEATURE, EXPERIMENTAL}
+    )
+    public static boolean mobInFireConvertsSandToSoulsand = false;
 }
