@@ -130,6 +130,16 @@ Credits: Skyrising (Quickcarpet)
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
 
+## flowerPotChunkLoading
+Place a wither rose in a flowerpot to load that chunk  
+If u enable the rule the already existing chunks with flowerpots won't be loaded. 
+Also disabling the carpet rule won't remove the loaded chunks, u need to manually unload them using the /forceload command. 
+All the loaded chunks can be seen using `/forceload query`  
+* Type: `boolean`  
+* Default value: `false`  
+* Default value: `false`  
+* Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
+
 ## hopperMinecart8gtCooldown
 Makes Hopper Minecarts have an 8gt cooldown like hoppers.
 * Type: `boolean`
