@@ -136,4 +136,13 @@ public class CarpetExtraSettings
             category = {EXTRA, FEATURE, EXPERIMENTAL}
     )
     public static boolean mobInFireConvertsSandToSoulsand = false;
+    
+    @Rule(
+            desc = "Place a wither rose in a flowerpot to load that chunk",
+            extra = "If u enable the rule the already existing chunks with flowerpots won't be loaded. " +
+                    "Also disabling the carpet rule won't remove the loaded chunks, u need to manually unload them using the /forceload command. " +
+                    "All the loaded chunks can be seen using `/forceload query`",
+            category = {EXTRA, FEATURE, EXPERIMENTAL}
+    )
+    public static boolean flowerPotChunkLoading = false;
 }
