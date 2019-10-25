@@ -33,7 +33,8 @@
     "FallingBlockMixin",
     "DispenserBehaviorFireChargeMixin",
     "ChickenEntityMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "FlowerPotBlockMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
