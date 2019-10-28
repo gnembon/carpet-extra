@@ -75,7 +75,11 @@ public abstract class EntityMixin
             double deltaX = ((box.minX + box.maxX) / 2.0D) - this.x;
             double deltaY = box.minY - this.y;
             double deltaZ = ((box.minZ + box.maxZ) / 2.0D) - this.z;
-    
+            
+            // Credits: MrGrim (MUP) -> Sanity check.
+            // If the position and BoundingBox center point are > 0.1 blocks apart then do not restore the BoundingBox. In vanilla
+            // this should never happen, but mods might not be aware that the BoundingBox is stored and that the entity
+            // position will be reset to it.
             if (((deltaX * deltaX) + (deltaY * deltaY) + (deltaZ * deltaZ)) < 0.01D)
             {
                 this.setBoundingBox(box);
