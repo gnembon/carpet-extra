@@ -1,0 +1,86 @@
+package carpetextra.mixins;
+
+import carpetextra.CarpetExtraSettings;
+import net.minecraft.entity.Entity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.util.math.Box;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(Entity.class)
+public abstract class EntityMixin
+{
+    @Shadow public abstract Box getBoundingBox();
+    
+    @Shadow protected abstract ListTag toListTag(double... doubles_1);
+    
+    @Shadow protected abstract boolean shouldSetPositionOnLoad();
+    
+    @Shadow public abstract void setPosition(double double_1, double double_2, double double_3);
+    
+    @Shadow public double x;
+    
+    @Shadow public double y;
+    
+    @Shadow public double z;
+    
+    @Shadow public abstract void setBoundingBox(Box box_1);
+    
+    @Inject(
+            method = "toTag",
+            at = @At(value = "INVOKE", shift = At.Shift.BEFORE, ordinal = 0,
+                    target = "Lnet/minecraft/nbt/CompoundTag;put(Ljava/lang/String;Lnet/minecraft/nbt/Tag;)Lnet/minecraft/nbt/Tag;")
+    )
+    private void onToTag(CompoundTag compoundTag_1, CallbackInfoReturnable<CompoundTag> cir)
+    {
+        if (CarpetExtraSettings.reloadSuffocationFix)
+        {
+            Box box = this.getBoundingBox();
+            compoundTag_1.put("CM_Box", this.toListTag(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ));
+        }
+    }
+    
+    @Redirect(method = "fromTag", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;shouldSetPositionOnLoad()Z"))
+    private boolean cancelShouldSetPositionOnLoad(Entity entity)
+    {
+        return false;
+    }
+    
+    @Inject(
+            method = "fromTag",
+            at = @At(value = "INVOKE", shift = At.Shift.AFTER,
+                    target = "Lnet/minecraft/entity/Entity;readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V")
+    )
+    private void onFromTag(CompoundTag compoundTag_1, CallbackInfo ci)
+    {
+        if (this.shouldSetPositionOnLoad())
+        {
+            this.setPosition(this.x, this.y, this.z);
+        }
+        
+        if (CarpetExtraSettings.reloadSuffocationFix && compoundTag_1.containsKey("CM_Box", 9))
+        {
+            ListTag box_tag = compoundTag_1.getList("CM_Box", 6);
+            
+            Box box = new Box(box_tag.getDouble(0), box_tag.getDouble(1),
+                    box_tag.getDouble(2), box_tag.getDouble(3),
+                    box_tag.getDouble(4), box_tag.getDouble(5));
+    
+            double deltaX = ((box.minX + box.maxX) / 2.0D) - this.x;
+            double deltaY = box.minY - this.y;
+            double deltaZ = ((box.minZ + box.maxZ) / 2.0D) - this.z;
+    
+            if (((deltaX * deltaX) + (deltaY * deltaY) + (deltaZ * deltaZ)) < 0.01D)
+            {
+                this.setBoundingBox(box);
+            }
+        }
+    }
+    
+}
