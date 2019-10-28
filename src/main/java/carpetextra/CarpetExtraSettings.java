@@ -148,7 +148,7 @@ public class CarpetExtraSettings
     
     @Rule(
             desc = "Won't let mobs glitch into blocks when reloaded.",
-            extra = "Can cause slight differences in mobs behaviour",
+            extra = "Can cause slight differences in mobs behaviour. Fixes MC-2025",
             category = {EXTRA, BUGFIX, EXPERIMENTAL}
     )
     public static boolean reloadSuffocationFix = false;
