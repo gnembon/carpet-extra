@@ -163,6 +163,14 @@ If a living entity dies on sand with fire on top the sand will convert into soul
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
 
+## reloadSuffocationFix
+Won't let mobs glitch into blocks when reloaded.  
+Can cause slight differences in mobs behaviour. Fixes MC-2025  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `BUGFIX`, `EXPERIMENTAL`  
+
 ## renewableLava
 Obsidian surrounded by 6 lava sources has a chance of converting to lava  
 Credits: Skyrising (Quickcarpet)  
