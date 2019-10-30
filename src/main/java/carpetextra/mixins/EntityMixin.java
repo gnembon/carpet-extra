@@ -64,7 +64,7 @@ public abstract class EntityMixin
             this.setPosition(this.x, this.y, this.z);
         }
         
-        if (CarpetExtraSettings.reloadSuffocationFix && compoundTag_1.containsKey("CM_Box", 9))
+        if (CarpetExtraSettings.reloadSuffocationFix && compoundTag_1.contains("CM_Box", 9))
         {
             ListTag box_tag = compoundTag_1.getList("CM_Box", 6);
             

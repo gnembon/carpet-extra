@@ -35,7 +35,7 @@ public abstract class FlowerPotBlockMixin extends Block
         super(block$Settings_1);
     }
     
-    @Inject(method = "activate", at = @At("HEAD"))
+    @Inject(method = "onUse", at = @At("HEAD"))
     private void onActivate(BlockState blockState_1, World world_1, BlockPos blockPos_1, PlayerEntity playerEntity_1, Hand hand_1, BlockHitResult blockHitResult_1, CallbackInfoReturnable<Boolean> cir)
     {
         if (CarpetExtraSettings.flowerPotChunkLoading && world_1.getServer() != null && !world_1.isClient)
