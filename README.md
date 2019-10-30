@@ -1,7 +1,9 @@
 # carpet-extra
 Extra Features for Carpet Mod
 
-Use along side base fabric-carpet mod for the same minecraft version
+Use along side base fabric-carpet mod for the same minecraft version.
+
+Due to how autoCraftingTable feature is implemented, if you are using other mods that require you to use fabric-api (carpet doesn't need it, btw), and you run carpet-extra on a server, the clients must run the same mod configuration as well. If you are only using carpet-style mods, you can connect to the servers with whatever vanilla compatible client you are using.
 
 # Carpet Extra features
 ## accurateBlockPlacement
@@ -130,6 +132,16 @@ Credits: Skyrising (Quickcarpet)
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
 
+## flowerPotChunkLoading
+Place a wither rose in a flowerpot to load that chunk  
+If u enable the rule the already existing chunks with flowerpots won't be loaded. 
+Also disabling the carpet rule won't remove the loaded chunks, u need to manually unload them using the /forceload command. 
+All the loaded chunks can be seen using `/forceload query`  
+* Type: `boolean`  
+* Default value: `false`  
+* Default value: `false`  
+* Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
+
 ## hopperMinecart8gtCooldown
 Makes Hopper Minecarts have an 8gt cooldown like hoppers.
 * Type: `boolean`
@@ -150,6 +162,14 @@ If a living entity dies on sand with fire on top the sand will convert into soul
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
+
+## reloadSuffocationFix
+Won't let mobs glitch into blocks when reloaded.  
+Can cause slight differences in mobs behaviour. Fixes MC-2025  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `BUGFIX`, `EXPERIMENTAL`  
 
 ## renewableLava
 Obsidian surrounded by 6 lava sources has a chance of converting to lava  
