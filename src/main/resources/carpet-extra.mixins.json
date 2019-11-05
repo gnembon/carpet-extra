@@ -21,6 +21,11 @@
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",
     "HopperMinecartEntity_transferItemsOutFeatureMixin",
+
+    "DropperBlock_craftingMixin",
+    "DispenserBlockEntity_craftingMixin",
+
+
     "PlayerEntityMixin",
     "PistonBlockMixin",
     "CactusBlock_syncMixin",
