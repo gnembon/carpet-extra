@@ -14,6 +14,8 @@ public class CarpetExtraSettings
     @Rule(desc = "Auto-crafting table", category = {CREATIVE, EXTRA})
     public static boolean autoCraftingTable = false;
 
+    @Rule(desc = "Auto-crafting dropper", category = {CREATIVE, EXTRA})
+    public static boolean autoCraftingDropper = false;
 
     @Rule(desc="Dispensers can place blocks", category = {CREATIVE, EXTRA})
     public static boolean dispenserPlacesBlocks = false;
