@@ -209,7 +209,7 @@ public class CarpetDispenserBehaviours
                         false
                     )
                 );
-                if(result.method_23665()) return stack; // success or consume
+                if(result.isAccepted()) return stack; // success or consume
             }
             return super.dispenseSilently(source, stack);
         }
