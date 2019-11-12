@@ -40,7 +40,8 @@
     "ChickenEntityMixin",
     "LivingEntityMixin",
     "FlowerPotBlockMixin",
-    "EntityMixin"
+    "EntityMixin",
+    "AbstractRedstoneGateBlockMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
