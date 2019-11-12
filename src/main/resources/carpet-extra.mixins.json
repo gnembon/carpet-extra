@@ -40,7 +40,8 @@
     "ChickenEntityMixin",
     "LivingEntityMixin",
     "FlowerPotBlockMixin",
-    "EntityMixin"
+    "EntityMixin",
+    "DispenserBehaviorBucketCowsMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"

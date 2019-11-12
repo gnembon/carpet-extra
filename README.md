@@ -87,6 +87,13 @@ Minecarts can be filled with hoppers, chests, tnt and furnace.
 * Required options: `true`, `false`
 * Categories: `EXPERIMENTAL`, `FEATURE`, `EXTRAS`
 
+## dispensersMilkCows
+Dispensers with empty buckets can milk cows  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXPERIMENTAL`, `EXTRAS`, `FEATURE`  
+
 ## dispensersPlayRecords
 Dispensers can play records if there's a jukebox in front of them
 If record already exists in the jukebox, it gets placed back in the dispenser
