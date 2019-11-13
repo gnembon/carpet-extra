@@ -10,6 +10,7 @@ import net.minecraft.container.NameableContainerProvider;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
@@ -48,6 +49,7 @@ public class CraftingTableBlockMixin extends Block implements BlockEntityProvide
                 playerEntity_1.openContainer((NameableContainerProvider) blockEntity);
             }
         }
+        player.incrementStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
         cir.setReturnValue(ActionResult.SUCCESS);
         cir.cancel();
     }

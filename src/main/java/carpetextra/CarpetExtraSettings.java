@@ -154,4 +154,10 @@ public class CarpetExtraSettings
             category = {EXTRA, BUGFIX, EXPERIMENTAL}
     )
     public static boolean reloadSuffocationFix = false;
+    
+    @Rule(
+            desc = "Dispensers with empty buckets can milk cows",
+            category = {EXPERIMENTAL, EXTRA, FEATURE}
+    )
+    public static boolean dispensersMilkCows = false;
 }
