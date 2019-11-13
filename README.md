@@ -170,7 +170,7 @@ If a living entity dies on sand with fire on top the sand will convert into soul
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
 
-## redstonePriorityFix
+## repeaterPriorityFix
 Quick pulses won't get lost in repeater setups  
 Probably brings back pre 1.8 behaviour. Fixes MC-54711  
 * Type: `boolean`  

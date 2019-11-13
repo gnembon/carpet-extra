@@ -17,7 +17,7 @@ public abstract class AbstractRedstoneGateBlockMixin
     )
     private Direction onIsTargetNotAligned(Direction direction)
     {
-        if (CarpetExtraSettings.redstonePriorityFix)
+        if (CarpetExtraSettings.repeaterPriorityFix)
             return direction;
         else
             return direction.getOpposite();

@@ -166,5 +166,5 @@ public class CarpetExtraSettings
             extra = "Probably brings back pre 1.8 behaviour. Fixes MC-54711",
             category = {EXTRA, BUGFIX, EXPERIMENTAL}
     )
-    public static boolean redstonePriorityFix = false;
+    public static boolean repeaterPriorityFix = false;
 }
