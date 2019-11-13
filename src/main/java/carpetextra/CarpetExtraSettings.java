@@ -156,6 +156,12 @@ public class CarpetExtraSettings
     public static boolean reloadSuffocationFix = false;
     
     @Rule(
+            desc = "Dispensers with empty buckets can milk cows",
+            category = {EXPERIMENTAL, EXTRA, FEATURE}
+    )
+    public static boolean dispensersMilkCows = false;
+    
+    @Rule(
             desc = "Quick pulses won't get lost in repeater setups",
             extra = "Probably brings back pre 1.8 behaviour. Fixes MC-54711",
             category = {EXTRA, BUGFIX, EXPERIMENTAL}

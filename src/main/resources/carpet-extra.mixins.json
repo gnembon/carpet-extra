@@ -41,6 +41,7 @@
     "LivingEntityMixin",
     "FlowerPotBlockMixin",
     "EntityMixin",
+    "DispenserBehaviorBucketCowsMixin",
     "AbstractRedstoneGateBlockMixin"
   ],
   "client": [
