@@ -49,7 +49,7 @@ public class CraftingTableBlockMixin extends Block implements BlockEntityProvide
                 playerEntity_1.openContainer((NameableContainerProvider) blockEntity);
             }
         }
-        player.incrementStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
+        playerEntity_1.incrementStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
         cir.setReturnValue(ActionResult.SUCCESS);
         cir.cancel();
     }

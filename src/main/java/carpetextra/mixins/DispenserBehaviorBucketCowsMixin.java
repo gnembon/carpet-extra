@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$5")
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$6")
 public abstract class DispenserBehaviorBucketCowsMixin extends ItemDispenserBehavior
 {
     @Inject(
@@ -34,25 +34,21 @@ public abstract class DispenserBehaviorBucketCowsMixin extends ItemDispenserBeha
         if (!world.isClient)
         {
             BlockPos pos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
-            List<CowEntity> cows = world.getEntities(CowEntity.class, new Box(pos));
-    
-            for (CowEntity cowEntity : cows)
+            List<CowEntity> cows = world.getEntities(CowEntity.class, new Box(pos), e -> e.isAlive() && !e.isBaby());
+            if (!cows.isEmpty())
             {
-                if (cowEntity.isAlive() && !cowEntity.isBaby())
+                stack.decrement(1);
+                if (stack.isEmpty())
                 {
-                    stack.decrement(1);
-                    if (stack.isEmpty())
+                    cir.setReturnValue(new ItemStack(Items.MILK_BUCKET));
+                }
+                else
+                {
+                    if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(Items.MILK_BUCKET)) < 0)
                     {
-                        cir.setReturnValue(new ItemStack(Items.MILK_BUCKET));
+                        this.dispense(pointer, new ItemStack(Items.MILK_BUCKET));
                     }
-                    else
-                    {
-                        if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(Items.MILK_BUCKET)) < 0)
-                        {
-                            this.dispense(pointer, new ItemStack(Items.MILK_BUCKET));
-                        }
-                        cir.setReturnValue(stack);
-                    }
+                    cir.setReturnValue(stack);
                 }
             }
         }
