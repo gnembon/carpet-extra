@@ -160,4 +160,11 @@ public class CarpetExtraSettings
             category = {EXPERIMENTAL, EXTRA, FEATURE}
     )
     public static boolean dispensersMilkCows = false;
+    
+    @Rule(
+            desc = "Quick pulses won't get lost in repeater setups",
+            extra = "Probably brings back pre 1.8 behaviour. Fixes MC-54711",
+            category = {EXTRA, BUGFIX, EXPERIMENTAL}
+    )
+    public static boolean repeaterPriorityFix = false;
 }

@@ -170,6 +170,14 @@ If a living entity dies on sand with fire on top the sand will convert into soul
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
 
+## repeaterPriorityFix
+Quick pulses won't get lost in repeater setups  
+Probably brings back pre 1.8 behaviour. Fixes MC-54711  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `BUGFIX`, `EXPERIMENTAL`  
+
 ## reloadSuffocationFix
 Won't let mobs glitch into blocks when reloaded.  
 Can cause slight differences in mobs behaviour. Fixes MC-2025  
