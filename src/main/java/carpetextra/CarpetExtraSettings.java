@@ -14,7 +14,15 @@ public class CarpetExtraSettings
     @Rule(desc = "Auto-crafting table", category = {CREATIVE, EXTRA})
     public static boolean autoCraftingTable = false;
 
-    @Rule(desc = "Auto-crafting dropper", category = {CREATIVE, EXTRA})
+    @Rule(
+            desc = "Auto-crafting dropper",
+            extra = {"Is a dropper points to the crafting table ",
+                    "and has a valid recipe in its 3x3 it crafts it.",
+                    "Overrides comparators so they indicate number of filled slots instead",
+                    "Also makes hoppers, droppers and dispensers input max 1 item per slot"
+            },
+            category = {CREATIVE, EXTRA}
+    )
     public static boolean autoCraftingDropper = false;
 
     @Rule(desc="Dispensers can place blocks", category = {CREATIVE, EXTRA})
