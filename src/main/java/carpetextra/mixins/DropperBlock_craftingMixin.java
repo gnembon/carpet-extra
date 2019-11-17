@@ -9,11 +9,16 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.DropperBlock;
 import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.client.network.packet.PlaySoundIdS2CPacket;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -104,6 +109,12 @@ public class DropperBlock_craftingMixin extends DispenserBlock
                     spawn(world_1, target.x, target.y, target.z, itemStack_3);
                 }
             }
+        }
+        Vec3d vec = new Vec3d(blockPos_1).add(0.5, 0.5, 0.5);
+        ServerWorld world = (ServerWorld) world_1;
+        for (ServerPlayerEntity player : world.getPlayers( (p) -> p.squaredDistanceTo(vec) < 256))
+        {
+            player.networkHandler.sendPacket(new PlaySoundIdS2CPacket(SoundEvents.ENTITY_VILLAGER_WORK_MASON.getId(), SoundCategory.BLOCKS, vec, 0.2f, 2.0f));
         }
         ci.cancel();
     }
