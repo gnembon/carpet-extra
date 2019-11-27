@@ -11,9 +11,6 @@ public class CarpetExtraSettings
 {
     public static final String EXTRA = "extras";
 
-    @Rule(desc = "Auto-crafting table", category = {CREATIVE, EXTRA})
-    public static boolean autoCraftingTable = false;
-
     @Rule(
             desc = "Auto-crafting dropper",
             extra = {"Is a dropper points to the crafting table ",
