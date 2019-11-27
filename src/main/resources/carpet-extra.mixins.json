@@ -5,8 +5,6 @@
   "mixins": [
     "MinecraftServer_noopMixin",
     "DispenserBlockMixin",
-    "CraftingTableBlockMixin",
-    "CraftingInventoryMixin",
     "FallingBlockEntityMixin",
     "WetSpongeBlockMixin",
     "RepeaterBlockMixin",
