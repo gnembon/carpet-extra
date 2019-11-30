@@ -46,15 +46,15 @@ public abstract class FallingBlockEntityMixin extends Entity
             {
                 if (iceCount < 2)
                 {
-                    world.breakBlock(blockPos_2.method_10074(), false, null);
+                    world.breakBlock(blockPos_2.down(), false, null);
                     this.onGround = false;
                     iceCount++;
                     ci.cancel();
                 }
                 else
                 {
-                    world.setBlockState(blockPos_2.method_10074(), Blocks.PACKED_ICE.getDefaultState(), 3);
-                    world.playLevelEvent(2001, blockPos_2.method_10074(), Block.getRawIdFromState(Blocks.PACKED_ICE.getDefaultState()));
+                    world.setBlockState(blockPos_2.down(), Blocks.PACKED_ICE.getDefaultState(), 3);
+                    world.playLevelEvent(2001, blockPos_2.down(), Block.getRawIdFromState(Blocks.PACKED_ICE.getDefaultState()));
                 }
             }
             else if (CarpetExtraSettings.renewableSand && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)

@@ -43,7 +43,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         super(requiredMemoryState);
     }
 
-    @Redirect(method = "method_19564", at = @At(
+    @Redirect(method = "shouldRun", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/village/VillagerData;getProfession()Lnet/minecraft/village/VillagerProfession;"
     ))
@@ -59,7 +59,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         return profession;
     }
 
-    @Redirect(method = "method_19564", at = @At(
+    @Redirect(method = "shouldRun", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;",
             ordinal = 0
@@ -79,7 +79,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         {
             BlockState blockState = serverWorld.getBlockState(blockPos);
             Block block = blockState.getBlock();
-            Block block2 = serverWorld.getBlockState(blockPos.method_10074()).getBlock(); // down()
+            Block block2 = serverWorld.getBlockState(blockPos.down()).getBlock(); // down()
             cir.setReturnValue(
                     block == Blocks.NETHER_WART && blockState.get(NetherWartBlock.AGE)== 3 && field_18860 ||
                             blockState.isAir() && block2 == Blocks.SOUL_SAND && field_18859);
@@ -87,7 +87,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         }
     }
 
-    @Redirect(method = "method_19565", at = @At(
+    @Redirect(method = "keepRunning", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/server/world/ServerWorld;getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;",
             ordinal = 0
@@ -102,7 +102,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         return state;
     }
 
-    @Redirect(method = "method_19565", at = @At(
+    @Redirect(method = "keepRunning", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/block/BlockState;getBlock()Lnet/minecraft/block/Block;",
             ordinal = 1
@@ -117,7 +117,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         return block;
     }
 
-    @Redirect(method = "method_19565", at = @At(
+    @Redirect(method = "keepRunning", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/inventory/BasicInventory;getInvSize()I"
     ))

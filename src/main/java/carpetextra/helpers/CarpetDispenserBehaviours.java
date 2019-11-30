@@ -253,7 +253,7 @@ public class CarpetDispenserBehaviours
             World world = blockPointer_1.getWorld();
             Direction direction = blockPointer_1.getBlockState().get(DispenserBlock.FACING);
             BlockPos front = blockPointer_1.getBlockPos().offset(direction);
-            BlockPos down = blockPointer_1.getBlockPos().method_10074().offset(direction);
+            BlockPos down = blockPointer_1.getBlockPos().down().offset(direction);
             BlockState frontState = world.getBlockState(front);
             BlockState downState = world.getBlockState(down);
             

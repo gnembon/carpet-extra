@@ -54,7 +54,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
         final Direction ffacing = facing;
 
         if (usePlacementContext(item, block)) {
-            BlockHitResult hitResult = new BlockHitResult(new Vec3d(pos.method_10079(facing, 2)), facing, pos, false); // offset
+            BlockHitResult hitResult = new BlockHitResult(new Vec3d(pos.offset(facing, 2)), facing, pos, false); // offset
             ItemPlacementContext ipc = new ItemPlacementContext(world, null, Hand.MAIN_HAND, itemStack, hitResult) {
                 @Override
                 public Direction getPlayerLookDirection() {
