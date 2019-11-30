@@ -68,6 +68,13 @@ public class CarpetExtraSettings
     
     @Rule(desc = "Wet sponges dry in the nether dimension", category = {EXTRA, FEATURE})
     public static boolean spongesDryInTheNether = false;
+
+    @Rule(
+            desc = "Clerics can warm nether farts",
+            extra = {"This will also make them pick up wart items","As well as pathfind to soulsand"},
+            category = {EXTRA, FEATURE}
+    )
+    public static boolean clericsFarmWarts = false;
     
     @Rule(desc = "Multiple ice crushed by falling anvils make packed ice", category = {EXTRA, EXPERIMENTAL, FEATURE})
     public static boolean renewablePackedIce = false;

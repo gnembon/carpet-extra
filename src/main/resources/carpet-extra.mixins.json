@@ -23,6 +23,12 @@
     "DropperBlock_craftingMixin",
     "DispenserBlockEntity_craftingMixin",
 
+    "VillagerEntity_wartFarmMixin",
+    "FarmerVillagerTask_wartFarmMixin",
+    "VillagerTaskListProvider_wartFarmMixin",
+    "VillagerProfession_wartFarmMixin",
+    "SecondaryPointOfInterestSensor_wartFarmMixin",
+
 
     "PlayerEntityMixin",
     "PistonBlockMixin",
