@@ -79,7 +79,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         {
             BlockState blockState = serverWorld.getBlockState(blockPos);
             Block block = blockState.getBlock();
-            Block block2 = serverWorld.getBlockState(blockPos.down()).getBlock();
+            Block block2 = serverWorld.getBlockState(blockPos.method_10074()).getBlock(); // down()
             cir.setReturnValue(
                     block == Blocks.NETHER_WART && blockState.get(NetherWartBlock.AGE)== 3 && field_18860 ||
                             blockState.isAir() && block2 == Blocks.SOUL_SAND && field_18859);

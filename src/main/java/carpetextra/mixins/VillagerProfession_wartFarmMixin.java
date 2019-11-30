@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraft.village.VillagerProfession;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,16 +17,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(VillagerProfession.class)
 public abstract class VillagerProfession_wartFarmMixin
 {
-    @Shadow static VillagerProfession register(String string, PointOfInterestType pointOfInterestType, ImmutableSet<Item> immutableSet, ImmutableSet<Block> immutableSet2) {
-        return null;
-    }
 
-    @Inject(method = "register(Ljava/lang/String;Lnet/minecraft/village/PointOfInterestType;)Lnet/minecraft/village/VillagerProfession;", cancellable = true, at = @At("HEAD"))
-    private static void registerCleric(String key, PointOfInterestType pointOfInterestType, CallbackInfoReturnable<VillagerProfession> cir)
+
+    @Shadow static VillagerProfession register(String string, PointOfInterestType pointOfInterestType, ImmutableSet<Item> immutableSet, ImmutableSet<Block> immutableSet2, /*@Nullable*/ SoundEvent soundEvent) {return null;};
+
+    @Inject(method = "register(Ljava/lang/String;Lnet/minecraft/village/PointOfInterestType;Lnet/minecraft/sound/SoundEvent;)Lnet/minecraft/village/VillagerProfession;", cancellable = true, at = @At("HEAD"))
+    private static void registerCleric(String key, PointOfInterestType pointOfInterestType, SoundEvent soundEvent, CallbackInfoReturnable<VillagerProfession> cir)
     {
         if (key.equals("cleric"))
         {
-            cir.setReturnValue(register("cleric", PointOfInterestType.CLERIC, ImmutableSet.of(Items.NETHER_WART), ImmutableSet.of(Blocks.SOUL_SAND)));
+            cir.setReturnValue(register(key, pointOfInterestType, ImmutableSet.of(Items.NETHER_WART), ImmutableSet.of(Blocks.SOUL_SAND), soundEvent));
         }
     }
 }
