@@ -2,7 +2,13 @@ package carpetextra;
 
 import carpet.settings.Rule;
 
-import static carpet.settings.RuleCategory.*;
+import static carpet.settings.RuleCategory.BUGFIX;
+import static carpet.settings.RuleCategory.COMMAND;
+import static carpet.settings.RuleCategory.CREATIVE;
+import static carpet.settings.RuleCategory.DISPENSER;
+import static carpet.settings.RuleCategory.EXPERIMENTAL;
+import static carpet.settings.RuleCategory.FEATURE;
+import static carpet.settings.RuleCategory.SURVIVAL;
 
 /**
  * Here is your example Settings class you can plug to use carpetmod /carpet settings command
@@ -18,11 +24,11 @@ public class CarpetExtraSettings
                     "Overrides comparators so they indicate number of filled slots instead",
                     "Also makes hoppers, droppers and dispensers input max 1 item per slot"
             },
-            category = {CREATIVE, EXTRA}
+            category = {CREATIVE, EXTRA, DISPENSER}
     )
     public static boolean autoCraftingDropper = false;
 
-    @Rule(desc="Dispensers can place blocks", category = {CREATIVE, EXTRA})
+    @Rule(desc="Dispensers can place blocks", category = {CREATIVE, EXTRA, DISPENSER})
     public static boolean dispenserPlacesBlocks = false;
 
     @Rule(
@@ -56,13 +62,13 @@ public class CarpetExtraSettings
     
     @Rule(
             desc = "Water bottles in dispensers fill with water when dispensed with water in front.",
-            category = {EXPERIMENTAL, FEATURE, EXTRA}
+            category = {EXPERIMENTAL, FEATURE, EXTRA, DISPENSER}
     )
     public static boolean dispensersFillBottles;
     
     @Rule(
             desc = "Minecarts can be filled with hoppers, chests, tnt and furnace.",
-            category = {EXPERIMENTAL, FEATURE, EXTRA}
+            category = {EXPERIMENTAL, FEATURE, EXTRA, DISPENSER}
     )
     public static boolean dispensersFillMinecarts = false;
     
@@ -82,7 +88,7 @@ public class CarpetExtraSettings
     @Rule(
             desc = "Dispensers can play records if there's a jukebox in front of them",
             extra = "If record already exists in the jukebox, it gets placed back in the dispenser",
-            category = {EXTRA, FEATURE}
+            category = {EXTRA, FEATURE, DISPENSER}
     )
     public static boolean dispensersPlayRecords = false;
 
@@ -92,13 +98,16 @@ public class CarpetExtraSettings
     )
     public static boolean accurateBlockPlacement = false;
 
-    @Rule(desc = "Dispensers can toggle with a stick things like buttons, doors, repeaters", category = {EXTRA, EXPERIMENTAL, FEATURE})
+    @Rule(
+            desc = "Dispensers can toggle with a stick things like buttons, doors, repeaters",
+            category = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER}
+    )
     public static boolean dispensersToggleThings = false;
 
-    @Rule(desc = "Dispensers with hoes can till soil", category = {EXTRA, FEATURE})
+    @Rule(desc = "Dispensers with hoes can till soil", category = {EXTRA, FEATURE, DISPENSER})
     public static boolean dispensersTillSoil = false;
 
-    @Rule(desc = "Dispensers can feed animals", category = {EXTRA, EXPERIMENTAL, FEATURE})
+    @Rule(desc = "Dispensers can feed animals", category = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER})
     public static boolean dispensersFeedAnimals = false;
     
     @Rule(desc = "Disables player entity collision", category = {EXTRA, CREATIVE, EXPERIMENTAL})
@@ -107,7 +116,7 @@ public class CarpetExtraSettings
     @Rule(
             desc = "Obsidian surrounded by 6 lava sources has a chance of converting to lava",
             category = {EXTRA, EXPERIMENTAL, FEATURE},
-            extra = "Credits: Skyrising (Quickcarpet)"
+            extra = "Credits: Skyrising"
     )
     public static boolean renewableLava = false;
     
@@ -134,7 +143,7 @@ public class CarpetExtraSettings
     @Rule(
             desc = "Fire charges from dispensers convert cobblestone to netherrack",
             category = {EXTRA, EXPERIMENTAL},
-            extra = "Credits: Skyrising (Quickcarpet)"
+            extra = "Credits: Skyrising"
     )
     public static boolean fireChargeConvertsToNetherrack = false;
     
@@ -169,7 +178,7 @@ public class CarpetExtraSettings
     
     @Rule(
             desc = "Dispensers with empty buckets can milk cows",
-            category = {EXPERIMENTAL, EXTRA, FEATURE}
+            category = {EXPERIMENTAL, EXTRA, FEATURE, DISPENSER}
     )
     public static boolean dispensersMilkCows = false;
     
