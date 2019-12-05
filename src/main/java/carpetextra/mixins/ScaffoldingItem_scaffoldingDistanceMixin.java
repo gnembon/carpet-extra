@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ScaffoldingItem.class)
-public class ScaffoldingItem_scaffoldingDistance {
+public class ScaffoldingItem_scaffoldingDistanceMixin {
     @ModifyConstant(method = "getPlacementContext", constant = @Constant(intValue = 7))
     private static int getPlacementContext_maxDistance(int oldValue)
     {

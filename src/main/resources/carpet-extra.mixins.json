@@ -48,8 +48,8 @@
     "DispenserBehaviorBucketCowsMixin",
     "AbstractRedstoneGateBlockMixin",
 
-    "ScaffoldingBlock_scaffoldingDistance",
-    "ScaffoldingItem_scaffoldingDistance"
+    "ScaffoldingBlock_scaffoldingDistanceMixin",
+    "ScaffoldingItem_scaffoldingDistanceMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"

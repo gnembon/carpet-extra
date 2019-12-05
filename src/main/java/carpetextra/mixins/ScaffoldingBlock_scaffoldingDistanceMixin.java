@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ScaffoldingBlock.class)
-public class ScaffoldingBlock_scaffoldingDistance {
+public class ScaffoldingBlock_scaffoldingDistanceMixin {
     @Redirect(method = "<clinit>",
                 at = @At(value = "FIELD", target = "Lnet/minecraft/state/property/Properties;DISTANCE_0_7:Lnet/minecraft/state/property/IntProperty;", opcode = Opcodes.GETSTATIC)
     )
