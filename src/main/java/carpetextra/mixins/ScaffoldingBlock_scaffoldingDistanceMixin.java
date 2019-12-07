@@ -20,7 +20,7 @@ public class ScaffoldingBlock_scaffoldingDistanceMixin {
         return IntProperty.of("distance", 0, 64);
     }
 
-    @ModifyConstant(method = "onScheduledTick", constant = @Constant(intValue = 7))
+    @ModifyConstant(method = "scheduledTick", constant = @Constant(intValue = 7))
     private int scheduledTick_maxDistance(int oldValue)
     {
         return CarpetExtraSettings.scaffoldingDistance;
