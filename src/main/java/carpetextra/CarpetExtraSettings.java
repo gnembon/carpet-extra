@@ -1,6 +1,10 @@
 package carpetextra;
 
+import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
+import carpet.settings.RuleCategory;
+import carpet.settings.Validator;
+import net.minecraft.server.command.ServerCommandSource;
 
 import static carpet.settings.RuleCategory.BUGFIX;
 import static carpet.settings.RuleCategory.COMMAND;
@@ -16,6 +20,24 @@ import static carpet.settings.RuleCategory.SURVIVAL;
 public class CarpetExtraSettings
 {
     public static final String EXTRA = "extras";
+
+    public static class validatorScaffoldingDistance extends Validator<Integer> {
+        @Override
+        public Integer validate(ServerCommandSource source, ParsedRule<Integer> currentRule, Integer newValue, String string) {
+            return newValue >= 0 && newValue <= 64 ? newValue : null;
+        }
+
+        @Override
+        public String description() { return "You must choose a value from 0 to 64";}
+    }
+    @Rule(
+            desc="Max distance for scaffolding",
+            options = { "7", "12", "16", "20" },
+            category = RuleCategory.FEATURE,
+            strict = false,
+            validate = validatorScaffoldingDistance.class
+    )
+    public static int scaffoldingDistance = 7;
 
     @Rule(
             desc = "Auto-crafting dropper",
