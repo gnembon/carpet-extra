@@ -46,7 +46,10 @@
     "FlowerPotBlockMixin",
     "EntityMixin",
     "DispenserBehaviorBucketCowsMixin",
-    "AbstractRedstoneGateBlockMixin"
+    "AbstractRedstoneGateBlockMixin",
+
+    "ScaffoldingBlock_scaffoldingDistanceMixin",
+    "ScaffoldingItem_scaffoldingDistanceMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"

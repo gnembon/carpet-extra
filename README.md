@@ -208,6 +208,15 @@ Cobblestone crushed by falling anvils makes sand
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
 
+## scaffoldingDistance
+Max distance for scaffolding  
+* Type: `int`  
+* Default value: `7`  
+* Suggested options: `7`, `12`, `16`, `20`  
+* Categories: `FEATURE`  
+* Additional notes:  
+  * You must choose a value from 0 to 64  
+
 ## spongesDryInTheNether
 Wet sponges dry in the nether dimension
 * Type: `boolean`
