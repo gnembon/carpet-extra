@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ScaffoldingBlock.class)
 public class ScaffoldingBlock_scaffoldingDistanceMixin {
+    /* this causes massive problems with vanilla clients and will cause crashes if world is saves with incorrect value
     @Redirect(method = "<clinit>",
                 at = @At(value = "FIELD", target = "Lnet/minecraft/state/property/Properties;DISTANCE_0_7:Lnet/minecraft/state/property/IntProperty;", opcode = Opcodes.GETSTATIC)
     )
@@ -19,6 +20,7 @@ public class ScaffoldingBlock_scaffoldingDistanceMixin {
     {
         return IntProperty.of("distance", 0, 64);
     }
+     */
 
     @ModifyConstant(method = "onScheduledTick", constant = @Constant(intValue = 7))
     private int scheduledTick_maxDistance(int oldValue)
