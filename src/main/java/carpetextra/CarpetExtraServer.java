@@ -10,6 +10,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 public class CarpetExtraServer implements CarpetExtension
 {
+    @Override
+    public String version()
+    {
+        return "carpet-extra 1.3.0";
+    }
+
     public static void noop() { }
 
     static
