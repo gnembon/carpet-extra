@@ -1,6 +1,5 @@
 package carpetextra.mixins;
 
-import carpet.settings.CarpetSettings;
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
