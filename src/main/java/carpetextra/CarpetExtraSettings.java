@@ -24,15 +24,15 @@ public class CarpetExtraSettings
     public static class validatorScaffoldingDistance extends Validator<Integer> {
         @Override
         public Integer validate(ServerCommandSource source, ParsedRule<Integer> currentRule, Integer newValue, String string) {
-            return newValue >= 0 && newValue <= 64 ? newValue : null;
+            return newValue >= 0 && newValue <= 7 ? newValue : null;
         }
 
         @Override
-        public String description() { return "You must choose a value from 0 to 64";}
+        public String description() { return "You must choose a value from 0 to 7";}
     }
     @Rule(
             desc="Max distance for scaffolding",
-            options = { "7", "12", "16", "20" },
+            options = { "2", "3", "5", "7" },
             category = RuleCategory.FEATURE,
             strict = false,
             validate = validatorScaffoldingDistance.class
