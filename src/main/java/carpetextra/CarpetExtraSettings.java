@@ -33,7 +33,7 @@ public class CarpetExtraSettings
     @Rule(
             desc="Max distance for scaffolding",
             options = { "2", "3", "5", "7" },
-            category = RuleCategory.FEATURE,
+            category = {FEATURE, EXTRA},
             strict = false,
             validate = validatorScaffoldingDistance.class
     )
