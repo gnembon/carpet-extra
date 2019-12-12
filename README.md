@@ -212,6 +212,15 @@ Probably brings back pre 1.8 behaviour. Fixes MC-54711
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `BUGFIX`, `EXPERIMENTAL`  
   
+## scaffoldingDistance
+Max distance for scaffolding  
+* Type: `int`  
+* Default value: `7`  
+* Suggested options: `2`, `3`, `5`, `7`  
+* Categories: `FEATURE`, `EXTRAS`  
+* Additional notes:  
+  * You must choose a value from 0 to 7  
+  
 ## spongesDryInTheNether
 Wet sponges dry in the nether dimension  
 * Type: `boolean`  
@@ -226,3 +235,4 @@ buttons, pressure plates
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`  
+ 
