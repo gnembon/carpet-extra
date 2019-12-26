@@ -210,4 +210,7 @@ public class CarpetExtraSettings
             category = {EXTRA, BUGFIX, EXPERIMENTAL}
     )
     public static boolean repeaterPriorityFix = false;
+    
+    @Rule(desc = "Only strays spawn in igloos", category = {FEATURE, EXTRA})
+    public static boolean straySpawningInIgloos = false;
 }
