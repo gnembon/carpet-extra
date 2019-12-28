@@ -57,12 +57,14 @@ public abstract class FallingBlockMixin extends Block
                     
                     BlockPos blockPos;
     
-                    for (blockPos = pos.down(); canFallThrough(world.getBlockState(blockPos)) && blockPos.getY() > 0; blockPos = blockPos.down())
+                    int minY = CarpetExtraSettings.y0DragonEggBedrockBreaking ? -1 : 0;
+                    
+                    for (blockPos = pos.down(); canFallThrough(world.getBlockState(blockPos)) && blockPos.getY() > minY; blockPos = blockPos.down())
                     {
                         ;
                     }
                     
-                    if (blockPos.getY() > 0)
+                    if (blockPos.getY() > minY)
                     {
                         world.setBlockState(blockPos, this.getDefaultState());
                     }
