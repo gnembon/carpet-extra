@@ -213,4 +213,11 @@ public class CarpetExtraSettings
     
     @Rule(desc = "Only strays spawn in igloos", category = {FEATURE, EXTRA})
     public static boolean straySpawningInIgloos = false;
+    
+    @Rule(
+            desc = "Let dragon eggs break Y0 bedrock",
+            extra = "Requires dragonEggBedrockBreaking to be set to true",
+            category = {EXPERIMENTAL, EXTRA}
+    )
+    public static boolean y0DragonEggBedrockBreaking = false;
 }
