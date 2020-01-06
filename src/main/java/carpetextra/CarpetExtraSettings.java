@@ -223,4 +223,7 @@ public class CarpetExtraSettings
     
     @Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
     public static boolean disablePhantomSpawning = false;
+    
+    @Rule(desc = "Phantoms don't ignore the mobcap", category = {EXPERIMENTAL, FEATURE, EXTRA})
+    public static boolean phantomsRespectMobcap = false;
 }

@@ -52,6 +52,7 @@
     "StrayEntityMixin",
     "FlatChunkGenerator_strayMixin",
     "PhantomSpawnerMixin",
+    "ServerChunkManagerAccessor",
 
     "ScaffoldingBlock_scaffoldingDistanceMixin",
     "ScaffoldingItem_scaffoldingDistanceMixin"

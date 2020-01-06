@@ -180,6 +180,13 @@ If a living entity dies on sand with fire on top the sand will convert into soul
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
+
+## phantomsRespectMobcap
+Phantoms don't ignore the mobcap  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXPERIMENTAL`, `FEATURE`, `EXTRAS`  
   
 ## reloadSuffocationFix
 Won't let mobs glitch into blocks when reloaded.  
