@@ -220,4 +220,7 @@ public class CarpetExtraSettings
             category = {EXPERIMENTAL, EXTRA}
     )
     public static boolean y0DragonEggBedrockBreaking = false;
+    
+    @Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
+    public static boolean disablePhantomSpawning = false;
 }

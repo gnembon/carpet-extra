@@ -64,7 +64,14 @@ Allows Comparators to read the daytime instead of the rotation of clocks in item
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
-  
+
+## disablePhantomSpawning
+Disable phantom spawning  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `CREATIVE`, `EXTRAS`  
+
 ## disablePlayerCollision
 Disables player entity collision  
 * Type: `boolean`  

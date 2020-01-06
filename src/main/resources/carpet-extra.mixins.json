@@ -51,6 +51,7 @@
     "OverworldChunkGeneratorMixin",
     "StrayEntityMixin",
     "FlatChunkGenerator_strayMixin",
+    "PhantomSpawnerMixin",
 
     "ScaffoldingBlock_scaffoldingDistanceMixin",
     "ScaffoldingItem_scaffoldingDistanceMixin"
