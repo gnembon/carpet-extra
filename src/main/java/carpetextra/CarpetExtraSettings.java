@@ -2,7 +2,6 @@ package carpetextra;
 
 import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
-import carpet.settings.RuleCategory;
 import carpet.settings.Validator;
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -210,4 +209,18 @@ public class CarpetExtraSettings
             category = {EXTRA, BUGFIX, EXPERIMENTAL}
     )
     public static boolean repeaterPriorityFix = false;
+    
+    @Rule(desc = "Only strays spawn in igloos", category = {FEATURE, EXTRA})
+    public static boolean straySpawningInIgloos = false;
+    
+    @Rule(
+            desc = "Let dragon eggs break Y0 bedrock",
+            extra = "Requires dragonEggBedrockBreaking to be set to true",
+            category = {EXPERIMENTAL, EXTRA}
+    )
+    public static boolean y0DragonEggBedrockBreaking = false;
+    
+    // Implemented in 1.15 - doInsomnia
+    /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
+    public static boolean disablePhantomSpawning = false;*/
 }

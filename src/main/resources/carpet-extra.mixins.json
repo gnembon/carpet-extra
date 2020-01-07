@@ -47,6 +47,10 @@
     "EntityMixin",
     "DispenserBehaviorBucketCowsMixin",
     "AbstractRedstoneGateBlockMixin",
+    "IglooFeatureMixin",
+    "OverworldChunkGeneratorMixin",
+    "StrayEntityMixin",
+    "FlatChunkGenerator_strayMixin",
 
     "ScaffoldingBlock_scaffoldingDistanceMixin",
     "ScaffoldingItem_scaffoldingDistanceMixin"

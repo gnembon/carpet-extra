@@ -227,6 +227,13 @@ Wet sponges dry in the nether dimension
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`  
+
+## straySpawningInIgloos
+Only strays spawn in igloos 
+* Type: `boolean`   
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `FEATURE`, `EXTRAS`  
   
 ## variableWoodDelays
 variable delays on wooden components  
