@@ -33,9 +33,9 @@ import java.util.Map;
 @Mixin(FarmerVillagerTask.class)
 public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEntity>
 {
-    @Shadow private boolean field_18860;
-    @Shadow private boolean field_18859;
-    @Shadow /*@Nullable*/ private BlockPos field_18858;
+    @Shadow private boolean ableToPickUpSeed;
+    @Shadow private boolean ableToPlant;
+    @Shadow /*@Nullable*/ private BlockPos currentTarget;
     private boolean isFarmingCleric;
 
     public FarmerVillagerTask_wartFarmMixin(Map<MemoryModuleType<?>, MemoryModuleState> requiredMemoryState)
@@ -72,7 +72,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         return item;
     }
 
-    @Inject(method = "method_20640", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isSuitableTarget", at = @At("HEAD"), cancellable = true)
     private void isValidSoulSand(BlockPos blockPos, ServerWorld serverWorld, CallbackInfoReturnable<Boolean> cir)
     {
         if (isFarmingCleric)
@@ -81,8 +81,8 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
             Block block = blockState.getBlock();
             Block block2 = serverWorld.getBlockState(blockPos.down()).getBlock(); // down()
             cir.setReturnValue(
-                    block == Blocks.NETHER_WART && blockState.get(NetherWartBlock.AGE)== 3 && field_18860 ||
-                            blockState.isAir() && block2 == Blocks.SOUL_SAND && field_18859);
+                    block == Blocks.NETHER_WART && blockState.get(NetherWartBlock.AGE)== 3 && ableToPickUpSeed ||
+                            blockState.isAir() && block2 == Blocks.SOUL_SAND && ableToPlant);
 
         }
     }
@@ -133,7 +133,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
                 {
                     if (itemStack.getItem() == Items.NETHER_WART)
                     {
-                        serverWorld.setBlockState(field_18858, Blocks.NETHER_WART.getDefaultState(), 3);
+                        serverWorld.setBlockState(currentTarget, Blocks.NETHER_WART.getDefaultState(), 3);
                         bl = true;
                     }
                 }
@@ -141,7 +141,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
                 if (bl)
                 {
                     serverWorld.playSound(null,
-                            field_18858.getX(), field_18858.getY(), this.field_18858.getZ(),
+                            currentTarget.getX(), currentTarget.getY(), this.currentTarget.getZ(),
                             SoundEvents.ITEM_NETHER_WART_PLANT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     itemStack.decrement(1);
                     if (itemStack.isEmpty())
