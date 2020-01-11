@@ -12,9 +12,13 @@ import net.minecraft.world.gen.chunk.FlatChunkGenerator;
 import net.minecraft.world.gen.chunk.FlatChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
 import java.util.List;
 
-@Mixin(FlatChunkGenerator.class)
+@Mixin(value = FlatChunkGenerator.class, priority = 999) // let carpet core create that method first
 public abstract class FlatChunkGenerator_strayMixin extends ChunkGenerator<FlatChunkGeneratorConfig>
 {
     public FlatChunkGenerator_strayMixin(IWorld world, BiomeSource biomeSource, FlatChunkGeneratorConfig config)
@@ -22,15 +26,17 @@ public abstract class FlatChunkGenerator_strayMixin extends ChunkGenerator<FlatC
         super(world, biomeSource, config);
     }
 
-    @Override
-    public List<Biome.SpawnEntry> getEntitySpawnList(EntityCategory category, BlockPos pos) {
+    @SuppressWarnings("UnresolvedMixinReference")
+    @Inject(method = "getEntitySpawnList", at = @At("HEAD"), cancellable = true)
+    private void onGetEntitySpawnList(EntityCategory category, BlockPos pos, CallbackInfoReturnable<List<Biome.SpawnEntry>> cir)
+    {
         if (CarpetSettings.flatWorldStructureSpawning && category == EntityCategory.MONSTER && CarpetExtraSettings.straySpawningInIgloos)
         {
             if (Feature.IGLOO.isApproximatelyInsideStructure(this.world, pos))
             {
-                return Feature.IGLOO.getMonsterSpawns();
+                cir.setReturnValue(Feature.IGLOO.getMonsterSpawns());
             }
         }
-        return super.getEntitySpawnList(category, pos);
     }
+
 }
