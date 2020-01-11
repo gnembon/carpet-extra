@@ -18,14 +18,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(FlatChunkGenerator.class)
+@Mixin(value = FlatChunkGenerator.class, priority = 999) // let carpet core create that method first
 public abstract class FlatChunkGenerator_strayMixin extends ChunkGenerator<FlatChunkGeneratorConfig>
 {
     public FlatChunkGenerator_strayMixin(IWorld world, BiomeSource biomeSource, FlatChunkGeneratorConfig config)
     {
         super(world, biomeSource, config);
     }
-    
+
     @SuppressWarnings("UnresolvedMixinReference")
     @Inject(method = "getEntitySpawnList", at = @At("HEAD"), cancellable = true)
     private void onGetEntitySpawnList(EntityCategory category, BlockPos pos, CallbackInfoReturnable<List<Biome.SpawnEntry>> cir)
@@ -38,5 +38,5 @@ public abstract class FlatChunkGenerator_strayMixin extends ChunkGenerator<FlatC
             }
         }
     }
-    
+
 }
