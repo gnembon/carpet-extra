@@ -26,7 +26,7 @@ public abstract class FlatChunkGenerator_strayMixin extends ChunkGenerator<FlatC
         super(world, biomeSource, config);
     }
 
-    @SuppressWarnings("UnresolvedMixinReference")
+    /*@SuppressWarnings("UnresolvedMixinReference")
     @Inject(method = "getEntitySpawnList", at = @At("HEAD"), cancellable = true)
     private void onGetEntitySpawnList(EntityCategory category, BlockPos pos, CallbackInfoReturnable<List<Biome.SpawnEntry>> cir)
     {
@@ -38,5 +38,5 @@ public abstract class FlatChunkGenerator_strayMixin extends ChunkGenerator<FlatC
             }
         }
     }
-
+    */
 }
