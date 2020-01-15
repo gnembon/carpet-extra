@@ -38,7 +38,7 @@ public abstract class FallingBlockEntityMixin extends Entity
                     target = "Lnet/minecraft/entity/FallingBlockEntity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V"),
             locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true
     )
-    private void onTick(CallbackInfo ci, Block block_1, BlockPos blockPos_2, BlockState blockState_1)
+    private void onTick(CallbackInfo ci, Block block_1, BlockPos blockPos_2, boolean b1, boolean bl2, BlockState blockState_1)
     {
         if (block_1.matches(BlockTags.ANVIL))
         {
