@@ -22,8 +22,6 @@ public abstract class EntityMixin
     
     @Shadow protected abstract boolean shouldSetPositionOnLoad();
     
-    @Shadow public abstract void setPosition(double double_1, double double_2, double double_3);
-    
     @Shadow public double x;
     
     @Shadow public double y;
@@ -31,7 +29,9 @@ public abstract class EntityMixin
     @Shadow public double z;
     
     @Shadow public abstract void setBoundingBox(Box box_1);
-    
+
+    @Shadow protected abstract void refreshPosition();
+
     @Inject(
             method = "toTag",
             at = @At(value = "INVOKE", shift = At.Shift.BEFORE, ordinal = 0,
@@ -61,7 +61,7 @@ public abstract class EntityMixin
     {
         if (this.shouldSetPositionOnLoad())
         {
-            this.setPosition(this.x, this.y, this.z);
+            this.refreshPosition();
         }
         
         if (CarpetExtraSettings.reloadSuffocationFix && compoundTag_1.contains("CM_Box", 9))
