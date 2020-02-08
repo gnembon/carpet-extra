@@ -1,6 +1,5 @@
 package carpetextra.mixins;
 
-import carpet.settings.CarpetSettings;
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.BlockState;
@@ -24,7 +23,8 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.stream.IntStream;
 
@@ -60,7 +60,7 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
     private static final Vec3d ascending_south_offset= new Vec3d( 0,1,-1).normalize().multiply(-1);
 
     private Vec3d getBlockBelowCartOffset(){
-        BlockState blockState_1 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.x), MathHelper.floor(this.y), MathHelper.floor(this.z)));
+        BlockState blockState_1 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getY()), MathHelper.floor(this.getZ())));
         if (blockState_1.matches(BlockTags.RAILS)) {
             RailShape railShape = (RailShape)blockState_1.get(((AbstractRailBlock)blockState_1.getBlock()).getShapeProperty());
             switch (railShape){
@@ -85,20 +85,20 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
         Vec3d offsetToInventory = getBlockBelowCartOffset();
         //The visual rotation point of the minecart is roughly 0.5 above its feet (determined visually ingame)
         //Search 0.5 Blocks below the feet for an inventory
-        Inventory inv =  HopperBlockEntity.getInventoryAt(this.world, this.x + offsetToInventory.x, this.y + 0.5 + offsetToInventory.y, this.z + offsetToInventory.z);
+        Inventory inv =  HopperBlockEntity.getInventoryAt(this.world, this.getX() + offsetToInventory.x, this.getY() + 0.5 + offsetToInventory.y, this.getZ() + offsetToInventory.z);
 
         //There is probably a way nicer way to determine the access side of the target inventory
         if(inv instanceof BlockEntity){
             BlockPos pos = ((BlockEntity) inv).getPos();
-            if(pos.getY() < MathHelper.floor(this.y))
+            if(pos.getY() < MathHelper.floor(this.getY()))
                 outputDirection = Direction.DOWN;
-            else if(pos.getX() > MathHelper.floor(this.x))
+            else if(pos.getX() > MathHelper.floor(this.getX()))
                 outputDirection = Direction.EAST;
-            else if(pos.getX() < MathHelper.floor(this.x))
+            else if(pos.getX() < MathHelper.floor(this.getX()))
                 outputDirection = Direction.WEST;
-            else if(pos.getZ() > MathHelper.floor(this.z))
+            else if(pos.getZ() > MathHelper.floor(this.getZ()))
                 outputDirection = Direction.SOUTH;
-            else if(pos.getZ() < MathHelper.floor(this.z))
+            else if(pos.getZ() < MathHelper.floor(this.getZ()))
                 outputDirection = Direction.NORTH;
             else outputDirection = Direction.DOWN;
         }else

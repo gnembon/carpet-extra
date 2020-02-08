@@ -54,7 +54,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
         final Direction ffacing = facing;
 
         if (usePlacementContext(item, block)) {
-            BlockHitResult hitResult = new BlockHitResult(new Vec3d(pos.offset(facing, 2)), facing, pos, false);
+            BlockHitResult hitResult = new BlockHitResult(new Vec3d(pos.offset(facing, 2)), facing, pos, false); // offset
             ItemPlacementContext ipc = new ItemPlacementContext(world, null, Hand.MAIN_HAND, itemStack, hitResult) {
                 @Override
                 public Direction getPlayerLookDirection() {
@@ -118,7 +118,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
 
         BlockState currentBlockState = world.getBlockState(pos);
         FluidState currentFluidState = world.getFluidState(pos);
-        if ((world.isAir(pos) || currentBlockState.getMaterial().isReplaceable()) && currentBlockState.getBlock() != block && state.canPlaceAt(world, pos)) {
+        if ((currentBlockState.isAir() || currentBlockState.getMaterial().isReplaceable()) && currentBlockState.getBlock() != block && state.canPlaceAt(world, pos)) {
             world.setBlockState(pos, state);
             CompoundTag blockEntityTag = itemStack.getSubTag("BlockEntityTag");
             if (blockEntityTag != null && block instanceof BlockEntityProvider) {
@@ -134,7 +134,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             }
             BlockSoundGroup soundType = state.getSoundGroup();
             world.playSound(null, pos, soundType.getPlaceSound(), SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F / 2.0F), soundType.getPitch() * 0.8F);
-            if (!world.isAir(pos)) {
+            if (!world.getBlockState(pos).isAir()) {
                 itemStack.decrement(1);
                 return itemStack;
             }
