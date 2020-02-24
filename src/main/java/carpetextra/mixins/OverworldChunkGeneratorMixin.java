@@ -40,5 +40,13 @@ public abstract class OverworldChunkGeneratorMixin extends SurfaceChunkGenerator
                 cir.setReturnValue(Feature.IGLOO.getMonsterSpawns());
             }
         }
+        
+        if (CarpetExtraSettings.creeperSpawningInJungleTemples)
+        {
+            if (Feature.JUNGLE_TEMPLE.isApproximatelyInsideStructure(this.world, pos))
+            {
+                cir.setReturnValue(Feature.JUNGLE_TEMPLE.getMonsterSpawns());
+            }
+        }
     }
 }
