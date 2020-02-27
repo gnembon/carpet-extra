@@ -50,7 +50,8 @@
     "IglooFeatureMixin",
     "OverworldChunkGeneratorMixin",
     "StrayEntityMixin",
-    "FlatChunkGenerator_strayMixin",
+    "FlatChunkGeneratorMixin",
+    "JungleTempleFeature_creeperMixin",
 
     "ScaffoldingBlock_scaffoldingDistanceMixin",
     "ScaffoldingItem_scaffoldingDistanceMixin"

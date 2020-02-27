@@ -64,6 +64,13 @@ Allows Comparators to read the daytime instead of the rotation of clocks in item
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
+
+## creeperSpawningInJungleTemples
+Only creepers spawn in jungle temples  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `FEATURE`, `EXTRAS`  
   
 ## disablePlayerCollision
 Disables player entity collision  
