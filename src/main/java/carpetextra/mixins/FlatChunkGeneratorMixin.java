@@ -19,9 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(value = FlatChunkGenerator.class, priority = 999) // let carpet core create that method first
-public abstract class FlatChunkGenerator_strayMixin extends ChunkGenerator<FlatChunkGeneratorConfig>
+public abstract class FlatChunkGeneratorMixin extends ChunkGenerator<FlatChunkGeneratorConfig>
 {
-    public FlatChunkGenerator_strayMixin(IWorld world, BiomeSource biomeSource, FlatChunkGeneratorConfig config)
+    public FlatChunkGeneratorMixin(IWorld world, BiomeSource biomeSource, FlatChunkGeneratorConfig config)
     {
         super(world, biomeSource, config);
     }
@@ -30,11 +30,21 @@ public abstract class FlatChunkGenerator_strayMixin extends ChunkGenerator<FlatC
     @Inject(method = "getEntitySpawnList", at = @At("HEAD"), cancellable = true)
     private void onGetEntitySpawnList(EntityCategory category, BlockPos pos, CallbackInfoReturnable<List<Biome.SpawnEntry>> cir)
     {
-        if (CarpetSettings.flatWorldStructureSpawning && category == EntityCategory.MONSTER && CarpetExtraSettings.straySpawningInIgloos)
+        if (CarpetSettings.flatWorldStructureSpawning && category == EntityCategory.MONSTER)
         {
-            if (Feature.IGLOO.isApproximatelyInsideStructure(this.world, pos))
+            if (CarpetExtraSettings.straySpawningInIgloos)
             {
-                cir.setReturnValue(Feature.IGLOO.getMonsterSpawns());
+                if (Feature.IGLOO.isApproximatelyInsideStructure(this.world, pos))
+                {
+                    cir.setReturnValue(Feature.IGLOO.getMonsterSpawns());
+                }
+            }
+            if (CarpetExtraSettings.creeperSpawningInJungleTemples)
+            {
+                if (Feature.JUNGLE_TEMPLE.isApproximatelyInsideStructure(this.world, pos))
+                {
+                    cir.setReturnValue(Feature.JUNGLE_TEMPLE.getMonsterSpawns());
+                }
             }
         }
     }
