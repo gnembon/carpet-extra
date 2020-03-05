@@ -10,7 +10,7 @@
     "RepeaterBlockMixin",
     "ComparatorBlockMixin",
     "DaylightDetectorBlockMixin",
-    "AnimalMateGoalMixin",
+    "AnimalEntity_dispenserMixin",
     "FoxMateGoalMixin",
     "TurtleMateGoalMixin",
     "AbstractPressurePlateBlock_variableWoodMixin",

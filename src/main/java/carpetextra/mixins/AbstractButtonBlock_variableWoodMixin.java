@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(AbstractButtonBlock.class)
 public class AbstractButtonBlock_variableWoodMixin
 {
-    @Redirect(method = "method_21845", at = @At(
+    @Redirect(method = "powerOn", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/block/AbstractButtonBlock;getTickRate(Lnet/minecraft/world/WorldView;)I"
     ))

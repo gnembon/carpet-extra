@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AbstractTraderEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.village.VillagerData;
 import net.minecraft.village.VillagerProfession;
@@ -27,9 +28,9 @@ public abstract class VillagerEntity_wartFarmMixin extends AbstractTraderEntity
     @Shadow public abstract VillagerData getVillagerData();
 
     @Inject(method = "canGather", at = @At("HEAD"), cancellable = true)
-    private void canClericGather(Item item, CallbackInfoReturnable<Boolean> cir)
+    private void canClericGather(ItemStack stack, CallbackInfoReturnable<Boolean> cir)
     {
-        if (CarpetExtraSettings.clericsFarmWarts && item == Items.NETHER_WART &&
+        if (CarpetExtraSettings.clericsFarmWarts && stack.getItem() == Items.NETHER_WART &&
                 getVillagerData().getProfession()== VillagerProfession.CLERIC )
         {
             cir.setReturnValue(true);

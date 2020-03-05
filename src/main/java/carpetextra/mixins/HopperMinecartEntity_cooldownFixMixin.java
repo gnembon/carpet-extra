@@ -38,7 +38,7 @@ public abstract class HopperMinecartEntity_cooldownFixMixin extends StorageMinec
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/vehicle/HopperMinecartEntity;setTransferCooldown(I)V",ordinal = 0),locals = LocalCapture.CAPTURE_FAILHARD)
     private void rememberBlockPos(CallbackInfo ci){
         if(CarpetExtraSettings.hopperMinecart8gtCooldown)
-            this.currentBlockPos = this.getBlockPos();
+            this.currentBlockPos = this.getSenseCenterPos();
         else
             this.currentBlockPos = BlockPos.ORIGIN;
     }

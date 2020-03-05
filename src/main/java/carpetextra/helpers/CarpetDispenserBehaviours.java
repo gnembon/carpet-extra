@@ -203,7 +203,7 @@ public class CarpetDispenserBehaviours
                     null,
                     Hand.MAIN_HAND,
                     new BlockHitResult(
-                        new Vec3d(new Vec3i(pos.getX(), pos.getY(), pos.getZ())), 
+                        Vec3d.method_24954(pos), // flat +0
                         direction, 
                         pos,
                         false

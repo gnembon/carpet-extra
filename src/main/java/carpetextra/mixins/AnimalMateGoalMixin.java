@@ -13,29 +13,5 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AnimalMateGoal.class)
 public abstract class AnimalMateGoalMixin {
-
-    @Shadow @Final
-    protected AnimalEntity animal;
-
-    @Shadow
-    protected AnimalEntity mate;
-
-    @Inject(
-        method = "breed",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
-            ordinal = 1
-        ),
-        cancellable = true
-    )
-    protected void onSpawnExperience(CallbackInfo ci) {
-        ServerPlayerEntity serverPlayerEntity_1 = this.animal.getLovingPlayer();
-        if (serverPlayerEntity_1 == null) {
-            serverPlayerEntity_1 = this.mate.getLovingPlayer();
-        }
-        if(serverPlayerEntity_1 == null && CarpetExtraSettings.dispensersFeedAnimals) {
-            ci.cancel();
-        }
-    }
+    //intentionally left blank
 }
