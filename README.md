@@ -210,6 +210,13 @@ Cobblestone crushed by falling anvils makes sand
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
+
+## renewableWitherSkeletons
+Skeletons turn into wither skeletons when struck by lightning  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `FEATURE`, `EXTRAS`  
   
 ## repeaterPriorityFix
 Quick pulses won't get lost in repeater setups  
