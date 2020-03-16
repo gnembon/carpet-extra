@@ -143,6 +143,13 @@ Reintroduce Dragon Egg Bedrock breaking bug from 1.12
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
+
+## dragonsBreathConvertsCobbleToEndstone
+Dragon's breath from dispensers convert cobblestone to end stone  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`, `DISPENSER`  
   
 ## fireChargeConvertsToNetherrack
 Fire charges from dispensers convert cobblestone to netherrack  
