@@ -223,6 +223,12 @@ public class CarpetExtraSettings
     )
     public static boolean y0DragonEggBedrockBreaking = false;
     
+    @Rule(
+            desc = "Dragon's breath from dispensers convert cobblestone to end stone",
+            category = {EXTRA, EXPERIMENTAL, DISPENSER}
+    )
+    public static boolean dragonsBreathConvertsCobbleToEndstone = false;
+    
     // Implemented in 1.15 - doInsomnia
     /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
     public static boolean disablePhantomSpawning = false;*/
