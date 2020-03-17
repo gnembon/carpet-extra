@@ -22,11 +22,11 @@ public abstract class EntityMixin
     
     @Shadow protected abstract boolean shouldSetPositionOnLoad();
     
-    @Shadow public double x;
+    @Shadow public abstract double getX();
     
-    @Shadow public double y;
+    @Shadow public abstract double getY();
     
-    @Shadow public double z;
+    @Shadow public abstract double getZ();
     
     @Shadow public abstract void setBoundingBox(Box box_1);
 
@@ -72,9 +72,9 @@ public abstract class EntityMixin
                     box_tag.getDouble(2), box_tag.getDouble(3),
                     box_tag.getDouble(4), box_tag.getDouble(5));
     
-            double deltaX = ((box.x1 + box.x2) / 2.0D) - this.x;
-            double deltaY = box.y1 - this.y;
-            double deltaZ = ((box.z1 + box.z2) / 2.0D) - this.z;
+            double deltaX = ((box.x1 + box.x2) / 2.0D) - this.getX();
+            double deltaY = box.y1 - this.getY();
+            double deltaZ = ((box.z1 + box.z2) / 2.0D) - this.getZ();
             
             // Credits: MrGrim (MUP) -> Sanity check.
             // If the position and BoundingBox center point are > 0.1 blocks apart then do not restore the BoundingBox. In vanilla
