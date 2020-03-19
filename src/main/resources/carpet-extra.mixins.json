@@ -52,6 +52,7 @@
     "StrayEntityMixin",
     "FlatChunkGeneratorMixin",
     "JungleTempleFeature_creeperMixin",
+    "SkeletonEntityMixin",
 
     "ScaffoldingBlock_scaffoldingDistanceMixin",
     "ScaffoldingItem_scaffoldingDistanceMixin"
