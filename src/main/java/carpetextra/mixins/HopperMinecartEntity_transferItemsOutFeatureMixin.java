@@ -61,7 +61,7 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
 
     private Vec3d getBlockBelowCartOffset(){
         BlockState blockState_1 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getY()), MathHelper.floor(this.getZ())));
-        if (blockState_1.matches(BlockTags.RAILS)) {
+        if (blockState_1.isIn(BlockTags.RAILS)) {
             RailShape railShape = (RailShape)blockState_1.get(((AbstractRailBlock)blockState_1.getBlock()).getShapeProperty());
             switch (railShape){
                 case ASCENDING_EAST:
