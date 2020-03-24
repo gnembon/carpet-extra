@@ -55,7 +55,8 @@
     "SkeletonEntityMixin",
 
     "ScaffoldingBlock_scaffoldingDistanceMixin",
-    "ScaffoldingItem_scaffoldingDistanceMixin"
+    "ScaffoldingItem_scaffoldingDistanceMixin",
+    "ExplosionMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"

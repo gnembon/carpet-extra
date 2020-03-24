@@ -242,6 +242,13 @@ Max distance for scaffolding
 * Additional notes:  
   * You must choose a value from 0 to 7  
   
+## silkTouchTNT
+TNT works like a silk touch pickaxe.  
+* Type: `boolean`  
+* Default value: `false`    
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`  
+  
 ## spongesDryInTheNether
 Wet sponges dry in the nether dimension  
 * Type: `boolean`  
