@@ -53,6 +53,7 @@
     "FlatChunkGeneratorMixin",
     "JungleTempleFeature_creeperMixin",
     "SkeletonEntityMixin",
+    "SpiderEntityMixin",
 
     "ScaffoldingBlock_scaffoldingDistanceMixin",
     "ScaffoldingItem_scaffoldingDistanceMixin"
