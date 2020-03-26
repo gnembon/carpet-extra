@@ -6,13 +6,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.TntEntity;
+import net.minecraft.entity.vehicle.TntMinecartEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.explosion.Explosion;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -23,6 +28,8 @@ import java.util.Iterator;
 @Mixin(Explosion.class)
 public abstract class ExplosionMixin
 {
+    @Shadow @Final /*@Nullable*/ private Entity entity;
+    
     private static ItemStack SILKY_PICK = new ItemStack(Items.DIAMOND_PICKAXE);
     
     static
@@ -38,7 +45,7 @@ public abstract class ExplosionMixin
     )
     private void silkyTNT(boolean bl, CallbackInfo ci, boolean bl2, ObjectArrayList objectArrayList, Iterator var4, BlockPos blockPos, BlockState blockState, Block block, BlockPos blockPos2, BlockEntity blockEntity, LootContext.Builder builder)
     {
-        if (CarpetExtraSettings.silkTouchTNT)
+        if (CarpetExtraSettings.silkTouchTNT && (this.entity instanceof TntEntity || this.entity instanceof TntMinecartEntity))
             builder.put(LootContextParameters.TOOL, SILKY_PICK);
     }
 }
