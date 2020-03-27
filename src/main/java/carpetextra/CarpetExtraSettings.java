@@ -213,12 +213,24 @@ public class CarpetExtraSettings
     @Rule(desc = "Only strays spawn in igloos", category = {FEATURE, EXTRA})
     public static boolean straySpawningInIgloos = false;
     
+    @Rule(desc = "Skeletons turn into wither skeletons when struck by lightning", category = {FEATURE, EXTRA})
+    public static boolean renewableWitherSkeletons = false;
+    
+    @Rule(desc = "Only creepers spawn in jungle temples", category = {FEATURE, EXTRA})
+    public static boolean creeperSpawningInJungleTemples = false;
+    
     @Rule(
             desc = "Let dragon eggs break Y0 bedrock",
             extra = "Requires dragonEggBedrockBreaking to be set to true",
             category = {EXPERIMENTAL, EXTRA}
     )
     public static boolean y0DragonEggBedrockBreaking = false;
+    
+    @Rule(
+            desc = "Dragon's breath from dispensers convert cobblestone to end stone",
+            category = {EXTRA, EXPERIMENTAL, DISPENSER}
+    )
+    public static boolean dragonsBreathConvertsCobbleToEndstone = false;
     
     // Implemented in 1.15 - doInsomnia
     /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})

@@ -46,8 +46,8 @@ public abstract class ItemFrameEntity_comparatorReadsClockMixin extends Abstract
             //Every 1500 ticks, increase signal strength by one, so update comparators exactly then
             if(this.world.getTimeOfDay() % 1500 == 0 || firstTick) {
                 firstTick = false;
-                if(this.blockPos != null) {
-                    this.world.updateHorizontalAdjacent(this.blockPos, Blocks.AIR);
+                if(this.attachmentPos != null) {
+                    this.world.updateHorizontalAdjacent(this.attachmentPos, Blocks.AIR);
                 }
             }
         }

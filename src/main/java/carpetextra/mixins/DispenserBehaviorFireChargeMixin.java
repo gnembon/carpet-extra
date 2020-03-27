@@ -16,9 +16,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 // Credits: Skyrising
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$3")
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$4")
 public class DispenserBehaviorFireChargeMixin extends ItemDispenserBehavior
 {
+    @SuppressWarnings("UnresolvedMixinReference")
     @Inject(method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;", at = @At("HEAD"), cancellable = true)
     private void convertNetherrack(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir)
     {

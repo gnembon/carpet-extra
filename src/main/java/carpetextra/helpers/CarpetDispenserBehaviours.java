@@ -285,4 +285,27 @@ public class CarpetDispenserBehaviours
             return state.getBlock() == Blocks.FARMLAND;
         }
     }
+    
+    public static class DragonsBreathDispenserBehaviour extends ItemDispenserBehavior
+    {
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
+        {
+            if (!CarpetExtraSettings.dragonsBreathConvertsCobbleToEndstone)
+                return super.dispenseSilently(source, stack);
+            
+            World world = source.getWorld();
+            Direction direction = source.getBlockState().get(DispenserBlock.FACING);
+            BlockPos front = source.getBlockPos().offset(direction);
+            BlockState state = world.getBlockState(front);
+            
+            if (state.getBlock() == Blocks.COBBLESTONE)
+            {
+                world.setBlockState(front, Blocks.END_STONE.getDefaultState());
+                stack.decrement(1);
+                return stack;
+            }
+            return super.dispenseSilently(source, stack);
+        }
+    }
 }
