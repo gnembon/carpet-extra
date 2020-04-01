@@ -119,15 +119,15 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
 
     @Redirect(method = "keepRunning", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/inventory/BasicInventory;getInvSize()I"
+            target = "Lnet/minecraft/inventory/BasicInventory;size()I"
     ))
     private int plantWart(BasicInventory basicInventory, ServerWorld serverWorld, VillagerEntity villagerEntity, long l)
     {
         if (isFarmingCleric) // fill cancel that for loop by setting length to 0
         {
-            for(int i = 0; i < basicInventory.getInvSize(); ++i)
+            for(int i = 0; i < basicInventory.size(); ++i)
             {
-                ItemStack itemStack = basicInventory.getInvStack(i);
+                ItemStack itemStack = basicInventory.getStack(i);
                 boolean bl = false;
                 if (!itemStack.isEmpty())
                 {
@@ -146,7 +146,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
                     itemStack.decrement(1);
                     if (itemStack.isEmpty())
                     {
-                        basicInventory.setInvStack(i, ItemStack.EMPTY);
+                        basicInventory.setStack(i, ItemStack.EMPTY);
                     }
                     break;
                 }
@@ -154,7 +154,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
             return 0;
 
         }
-        return basicInventory.getInvSize();
+        return basicInventory.size();
     }
 
 

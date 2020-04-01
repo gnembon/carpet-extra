@@ -42,7 +42,7 @@ public abstract class VillagerEntity_wartFarmMixin extends AbstractTraderEntity
     {
         if (CarpetExtraSettings.clericsFarmWarts && getVillagerData().getProfession()== VillagerProfession.CLERIC )
         {
-            cir.setReturnValue(getInventory().containsAnyInInv(ImmutableSet.of(Items.NETHER_WART)));
+            cir.setReturnValue(getInventory().containsAny(ImmutableSet.of(Items.NETHER_WART)));
         }
     }
 }

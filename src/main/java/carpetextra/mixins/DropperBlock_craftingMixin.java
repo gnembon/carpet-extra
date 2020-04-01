@@ -79,7 +79,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         DispenserBlockEntity dispenserBlockEntity_1 = (DispenserBlockEntity) world_1.getBlockEntity(blockPos_1);
         if (dispenserBlockEntity_1 == null) return;
         CraftingInventory craftingInventory = new CraftingInventory(new VoidContainer(), 3, 3);
-        for (int i=0; i < 9; i++) craftingInventory.setInvStack(i, dispenserBlockEntity_1.getInvStack(i));
+        for (int i=0; i < 9; i++) craftingInventory.setStack(i, dispenserBlockEntity_1.getStack(i));
         CraftingRecipe recipe = world_1.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, craftingInventory, world_1).orElse(null);
         if (recipe == null) return;
         // crafting it
@@ -90,19 +90,19 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         // copied from CraftingResultSlot.onTakeItem()
         DefaultedList<ItemStack> defaultedList_1 = world_1.getRecipeManager().getRemainingStacks(RecipeType.CRAFTING, craftingInventory, world_1);
         for(int int_1 = 0; int_1 < defaultedList_1.size(); ++int_1) {
-            ItemStack itemStack_2 = dispenserBlockEntity_1.getInvStack(int_1);
+            ItemStack itemStack_2 = dispenserBlockEntity_1.getStack(int_1);
             ItemStack itemStack_3 = defaultedList_1.get(int_1);
             if (!itemStack_2.isEmpty()) {
-                dispenserBlockEntity_1.takeInvStack(int_1, 1);
-                itemStack_2 = dispenserBlockEntity_1.getInvStack(int_1);
+                dispenserBlockEntity_1.removeStack(int_1, 1);
+                itemStack_2 = dispenserBlockEntity_1.getStack(int_1);
             }
 
             if (!itemStack_3.isEmpty()) {
                 if (itemStack_2.isEmpty()) {
-                    dispenserBlockEntity_1.setInvStack(int_1, itemStack_3);
+                    dispenserBlockEntity_1.setStack(int_1, itemStack_3);
                 } else if (ItemStack.areItemsEqualIgnoreDamage(itemStack_2, itemStack_3) && ItemStack.areTagsEqual(itemStack_2, itemStack_3)) {
                     itemStack_3.increment(itemStack_2.getCount());
-                    dispenserBlockEntity_1.setInvStack(int_1, itemStack_3);
+                    dispenserBlockEntity_1.setStack(int_1, itemStack_3);
                 } else {
                     spawn(world_1, target.x, target.y, target.z, itemStack_3);
                 }

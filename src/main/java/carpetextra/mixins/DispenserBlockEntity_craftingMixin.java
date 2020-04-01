@@ -30,7 +30,7 @@ public abstract class DispenserBlockEntity_craftingMixin extends LootableContain
     }
 
     @Override
-    public boolean isValidInvStack(int int_1, ItemStack itemStack_1)
+    public boolean isValid(int int_1, ItemStack itemStack_1)
     {
 
         if (CarpetExtraSettings.autoCraftingDropper && world != null)
@@ -44,6 +44,6 @@ public abstract class DispenserBlockEntity_craftingMixin extends LootableContain
                 }
             }
         }
-        return super.isValidInvStack(int_1, itemStack_1);
+        return super.isValid(int_1, itemStack_1);
     }
 }

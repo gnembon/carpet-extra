@@ -38,6 +38,8 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
     @Shadow
     public abstract boolean canOperate();
 
+    @Shadow public abstract int size();
+
     public HopperMinecartEntity_transferItemsOutFeatureMixin(EntityType<? extends HopperMinecartEntity> entityType_1, World world_1) {
         super(entityType_1, world_1);
         this.currentBlockPos = BlockPos.ORIGIN;
@@ -115,7 +117,7 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
 
     //copied from HopperBlockEntity, (code originally taken from 1.14.4 pre 6)
     private boolean insert(){
-        if(!this.isInvEmpty()){
+        if(!this.isEmpty()){
             Inventory inventory_1 = this.getOutputInventory();
             if (inventory_1 == null) {
                 return false;
@@ -124,16 +126,16 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
                 if (this.isInventoryFull(inventory_1, direction_1)) {
                     return false;
                 } else {
-                    for(int int_1 = 0; int_1 < this.getInvSize(); ++int_1) {
-                        if (!this.getInvStack(int_1).isEmpty()) {
-                            ItemStack itemStack_1 = this.getInvStack(int_1).copy();
-                            ItemStack itemStack_2 = transfer(this, inventory_1, this.takeInvStack(int_1, 1), direction_1);
+                    for(int int_1 = 0; int_1 < this.size(); ++int_1) {
+                        if (!this.getStack(int_1).isEmpty()) {
+                            ItemStack itemStack_1 = this.getStack(int_1).copy();
+                            ItemStack itemStack_2 = transfer(this, inventory_1, this.removeStack(int_1, 1), direction_1);
                             if (itemStack_2.isEmpty()) {
                                 inventory_1.markDirty();
                                 return true;
                             }
 
-                            this.setInvStack(int_1, itemStack_1);
+                            this.setStack(int_1, itemStack_1);
                         }
                     }
 
@@ -148,13 +150,13 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
     //Copied from HopperBlockEntity as it is private there
     private boolean isInventoryFull(Inventory inventory_1, Direction direction_1) {
         return getAvailableSlots(inventory_1, direction_1).allMatch((int_1) -> {
-            ItemStack itemStack_1 = inventory_1.getInvStack(int_1);
+            ItemStack itemStack_1 = inventory_1.getStack(int_1);
             return itemStack_1.getCount() >= itemStack_1.getMaxCount();
         });
     }
     //Copied from HopperBlockEntity as it is private there
     private static IntStream getAvailableSlots(Inventory inventory_1, Direction direction_1) {
-        return inventory_1 instanceof SidedInventory ? IntStream.of(((SidedInventory)inventory_1).getInvAvailableSlots(direction_1)) : IntStream.range(0, inventory_1.getInvSize());
+        return inventory_1 instanceof SidedInventory ? IntStream.of(((SidedInventory)inventory_1).getAvailableSlots(direction_1)) : IntStream.range(0, inventory_1.size());
     }
 
 
