@@ -1,7 +1,10 @@
 package carpetextra.helpers;
 
 import carpetextra.CarpetExtraSettings;
+import carpetextra.utils.PlaceBlockDispenserBehavior;
 import com.google.common.collect.Sets;
+
+import carpet.CarpetSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -13,6 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -219,10 +223,6 @@ public class CarpetDispenserBehaviours
 
         @Override
         protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
-            if(!CarpetExtraSettings.dispensersFeedAnimals) {
-                return super.dispenseSilently(source, stack);
-            }
-
             BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
             List<AnimalEntity> list = source.getWorld().getEntities(AnimalEntity.class, new Box(pos),null);
             boolean failure = false;
@@ -238,7 +238,11 @@ public class CarpetDispenserBehaviours
                 return stack;
             }
             if(failure) return stack;
-            return super.dispenseSilently(source, stack);
+            if(PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock()) && CarpetExtraSettings.dispenserPlacesBlocks) {
+                return PlaceBlockDispenserBehavior.getInstance().dispenseSilently(source, stack);
+            } else {
+                return super.dispenseSilently(source, stack);
+            }
         }
     }
     
