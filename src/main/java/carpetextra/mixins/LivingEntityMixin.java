@@ -7,6 +7,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.SpiderEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -44,6 +47,15 @@ public abstract class LivingEntityMixin extends Entity
         if (statePos.getBlock() == Blocks.FIRE && stateBelow.getBlock().isIn(BlockTags.SAND))
         {
             this.world.setBlockState(below, Blocks.SOUL_SAND.getDefaultState());
+        }
+    }
+    
+    @Inject(method = "onDeath", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageSource;getAttacker()Lnet/minecraft/entity/Entity;"))
+    private void onOnDeath(DamageSource source, CallbackInfo ci)
+    {
+        if ((this.getVehicle() instanceof SpiderEntity) && this.random.nextInt(100) + 1 < CarpetExtraSettings.spiderJockeysDropGapples)
+        {
+            this.dropStack(new ItemStack(Items.ENCHANTED_GOLDEN_APPLE));
         }
     }
 }
