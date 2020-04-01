@@ -59,19 +59,6 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         return profession;
     }
 
-    @Redirect(method = "shouldRun", at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;",
-            ordinal = 0
-    ))
-    private Item disguiseWartAsSeeds(ItemStack itemStack, ServerWorld serverWorld, VillagerEntity villagerEntity)
-    {
-        Item item = itemStack.getItem();
-        if (isFarmingCleric && item == Items.NETHER_WART)
-            return Items.WHEAT_SEEDS;
-        return item;
-    }
-
     @Inject(method = "isSuitableTarget", at = @At("HEAD"), cancellable = true)
     private void isValidSoulSand(BlockPos blockPos, ServerWorld serverWorld, CallbackInfoReturnable<Boolean> cir)
     {
