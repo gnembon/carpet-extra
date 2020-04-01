@@ -3,25 +3,22 @@ package carpetextra.helpers;
 import carpetextra.CarpetExtraSettings;
 import carpetextra.utils.PlaceBlockDispenserBehavior;
 import com.google.common.collect.Sets;
-
-import carpet.CarpetSettings;
-import net.minecraft.block.*;
-import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.JukeboxBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.block.entity.JukeboxBlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.TntEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -69,52 +66,6 @@ public class CarpetDispenserBehaviours
             return super.dispenseSilently(source, stack);
         }
     }
-    /* not needed in 1.15
-    public static class WaterBottleDispenserBehaviour extends FallibleItemDispenserBehavior
-    {
-        @Override
-        protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
-        {
-            if (!CarpetExtraSettings.dispensersFillBottles)
-            {
-                return super.dispenseSilently(source, stack);
-            }
-            else
-            {
-                World world = source.getWorld();
-                BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
-                BlockState state = world.getBlockState(pos);
-                Block block = state.getBlock();
-                Material material = state.getMaterial();
-                ItemStack itemStack;
-                
-                if (material == Material.WATER && block instanceof FluidBlock && ((Integer) state.get(FluidBlock.LEVEL)).intValue() == 0)
-                {
-                    itemStack = PotionUtil.setPotion(new ItemStack(Items.POTION), Potions.WATER);
-                }
-                else
-                {
-                    itemStack = new ItemStack(Items.GLASS_BOTTLE);
-                }
-                
-                stack.decrement(1);
-                
-                if (stack.isEmpty())
-                {
-                    return itemStack;
-                }
-                else
-                {
-                    if (((DispenserBlockEntity)source.getBlockEntity()).addToFirstFreeSlot(itemStack) < 0)
-                    {
-                        super.dispenseSilently(source, stack);
-                    }
-                    
-                    return stack;
-                }
-            }
-        }
-    }*/
     
     public static class MinecartDispenserBehaviour extends ItemDispenserBehavior
     {
