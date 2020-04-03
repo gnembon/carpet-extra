@@ -2,6 +2,7 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.entity.mob.StrayEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.Feature;
@@ -16,6 +17,6 @@ public abstract class StrayEntityMixin
     private static boolean isSkylightOrIglooVisible(IWorld iWorld, BlockPos blockPos)
     {
         return iWorld.isSkyVisible(blockPos) ||
-                       (CarpetExtraSettings.straySpawningInIgloos && Feature.IGLOO.isApproximatelyInsideStructure(iWorld, blockPos));
+                       (CarpetExtraSettings.straySpawningInIgloos && Feature.IGLOO.isApproximatelyInsideStructure(iWorld, ((ServerWorld)iWorld).method_27056(), blockPos));
     }
 }

@@ -114,7 +114,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             state = state.with(ObserverBlock.POWERED, true);
         }
 
-        state = Block.getRenderingState(state, world, pos);
+        state = Block.postProcessState(state, world, pos);
 
         BlockState currentBlockState = world.getBlockState(pos);
         FluidState currentFluidState = world.getFluidState(pos);

@@ -1,6 +1,7 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
+import net.minecraft.class_5138;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -28,14 +29,14 @@ public abstract class OverworldChunkGeneratorMixin extends SurfaceChunkGenerator
     @Inject(
             method = "getEntitySpawnList",
             at = @At(value = "INVOKE", ordinal = 1, shift = At.Shift.BEFORE,
-                    target = "Lnet/minecraft/world/gen/feature/StructureFeature;isApproximatelyInsideStructure(Lnet/minecraft/world/IWorld;Lnet/minecraft/util/math/BlockPos;)Z"),
+                    target = "Lnet/minecraft/world/gen/feature/StructureFeature;isApproximatelyInsideStructure(Lnet/minecraft/world/IWorld;Lnet/minecraft/class_5138;Lnet/minecraft/util/math/BlockPos;)Z"),
             cancellable = true
     )
-    private void onGetEntitySpawnList(EntityCategory category, BlockPos pos, CallbackInfoReturnable<List<Biome.SpawnEntry>> cir)
+    private void onGetEntitySpawnList(class_5138 arg, EntityCategory category, BlockPos pos, CallbackInfoReturnable<List<Biome.SpawnEntry>> cir)
     {
         if (CarpetExtraSettings.straySpawningInIgloos)
         {
-            if (Feature.IGLOO.isApproximatelyInsideStructure(this.world, pos))
+            if (Feature.IGLOO.isApproximatelyInsideStructure(this.world, arg,  pos))
             {
                 cir.setReturnValue(Feature.IGLOO.getMonsterSpawns());
             }
@@ -43,7 +44,7 @@ public abstract class OverworldChunkGeneratorMixin extends SurfaceChunkGenerator
         
         if (CarpetExtraSettings.creeperSpawningInJungleTemples)
         {
-            if (Feature.JUNGLE_TEMPLE.isApproximatelyInsideStructure(this.world, pos))
+            if (Feature.JUNGLE_TEMPLE.isApproximatelyInsideStructure(this.world, arg, pos))
             {
                 cir.setReturnValue(Feature.JUNGLE_TEMPLE.getMonsterSpawns());
             }
