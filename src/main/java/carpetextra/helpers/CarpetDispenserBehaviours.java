@@ -189,9 +189,17 @@ public class CarpetDispenserBehaviours
                 return stack;
             }
             if(failure) return stack;
-            if(PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock()) && CarpetExtraSettings.dispenserPlacesBlocks) {
+            // fix here for now - if problem shows up next time, will need to fix it one level above.
+            if(
+                    CarpetExtraSettings.dispenserPlacesBlocks &&
+                    stack.getItem() instanceof BlockItem &&
+                    PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock())
+            )
+            {
                 return PlaceBlockDispenserBehavior.getInstance().dispenseSilently(source, stack);
-            } else {
+            }
+            else
+            {
                 return super.dispenseSilently(source, stack);
             }
         }
