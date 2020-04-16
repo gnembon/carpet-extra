@@ -33,7 +33,6 @@ import java.util.Map;
 @Mixin(FarmerVillagerTask.class)
 public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEntity>
 {
-    @Shadow private boolean ableToPickUpSeed;
     @Shadow private boolean ableToPlant;
     @Shadow /*@Nullable*/ private BlockPos currentTarget;
     private boolean isFarmingCleric;
@@ -68,7 +67,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
             Block block = blockState.getBlock();
             Block block2 = serverWorld.getBlockState(blockPos.down()).getBlock(); // down()
             cir.setReturnValue(
-                    block == Blocks.NETHER_WART && blockState.get(NetherWartBlock.AGE)== 3 && ableToPickUpSeed ||
+                    block == Blocks.NETHER_WART && blockState.get(NetherWartBlock.AGE)== 3 ||
                             blockState.isAir() && block2 == Blocks.SOUL_SAND && ableToPlant);
 
         }
