@@ -1,13 +1,10 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
-import jdk.internal.jline.internal.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -26,7 +23,7 @@ import static net.minecraft.block.Block.getDroppedStacks;
 public abstract class BlockMixin implements ItemConvertible {
 
    @Inject(method = "afterBreak" , at = @At(value ="HEAD"), cancellable =true )
-    private void onAfterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo ci){
+    private void onAfterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack stack, CallbackInfo ci){
         if(CarpetExtraSettings.carefulBreak && player.isInSneakingPose()){
 
             player.incrementStat(Stats.MINED.getOrCreateStat(state.getBlock()));
