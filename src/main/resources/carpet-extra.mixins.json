@@ -38,6 +38,7 @@
     "SaplingBlock_syncMixin",
     "SugarCaneBlock_syncMixin",
     "BlocksMixin",
+    "BlockMixin",
     "ChunkGeneratorMixin",
     "FallingBlockMixin",
     "DispenserBehaviorFireChargeMixin",

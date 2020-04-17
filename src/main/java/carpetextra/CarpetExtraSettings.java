@@ -73,8 +73,14 @@ public class CarpetExtraSettings
     public static boolean hopperMinecart8gtCooldown = false;
 
     @Rule(
-        desc = "Allows Hopper Minecarts to transfer items out.",
-        category = {BUGFIX,FEATURE,EXTRA,EXPERIMENTAL}
+            desc = "Adds mined block to Inventory while sneaking.",
+            category = {SURVIVAL,FEATURE,EXTRA,EXPERIMENTAL}
+    )
+    public static boolean carefulBreak= false;
+
+    @Rule(
+            desc = "Allows Hopper Minecarts to transfer items out.",
+            category = {BUGFIX,FEATURE,EXTRA,EXPERIMENTAL}
     )
     public static boolean hopperMinecartItemTransfer= false;
     
