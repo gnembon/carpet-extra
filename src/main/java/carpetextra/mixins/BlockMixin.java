@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.minecraft.block.Block.dropStack;
 import static net.minecraft.block.Block.getDroppedStacks;
 
 @Mixin(Block.class)
@@ -31,11 +32,13 @@ public abstract class BlockMixin implements ItemConvertible {
             player.incrementStat(Stats.MINED.getOrCreateStat(state.getBlock()));
             player.addExhaustion(0.005F);
 
-            getDroppedStacks(state, (ServerWorld)world, pos, blockEntity, player, stack).forEach((itemStack) -> {
-                ItemEntity itemEntity = new ItemEntity(world, player.getX(),player.getY(),player.getZ(), itemStack);
-                itemEntity.setPickupDelay(0);
-                world.spawnEntity(itemEntity);
-            });
+            if (world instanceof ServerWorld) {
+                getDroppedStacks(state, (ServerWorld) world, pos, blockEntity, player, stack).forEach((itemStack) -> {
+                    if (!player.giveItemStack(itemStack)) {
+                        dropStack(world, pos, itemStack);
+                    }
+                });
+            }
 
          ci.cancel();
         }
