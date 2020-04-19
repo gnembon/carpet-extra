@@ -47,7 +47,7 @@ public abstract class BlockMixin implements ItemConvertible {
                 });
                 return;
             }
-            getDroppedStacks(state, (ServerWorld) world, pos, (BlockEntity) null).forEach((itemStack) -> {
+            getDroppedStacks(state, (ServerWorld) world, pos, blockEntity, entity, stack).forEach((itemStack) -> {
                 dropStack(world, pos, itemStack);
             });
         }
