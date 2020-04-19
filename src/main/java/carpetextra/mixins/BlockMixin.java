@@ -2,11 +2,9 @@ package carpetextra.mixins;
 
 import carpet.CarpetServer;
 import carpetextra.CarpetExtraSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FacingBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -19,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -29,31 +28,45 @@ import static net.minecraft.block.Block.getDroppedStacks;
 @Mixin(Block.class)
 public abstract class BlockMixin implements ItemConvertible {
 
-   @Inject(method = "afterBreak" , at = @At(value ="HEAD"), cancellable =true )
-    private void onAfterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack stack, CallbackInfo ci){
-        if(CarpetExtraSettings.carefulBreak && player.isInSneakingPose()){
+    //carefulBreak
+    @Overwrite
+    /*Nullable*/
+    public static void dropStacks(BlockState state, World world, BlockPos pos, BlockEntity blockEntity, Entity entity, ItemStack stack) {
+        if (world instanceof ServerWorld) {
+            if (CarpetExtraSettings.carefulBreak && entity instanceof PlayerEntity && entity.isInSneakingPose()) {
 
-            player.incrementStat(Stats.MINED.getOrCreateStat(state.getBlock()));
-            player.addExhaustion(0.005F);
-
-            if (world instanceof ServerWorld) {
-                getDroppedStacks(state, (ServerWorld) world, pos, blockEntity, player, stack).forEach((itemStack) -> {
-
+                getDroppedStacks(state, (ServerWorld) world, pos, blockEntity, entity, stack).forEach((itemStack) -> {
                     Item item = itemStack.getItem();
                     int itemAmount = itemStack.getCount();
-                    if (player.inventory.insertStack(itemStack)) {
-
-                        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2f, (CarpetServer.rand.nextFloat() - CarpetServer.rand.nextFloat()) * 1.4F + 2.0F);
-                        player.increaseStat(Stats.PICKED_UP.getOrCreateStat(item),itemAmount);
-
-                    }else{
+                    if (((PlayerEntity) entity).inventory.insertStack(itemStack)) {
+                        world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2f, (CarpetServer.rand.nextFloat() - CarpetServer.rand.nextFloat()) * 1.4F + 2.0F);
+                        ((PlayerEntity) entity).increaseStat(Stats.PICKED_UP.getOrCreateStat(item), itemAmount);
+                    } else {
                         dropStack(world, pos, itemStack);
                     }
-
                 });
+                return;
             }
+            getDroppedStacks(state, (ServerWorld) world, pos, (BlockEntity) null).forEach((itemStack) -> {
+                dropStack(world, pos, itemStack);
+            });
+        }
+        state.onStacksDropped(world, pos, ItemStack.EMPTY);
+    }
 
-         ci.cancel();
+    //carefulBreak PISTON_HEADS
+    @Inject(method = "onBreak", at = @At("INVOKE"))
+    private void onBreak1(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
+
+        if (state.getBlock() == Blocks.PISTON_HEAD && CarpetExtraSettings.carefulBreak && player.isInSneakingPose()) {
+            Direction direction = ((Direction) state.get(FacingBlock.FACING)).getOpposite();
+            pos = pos.offset(direction);
+            BlockState blockState = world.getBlockState(pos);
+            Block block = world.getBlockState(pos).getBlock();
+            if (block == Blocks.PISTON || block == Blocks.STICKY_PISTON && (Boolean) blockState.get(PistonBlock.EXTENDED)) {
+                dropStacks(blockState, world, pos, null, player, player.getMainHandStack());
+                world.removeBlock(pos, false);
+            }
         }
     }
 }
