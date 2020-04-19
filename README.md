@@ -31,7 +31,14 @@ Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
-  
+ 
+## carefulBreak
+Places the mined block in the player inventory when sneaking.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`  
+ 
 ## chickenShearing
 Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!  
 Baby chickens can't be sheared  

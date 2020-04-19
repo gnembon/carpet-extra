@@ -73,8 +73,8 @@ public class CarpetExtraSettings
     public static boolean hopperMinecart8gtCooldown = false;
 
     @Rule(
-            desc = "Adds mined block to Inventory while sneaking.",
-            category = {SURVIVAL,FEATURE,EXTRA,EXPERIMENTAL}
+            desc = "Places the mined block in the player inventory when sneaking.",
+            category = {FEATURE,EXTRA}
     )
     public static boolean carefulBreak= false;
 
