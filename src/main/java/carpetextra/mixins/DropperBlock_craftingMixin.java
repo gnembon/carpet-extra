@@ -83,7 +83,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         CraftingRecipe recipe = world_1.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, craftingInventory, world_1).orElse(null);
         if (recipe == null) return;
         // crafting it
-        Vec3d target = Vec3d.method_24955(front).add(0.0, 0.2, 0.0); //+0.5 sans Y
+        Vec3d target = Vec3d.ofBottomCenter(front).add(0.0, 0.2, 0.0);
         ItemStack result = recipe.craft(craftingInventory);
         spawn(world_1, target.x, target.y, target.z, result);
 
@@ -108,7 +108,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
                 }
             }
         }
-        Vec3d vec = Vec3d.method_24953(blockPos_1); //+0.5v
+        Vec3d vec = Vec3d.ofCenter(blockPos_1); //+0.5v
         ServerWorld world = (ServerWorld) world_1;
         world.playSound(null, blockPos_1, SoundEvents.ENTITY_VILLAGER_WORK_MASON, SoundCategory.BLOCKS, 0.2f, 2.0f);
         ci.cancel();

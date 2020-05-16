@@ -93,8 +93,8 @@ public class CarpetExtraSettings
     )
     public static boolean dispensersFillMinecarts = false;
     
-    @Rule(desc = "Wet sponges dry in the nether dimension", category = {EXTRA, FEATURE})
-    public static boolean spongesDryInTheNether = false;
+    //@Rule(desc = "Wet sponges dry in the nether dimension", category = {EXTRA, FEATURE})
+    //public static boolean spongesDryInTheNether = false;
 
     @Rule(
             desc = "Clerics can warm nether farts",

@@ -57,7 +57,7 @@ public class CarpetDispenserBehaviours
                 {
                     ItemStack itemStack = jukebox.getRecord();
                     ((JukeboxBlock) state.getBlock()).setRecord(world, pos, state, stack);
-                    world.playLevelEvent(null, 1010, pos, Item.getRawId(stack.getItem()));
+                    world.syncWorldEvent(1010, pos, Item.getRawId(stack.getItem()));
                     
                     return itemStack;
                 }
@@ -129,7 +129,7 @@ public class CarpetDispenserBehaviours
         @Override
         protected void playSound(BlockPointer source)
         {
-            source.getWorld().playLevelEvent(1000, source.getBlockPos(), 0);
+            source.getWorld().syncWorldEvent(1000, source.getBlockPos(), 0);
         }
     }
   
@@ -158,7 +158,7 @@ public class CarpetDispenserBehaviours
                     null,
                     Hand.MAIN_HAND,
                     new BlockHitResult(
-                        Vec3d.method_24954(pos), // flat +0
+                        Vec3d.of(pos), // flat +0
                         direction, 
                         pos,
                         false
