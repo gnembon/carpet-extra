@@ -14,7 +14,7 @@ public abstract class AbsorbWaterMixin {
         constant = @Constant(intValue = 64)
     )
     private int onCheckBlockLimit(int blockLimit) {
-        return CarpetExtraSettings.maxSpongeSucc;
+        return CarpetExtraSettings.maxSpongeSuck;
     }
 
     
