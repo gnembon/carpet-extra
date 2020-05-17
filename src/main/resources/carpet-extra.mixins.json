@@ -19,7 +19,7 @@
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",
     "HopperMinecartEntity_transferItemsOutFeatureMixin",
-
+    "AbsorbWaterMixin",
     "DropperBlock_craftingMixin",
     "DispenserBlockEntity_craftingMixin",
 

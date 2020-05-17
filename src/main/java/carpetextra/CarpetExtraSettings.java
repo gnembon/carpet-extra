@@ -13,6 +13,8 @@ import static carpet.settings.RuleCategory.EXPERIMENTAL;
 import static carpet.settings.RuleCategory.FEATURE;
 import static carpet.settings.RuleCategory.SURVIVAL;
 
+import com.google.common.jimfs.Feature;
+
 /**
  * Here is your example Settings class you can plug to use carpetmod /carpet settings command
  */
@@ -252,6 +254,22 @@ public class CarpetExtraSettings
             category = {EXTRA, EXPERIMENTAL, DISPENSER}
     )
     public static boolean dragonsBreathConvertsCobbleToEndstone = false;
+
+    @Rule(
+            desc = "Maximum water sucking for sponge",
+            options = {"64"},
+            category = {FEATURE, EXTRA},
+            strict = false
+    )
+    public static int maxSpongeSuck = 64;
+
+    @Rule(
+            desc = "Maximum offset limit for sponge",
+            options = {"7"},
+            category = {FEATURE, EXTRA},
+            strict = false
+    )
+    public static int maxSpongeOffset = 7;
     
     // Implemented in 1.15 - doInsomnia
     /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
