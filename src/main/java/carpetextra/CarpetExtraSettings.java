@@ -226,6 +226,27 @@ public class CarpetExtraSettings
     )
     public static boolean y0DragonEggBedrockBreaking = false;
     
+    public static class ValidateSpiderJokeyDropChance extends Validator<Integer>
+    {
+        @Override
+        public Integer validate(ServerCommandSource source, ParsedRule<Integer> currentRule, Integer newValue, String string)
+        {
+            return newValue >= 0 && newValue <= 100 ? newValue : null;
+        }
+    
+        @Override
+        public String description() { return "You must choose a value from 0 to 100";}
+    }
+    
+    @Rule(
+            desc = "Gives Spider jockeys a specified chance to drop enchanted golden apples",
+            extra = "0 is default, i.e no enchanted golden apples will be dropped",
+            options = {"0", "50", "100"},
+            category = {EXTRA, FEATURE},
+            validate = ValidateSpiderJokeyDropChance.class
+    )
+    public static int spiderJockeysDropGapples = 0;
+    
     @Rule(
             desc = "Dragon's breath from dispensers convert cobblestone to end stone",
             category = {EXTRA, EXPERIMENTAL, DISPENSER}

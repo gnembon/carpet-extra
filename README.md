@@ -241,6 +241,16 @@ Max distance for scaffolding
 * Categories: `FEATURE`, `EXTRAS`  
 * Additional notes:  
   * You must choose a value from 0 to 7  
+
+## spiderJockeysDropGapples
+Gives Spider jockeys a specified chance to drop enchanted golden apples  
+0 is default, i.e no enchanted golden apples will be dropped  
+* Type: `int`  
+* Default value: `0`  
+* Suggested options: `0`, `50`, `100`  
+* Categories: `EXTRAS`, `FEATURE`  
+* Additional notes:  
+  * You must choose a value from 0 to 100  
   
 ## spongesDryInTheNether
 Wet sponges dry in the nether dimension  
