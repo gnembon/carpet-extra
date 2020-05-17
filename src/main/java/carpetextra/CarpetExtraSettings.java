@@ -13,7 +13,6 @@ import static carpet.settings.RuleCategory.EXPERIMENTAL;
 import static carpet.settings.RuleCategory.FEATURE;
 import static carpet.settings.RuleCategory.SURVIVAL;
 
-import com.google.common.jimfs.Feature;
 
 /**
  * Here is your example Settings class you can plug to use carpetmod /carpet settings command
