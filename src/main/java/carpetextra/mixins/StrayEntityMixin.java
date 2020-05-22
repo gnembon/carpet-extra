@@ -5,7 +5,7 @@ import net.minecraft.entity.mob.StrayEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.StructureFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -17,6 +17,6 @@ public abstract class StrayEntityMixin
     private static boolean isSkylightOrIglooVisible(WorldAccess iWorld, BlockPos blockPos)
     {
         return iWorld.isSkyVisible(blockPos) ||
-                       (CarpetExtraSettings.straySpawningInIgloos && Feature.IGLOO.isApproximatelyInsideStructure(((ServerWorld)iWorld).getStructureAccessor(), blockPos));
+                       (CarpetExtraSettings.straySpawningInIgloos && (((ServerWorld)iWorld).getStructureAccessor().method_28388(blockPos, false, StructureFeature.IGLOO).hasChildren()));
     }
 }

@@ -45,7 +45,7 @@ public abstract class FlowerPotBlockMixin extends Block
             Block block = item instanceof BlockItem ? (Block) CONTENT_TO_POTTED.getOrDefault(((BlockItem) item).getBlock(), Blocks.AIR) : Blocks.AIR;
             boolean boolean_1 = block == Blocks.AIR;
             boolean boolean_2 = this.content == Blocks.AIR;
-            ServerWorld serverWorld = world_1.getServer().getWorld(world_1.getDimension().getType());
+            ServerWorld serverWorld = world_1.getServer().getWorld(world_1.method_27983());
     
             if (boolean_1 != boolean_2 && (block == Blocks.POTTED_WITHER_ROSE || this.content == Blocks.WITHER_ROSE))
             {
@@ -60,7 +60,7 @@ public abstract class FlowerPotBlockMixin extends Block
     {
         if (CarpetExtraSettings.flowerPotChunkLoading && world_1.getServer() != null)
         {
-            ServerWorld serverWorld = world_1.getServer().getWorld(world_1.getDimension().getType());
+            ServerWorld serverWorld = world_1.getServer().getWorld(world_1.method_27983());
             serverWorld.setChunkForced(blockPos_1.getX() >> 4, blockPos_1.getZ() >> 4, false);
         }
         super.onBreak(world_1, blockPos_1, blockState_1, playerEntity_1);

@@ -11,7 +11,7 @@ import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.FarmerVillagerTask;
 import net.minecraft.entity.ai.brain.task.Task;
 import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.inventory.BasicInventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -105,9 +105,9 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
 
     @Redirect(method = "keepRunning", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/inventory/BasicInventory;size()I"
+            target = "Lnet/minecraft/inventory/SimpleInventory;size()I"
     ))
-    private int plantWart(BasicInventory basicInventory, ServerWorld serverWorld, VillagerEntity villagerEntity, long l)
+    private int plantWart(SimpleInventory basicInventory, ServerWorld serverWorld, VillagerEntity villagerEntity, long l)
     {
         if (isFarmingCleric) // fill cancel that for loop by setting length to 0
         {
