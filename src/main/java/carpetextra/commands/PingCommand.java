@@ -20,7 +20,7 @@ public class PingCommand
                         {
                             ServerPlayerEntity playerEntity = c.getSource().getPlayer();
                             int ping = playerEntity.pingMilliseconds;
-                            playerEntity.sendSystemMessage(new LiteralText("Your ping is: " + ping + " ms"), Util.field_25140);
+                            playerEntity.sendSystemMessage(new LiteralText("Your ping is: " + ping + " ms"), Util.NIL_UUID);
                             return 1;
                         });
         

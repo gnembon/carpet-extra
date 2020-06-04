@@ -9,6 +9,7 @@ import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +23,7 @@ public abstract class ChickenEntityMixin extends AnimalEntity
     }
     
     @Override
-    public boolean interactMob(PlayerEntity playerEntity_1, Hand hand_1)
+    public ActionResult interactMob(PlayerEntity playerEntity_1, Hand hand_1)
     {
         ItemStack stack = playerEntity_1.getStackInHand(hand_1);
         if (CarpetExtraSettings.chickenShearing && stack.getItem() == Items.SHEARS && !this.isBaby())
