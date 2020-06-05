@@ -21,6 +21,8 @@ public class CarpetExtraServer implements CarpetExtension
     static
     {
         CarpetServer.manageExtension(new CarpetExtraServer());
+        // temporary until CM proper runs tiny bit later
+        CarpetServer.settingsManager.parseSettingsClass(CarpetExtraSettings.class);
     }
 
     @Override

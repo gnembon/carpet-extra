@@ -3,7 +3,7 @@
   "package": "carpetextra.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MinecraftServer_noopMixin",
+    "Main_serverNoopMixin",
     "DispenserBlockMixin",
     "FallingBlockEntityMixin",
     "WetSpongeBlockMixin",
@@ -58,7 +58,7 @@
     "ScaffoldingItem_scaffoldingDistanceMixin"
   ],
   "client": [
-    "MinecraftClient_noopMixin"
+    "Main_clientNoopMixin"
   ],
   "injectors": {
     "defaultRequire": 1
