@@ -22,7 +22,7 @@ public class CarpetExtraServer implements CarpetExtension
     {
         CarpetServer.manageExtension(new CarpetExtraServer());
         // temporary until CM proper runs tiny bit later
-        CarpetServer.settingsManager.parseSettingsClass(CarpetExtraSettings.class);
+        //CarpetServer.settingsManager.parseSettingsClass(CarpetExtraSettings.class);
     }
 
     @Override
