@@ -1,13 +1,13 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
-import net.minecraft.class_5311;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.StructuresConfig;
 import net.minecraft.world.gen.chunk.SurfaceChunkGenerator;
 import net.minecraft.world.gen.feature.StructureFeature;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,9 +21,9 @@ import java.util.List;
 public abstract class SurfaceChunkGeneratorMixin extends ChunkGenerator
 {
 
-    public SurfaceChunkGeneratorMixin(BiomeSource biomeSource, class_5311 arg)
+    public SurfaceChunkGeneratorMixin(BiomeSource biomeSource, StructuresConfig structuresConfig)
     {
-        super(biomeSource, arg);
+        super(biomeSource, structuresConfig);
     }
 
     @Inject( method = "getEntitySpawnList", at = @At("HEAD"), cancellable = true
