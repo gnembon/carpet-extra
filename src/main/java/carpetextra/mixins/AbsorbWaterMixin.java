@@ -23,6 +23,6 @@ public abstract class AbsorbWaterMixin {
         constant = @Constant(intValue = 6)
     )
     private int onCheckOffsetLimit(int offsetLimit) {
-        return CarpetExtraSettings.maxSpongeOffset - 1;
+        return CarpetExtraSettings.maxSpongeRange - 1;
     }
 }
