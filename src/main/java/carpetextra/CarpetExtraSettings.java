@@ -268,7 +268,7 @@ public class CarpetExtraSettings
             category = {FEATURE, EXTRA},
             strict = false
     )
-    public static int maxSpongeOffset = 7;
+    public static int maxSpongeRange = 7;
     
     // Implemented in 1.15 - doInsomnia
     /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
