@@ -53,6 +53,7 @@
     "JungleTempleFeature_creeperMixin",
     "SkeletonEntityMixin",
     "SpiderEntityMixin",
+    "FluidBlock_renewableBlackstoneMixin",
 
     "ScaffoldingBlock_scaffoldingDistanceMixin",
     "ScaffoldingItem_scaffoldingDistanceMixin"
