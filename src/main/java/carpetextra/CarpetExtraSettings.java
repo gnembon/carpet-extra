@@ -158,13 +158,6 @@ public class CarpetExtraSettings
     @Rule(desc = "Cobblestone crushed by falling anvils makes sand", category = {EXTRA, EXPERIMENTAL, FEATURE})
     public static boolean renewableSand = false;
 
-    @Rule(
-            desc = "Nether basalt generator without soul sand below ",
-            extra = "  .. will convert into blackstone instead",
-            category = {EXTRA, EXPERIMENTAL, FEATURE}
-    )
-    public static boolean renewableBlackstone = false;
-
 
     @Rule(desc = "Reintroduce Dragon Egg Bedrock breaking bug from 1.12", category = {EXTRA, EXPERIMENTAL})
     public static boolean dragonEggBedrockBreaking = false;
