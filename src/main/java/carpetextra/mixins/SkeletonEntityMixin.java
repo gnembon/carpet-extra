@@ -9,6 +9,7 @@ import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -19,15 +20,15 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
     {
         super(type, world);
     }
-    
+
     @Override
-    public void onStruckByLightning(LightningEntity lightning)
+    public void onStruckByLightning(ServerWorld serverWorld, LightningEntity lightningEntity)
     {
         if (!this.world.isClient && !this.removed && CarpetExtraSettings.renewableWitherSkeletons)
         {
             WitherSkeletonEntity witherSkelly = new WitherSkeletonEntity(EntityType.WITHER_SKELETON, this.world);
             witherSkelly.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.yaw, this.pitch);
-            witherSkelly.initialize(this.world, this.world.getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, (EntityData) null, (CompoundTag) null);
+            witherSkelly.initialize(serverWorld, this.world.getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, (EntityData) null, (CompoundTag) null);
             witherSkelly.setAiDisabled(this.isAiDisabled());
             
             if (this.hasCustomName())
@@ -41,7 +42,7 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
         }
         else
         {
-            super.onStruckByLightning(lightning);
+            super.onStruckByLightning(serverWorld,lightningEntity);
         }
     }
 }

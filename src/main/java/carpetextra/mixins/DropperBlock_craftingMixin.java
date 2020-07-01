@@ -71,7 +71,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
     }
 
     @Inject(method = "dispense", at = @At("HEAD"), cancellable = true)
-    private void tryCraft(World world_1, BlockPos blockPos_1, CallbackInfo ci)
+    private void tryCraft(ServerWorld world_1, BlockPos blockPos_1, CallbackInfo ci)
     {
         if (!CarpetExtraSettings.autoCraftingDropper) return;
         BlockPos front = blockPos_1.offset(world_1.getBlockState(blockPos_1).get(DispenserBlock.FACING));
