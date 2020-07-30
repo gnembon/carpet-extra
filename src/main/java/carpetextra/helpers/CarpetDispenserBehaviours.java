@@ -19,6 +19,7 @@ import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -86,7 +87,7 @@ public class CarpetDispenserBehaviours
             else
             {
                 BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
-                List<MinecartEntity> list = source.getWorld().<MinecartEntity>getEntities(MinecartEntity.class, new Box(pos), null);
+                List<MinecartEntity> list = source.getWorld().getEntitiesByClass(MinecartEntity.class, new Box(pos), EntityPredicates.VALID_ENTITY);
     
                 if (list.isEmpty())
                 {
@@ -175,7 +176,7 @@ public class CarpetDispenserBehaviours
         @Override
         protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
             BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
-            List<AnimalEntity> list = source.getWorld().getEntities(AnimalEntity.class, new Box(pos),null);
+            List<AnimalEntity> list = source.getWorld().getEntitiesByClass(AnimalEntity.class, new Box(pos),EntityPredicates.VALID_ENTITY);
             boolean failure = false;
 
             for(AnimalEntity mob : list) {

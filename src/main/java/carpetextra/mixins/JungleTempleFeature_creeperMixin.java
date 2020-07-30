@@ -4,7 +4,7 @@ import carpetextra.CarpetExtraSettings;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import net.minecraft.entity.EntityType;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.JungleTempleFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -18,7 +18,7 @@ public abstract class JungleTempleFeature_creeperMixin extends StructureFeature<
 {
 
     
-    private static final List<Biome.SpawnEntry> MONSTER_SPAWNS;
+    private static final List<SpawnSettings.SpawnEntry> MONSTER_SPAWNS;
 
     public JungleTempleFeature_creeperMixin(Codec<DefaultFeatureConfig> codec)
     {
@@ -26,7 +26,7 @@ public abstract class JungleTempleFeature_creeperMixin extends StructureFeature<
     }
 
     @Override
-    public List<Biome.SpawnEntry> getMonsterSpawns()
+    public List<SpawnSettings.SpawnEntry> getMonsterSpawns()
     {
         if (CarpetExtraSettings.creeperSpawningInJungleTemples)
         {
@@ -37,6 +37,6 @@ public abstract class JungleTempleFeature_creeperMixin extends StructureFeature<
     
     static
     {
-        MONSTER_SPAWNS = Lists.newArrayList(new Biome.SpawnEntry(EntityType.CREEPER, 1, 1, 1));
+        MONSTER_SPAWNS = Lists.newArrayList(new SpawnSettings.SpawnEntry(EntityType.CREEPER, 1, 1, 1));
     }
 }

@@ -4,7 +4,7 @@ import carpetextra.CarpetExtraSettings;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import net.minecraft.entity.EntityType;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.IglooFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -17,7 +17,7 @@ import java.util.List;
 public abstract class IglooFeatureMixin extends StructureFeature<DefaultFeatureConfig>
 {
 
-    private static final List<Biome.SpawnEntry> MONSTER_SPAWNS;
+    private static final List<SpawnSettings.SpawnEntry> MONSTER_SPAWNS;
 
     public IglooFeatureMixin(Codec<DefaultFeatureConfig> codec)
     {
@@ -25,7 +25,7 @@ public abstract class IglooFeatureMixin extends StructureFeature<DefaultFeatureC
     }
 
     @Override
-    public List<Biome.SpawnEntry> getMonsterSpawns()
+    public List<SpawnSettings.SpawnEntry> getMonsterSpawns()
     {
         if (CarpetExtraSettings.straySpawningInIgloos)
         {
@@ -36,6 +36,6 @@ public abstract class IglooFeatureMixin extends StructureFeature<DefaultFeatureC
     
     static
     {
-        MONSTER_SPAWNS = Lists.newArrayList(new Biome.SpawnEntry(EntityType.STRAY, 1, 1, 1));
+        MONSTER_SPAWNS = Lists.newArrayList(new SpawnSettings.SpawnEntry(EntityType.STRAY, 1, 1, 1));
     }
 }

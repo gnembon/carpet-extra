@@ -22,7 +22,7 @@ public abstract class FoxMateGoalMixin extends AnimalMateGoal {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
-            ordinal = 1
+            ordinal = 0
         ),
         cancellable = true
     )

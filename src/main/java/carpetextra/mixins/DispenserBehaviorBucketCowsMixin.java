@@ -4,6 +4,7 @@ import carpetextra.CarpetExtraSettings;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$6")
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$9")
 public abstract class DispenserBehaviorBucketCowsMixin extends ItemDispenserBehavior
 {
     @Inject(
@@ -34,7 +35,7 @@ public abstract class DispenserBehaviorBucketCowsMixin extends ItemDispenserBeha
         if (!world.isClient)
         {
             BlockPos pos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
-            List<CowEntity> cows = world.getEntities(CowEntity.class, new Box(pos), e -> e.isAlive() && !e.isBaby());
+            List<CowEntity> cows = world.getEntitiesByType(EntityType.COW, new Box(pos), e -> e.isAlive() && !e.isBaby());
             if (!cows.isEmpty())
             {
                 stack.decrement(1);

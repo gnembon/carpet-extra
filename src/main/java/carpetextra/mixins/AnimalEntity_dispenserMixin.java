@@ -21,7 +21,7 @@ public abstract class AnimalEntity_dispenserMixin
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/world/ServerWorld;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
-                    ordinal = 1
+                    ordinal = 0
             ),
             cancellable = true
     )
