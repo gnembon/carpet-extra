@@ -39,6 +39,12 @@ public class CarpetExtraSettings
     public static int scaffoldingDistance = 7;
 
     @Rule(
+            desc = "Fixes updates suppression causing server crashes.",
+            category = {BUGFIX, EXTRA}
+    )
+    public static boolean updateSuppressionCrashFix = false;
+
+    @Rule(
             desc = "Auto-crafting dropper",
             extra = {"Is a dropper points to the crafting table ",
                     "and has a valid recipe in its 3x3 it crafts it.",

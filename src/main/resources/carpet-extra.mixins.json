@@ -56,7 +56,10 @@
     "SpiderEntityMixin",
 
     "ScaffoldingBlock_scaffoldingDistanceMixin",
-    "ScaffoldingItem_scaffoldingDistanceMixin"
+    "ScaffoldingItem_scaffoldingDistanceMixin",
+
+    "MinecraftServer_updateSuppressionCrashFixMixin",
+    "World_updateSuppressionCrashFixMixin"
   ],
   "client": [
     "MinecraftClient_noopMixin"
