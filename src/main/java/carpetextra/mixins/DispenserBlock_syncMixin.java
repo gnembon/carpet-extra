@@ -1,30 +1,25 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(DispenserBlock.class)
 public abstract class DispenserBlock_syncMixin
 {
-    @ModifyConstant(method = "neighborUpdate", constant = @Constant(intValue = 4, ordinal = 0))
-    private int onNeighborUpdate1(int original)
+    @Redirect(method = "neighborUpdate", at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"
+    ))
+    private boolean setWithFlags(World world, BlockPos pos, BlockState state, int flags)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return 6;
-        else
-            return original;
+            return world.setBlockState(pos, state, flags | 2);
+        return world.setBlockState(pos, state, flags);
     }
-    
-    @ModifyConstant(method = "neighborUpdate", constant = @Constant(intValue = 4, ordinal = 1))
-    private int onNeighborUpdate2(int original)
-    {
-        if (CarpetExtraSettings.blockStateSyncing)
-            return 6;
-        else
-            return original;
-    }
-    
 }
