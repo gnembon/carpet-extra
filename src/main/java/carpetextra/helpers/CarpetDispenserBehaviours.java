@@ -139,8 +139,8 @@ public class CarpetDispenserBehaviours
         private static Set<Block> toggleable = Sets.newHashSet(
             Blocks.STONE_BUTTON, Blocks.ACACIA_BUTTON, Blocks.BIRCH_BUTTON, Blocks.DARK_OAK_BUTTON,
             Blocks.JUNGLE_BUTTON, Blocks.OAK_BUTTON, Blocks.SPRUCE_BUTTON, Blocks.REPEATER, 
-            Blocks.COMPARATOR, Blocks.LEVER, Blocks.DAYLIGHT_DETECTOR, Blocks.REDSTONE_ORE, Blocks.BELL,
-            Blocks.JUKEBOX
+            Blocks.COMPARATOR, Blocks.LEVER, Blocks.DAYLIGHT_DETECTOR, Blocks.REDSTONE_ORE,
+            Blocks.JUKEBOX, Blocks.NOTE_BLOCK
         );
 
         @Override
