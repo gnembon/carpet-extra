@@ -194,7 +194,7 @@ If a living entity dies on sand with fire on top the sand will convert into soul
 
 ## reloadSuffocationFix
 Won't let mobs glitch into blocks when reloaded.
-Can cause slight differences in mobs behaviour. Fixes MC-2025.
+Can cause slight differences in mobs behaviour. Fixes [MC-2025](https://bugs.mojang.com/browse/MC-2025).
 * Type: `boolean`
 * Default value: `false`
 * Required options: `true`, `false`
@@ -231,7 +231,8 @@ Skeletons turn into wither skeletons when struck by lightning.
 * Categories: `FEATURE`, `EXTRAS`
 
 ## repeaterPriorityFix
-Quick pulses won't get lost in repeater setups. Probably brings back pre 1.8 behaviour. Fixes MC-54711
+Quick pulses won't get lost in repeater setups. Probably brings back pre 1.8 behaviour.
+Fixes [MC-54711](https://bugs.mojang.com/browse/MC-54711).
 * Type: `boolean`
 * Default value: `false`
 * Required options: `true`, `false`
