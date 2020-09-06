@@ -28,7 +28,7 @@
     "VillagerTaskListProvider_wartFarmMixin",
     "VillagerProfession_wartFarmMixin",
     "SecondaryPointOfInterestSensor_wartFarmMixin",
-
+    "NoteBlockMixin",
 
     "PlayerEntityMixin",
     "PistonBlockMixin",
