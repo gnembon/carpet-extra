@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 // Credits: Skyrising
 @Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$7")
-public class DispenserBehaviorFireChargeMixin extends ItemDispenserBehavior
+public class DispenserBehaviorFireChargeMixin
 {
     @SuppressWarnings("UnresolvedMixinReference")
     @Inject(method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;", at = @At("HEAD"), cancellable = true)
