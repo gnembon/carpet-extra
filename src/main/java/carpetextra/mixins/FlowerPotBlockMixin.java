@@ -58,7 +58,7 @@ public abstract class FlowerPotBlockMixin extends Block
     @Override
     public void onBreak(World world_1, BlockPos blockPos_1, BlockState blockState_1, PlayerEntity playerEntity_1)
     {
-        if (CarpetExtraSettings.flowerPotChunkLoading && world_1.getServer() != null && !world.isClient && this.content == Blocks.WITHER_ROSE)
+        if (CarpetExtraSettings.flowerPotChunkLoading && world_1.getServer() != null && !world_1.isClient && this.content == Blocks.WITHER_ROSE)
         {
             ServerWorld serverWorld = (ServerWorld)world_1;
             serverWorld.setChunkForced(blockPos_1.getX() >> 4, blockPos_1.getZ() >> 4, false);
