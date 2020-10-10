@@ -10,6 +10,8 @@ import net.minecraft.block.ObserverBlock;
 import net.minecraft.block.SeaPickleBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TurtleEggBlock;
+import net.minecraft.block.SeagrassBlock;
+import net.minecraft.block.KelpBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.BlockHalf;
@@ -71,7 +73,8 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
                     return new Direction[] {getPlayerLookDirection(), Direction.UP, Direction.DOWN, Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
                 }
             };
-            if (((BlockItem) item).place(ipc) == ActionResult.SUCCESS) {
+            ActionResult result = ((BlockItem) item).place(ipc);
+            if (result.isAccepted()) {
                 return itemStack;
             } else {
                 return super.dispenseSilently(blockPointer, itemStack);
@@ -120,6 +123,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
         FluidState currentFluidState = world.getFluidState(pos);
         if ((currentBlockState.isAir() || currentBlockState.getMaterial().isReplaceable()) && currentBlockState.getBlock() != block && state.canPlaceAt(world, pos)) {
             world.setBlockState(pos, state);
+            world.updateNeighbor(pos, state.getBlock(), pos);
             CompoundTag blockEntityTag = itemStack.getSubTag("BlockEntityTag");
             if (blockEntityTag != null && block instanceof BlockEntityProvider) {
                 BlockEntity be = world.getBlockEntity(pos);
@@ -152,6 +156,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
     }
 
     private static boolean usePlacementContext(Item item, Block block) {
-        return item.getClass() != BlockItem.class || block instanceof SeaPickleBlock || block instanceof TurtleEggBlock;
+        return item.getClass() != BlockItem.class || block instanceof SeaPickleBlock || block instanceof TurtleEggBlock ||
+               block instanceof SeagrassBlock || block instanceof KelpBlock;
     }
 }
