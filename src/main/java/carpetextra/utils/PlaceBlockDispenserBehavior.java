@@ -12,6 +12,7 @@ import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TurtleEggBlock;
 import net.minecraft.block.SeagrassBlock;
 import net.minecraft.block.KelpBlock;
+import net.minecraft.block.CoralParentBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.BlockHalf;
@@ -157,6 +158,6 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
 
     private static boolean usePlacementContext(Item item, Block block) {
         return item.getClass() != BlockItem.class || block instanceof SeaPickleBlock || block instanceof TurtleEggBlock ||
-               block instanceof SeagrassBlock || block instanceof KelpBlock;
+               block instanceof SeagrassBlock || block instanceof KelpBlock || block instanceof CoralParentBlock;
     }
 }
