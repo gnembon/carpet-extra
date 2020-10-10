@@ -270,7 +270,13 @@ public class CarpetExtraSettings
             strict = false
     )
     public static int maxSpongeRange = 7;
-    
+
+    @Rule(
+            desc = "Empty Shulker Boxes will always stack, even inside inventories",
+            category = {FEATURE, EXTRA, EXPERIMENTAL}
+    )
+    public static boolean emptyShulkerBoxStackAlways = false;
+
     // Implemented in 1.15 - doInsomnia
     /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
     public static boolean disablePhantomSpawning = false;*/
