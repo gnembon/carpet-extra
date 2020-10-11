@@ -179,14 +179,23 @@ public class CarpetDispenserBehaviours
             List<AnimalEntity> list = source.getWorld().getEntitiesByClass(AnimalEntity.class, new Box(pos),EntityPredicates.VALID_ENTITY);
             boolean failure = false;
 
-            for(AnimalEntity mob : list) {
-                if(!mob.isBreedingItem(stack)) continue;
-                if(mob.getBreedingAge() != 0 || mob.isInLove()) {
+            for (AnimalEntity mob : list)
+            {
+                if (!mob.isBreedingItem(stack)) continue;
+                if (mob.getBreedingAge() == 0 && mob.canEat())
+                {
+                    mob.lovePlayer(null);
+                }
+                else if (mob.isBaby())
+                {
+                    mob.growUp((int) ((float) (-mob.getBreedingAge() / 20) * 0.1F), true);
+                }
+                else
+                {
                     failure = true;
                     continue;
                 }
                 stack.decrement(1);
-                mob.lovePlayer(null);
                 return stack;
             }
             if(failure) return stack;
