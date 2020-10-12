@@ -78,7 +78,7 @@ public class CarpetDispenserBehaviours
         }
     
         @Override
-        protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
+        public ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
         {
             if (!CarpetExtraSettings.dispensersFillMinecarts)
             {
@@ -123,6 +123,8 @@ public class CarpetDispenserBehaviours
             }
             else
             {
+                if (stack.getItem() instanceof BlockItem && PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock()))
+                    return PlaceBlockDispenserBehavior.getInstance().dispenseSilently(source, stack);
                 return super.dispenseSilently(source, stack);
             }
         }
@@ -191,11 +193,7 @@ public class CarpetDispenserBehaviours
             }
             if(failure) return stack;
             // fix here for now - if problem shows up next time, will need to fix it one level above.
-            if(
-                    CarpetExtraSettings.dispenserPlacesBlocks &&
-                    stack.getItem() instanceof BlockItem &&
-                    PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock())
-            )
+            if (stack.getItem() instanceof BlockItem && PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock()))
             {
                 return PlaceBlockDispenserBehavior.getInstance().dispenseSilently(source, stack);
             }

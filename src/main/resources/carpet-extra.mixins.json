@@ -24,6 +24,11 @@
     "DropperBlock_craftingMixin",
     "DispenserBlockEntity_craftingMixin",
 
+    "DispenserBehaviorCarpetsMixin",
+    "DispenserBehaviorChestMixin",
+    "DispenserBehaviorFireChargeMixin",
+    "DispenserBehaviorGlowstoneMixin",
+
     "VillagerEntity_wartFarmMixin",
     "FarmerVillagerTask_wartFarmMixin",
     "VillagerTaskListProvider_wartFarmMixin",
@@ -41,7 +46,6 @@
     "BlocksMixin",
     "ChunkGeneratorMixin",
     "FallingBlockMixin",
-    "DispenserBehaviorFireChargeMixin",
     "ChickenEntityMixin",
     "LivingEntityMixin",
     "FlowerPotBlockMixin",
