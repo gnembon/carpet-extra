@@ -127,7 +127,7 @@ public class CarpetExtraSettings
     public static boolean accurateBlockPlacement = false;
 
     @Rule(
-            desc = "Dispensers can toggle with a stick things like buttons, doors, repeaters",
+            desc = "Dispensers can toggle with a stick things like redstone, noteblocks, comparator, daylight detector, repeaters",
             category = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER}
     )
     public static boolean dispensersToggleThings = false;
