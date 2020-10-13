@@ -18,7 +18,8 @@ public abstract class NoteBlockMixin {
         )
     )
     private void onIncrementStat(PlayerEntity player, Identifier ident) {
-        if(player == null) return;
+        // player will never be null in VANILLA
+        if (player == null) return;
         player.incrementStat(ident);
         return;
     }

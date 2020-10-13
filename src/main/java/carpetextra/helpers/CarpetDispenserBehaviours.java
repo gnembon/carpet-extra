@@ -147,7 +147,7 @@ public class CarpetDispenserBehaviours
             Blocks.STONE_BUTTON, Blocks.ACACIA_BUTTON, Blocks.BIRCH_BUTTON, Blocks.DARK_OAK_BUTTON,
             Blocks.JUNGLE_BUTTON, Blocks.OAK_BUTTON, Blocks.SPRUCE_BUTTON, Blocks.REPEATER, 
             Blocks.COMPARATOR, Blocks.LEVER, Blocks.DAYLIGHT_DETECTOR, Blocks.REDSTONE_ORE,
-            Blocks.JUKEBOX, Blocks.NOTE_BLOCK
+            Blocks.JUKEBOX, Blocks.NOTE_BLOCK, Blocks.REDSTONE_WIRE
         );
 
         @Override

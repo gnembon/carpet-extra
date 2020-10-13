@@ -16,7 +16,8 @@ public abstract class DaylightDetectorBlockMixin {
         )
     )
     private boolean hasModifyWorld(final PlayerEntity player) {
-        if(player == null) return true;
+        // player will never be null in VANILLA
+        if (player == null) return true;
         return player.abilities.allowModifyWorld;
     }
 }

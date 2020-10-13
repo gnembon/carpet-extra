@@ -35,6 +35,7 @@
     "VillagerProfession_wartFarmMixin",
     "SecondaryPointOfInterestSensor_wartFarmMixin",
     "NoteBlockMixin",
+    "RedstoneWireBlockMixin",
 
     "PlayerEntityMixin",
     "PistonBlockMixin",
