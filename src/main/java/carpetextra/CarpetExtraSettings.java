@@ -206,7 +206,7 @@ public class CarpetExtraSettings
     public static boolean reloadSuffocationFix = false;
     
     @Rule(
-            desc = "Dispensers with empty buckets can milk cows",
+            desc = "Dispensers with empty buckets can milk cows and get stew from mooshrooms with bowls",
             category = {EXPERIMENTAL, EXTRA, FEATURE, DISPENSER}
     )
     public static boolean dispensersMilkCows = false;

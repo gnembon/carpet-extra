@@ -9,16 +9,21 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.JukeboxBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.block.entity.JukeboxBlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -277,6 +282,40 @@ public class CarpetDispenserBehaviours
                 return stack;
             }
             return super.dispenseSilently(source, stack);
+        }
+    }
+    
+    public static class MushroomStewBehavior extends ItemDispenserBehavior
+    {
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack)
+        {
+            if (!CarpetExtraSettings.dispensersMilkCows)
+                return super.dispenseSilently(pointer, stack);
+    
+            World world = pointer.getWorld();
+            if (!world.isClient)
+            {
+                BlockPos pos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+                List<MooshroomEntity> mooshroom = world.getEntitiesByType(EntityType.MOOSHROOM, new Box(pos), e -> e.isAlive() && !e.isBaby());
+                if (!mooshroom.isEmpty())
+                {
+                    stack.decrement(1);
+                    if (stack.isEmpty())
+                    {
+                        return new ItemStack(Items.MUSHROOM_STEW);
+                    }
+                    else
+                    {
+                        if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(Items.MUSHROOM_STEW)) < 0)
+                        {
+                            this.dispense(pointer, new ItemStack(Items.MUSHROOM_STEW));
+                        }
+                        return stack;
+                    }
+                }
+            }
+            return super.dispenseSilently(pointer, stack);
         }
     }
 }

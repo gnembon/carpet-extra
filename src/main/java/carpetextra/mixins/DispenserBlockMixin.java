@@ -63,5 +63,8 @@ public abstract class DispenserBlockMixin
         
         if (CarpetExtraSettings.dragonsBreathConvertsCobbleToEndstone && item == Items.DRAGON_BREATH)
             cir.setReturnValue(new DragonsBreathDispenserBehaviour());
+        
+        if (CarpetExtraSettings.dispensersMilkCows && item == Items.BOWL)
+            cir.setReturnValue(new MushroomStewBehavior());
     }
 }
