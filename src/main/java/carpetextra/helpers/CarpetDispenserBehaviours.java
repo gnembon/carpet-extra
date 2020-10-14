@@ -309,7 +309,7 @@ public class CarpetDispenserBehaviours
                     {
                         if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(Items.MUSHROOM_STEW)) < 0)
                         {
-                            this.dispense(pointer, new ItemStack(Items.MUSHROOM_STEW));
+                            new ItemDispenserBehavior().dispense(pointer, new ItemStack(Items.MUSHROOM_STEW));
                         }
                         return stack;
                     }
