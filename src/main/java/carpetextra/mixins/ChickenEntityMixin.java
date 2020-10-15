@@ -35,6 +35,7 @@ public abstract class ChickenEntityMixin extends AnimalEntity
                 stack.damage(1, (LivingEntity)playerEntity_1, ((playerEntity_1x) -> {
                     playerEntity_1x.sendToolBreakStatus(hand_1);
                 }));
+                return ActionResult.SUCCESS;
             }
         }
         return super.interactMob(playerEntity_1, hand_1);
