@@ -28,9 +28,9 @@ public abstract class ChickenEntityMixin extends AnimalEntity
         ItemStack stack = playerEntity_1.getStackInHand(hand_1);
         if (CarpetExtraSettings.chickenShearing && stack.getItem() == Items.SHEARS && !this.isBaby())
         {
-            if (!this.world.isClient)
+            boolean tookDamage = this.damage(DamageSource.GENERIC, 1);
+            if (tookDamage)
             {
-                this.damage(DamageSource.GENERIC, 1);
                 this.dropItem(Items.FEATHER, 1);
                 stack.damage(1, (LivingEntity)playerEntity_1, ((playerEntity_1x) -> {
                     playerEntity_1x.sendToolBreakStatus(hand_1);
