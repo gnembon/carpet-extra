@@ -62,6 +62,8 @@
     "SpiderEntityMixin",
     "ScaffoldingBlock_scaffoldingDistanceMixin",
     "ScaffoldingItem_scaffoldingDistanceMixin",
+    "SugarCaneBlock_fertilizerMixin",
+    "CactusBlock_fertilizerMixin",
 
     "MinecraftServer_updateSuppressionCrashFixMixin",
     "World_updateSuppressionCrashFixMixin"

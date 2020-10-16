@@ -282,6 +282,12 @@ public class CarpetExtraSettings
             category = {FEATURE, EXTRA, EXPERIMENTAL}
     )
     public static boolean emptyShulkerBoxStackAlways = false;
+    
+    @Rule(
+            desc = "Bonemeal can be used to grow sugarcane and cactus",
+            category = {FEATURE, EXTRA, SURVIVAL}
+    )
+    public static boolean expandedBonemealUsage = false;
 
     @Rule(
             desc = "Dispensers with shears can carve pumpkins",
