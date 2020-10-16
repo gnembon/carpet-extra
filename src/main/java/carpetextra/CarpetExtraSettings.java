@@ -283,6 +283,12 @@ public class CarpetExtraSettings
     )
     public static boolean emptyShulkerBoxStackAlways = false;
 
+    @Rule(
+            desc = "Dispensers with shears can carve pumpkins",
+            category = {EXTRA, FEATURE, DISPENSER}
+    )
+    public static boolean dispensersCarvePumpkins = false;
+
     // Implemented in 1.15 - doInsomnia
     /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
     public static boolean disablePhantomSpawning = false;*/
