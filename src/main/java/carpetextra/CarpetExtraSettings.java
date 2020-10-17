@@ -287,7 +287,7 @@ public class CarpetExtraSettings
             desc = "Bonemeal can be used to grow sugarcane and cactus",
             category = {FEATURE, EXTRA, SURVIVAL}
     )
-    public static boolean expandedBonemealUsage = false;
+    public static boolean betterBonemeal = false;
 
     @Rule(
             desc = "Dispensers with shears can carve pumpkins",

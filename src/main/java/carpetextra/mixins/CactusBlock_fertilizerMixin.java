@@ -21,7 +21,7 @@ public abstract class CactusBlock_fertilizerMixin implements Fertilizable
     {
         int i = this.countCactusAbove(world, pos);
         int j = this.countCactusBelow(world, pos);
-        return CarpetExtraSettings.expandedBonemealUsage && i + j < 2;
+        return CarpetExtraSettings.betterBonemeal && i + j < 2;
     }
     
     @Override

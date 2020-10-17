@@ -18,7 +18,7 @@ public abstract class SugarCaneBlock_fertilizerMixin implements Fertilizable
     {
         int i = this.countSugarCaneAbove(world, pos);
         int j = this.countSugarCaneBelow(world, pos);
-        return CarpetExtraSettings.expandedBonemealUsage && i + j < 2;
+        return CarpetExtraSettings.betterBonemeal && i + j < 2;
     }
     
     @Override
