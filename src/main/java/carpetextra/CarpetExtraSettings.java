@@ -288,6 +288,9 @@ public class CarpetExtraSettings
             category = {EXTRA, FEATURE, DISPENSER}
     )
     public static boolean dispensersCarvePumpkins = false;
+    
+    @Rule(desc = "Blaze powder fertilizes netherwart via dispenser or player right click action", category = {EXTRA, FEATURE, SURVIVAL})
+    public static boolean blazeMeal = false;
 
     // Implemented in 1.15 - doInsomnia
     /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})

@@ -37,6 +37,7 @@
     "SecondaryPointOfInterestSensor_wartFarmMixin",
     "NoteBlockMixin",
     "RedstoneWireBlockMixin",
+    "NetherWartBlock_fertilizerMixin",
 
     "PlayerEntityMixin",
     "PistonBlockMixin",
