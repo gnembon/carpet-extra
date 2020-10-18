@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.JukeboxBlock;
+import net.minecraft.block.NetherWartBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.block.entity.JukeboxBlockEntity;
@@ -316,6 +317,34 @@ public class CarpetDispenserBehaviours
                 }
             }
             return super.dispenseSilently(pointer, stack);
+        }
+    }
+    
+    public static class BlazePowderBehavior extends ItemDispenserBehavior
+    {
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack)
+        {
+            if (!CarpetExtraSettings.blazeMeal)
+                return super.dispenseSilently(pointer, stack);
+    
+            World world = pointer.getWorld();
+            Direction direction = pointer.getBlockState().get(DispenserBlock.FACING);
+            BlockPos front = pointer.getBlockPos().offset(direction);
+            BlockState state = world.getBlockState(front);
+            
+            if (state.getBlock() == Blocks.NETHER_WART)
+            {
+                int age = state.get(NetherWartBlock.AGE);
+                if (age < 3)
+                {
+                    world.setBlockState(front, Blocks.NETHER_WART.getDefaultState().with(NetherWartBlock.AGE, age + 1), 2);
+                    world.syncWorldEvent(2005, front, 0);
+                    stack.decrement(1);
+                    return stack;
+                }
+            }
+            return stack;
         }
     }
 }

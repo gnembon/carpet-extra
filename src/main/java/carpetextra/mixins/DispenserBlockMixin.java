@@ -66,5 +66,8 @@ public abstract class DispenserBlockMixin
         
         if (CarpetExtraSettings.dispensersMilkCows && item == Items.BOWL)
             cir.setReturnValue(new MushroomStewBehavior());
+        
+        if (CarpetExtraSettings.blazeMeal && item == Items.BLAZE_POWDER)
+            cir.setReturnValue(new BlazePowderBehavior());
     }
 }
