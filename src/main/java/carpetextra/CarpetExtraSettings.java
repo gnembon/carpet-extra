@@ -282,7 +282,13 @@ public class CarpetExtraSettings
             category = {FEATURE, EXTRA, EXPERIMENTAL}
     )
     public static boolean emptyShulkerBoxStackAlways = false;
-    
+
+    @Rule(
+            desc = "Allow horizontally moving Ender Pearls to load chunks as entity ticking",
+            category = {FEATURE, EXTRA}
+    )
+    public static boolean enderPearlChunkLoading = false;
+
     @Rule(
             desc = "Bonemeal can be used to grow sugarcane and cactus",
             category = {FEATURE, EXTRA, SURVIVAL}
