@@ -5,7 +5,7 @@ on:
     branches: 
       - master
     paths:
-    - "src/main/java/carpet/CarpetSettings.java"
+    - "src/main/java/carpetextra/CarpetExtraSettings.java"
     - "README-header.md"
 jobs:
   Rules:
