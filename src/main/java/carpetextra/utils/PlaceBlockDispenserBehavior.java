@@ -6,6 +6,7 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.FluidFillable;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.ObserverBlock;
 import net.minecraft.block.SeaPickleBlock;
 import net.minecraft.block.StairsBlock;
@@ -116,6 +117,10 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
 
         if (block instanceof ObserverBlock) {
             state = state.with(ObserverBlock.POWERED, true);
+        }
+
+        if (block instanceof LeavesBlock) {
+            state = state.with(Properties.PERSISTENT, true);
         }
 
         state = Block.postProcessState(state, world, pos);
