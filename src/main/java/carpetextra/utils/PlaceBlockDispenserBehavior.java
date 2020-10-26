@@ -123,11 +123,10 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             state = state.with(Properties.PERSISTENT, true);
         }
 
-        state = Block.postProcessState(state, world, pos);
-
         BlockState currentBlockState = world.getBlockState(pos);
         FluidState currentFluidState = world.getFluidState(pos);
         if ((currentBlockState.isAir() || currentBlockState.getMaterial().isReplaceable()) && currentBlockState.getBlock() != block && state.canPlaceAt(world, pos)) {
+            state = Block.postProcessState(state, world, pos);
             boolean blockWasPlaced = world.setBlockState(pos, state);
             world.updateNeighbor(pos, state.getBlock(), pos);
             CompoundTag blockEntityTag = itemStack.getSubTag("BlockEntityTag");
