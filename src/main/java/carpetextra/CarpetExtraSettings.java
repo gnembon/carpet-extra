@@ -126,7 +126,8 @@ public class CarpetExtraSettings
     public static boolean accurateBlockPlacement = false;
 
     @Rule(
-            desc = "Dispensers containing a stick can toggle things like buttons, redstone, noteblocks, comparators, daylight detectors and repeaters.",
+            desc = "Dispensers containing a stick can toggle things.",
+            extra = {"Works with buttons, redstone, noteblocks, comparators, repeaters", "and daylight detectors."},
             category = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER}
     )
     public static boolean dispensersToggleThings = false;
@@ -155,9 +156,9 @@ public class CarpetExtraSettings
     public static boolean doubleRetraction = false;
     
     @Rule(
-            desc = "Fixes block states in F3 debug mode not updating for some blocks. May cause increased network traffic.",
+            desc = "Fixes block states in F3 debug mode not updating for some blocks.",
             category = {EXTRA, EXPERIMENTAL},
-            extra = "Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers."
+            extra = {"May cause increased network traffic.", "Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers."}
     )
     public static boolean blockStateSyncing = false;
     
@@ -201,7 +202,7 @@ public class CarpetExtraSettings
     
     @Rule(
             desc = "Won't let mobs glitch into blocks when reloaded.",
-            extra = "Can cause slight differences in mobs behaviour. Fixes [MC-2025](https://bugs.mojang.com/browse/MC-2025).",
+            extra = {"Can cause slight differences in mobs behaviour.", "Fixes [MC-2025](https://bugs.mojang.com/browse/MC-2025)."},
             category = {EXTRA, BUGFIX, EXPERIMENTAL}
     )
     public static boolean reloadSuffocationFix = false;
@@ -214,7 +215,7 @@ public class CarpetExtraSettings
     
     @Rule(
             desc = "Quick pulses won't get lost in repeater setups.",
-            extra = "Probably brings back pre 1.8 behaviour. Fixes [MC-54711](https://bugs.mojang.com/browse/MC-54711).",
+            extra = {"Probably brings back pre 1.8 behaviour.", "Fixes [MC-54711](https://bugs.mojang.com/browse/MC-54711)."},
             category = {EXTRA, BUGFIX, EXPERIMENTAL}
     )
     public static boolean repeaterPriorityFix = false;
@@ -302,7 +303,11 @@ public class CarpetExtraSettings
     )
     public static boolean dispensersCarvePumpkins = false;
     
-    @Rule(desc = "Blaze powder fertilizes netherwart via dispenser or player right click actions.", category = {EXTRA, FEATURE, SURVIVAL})
+    @Rule(
+            desc = "Blaze powder fertilizes netherwart.",
+            extra = "Via dispenser or player right click actions.",
+            category = {EXTRA, FEATURE, SURVIVAL}
+    )
     public static boolean blazeMeal = false;
 
     // Implemented in 1.15 - doInsomnia
