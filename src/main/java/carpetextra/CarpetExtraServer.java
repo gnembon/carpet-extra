@@ -3,10 +3,13 @@ package carpetextra;
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpetextra.commands.PingCommand;
+import carpetextra.utils.CarpetExtraTranslations;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+
+import java.util.Map;
 
 public class CarpetExtraServer implements CarpetExtension
 {
@@ -69,5 +72,11 @@ public class CarpetExtraServer implements CarpetExtension
     public void onPlayerLoggedOut(ServerPlayerEntity player)
     {
         // will need that for client features
+    }
+
+    @Override
+    public Map<String, String> canHasTranslations(String lang)
+    {
+        return CarpetExtraTranslations.getTranslationFromResourcePath(lang);
     }
 }
