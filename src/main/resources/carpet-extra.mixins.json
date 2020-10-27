@@ -30,6 +30,8 @@
     "DispenserBehaviorFireChargeMixin",
     "DispenserBehaviorGlowstoneMixin",
     "DispenserBehaviorShearsMixin",
+    "DispenserBehaviorCarvedPumpkinMixin",
+    "DispenserBehaviorMobHeadMixin",
 
     "VillagerEntity_wartFarmMixin",
     "FarmerVillagerTask_wartFarmMixin",

@@ -6,6 +6,7 @@ import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.FluidFillable;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.ObserverBlock;
 import net.minecraft.block.SeaPickleBlock;
 import net.minecraft.block.StairsBlock;
@@ -118,12 +119,16 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             state = state.with(ObserverBlock.POWERED, true);
         }
 
-        state = Block.postProcessState(state, world, pos);
+        if (block instanceof LeavesBlock) {
+            state = state.with(Properties.PERSISTENT, true);
+        }
 
         BlockState currentBlockState = world.getBlockState(pos);
         FluidState currentFluidState = world.getFluidState(pos);
         if ((currentBlockState.isAir() || currentBlockState.getMaterial().isReplaceable()) && currentBlockState.getBlock() != block && state.canPlaceAt(world, pos)) {
-            world.setBlockState(pos, state);
+            state = Block.postProcessState(state, world, pos);
+            boolean blockWasPlaced = world.setBlockState(pos, state);
+            block.onPlaced(world, pos, state, null, itemStack);
             world.updateNeighbor(pos, state.getBlock(), pos);
             CompoundTag blockEntityTag = itemStack.getSubTag("BlockEntityTag");
             if (blockEntityTag != null && block instanceof BlockEntityProvider) {
@@ -139,7 +144,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             }
             BlockSoundGroup soundType = state.getSoundGroup();
             world.playSound(null, pos, soundType.getPlaceSound(), SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F / 2.0F), soundType.getPitch() * 0.8F);
-            if (!world.getBlockState(pos).isAir()) {
+            if (blockWasPlaced) {
                 itemStack.decrement(1);
                 return itemStack;
             }
