@@ -1,11 +1,12 @@
 # carpet-extra
-Extra Features for Carpet Mod
+Extra Features for Carpet Mod.
 
-Use along side base fabric-carpet mod for the same minecraft version.
+Use along side base [fabric-carpet](https://github.com/gnembon/fabric-carpet) mod for the same minecraft version.
 
-Due to how autoCraftingTable feature is implemented, if you are using other mods that require you to use fabric-api (carpet doesn't need it, btw), and you run carpet-extra on a server, the clients must run the same mod configuration as well. If you are only using carpet-style mods, you can connect to the servers with whatever vanilla compatible client you are using.
+Due to how autoCraftingTable feature is implemented, it has been moved to [a standalone extension](https://github.com/gnembon/carpet-autoCraftingTable).
 
-# Carpet Extra features
+# Carpet Extra Features
+
 ## accurateBlockPlacement
 Client can provide alternative block placement  
 * Type: `boolean`  
@@ -23,6 +24,20 @@ Also makes hoppers, droppers and dispensers input max 1 item per slot
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `CREATIVE`, `EXTRAS`, `DISPENSER`  
+  
+## betterBonemeal
+Bonemeal can be used to grow sugarcane and cactus  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `FEATURE`, `EXTRAS`, `SURVIVAL`  
+  
+## blazeMeal
+Blaze powder fertilizes netherwart via dispenser or player right click action  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `SURVIVAL`  
   
 ## blockStateSyncing
 Fixes block states in F3 debug mode not updating for some blocks. May cause increased network traffic  
@@ -64,7 +79,7 @@ Allows Comparators to read the daytime instead of the rotation of clocks in item
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
-
+  
 ## creeperSpawningInJungleTemples
 Only creepers spawn in jungle temples  
 * Type: `boolean`  
@@ -86,6 +101,13 @@ Dispensers can place blocks
 * Required options: `true`, `false`  
 * Categories: `CREATIVE`, `EXTRAS`, `DISPENSER`  
   
+## dispensersCarvePumpkins
+Dispensers with shears can carve pumpkins  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
+  
 ## dispensersFeedAnimals
 Dispensers can feed animals  
 * Type: `boolean`  
@@ -101,7 +123,7 @@ Minecarts can be filled with hoppers, chests, tnt and furnace.
 * Categories: `EXPERIMENTAL`, `FEATURE`, `EXTRAS`, `DISPENSER`  
   
 ## dispensersMilkCows
-Dispensers with empty buckets can milk cows  
+Dispensers with empty buckets can milk cows and get stew from mooshrooms with bowls  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
@@ -123,7 +145,7 @@ Dispensers with hoes can till soil
 * Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
 ## dispensersToggleThings
-Dispensers can toggle with a stick things like buttons, doors, repeaters  
+Dispensers can toggle with a stick things like redstone, noteblocks, comparator, daylight detector, repeaters  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
@@ -143,13 +165,27 @@ Reintroduce Dragon Egg Bedrock breaking bug from 1.12
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
-
+  
 ## dragonsBreathConvertsCobbleToEndstone
 Dragon's breath from dispensers convert cobblestone to end stone  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `DISPENSER`  
+  
+## emptyShulkerBoxStackAlways
+Empty Shulker Boxes will always stack, even inside inventories  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
+  
+## enderPearlChunkLoading
+Allow horizontally moving Ender Pearls to load chunks as entity ticking  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `FEATURE`, `EXTRAS`  
   
 ## fireChargeConvertsToNetherrack
 Fire charges from dispensers convert cobblestone to netherrack  
@@ -180,6 +216,20 @@ Allows Hopper Minecarts to transfer items out.
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `BUGFIX`, `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
+  
+## maxSpongeRange
+Maximum offset limit for sponge  
+* Type: `int`  
+* Default value: `7`  
+* Suggested options: `7`  
+* Categories: `FEATURE`, `EXTRAS`  
+  
+## maxSpongeSuck
+Maximum water sucking for sponge  
+* Type: `int`  
+* Default value: `64`  
+* Suggested options: `64`  
+* Categories: `FEATURE`, `EXTRAS`  
   
 ## mobInFireConvertsSandToSoulsand
 If a living entity dies on sand with fire on top the sand will convert into soul sand  
@@ -217,7 +267,7 @@ Cobblestone crushed by falling anvils makes sand
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
-
+  
 ## renewableWitherSkeletons
 Skeletons turn into wither skeletons when struck by lightning  
 * Type: `boolean`  
@@ -241,30 +291,30 @@ Max distance for scaffolding
 * Categories: `FEATURE`, `EXTRAS`  
 * Additional notes:  
   * You must choose a value from 0 to 7  
-
+  
 ## spiderJockeysDropGapples
 Gives Spider jockeys a specified chance to drop enchanted golden apples  
 0 is default, i.e no enchanted golden apples will be dropped  
 * Type: `int`  
 * Default value: `0`  
-* Suggested options: `0`, `50`, `100`  
+* Required options: `0`, `50`, `100`  
 * Categories: `EXTRAS`, `FEATURE`  
 * Additional notes:  
   * You must choose a value from 0 to 100  
   
-## spongesDryInTheNether
-Wet sponges dry in the nether dimension  
+## straySpawningInIgloos
+Only strays spawn in igloos  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
-* Categories: `EXTRAS`, `FEATURE`  
-
-## straySpawningInIgloos
-Only strays spawn in igloos 
-* Type: `boolean`   
+* Categories: `FEATURE`, `EXTRAS`  
+  
+## updateSuppressionCrashFix
+Fixes updates suppression causing server crashes.  
+* Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
-* Categories: `FEATURE`, `EXTRAS`  
+* Categories: `BUGFIX`, `EXTRAS`  
   
 ## variableWoodDelays
 variable delays on wooden components  
@@ -273,4 +323,14 @@ buttons, pressure plates
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`  
- 
+  
+## y0DragonEggBedrockBreaking
+Let dragon eggs break Y0 bedrock  
+Requires dragonEggBedrockBreaking to be set to true  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXPERIMENTAL`, `EXTRAS`  
+  
+
+
