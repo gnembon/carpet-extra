@@ -41,6 +41,7 @@
     "NoteBlockMixin",
     "RedstoneWireBlockMixin",
     "NetherWartBlock_fertilizerMixin",
+    "RedstoneWireBlockMixin_pistonRedirectsRedstone",
 
     "PlayerEntityMixin",
     "PistonBlockMixin",
