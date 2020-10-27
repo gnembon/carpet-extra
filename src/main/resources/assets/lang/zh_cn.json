@@ -1,0 +1,141 @@
+{
+  "category.extras": "扩展",
+
+  "rule.scaffoldingDistance.name": "脚手架距离上限",
+  "rule.scaffoldingDistance.desc": "脚手架水平扩展的距离上限",
+
+  "rule.autoCraftingDropper.name": "投掷器自动合成",
+  "rule.autoCraftingDropper.desc": "指向工作台的投掷器可以合成物品",
+  "rule.autoCraftingDropper.extra.0": "当投掷器指向工作台时，若投掷器的3x3空间中存在一个合法的配方，则在被激活的时投掷器会合成这个配方",
+  "rule.autoCraftingDropper.extra.1": "对于这类指向工作台的投掷器，它们输出比较器信号的逻辑被修改，信号强度与被填充的格子数量相关",
+  "rule.autoCraftingDropper.extra.2": "除此之外，当使用漏斗、投掷器以及发射器向它们输入时，它们每个槽位最多仅接受一个物品",
+
+  "rule.dispenserPlacesBlocks.name": "发射器放置方块",
+  "rule.dispenserPlacesBlocks.desc": "发射器可放置方块",
+
+  "rule.variableWoodDelays.name": "木质元件可变延迟",
+  "rule.variableWoodDelays.desc": "木质压力板、按钮将因其种类不同而拥有不同的延迟",
+
+  "rule.comparatorReadsClock.name": "比较器读取时钟",
+  "rule.comparatorReadsClock.desc": "让比较器读取展示框内钟的时间，而非钟物品在展示框中的旋转角度",
+
+  "rule.hopperMinecart8gtCooldown.name": "漏斗矿车8gt冷却",
+  "rule.hopperMinecart8gtCooldown.desc": "让漏斗矿车具有跟漏斗类似的8gt延迟",
+
+  "rule.hopperMinecartItemTransfer.name": "漏斗矿车输出物品",
+  "rule.hopperMinecartItemTransfer.desc": "让漏斗矿车可以向外输出物品",
+
+  "rule.commandPing.name": "延迟测试",
+  "rule.commandPing.desc": "启用/ping命令让玩家可获得他们的网络延迟",
+
+  "rule.dispensersFillBottles.name": "发射器填充水瓶",
+  "rule.dispensersFillBottles.desc": "当发射器前方是水时，发射器将空瓶填满成水瓶",
+
+  "rule.dispensersFillMinecarts.name": "发射器组装矿车",
+  "rule.dispensersFillMinecarts.desc": "发射器可将漏斗、箱子、TNT以及熔炉放入矿车中",
+
+  "rule.spongesDryInTheNether.name": "海绵在下界变干",
+  "rule.spongesDryInTheNether.desc": "湿海绵将会在下界中变干",
+
+  "rule.clericsFarmWarts.name": "牧师收获下界疣",
+  "rule.clericsFarmWarts.desc": "让牧师可以收获下界疣",
+  "rule.clericsFarmWarts.extra.0": "同时这也会使它们捡起下界疣物品",
+  "rule.clericsFarmWarts.extra.1": "以及让它们寻路至灵魂沙",
+
+  "rule.renewablePackedIce.name": "可再生浮冰",
+  "rule.renewablePackedIce.desc": "掉落的铁砧压碎多个冰块时会将冰转换为浮冰",
+
+  "rule.dispensersPlayRecords.name": "发射器播放唱片",
+  "rule.dispensersPlayRecords.desc": "发射器可以使用其前方的唱片机播放唱片",
+  "rule.dispensersPlayRecords.extra.0": "如果唱片机中已存在唱片，已存在的唱片将会被放回投掷器中",
+
+  "rule.accurateBlockPlacement.name": "准确方块放置支持",
+  "rule.accurateBlockPlacement.desc": "启用对tweakroo mod的tweakAccurateBlockPlacement选项的支持",
+
+  "rule.dispensersToggleThings.name": "发射器拨动方块",
+  "rule.dispensersToggleThings.desc": "发射器可以使用木棍来拨动各种方块，如按钮、门、红石中继器",
+
+  "rule.dispensersTillSoil.name": "发射器锄地",
+  "rule.dispensersTillSoil.desc": "发射器可使用锄来锄地",
+
+  "rule.dispensersFeedAnimals.name": "发射器喂食动物",
+  "rule.dispensersFeedAnimals.desc": "发射器可喂食动物",
+
+  "rule.disablePlayerCollision.name": "禁用玩家碰撞",
+  "rule.disablePlayerCollision.desc": "禁用玩家实体的碰撞",
+
+  "rule.renewableLava.name": "可再生岩浆",
+  "rule.renewableLava.desc": "被6个岩浆源围绕的黑曜石有概率转换为岩浆",
+  "rule.renewableLava.extra.0": "感谢：Skyrising",
+
+  "rule.doubleRetraction.name": "活塞双重收回",
+  "rule.doubleRetraction.desc": "重新实现1.8版本中活塞的双重收回",
+  "rule.doubleRetraction.extra.0": "无副作用的实现",
+
+  "rule.blockStateSyncing.name": "方块状态同步",
+  "rule.blockStateSyncing.desc": "修复F3调试界面中某些方块的方块状态不被更新。可能会增加网络负载",
+  "rule.blockStateSyncing.extra.0": "影响方块：仙人掌、甘蔗、树苗、漏斗、发射器以及投掷器",
+
+  "rule.renewableSand.name": "可再生沙子",
+  "rule.renewableSand.desc": "被铁砧砸到的圆石会变成沙子",
+
+  "rule.dragonEggBedrockBreaking.name": "龙蛋破基岩",
+  "rule.dragonEggBedrockBreaking.desc": "重新引入1.12的龙蛋破基岩机制",
+
+  "rule.fireChargeConvertsToNetherrack.name": "烈焰弹转换圆石至下界岩",
+  "rule.fireChargeConvertsToNetherrack.desc": "发射器中的烈焰弹可将圆石转换为下界岩",
+  "rule.fireChargeConvertsToNetherrack.extra.0": "感谢：Skyrising",
+
+  "rule.chickenShearing.name": "剪鸡毛",
+  "rule.chickenShearing.desc": "你可以用剪刀从鸡的身上剪下羽毛。注意！每次你剪鸡毛时鸡都会受伤！",
+  "rule.chickenShearing.extra.0": "未成年的鸡不能被剪下羽毛",
+
+  "rule.mobInFireConvertsSandToSoulsand.name": "着火的生物将沙子转换为灵魂沙",
+  "rule.mobInFireConvertsSandToSoulsand.desc": "当生物死于沙子上的火焰时，沙子将会转换为灵魂沙",
+
+  "rule.flowerPotChunkLoading.name": "花盆区块加载",
+  "rule.flowerPotChunkLoading.desc": "将凋零玫瑰放置于花盆中以常加载其所在的区块",
+  "rule.flowerPotChunkLoading.extra.0": "如果你启用了这个规则，已存在花盆的区块不会被加载",
+  "rule.flowerPotChunkLoading.extra.1": "如果你关闭了这个规则，处于加载状态的花盆区块不会被移除，你需要手动使用/forceload指令来移除它们",
+  "rule.flowerPotChunkLoading.extra.2": "所有常加载区块的列表可用`/forceload query`查询",
+
+  "rule.reloadSuffocationFix.name": "重载窒息修复",
+  "rule.reloadSuffocationFix.desc": "让生物不会在区块重载后卡进方块里",
+  "rule.reloadSuffocationFix.extra.0": "生物表现可能会有轻微的不同。修复了MC-2025",
+
+  "rule.dispensersMilkCows.name": "发射器挤奶",
+  "rule.dispensersMilkCows.desc": "发射器可使用空桶给牛挤奶",
+
+  "rule.repeaterPriorityFix.name": "红石中继器优先级修复",
+  "rule.repeaterPriorityFix.desc": "短脉冲不会在某些中继器序列中消失",
+  "rule.repeaterPriorityFix.extra.0": "可以说是带回了1.8前的表现。修复了MC-54711",
+
+  "rule.straySpawningInIgloos.name": "流浪者于雪屋生成",
+  "rule.straySpawningInIgloos.desc": "雪屋中能且仅能生成流浪者",
+
+  "rule.renewableWitherSkeletons.name": "可再生凋灵骷髅",
+  "rule.renewableWitherSkeletons.desc": "被闪电击中的骷髅会转换为凋灵骷髅",
+
+  "rule.creeperSpawningInJungleTemples.name": "爬行者于雪屋生成",
+  "rule.creeperSpawningInJungleTemples.desc": "雪屋中能且仅能生成爬行者",
+
+  "rule.y0DragonEggBedrockBreaking.name": "y0龙蛋破基岩",
+  "rule.y0DragonEggBedrockBreaking.desc": "让龙蛋可破除y0基岩",
+  "rule.y0DragonEggBedrockBreaking.extra.0": "需开启dragonEggBedrockBreaking(龙蛋破基岩)规则",
+
+  "rule.spiderJockeysDropGapples.name": "蜘蛛骑士掉落附魔金苹果",
+  "rule.spiderJockeysDropGapples.desc": "让骷髅骑士有一定概率掉落附魔金苹果",
+  "rule.spiderJockeysDropGapples.extra.0": "默认值为0，即不会掉落附魔金苹果",
+
+  "rule.dragonsBreathConvertsCobbleToEndstone.name": "龙息转换圆石至末地石",
+  "rule.dragonsBreathConvertsCobbleToEndstone.desc": "发射器中的龙息可将圆石转换为末地石",
+
+  "rule.maxSpongeSuck.name": "海绵吸水量",
+  "rule.maxSpongeSuck.desc": "海绵的最大吸水量",
+
+  "rule.maxSpongeRange.name": "海绵吸水距离",
+  "rule.maxSpongeRange.desc": "海绵吸水的最大偏移距离",
+
+  "rule.disablePhantomSpawning.name": "禁止幻翼生成",
+  "rule.disablePhantomSpawning.desc": "禁止幻翼的生成"
+}
