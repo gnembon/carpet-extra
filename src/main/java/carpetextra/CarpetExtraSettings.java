@@ -127,7 +127,7 @@ public class CarpetExtraSettings
 
     @Rule(
             desc = "Dispensers containing a stick can toggle things.",
-            extra = {"Works with buttons, redstone, noteblocks, comparators, repeaters", "and daylight detectors."},
+            extra = {"Works with buttons, redstone, noteblocks, comparators, repeaters, ", "daylight detectors, etc."},
             category = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER}
     )
     public static boolean dispensersToggleThings = false;
