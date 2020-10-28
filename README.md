@@ -147,8 +147,8 @@ Dispensers with hoes can till soil.
   
 ## dispensersToggleThings
 Dispensers containing a stick can toggle things.  
-Works with buttons, redstone, noteblocks, comparators, repeaters  
-and daylight detectors.  
+Works with buttons, redstone, noteblocks, comparators, repeaters,   
+daylight detectors, etc.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
