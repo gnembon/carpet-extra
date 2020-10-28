@@ -243,6 +243,13 @@ If a living entity dies on sand with fire on top the sand will convert into soul
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
   
+## pistonRedirectsRedstone
+Pistons and sticky pistons redirect redstone  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`  
+  
 ## reloadSuffocationFix
 Won't let mobs glitch into blocks when reloaded.  
 Can cause slight differences in mobs behaviour.  
