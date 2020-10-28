@@ -2,7 +2,6 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.PistonBlock;
 import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.util.math.Direction;
@@ -21,9 +20,12 @@ public abstract class RedstoneWireBlockMixin_pistonRedirectsRedstone
     )
     private static void onConnectsTo(BlockState state, Direction dir, CallbackInfoReturnable<Boolean> cir)
     {
-        if ( CarpetExtraSettings.pistonRedirectsRedstone && state.isOf(Blocks.PISTON)) {
-            cir.setReturnValue(dir != state.get(PistonBlock.FACING).getOpposite());
-            cir.cancel();
+        if ( CarpetExtraSettings.pistonRedirectsRedstone ) {
+            if (state.getBlock() instanceof PistonBlock)
+            {
+                cir.setReturnValue(dir != state.get(PistonBlock.FACING).getOpposite());
+                cir.cancel();
+            }
         }
     }
 }

@@ -41,6 +41,9 @@ public class CarpetExtraSettings
 
     @Rule(
             desc = "Pistons and sticky pistons redirect redstone",
+            extra = {"When retracting, they will blink visually",
+                    "but that's only to minimize changes required for it to work"
+            },
             category = {EXTRA, FEATURE}
     )
     public static boolean pistonRedirectsRedstone = false;
