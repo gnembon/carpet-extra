@@ -21,7 +21,7 @@ public abstract class RedstoneWireBlockMixin_pistonRedirectsRedstone
     )
     private static void onConnectsTo(BlockState state, Direction dir, CallbackInfoReturnable<Boolean> cir)
     {
-        if (state.isOf(Blocks.PISTON) && CarpetExtraSettings.pistonRedirectsRedstone) {
+        if ( CarpetExtraSettings.pistonRedirectsRedstone && state.isOf(Blocks.PISTON)) {
             cir.setReturnValue(dir != state.get(PistonBlock.FACING).getOpposite());
             cir.cancel();
         }
