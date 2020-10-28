@@ -1,13 +1,14 @@
 # carpet-extra
-Extra Features for Carpet Mod
+Extra Features for Carpet Mod.
 
-Use along side base fabric-carpet mod for the same minecraft version.
+Use along side base [fabric-carpet](https://github.com/gnembon/fabric-carpet) mod for the same minecraft version.
 
-Due to how autoCraftingTable feature is implemented, if you are using other mods that require you to use fabric-api (carpet doesn't need it, btw), and you run carpet-extra on a server, the clients must run the same mod configuration as well. If you are only using carpet-style mods, you can connect to the servers with whatever vanilla compatible client you are using.
+Due to how autoCraftingTable feature is implemented, it has been moved to [a standalone extension](https://github.com/gnembon/carpet-autoCraftingTable).
 
-# Carpet Extra features
+# Carpet Extra Features
+
 ## accurateBlockPlacement
-Client can provide alternative block placement  
+Client can provide alternative block placement.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
@@ -15,17 +16,33 @@ Client can provide alternative block placement
   
 ## autoCraftingDropper
 Auto-crafting dropper  
-Is a dropper points to the crafting table   
-and has a valid recipe in its 3x3 it crafts it.  
-Overrides comparators so they indicate number of filled slots instead  
-Also makes hoppers, droppers and dispensers input max 1 item per slot  
+If a dropper points into a crafting table and contains a valid 3x3 crafting recipe, firing that   
+dropper will cause it to craft (drop as item) that recipe.   
+Overrides comparators so they indicate number of filled slots instead.  
+Also makes hoppers, droppers and dispensers input max 1 item per slot.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `CREATIVE`, `EXTRAS`, `DISPENSER`  
   
+## betterBonemeal
+Bonemeal can be used to grow sugarcane and cactus.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `FEATURE`, `EXTRAS`, `SURVIVAL`  
+  
+## blazeMeal
+Blaze powder fertilizes netherwart.  
+Via dispenser or player right click actions.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `SURVIVAL`  
+  
 ## blockStateSyncing
-Fixes block states in F3 debug mode not updating for some blocks. May cause increased network traffic  
+Fixes block states in F3 debug mode not updating for some blocks.  
+May cause increased network traffic.  
 Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.  
 * Type: `boolean`  
 * Default value: `false`  
@@ -34,23 +51,22 @@ Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.
   
 ## chickenShearing
 Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!  
-Baby chickens can't be sheared  
+Baby chickens can't be sheared.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`  
   
 ## clericsFarmWarts
-Clerics can warm nether farts  
-This will also make them pick up wart items  
-As well as pathfind to soulsand  
+Clerics can warm nether farts.  
+This will also allow them to pick up wart items, as well as pathfind to soulsand.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`  
   
 ## commandPing
-Enables /ping for players to get their ping  
+Enables `/ping` for players to get their ping.  
 * Type: `boolean`  
 * Default value: `true`  
 * Required options: `true`, `false`  
@@ -59,35 +75,42 @@ Enables /ping for players to get their ping
   * It has an accompanying command  
   
 ## comparatorReadsClock
-Allows Comparators to read the daytime instead of the rotation of clocks in item frames  
+Allows Comparators to read the daytime instead of the rotation of clocks in item frames.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
-
+  
 ## creeperSpawningInJungleTemples
-Only creepers spawn in jungle temples  
+Only creepers spawn in jungle temples.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`  
   
 ## disablePlayerCollision
-Disables player entity collision  
+Disables player entity collision.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `CREATIVE`, `EXPERIMENTAL`  
   
 ## dispenserPlacesBlocks
-Dispensers can place blocks  
+Dispensers can place blocks.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `CREATIVE`, `EXTRAS`, `DISPENSER`  
   
+## dispensersCarvePumpkins
+Dispensers containing shears can carve pumpkins.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
+  
 ## dispensersFeedAnimals
-Dispensers can feed animals  
+Dispensers can feed animals.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
@@ -101,58 +124,74 @@ Minecarts can be filled with hoppers, chests, tnt and furnace.
 * Categories: `EXPERIMENTAL`, `FEATURE`, `EXTRAS`, `DISPENSER`  
   
 ## dispensersMilkCows
-Dispensers with empty buckets can milk cows  
+Dispensers with empty buckets can milk cows and get stew from mooshrooms with bowls.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXPERIMENTAL`, `EXTRAS`, `FEATURE`, `DISPENSER`  
   
 ## dispensersPlayRecords
-Dispensers can play records if there's a jukebox in front of them  
-If record already exists in the jukebox, it gets placed back in the dispenser  
+Dispensers can play records if there's a jukebox in front of them.  
+If a record already exists in the jukebox, it gets placed back in the dispenser.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
 ## dispensersTillSoil
-Dispensers with hoes can till soil  
+Dispensers with hoes can till soil.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
 ## dispensersToggleThings
-Dispensers can toggle with a stick things like buttons, doors, repeaters  
+Dispensers containing a stick can toggle things.  
+Works with buttons, redstone, noteblocks, comparators, repeaters  
+and daylight detectors.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`, `DISPENSER`  
   
 ## doubleRetraction
-1.8 double retraction from pistons  
-Gives pistons the ability to double retract without side effects  
+Re-adds 1.8 double retraction to pistons.  
+Gives pistons the ability to double retract without side effects.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
   
 ## dragonEggBedrockBreaking
-Reintroduce Dragon Egg Bedrock breaking bug from 1.12  
+Reintroduce the Dragon Egg Bedrock breaking bug from 1.12.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
-
+  
 ## dragonsBreathConvertsCobbleToEndstone
-Dragon's breath from dispensers convert cobblestone to end stone  
+Dragon's breath from dispensers convert cobblestone to end stone.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `DISPENSER`  
   
+## emptyShulkerBoxStackAlways
+Empty Shulker Boxes will always stack, even inside inventories.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
+  
+## enderPearlChunkLoading
+Allow horizontally moving Ender Pearls to load chunks as entity ticking.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `FEATURE`, `EXTRAS`  
+  
 ## fireChargeConvertsToNetherrack
-Fire charges from dispensers convert cobblestone to netherrack  
+Fire charges from dispensers convert cobblestone to netherrack.  
 Credits: Skyrising  
 * Type: `boolean`  
 * Default value: `false`  
@@ -160,8 +199,10 @@ Credits: Skyrising
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
   
 ## flowerPotChunkLoading
-Place a wither rose in a flowerpot to load that chunk  
-If u enable the rule the already existing chunks with flowerpots won't be loaded. Also disabling the carpet rule won't remove the loaded chunks, u need to manually unload them using the /forceload command. All the loaded chunks can be seen using `/forceload query`  
+Placing a wither rose in a flowerpot will load that chunk.  
+If u enable the rule the already existing chunks with flowerpots won't be loaded.   
+Also disabling the carpet rule won't remove the loaded chunks, u need to manually unload them using the /forceload command.   
+All the loaded chunks can be seen using `/forceload query`  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
@@ -175,14 +216,28 @@ Makes Hopper Minecarts have an 8gt cooldown like hoppers.
 * Categories: `BUGFIX`, `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
   
 ## hopperMinecartItemTransfer
-Allows Hopper Minecarts to transfer items out.  
+Allows Hopper Minecarts to transfer items into containers below them.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `BUGFIX`, `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
   
+## maxSpongeRange
+Maximum offset limit for sponge.  
+* Type: `int`  
+* Default value: `7`  
+* Suggested options: `7`  
+* Categories: `FEATURE`, `EXTRAS`  
+  
+## maxSpongeSuck
+Maximum water sucking for sponge.  
+* Type: `int`  
+* Default value: `64`  
+* Suggested options: `64`  
+* Categories: `FEATURE`, `EXTRAS`  
+  
 ## mobInFireConvertsSandToSoulsand
-If a living entity dies on sand with fire on top the sand will convert into soul sand  
+If a living entity dies on sand with fire on top the sand will convert into soul sand.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
@@ -190,14 +245,15 @@ If a living entity dies on sand with fire on top the sand will convert into soul
   
 ## reloadSuffocationFix
 Won't let mobs glitch into blocks when reloaded.  
-Can cause slight differences in mobs behaviour. Fixes MC-2025  
+Can cause slight differences in mobs behaviour.  
+Fixes [MC-2025](https://bugs.mojang.com/browse/MC-2025).  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `BUGFIX`, `EXPERIMENTAL`  
   
 ## renewableLava
-Obsidian surrounded by 6 lava sources has a chance of converting to lava  
+Obsidian surrounded by 6 lava sources has a chance of converting to lava.  
 Credits: Skyrising  
 * Type: `boolean`  
 * Default value: `false`  
@@ -205,72 +261,82 @@ Credits: Skyrising
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
   
 ## renewablePackedIce
-Multiple ice crushed by falling anvils make packed ice  
+Multiple ice crushed by falling anvils make packed ice.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
   
 ## renewableSand
-Cobblestone crushed by falling anvils makes sand  
+Cobblestone crushed by falling anvils makes sand.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
-
+  
 ## renewableWitherSkeletons
-Skeletons turn into wither skeletons when struck by lightning  
+Skeletons turn into wither skeletons when struck by lightning.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`  
   
 ## repeaterPriorityFix
-Quick pulses won't get lost in repeater setups  
-Probably brings back pre 1.8 behaviour. Fixes MC-54711  
+Quick pulses won't get lost in repeater setups.  
+Probably brings back pre 1.8 behaviour.  
+Fixes [MC-54711](https://bugs.mojang.com/browse/MC-54711).  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `BUGFIX`, `EXPERIMENTAL`  
   
 ## scaffoldingDistance
-Max distance for scaffolding  
+Max distance for scaffolding.  
 * Type: `int`  
 * Default value: `7`  
 * Suggested options: `2`, `3`, `5`, `7`  
 * Categories: `FEATURE`, `EXTRAS`  
 * Additional notes:  
   * You must choose a value from 0 to 7  
-
+  
 ## spiderJockeysDropGapples
-Gives Spider jockeys a specified chance to drop enchanted golden apples  
-0 is default, i.e no enchanted golden apples will be dropped  
+Gives Spider jockeys a specified chance to drop enchanted golden apples.  
+0 is the default setting, no enchanted golden apples will be dropped  
 * Type: `int`  
 * Default value: `0`  
-* Suggested options: `0`, `50`, `100`  
+* Required options: `0`, `50`, `100`  
 * Categories: `EXTRAS`, `FEATURE`  
 * Additional notes:  
   * You must choose a value from 0 to 100  
   
-## spongesDryInTheNether
-Wet sponges dry in the nether dimension  
-* Type: `boolean`  
-* Default value: `false`  
-* Required options: `true`, `false`  
-* Categories: `EXTRAS`, `FEATURE`  
-
 ## straySpawningInIgloos
-Only strays spawn in igloos 
-* Type: `boolean`   
+Only strays spawn in igloos.  
+* Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`  
   
+## updateSuppressionCrashFix
+Fixes updates suppression causing server crashes.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `BUGFIX`, `EXTRAS`  
+  
 ## variableWoodDelays
-variable delays on wooden components  
-buttons, pressure plates  
+Variable delays on wooden components (buttons, pressure plates).  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`  
- 
+  
+## y0DragonEggBedrockBreaking
+Let dragon eggs break Y0 bedrock.  
+Requires dragonEggBedrockBreaking to be set to true.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXPERIMENTAL`, `EXTRAS`  
+  
+
+

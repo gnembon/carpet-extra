@@ -47,7 +47,7 @@ public abstract class DispenserBehaviorBucketCowsMixin extends ItemDispenserBeha
                 {
                     if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(Items.MILK_BUCKET)) < 0)
                     {
-                        this.dispense(pointer, new ItemStack(Items.MILK_BUCKET));
+                        super.dispenseSilently(pointer, new ItemStack(Items.MILK_BUCKET));
                     }
                     cir.setReturnValue(stack);
                 }

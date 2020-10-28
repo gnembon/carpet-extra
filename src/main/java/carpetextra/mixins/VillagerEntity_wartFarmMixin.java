@@ -3,9 +3,8 @@ package carpetextra.mixins;
 import carpetextra.CarpetExtraSettings;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.AbstractTraderEntity;
+import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.village.VillagerData;
@@ -18,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(VillagerEntity.class)
-public abstract class VillagerEntity_wartFarmMixin extends AbstractTraderEntity
+public abstract class VillagerEntity_wartFarmMixin extends MerchantEntity
 {
-    public VillagerEntity_wartFarmMixin(EntityType<? extends AbstractTraderEntity> entityType, World world)
+    public VillagerEntity_wartFarmMixin(EntityType<? extends MerchantEntity> entityType, World world)
     {
         super(entityType, world);
     }

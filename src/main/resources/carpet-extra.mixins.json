@@ -16,6 +16,8 @@
     "AbstractPressurePlateBlock_variableWoodMixin",
     "AbstractButtonBlock_variableWoodMixin",
     "ItemFrameEntity_comparatorReadsClockMixin",
+    "ItemStackMixin",
+    "ThrownEntityMixin",
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",
     "HopperMinecartEntity_transferItemsOutFeatureMixin",
@@ -23,12 +25,22 @@
     "DropperBlock_craftingMixin",
     "DispenserBlockEntity_craftingMixin",
 
+    "DispenserBehaviorCarpetsMixin",
+    "DispenserBehaviorChestMixin",
+    "DispenserBehaviorFireChargeMixin",
+    "DispenserBehaviorGlowstoneMixin",
+    "DispenserBehaviorShearsMixin",
+    "DispenserBehaviorCarvedPumpkinMixin",
+    "DispenserBehaviorMobHeadMixin",
+
     "VillagerEntity_wartFarmMixin",
     "FarmerVillagerTask_wartFarmMixin",
     "VillagerTaskListProvider_wartFarmMixin",
     "VillagerProfession_wartFarmMixin",
     "SecondaryPointOfInterestSensor_wartFarmMixin",
     "NoteBlockMixin",
+    "RedstoneWireBlockMixin",
+    "NetherWartBlock_fertilizerMixin",
 
     "PlayerEntityMixin",
     "PistonBlockMixin",
@@ -40,7 +52,6 @@
     "BlocksMixin",
     "ChunkGeneratorMixin",
     "FallingBlockMixin",
-    "DispenserBehaviorFireChargeMixin",
     "ChickenEntityMixin",
     "LivingEntityMixin",
     "FlowerPotBlockMixin",
@@ -54,7 +65,12 @@
     "SkeletonEntityMixin",
     "SpiderEntityMixin",
     "ScaffoldingBlock_scaffoldingDistanceMixin",
-    "ScaffoldingItem_scaffoldingDistanceMixin"
+    "ScaffoldingItem_scaffoldingDistanceMixin",
+    "SugarCaneBlock_fertilizerMixin",
+    "CactusBlock_fertilizerMixin",
+
+    "MinecraftServer_updateSuppressionCrashFixMixin",
+    "World_updateSuppressionCrashFixMixin"
   ],
   "client": [
   ],
