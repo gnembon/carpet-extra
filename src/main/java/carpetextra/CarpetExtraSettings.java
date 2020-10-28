@@ -40,6 +40,12 @@ public class CarpetExtraSettings
     public static int scaffoldingDistance = 7;
 
     @Rule(
+            desc = "Pistons and sticky pistons redirect redstone",
+            category = {EXTRA, FEATURE}
+    )
+    public static boolean pistonRedirectsRedstone = false;
+
+    @Rule(
             desc = "Fixes updates suppression causing server crashes.",
             category = {BUGFIX, EXTRA}
     )
