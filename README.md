@@ -245,6 +245,8 @@ If a living entity dies on sand with fire on top the sand will convert into soul
   
 ## pistonRedirectsRedstone
 Pistons and sticky pistons redirect redstone  
+When retracting, they will blink visually  
+but that's only to minimize changes required for it to work  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
