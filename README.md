@@ -157,6 +157,7 @@ daylight detectors, etc.
 ## doubleRetraction
 Re-adds 1.8 double retraction to pistons.  
 Gives pistons the ability to double retract without side effects.  
+Fixes [MC-88959](https://bugs.mojang.com/browse/MC-88959).  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
