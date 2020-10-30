@@ -160,7 +160,8 @@ public class CarpetExtraSettings
     @Rule(
             desc = "Re-adds 1.8 double retraction to pistons.",
             category = {EXTRA, EXPERIMENTAL},
-            extra = { "Gives pistons the ability to double retract without side effects." }
+            extra = { "Gives pistons the ability to double retract without side effects.",
+                      "Fixes [MC-88959](https://bugs.mojang.com/browse/MC-88959)." }
     )
     public static boolean doubleRetraction = false;
     
