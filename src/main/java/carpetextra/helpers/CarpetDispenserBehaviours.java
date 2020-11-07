@@ -102,7 +102,7 @@ public class CarpetDispenserBehaviours
                 else
                 {
                     MinecartEntity minecart = list.get(0);
-                    minecart.remove();
+                    minecart.discard();
                     AbstractMinecartEntity minecartEntity = AbstractMinecartEntity.create(minecart.world, minecart.getX(), minecart.getY(), minecart.getZ(), this.minecartType);
                     minecartEntity.setVelocity(minecart.getVelocity());
                     minecartEntity.pitch = minecart.pitch;
@@ -254,7 +254,7 @@ public class CarpetDispenserBehaviours
     
         private boolean canDirectlyTurnToFarmland(BlockState state)
         {
-            return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.GRASS_PATH;
+            return state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.DIRT_PATH;
         }
         
         private boolean isFarmland(BlockState state)

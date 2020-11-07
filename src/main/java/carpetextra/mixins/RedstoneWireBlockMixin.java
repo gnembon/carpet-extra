@@ -13,14 +13,14 @@ public abstract class RedstoneWireBlockMixin
     @Redirect(
             method = "onUse",
             at = @At(
-                    value = "FIELD",
-                    target = "Lnet/minecraft/entity/player/PlayerEntity;abilities:Lnet/minecraft/entity/player/PlayerAbilities;"
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/player/PlayerEntity;getAbilities()Lnet/minecraft/entity/player/PlayerAbilities;"
             )
     )
     private PlayerAbilities hasPlayerAbilities(final PlayerEntity player)
     {
         // player will never be null in VANILLA
         if (player == null) return new PlayerAbilities();
-        return player.abilities;
+        return player.getAbilities();
     }
 }

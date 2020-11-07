@@ -11,6 +11,7 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -19,6 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(FallingBlockEntity.class)
 public abstract class FallingBlockEntityMixin extends Entity
 {
+    @Shadow public abstract BlockState getBlockState();
+
     private int iceCount = 0;
     
     public FallingBlockEntityMixin(EntityType<?> entityType_1, World world_1)
@@ -40,7 +43,7 @@ public abstract class FallingBlockEntityMixin extends Entity
     )
     private void onTick(CallbackInfo ci, Block block_1, BlockPos blockPos_2, boolean b1, boolean bl2, BlockState blockState_1)
     {
-        if (block_1.isIn(BlockTags.ANVIL))
+        if (getBlockState().isIn(BlockTags.ANVIL))
         {
             if (CarpetExtraSettings.renewablePackedIce && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock() == Blocks.ICE)
             {

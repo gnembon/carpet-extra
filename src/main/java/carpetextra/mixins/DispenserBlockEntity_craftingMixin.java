@@ -10,6 +10,7 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -18,10 +19,10 @@ public abstract class DispenserBlockEntity_craftingMixin extends LootableContain
 {
     @Shadow private DefaultedList<ItemStack> inventory;
 
-    protected DispenserBlockEntity_craftingMixin(BlockEntityType<?> blockEntityType_1)
-    {
-        super(blockEntityType_1);
+    protected DispenserBlockEntity_craftingMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
+        super(blockEntityType, blockPos, blockState);
     }
+
 
     @Override
     public DefaultedList<ItemStack> getInventory()

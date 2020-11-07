@@ -137,7 +137,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
                 blockEntityTag.putInt("x", pos.getX());
                 blockEntityTag.putInt("y", pos.getY());
                 blockEntityTag.putInt("z", pos.getZ());
-                be.fromTag(state, blockEntityTag);
+                be.fromTag(blockEntityTag);
             }
             if (currentFluidState.isStill() && block instanceof FluidFillable) {
                 ((FluidFillable) block).tryFillWithFluid(world, pos, state, currentFluidState);

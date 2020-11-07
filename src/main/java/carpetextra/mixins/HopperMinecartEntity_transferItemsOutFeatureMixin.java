@@ -87,7 +87,7 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
         Vec3d offsetToInventory = getBlockBelowCartOffset();
         //The visual rotation point of the minecart is roughly 0.5 above its feet (determined visually ingame)
         //Search 0.5 Blocks below the feet for an inventory
-        Inventory inv =  HopperBlockEntity.getInventoryAt(this.world, this.getX() + offsetToInventory.x, this.getY() + 0.5 + offsetToInventory.y, this.getZ() + offsetToInventory.z);
+        Inventory inv =  HopperBlockEntity.getInventoryAt(this.world, new BlockPos(this.getX() + offsetToInventory.x, this.getY() + 0.5 + offsetToInventory.y, this.getZ() + offsetToInventory.z));
 
         //There is probably a way nicer way to determine the access side of the target inventory
         if(inv instanceof BlockEntity){
