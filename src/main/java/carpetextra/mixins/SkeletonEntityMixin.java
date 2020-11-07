@@ -1,6 +1,7 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -38,6 +39,15 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
             }
             
             this.world.spawnEntity(witherSkelly);
+
+            if (getVehicle() != null)
+            {
+                Entity mount = getVehicle();
+                this.stopRiding();
+                witherSkelly.extinguish();
+                mount.extinguish();
+                witherSkelly.startRiding(mount, true);
+            }
             this.remove();
         }
         else
