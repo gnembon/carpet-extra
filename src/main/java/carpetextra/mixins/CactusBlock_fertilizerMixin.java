@@ -21,7 +21,7 @@ public abstract class CactusBlock_fertilizerMixin implements Fertilizable
     {
         int i = this.countCactusAbove(world, pos);
         int j = this.countCactusBelow(world, pos);
-        return CarpetExtraSettings.betterBonemeal && i + j < 2;
+        return CarpetExtraSettings.betterBonemeal && i + j < 2 && world.getBlockState(pos.up(i + 1)).isAir();
     }
     
     @Override
@@ -34,7 +34,9 @@ public abstract class CactusBlock_fertilizerMixin implements Fertilizable
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
     {
         int i = this.countCactusAbove(world, pos);
-        world.setBlockState(pos.up(i + 1), Blocks.CACTUS.getDefaultState());
+        BlockPos growPos = pos.up(i + 1);
+        world.setBlockState(growPos, Blocks.CACTUS.getDefaultState());
+        state.scheduledTick(world, growPos, random);
     }
     
     private int countCactusAbove(BlockView world, BlockPos pos)
