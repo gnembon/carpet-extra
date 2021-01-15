@@ -54,7 +54,7 @@
 
   "rule.dispensersPlayRecords.name": "发射器播放唱片",
   "rule.dispensersPlayRecords.desc": "发射器可以使用其前方的唱片机播放唱片",
-  "rule.dispensersPlayRecords.extra.0": "如果唱片机中已存在唱片，已存在的唱片将会被放回投掷器中",
+  "rule.dispensersPlayRecords.extra.0": "如果唱片机中已存在唱片，已存在的唱片将会被放回发射器中",
 
   "rule.accurateBlockPlacement.name": "准确方块放置支持",
   "rule.accurateBlockPlacement.desc": "启用对tweakroo mod的tweakAccurateBlockPlacement选项的支持",
@@ -159,8 +159,8 @@
   "rule.dispensersCarvePumpkins.name": "发射器雕刻南瓜",
   "rule.dispensersCarvePumpkins.desc": "含有剪刀的发射器可以雕刻南瓜",
 
-  "rule.blazeMeal.name": "烈焰棒肥料",
-  "rule.blazeMeal.desc": "烈焰棒可以催熟下界疣",
+  "rule.blazeMeal.name": "烈焰粉肥料",
+  "rule.blazeMeal.desc": "烈焰粉可以催熟下界疣",
   "rule.blazeMeal.extra.0": "可通过发射器或玩家右键动作来催熟",
 
   "rule.disablePhantomSpawning.name": "禁止幻翼生成",
