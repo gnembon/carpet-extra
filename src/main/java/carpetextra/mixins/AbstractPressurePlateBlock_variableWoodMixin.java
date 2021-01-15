@@ -4,6 +4,7 @@ import carpetextra.CarpetExtraSettings;
 import carpetextra.utils.WoodDelayMultipliers;
 import net.minecraft.block.AbstractPressurePlateBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
@@ -23,7 +24,7 @@ public abstract class AbstractPressurePlateBlock_variableWoodMixin
             target ="Lnet/minecraft/block/AbstractPressurePlateBlock;getTickRate()I"
     ))
     private int getCustomTickRate(AbstractPressurePlateBlock abstractPressurePlateBlock,
-                                  World world_1, BlockPos blockPos_1, BlockState blockState_1, int int_1)
+                                  Entity entity, World world_1, BlockPos blockPos_1, BlockState blockState_1, int int_1)
     {
         if (!CarpetExtraSettings.variableWoodDelays)
         {

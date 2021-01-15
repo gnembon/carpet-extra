@@ -21,7 +21,7 @@ public abstract class ThrownEntityMixin extends Entity
     }
 
     @Inject(method = "tick", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/entity/projectile/thrown/ThrownEntity;updatePosition(DDD)V"))
+            target = "Lnet/minecraft/entity/projectile/thrown/ThrownEntity;setPosition(DDD)V"))
     private void chunkLoadNextChunk(CallbackInfo ci)
     {
         if (CarpetExtraSettings.enderPearlChunkLoading &&
