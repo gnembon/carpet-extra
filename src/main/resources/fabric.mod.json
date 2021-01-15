@@ -31,5 +31,8 @@
   },
   "suggests": {
     "flamingo": "*"
+  },
+  "custom": {
+    "modmenu:parent": "carpet"
   }
 }
