@@ -2,12 +2,14 @@ package carpetextra.utils;
 
 import carpetextra.CarpetExtraServer;
 import carpet.CarpetServer;
-import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
+import carpet.utils.CarpetRulePrinter;
+import net.fabricmc.api.DedicatedServerModInitializer;
 import java.lang.System;
 
-public class RulePrinter implements PreLaunchEntrypoint {
+public class RulePrinter implements DedicatedServerModInitializer {
     @Override
-    public void onPreLaunch() {
+    public void onInitializeServer() {
+        System.setOut(CarpetRulePrinter.OLD_OUT);
         CarpetExtraServer.noop();
         CarpetServer.onGameStarted();
         CarpetServer.settingsManager.printAllRulesToLog("extras");
