@@ -118,8 +118,12 @@ public class CarpetExtraSettings
     )
     public static boolean clericsFarmWarts = false;
     
-    @Rule(desc = "Multiple ice crushed by falling anvils make packed ice.", category = {EXTRA, EXPERIMENTAL, FEATURE})
-    public static boolean renewablePackedIce = false;
+    @Rule(
+            desc = "Multiple ice crushed by falling anvils make denser ice.",
+            extra = "frosted turns into normal, normal into packed and packed into blue",
+            category = {EXTRA, EXPERIMENTAL, FEATURE}
+    )
+    public static boolean renewableIce = false;
     
     @Rule(
             desc = "Dispensers can play records if there's a jukebox in front of them.",
