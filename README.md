@@ -262,16 +262,17 @@ Fixes [MC-2025](https://bugs.mojang.com/browse/MC-2025).
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `BUGFIX`, `EXPERIMENTAL`  
   
-## renewableLava
-Obsidian surrounded by 6 lava sources has a chance of converting to lava.  
-Credits: Skyrising  
+## renewableIce
+Multiple ice crushed by falling anvils make denser ice.  
+frosted turns into normal, normal into packed and packed into blue  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
   
-## renewablePackedIce
-Multiple ice crushed by falling anvils make packed ice.  
+## renewableLava
+Obsidian surrounded by 6 lava sources has a chance of converting to lava.  
+Credits: Skyrising  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
