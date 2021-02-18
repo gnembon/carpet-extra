@@ -347,7 +347,15 @@ Requires dragonEggBedrockBreaking to be set to true.
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
-* Categories: `EXPERIMENTAL`, `EXTRAS`  
+* Categories: `EXPERIMENTAL`, `EXTRAS`
+
+## lightningKillsDrops
+Bugfix for [MC-206922](https://bugs.mojang.com/browse/MC-206922)
+Setting to false will prevent lightning from killing drops
+* Type: `boolean`
+* Default value: `true`  
+* Required options: `true`, `false`  
+* Categories: `BUGFIX`, `EXTRAS` 
   
 
 
