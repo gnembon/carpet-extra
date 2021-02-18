@@ -324,6 +324,13 @@ public class CarpetExtraSettings
     )
     public static boolean blazeMeal = false;
 
+    @Rule(
+            desc = "Lightning kills the items that drop when lightning kills an entity",
+            extra = {"Setting to false will prevent lightning from killing drops", "Fixes (https://bugs.mojang.com/browse/MC-195640)."},
+            category = {BUGFIX, EXTRA}
+    )
+    public static boolean lightningKillsDrops = true;
+
     // Implemented in 1.15 - doInsomnia
     /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
     public static boolean disablePhantomSpawning = false;*/
