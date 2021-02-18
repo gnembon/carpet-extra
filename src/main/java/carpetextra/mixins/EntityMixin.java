@@ -33,7 +33,7 @@ public abstract class EntityMixin
     @Shadow protected abstract void refreshPosition();
 
     @Inject(
-            method = "toTag",
+            method = "writeNbt",
             at = @At(value = "INVOKE", shift = At.Shift.BEFORE, ordinal = 0,
                     target = "Lnet/minecraft/nbt/CompoundTag;put(Ljava/lang/String;Lnet/minecraft/nbt/Tag;)Lnet/minecraft/nbt/Tag;")
     )
@@ -46,16 +46,16 @@ public abstract class EntityMixin
         }
     }
     
-    @Redirect(method = "fromTag", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;shouldSetPositionOnLoad()Z"))
+    @Redirect(method = "readNbt", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;shouldSetPositionOnLoad()Z"))
     private boolean cancelShouldSetPositionOnLoad(Entity entity)
     {
         return false;
     }
     
     @Inject(
-            method = "fromTag",
+            method = "readNbt",
             at = @At(value = "INVOKE", shift = At.Shift.AFTER,
-                    target = "Lnet/minecraft/entity/Entity;readCustomDataFromTag(Lnet/minecraft/nbt/CompoundTag;)V")
+                    target = "Lnet/minecraft/entity/Entity;readCustomDataFromNbt(Lnet/minecraft/nbt/CompoundTag;)V")
     )
     private void onFromTag(CompoundTag compoundTag_1, CallbackInfo ci)
     {
