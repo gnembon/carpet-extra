@@ -22,11 +22,11 @@ public abstract class EntityMixin
     
     @Shadow protected abstract boolean shouldSetPositionOnLoad();
     
-    @Shadow public double x;
+    @Shadow public abstract double getX();
     
-    @Shadow public double y;
+    @Shadow public abstract double getY();
     
-    @Shadow public double z;
+    @Shadow public abstract double getZ();
     
     @Shadow public abstract void setBoundingBox(Box box_1);
 
@@ -42,7 +42,7 @@ public abstract class EntityMixin
         if (CarpetExtraSettings.reloadSuffocationFix)
         {
             Box box = this.getBoundingBox();
-            compoundTag_1.put("CM_Box", this.toListTag(box.x1, box.y1, box.z1, box.x2, box.y2, box.z2));
+            compoundTag_1.put("CM_Box", this.toListTag(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ));
         }
     }
     
@@ -72,9 +72,9 @@ public abstract class EntityMixin
                     box_tag.getDouble(2), box_tag.getDouble(3),
                     box_tag.getDouble(4), box_tag.getDouble(5));
     
-            double deltaX = ((box.x1 + box.x2) / 2.0D) - this.x;
-            double deltaY = box.y1 - this.y;
-            double deltaZ = ((box.z1 + box.z2) / 2.0D) - this.z;
+            double deltaX = ((box.minX + box.maxX) / 2.0D) - this.getX();
+            double deltaY = box.minY - this.getY();
+            double deltaZ = ((box.minZ + box.maxZ) / 2.0D) - this.getZ();
             
             // Credits: MrGrim (MUP) -> Sanity check.
             // If the position and BoundingBox center point are > 0.1 blocks apart then do not restore the BoundingBox. In vanilla

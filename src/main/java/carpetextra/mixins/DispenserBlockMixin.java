@@ -39,9 +39,6 @@ public abstract class DispenserBlockMixin
         
         if (CarpetExtraSettings.dispensersFillMinecarts)
         {
-            if (item == Items.CHEST)
-                cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.CHEST));
-
             if (item == Items.HOPPER)
                 cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.HOPPER));
 
@@ -61,10 +58,16 @@ public abstract class DispenserBlockMixin
         if (CarpetExtraSettings.dispensersTillSoil && item instanceof HoeItem)
             cir.setReturnValue(new TillSoilDispenserBehaviour());
 
-        if (CarpetExtraSettings.dispensersFeedAnimals &&  FeedableItems.ITEMS.contains(item.asItem()))
+        if (CarpetExtraSettings.dispensersFeedAnimals && FeedableItems.ITEMS.contains(item.asItem()))
             cir.setReturnValue(new FeedAnimalDispenserBehaviour());
         
         if (CarpetExtraSettings.dragonsBreathConvertsCobbleToEndstone && item == Items.DRAGON_BREATH)
             cir.setReturnValue(new DragonsBreathDispenserBehaviour());
+        
+        if (CarpetExtraSettings.dispensersMilkCows && item == Items.BOWL)
+            cir.setReturnValue(new MushroomStewBehavior());
+        
+        if (CarpetExtraSettings.blazeMeal && item == Items.BLAZE_POWDER)
+            cir.setReturnValue(new BlazePowderBehavior());
     }
 }

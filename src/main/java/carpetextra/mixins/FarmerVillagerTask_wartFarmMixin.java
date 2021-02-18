@@ -11,7 +11,7 @@ import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.FarmerVillagerTask;
 import net.minecraft.entity.ai.brain.task.Task;
 import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.inventory.BasicInventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -33,8 +33,7 @@ import java.util.Map;
 @Mixin(FarmerVillagerTask.class)
 public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEntity>
 {
-    @Shadow private boolean ableToPickUpSeed;
-    @Shadow private boolean ableToPlant;
+    //@Shadow private boolean ableToPlant;
     @Shadow /*@Nullable*/ private BlockPos currentTarget;
     private boolean isFarmingCleric;
 
@@ -59,19 +58,6 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
         return profession;
     }
 
-    @Redirect(method = "shouldRun", at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;",
-            ordinal = 0
-    ))
-    private Item disguiseWartAsSeeds(ItemStack itemStack, ServerWorld serverWorld, VillagerEntity villagerEntity)
-    {
-        Item item = itemStack.getItem();
-        if (isFarmingCleric && item == Items.NETHER_WART)
-            return Items.WHEAT_SEEDS;
-        return item;
-    }
-
     @Inject(method = "isSuitableTarget", at = @At("HEAD"), cancellable = true)
     private void isValidSoulSand(BlockPos blockPos, ServerWorld serverWorld, CallbackInfoReturnable<Boolean> cir)
     {
@@ -81,8 +67,8 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
             Block block = blockState.getBlock();
             Block block2 = serverWorld.getBlockState(blockPos.down()).getBlock(); // down()
             cir.setReturnValue(
-                    block == Blocks.NETHER_WART && blockState.get(NetherWartBlock.AGE)== 3 && ableToPickUpSeed ||
-                            blockState.isAir() && block2 == Blocks.SOUL_SAND && ableToPlant);
+                    block == Blocks.NETHER_WART && blockState.get(NetherWartBlock.AGE)== 3 ||
+                            blockState.isAir() && block2 == Blocks.SOUL_SAND);
 
         }
     }
@@ -119,15 +105,15 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
 
     @Redirect(method = "keepRunning", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/inventory/BasicInventory;getInvSize()I"
+            target = "Lnet/minecraft/inventory/SimpleInventory;size()I"
     ))
-    private int plantWart(BasicInventory basicInventory, ServerWorld serverWorld, VillagerEntity villagerEntity, long l)
+    private int plantWart(SimpleInventory basicInventory, ServerWorld serverWorld, VillagerEntity villagerEntity, long l)
     {
         if (isFarmingCleric) // fill cancel that for loop by setting length to 0
         {
-            for(int i = 0; i < basicInventory.getInvSize(); ++i)
+            for(int i = 0; i < basicInventory.size(); ++i)
             {
-                ItemStack itemStack = basicInventory.getInvStack(i);
+                ItemStack itemStack = basicInventory.getStack(i);
                 boolean bl = false;
                 if (!itemStack.isEmpty())
                 {
@@ -146,7 +132,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
                     itemStack.decrement(1);
                     if (itemStack.isEmpty())
                     {
-                        basicInventory.setInvStack(i, ItemStack.EMPTY);
+                        basicInventory.setStack(i, ItemStack.EMPTY);
                     }
                     break;
                 }
@@ -154,7 +140,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
             return 0;
 
         }
-        return basicInventory.getInvSize();
+        return basicInventory.size();
     }
 
 

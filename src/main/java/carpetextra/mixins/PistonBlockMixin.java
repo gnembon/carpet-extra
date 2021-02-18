@@ -16,7 +16,7 @@ public abstract class PistonBlockMixin
     @Inject(
             method = "tryMove",
             at = @At(value = "INVOKE", shift = At.Shift.BEFORE, ordinal = 1,
-                    target = "Lnet/minecraft/world/World;addBlockAction(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;II)V")
+                    target = "Lnet/minecraft/world/World;addSyncedBlockEvent(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;II)V")
     )
     private void onTryMove(World world, BlockPos pos, BlockState state, CallbackInfo ci)
     {

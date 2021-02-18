@@ -17,7 +17,8 @@ public abstract class ComparatorBlockMixin {
         )
     )
     private PlayerAbilities hasPlayerAbilities(final PlayerEntity player) {
-        if(player == null) return new PlayerAbilities();
+        // player will never be null in VANILLA
+        if (player == null) return new PlayerAbilities();
         return player.abilities;
     }
 }

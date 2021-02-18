@@ -12,11 +12,12 @@ public abstract class DaylightDetectorBlockMixin {
         method = "onUse",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/player/PlayerEntity;canModifyWorld()Z"
+            target = "Lnet/minecraft/entity/player/PlayerEntity;canModifyBlocks()Z"
         )
     )
     private boolean hasModifyWorld(final PlayerEntity player) {
-        if(player == null) return true;
+        // player will never be null in VANILLA
+        if (player == null) return true;
         return player.abilities.allowModifyWorld;
     }
 }

@@ -47,7 +47,7 @@ public abstract class ItemFrameEntity_comparatorReadsClockMixin extends Abstract
             if(this.world.getTimeOfDay() % 1500 == 0 || firstTick) {
                 firstTick = false;
                 if(this.attachmentPos != null) {
-                    this.world.updateHorizontalAdjacent(this.attachmentPos, Blocks.AIR);
+                    this.world.updateComparators(this.attachmentPos, Blocks.AIR);
                 }
             }
         }

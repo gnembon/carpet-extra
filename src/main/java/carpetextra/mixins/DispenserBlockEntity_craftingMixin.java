@@ -9,7 +9,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.util.collection.DefaultedList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -30,7 +30,7 @@ public abstract class DispenserBlockEntity_craftingMixin extends LootableContain
     }
 
     @Override
-    public boolean isValidInvStack(int int_1, ItemStack itemStack_1)
+    public boolean isValid(int int_1, ItemStack itemStack_1)
     {
 
         if (CarpetExtraSettings.autoCraftingDropper && world != null)
@@ -44,6 +44,6 @@ public abstract class DispenserBlockEntity_craftingMixin extends LootableContain
                 }
             }
         }
-        return super.isValidInvStack(int_1, itemStack_1);
+        return super.isValid(int_1, itemStack_1);
     }
 }

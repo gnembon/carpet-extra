@@ -8,24 +8,27 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(AbstractPressurePlateBlock.class)
-public class AbstractPressurePlateBlock_variableWoodMixin
+public abstract class AbstractPressurePlateBlock_variableWoodMixin
 {
+
+    @Shadow protected abstract int getTickRate();
 
     @Redirect(method = "updatePlateState", at = @At(
             value = "INVOKE",
-            target ="Lnet/minecraft/block/AbstractPressurePlateBlock;getTickRate(Lnet/minecraft/world/WorldView;)I"
+            target ="Lnet/minecraft/block/AbstractPressurePlateBlock;getTickRate()I"
     ))
-    private int getCustomTickRate(AbstractPressurePlateBlock abstractPressurePlateBlock, WorldView viewableWorld_1,
+    private int getCustomTickRate(AbstractPressurePlateBlock abstractPressurePlateBlock,
                                   World world_1, BlockPos blockPos_1, BlockState blockState_1, int int_1)
     {
         if (!CarpetExtraSettings.variableWoodDelays)
         {
-            return abstractPressurePlateBlock.getTickRate(viewableWorld_1);
+            return getTickRate();
         }
-        return WoodDelayMultipliers.getForDelay(blockState_1.getBlock(), abstractPressurePlateBlock.getTickRate(viewableWorld_1));
+        return WoodDelayMultipliers.getForDelay(blockState_1.getBlock(), getTickRate());
     }
 }

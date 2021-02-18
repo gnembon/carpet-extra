@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.2.6-SNAPSHOT'
+	id 'fabric-loom' version '0.5-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -38,7 +38,7 @@ processResources {
 
 	from(sourceSets.main.resources.srcDirs) {
 		include "fabric.mod.json"
-		expand "version": project.version
+		expand "version": project.mod_version
 	}
 
 	from(sourceSets.main.resources.srcDirs) {

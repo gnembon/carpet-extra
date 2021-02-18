@@ -8,17 +8,24 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.JukeboxBlock;
+import net.minecraft.block.NetherWartBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.block.entity.JukeboxBlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -57,7 +64,7 @@ public class CarpetDispenserBehaviours
                 {
                     ItemStack itemStack = jukebox.getRecord();
                     ((JukeboxBlock) state.getBlock()).setRecord(world, pos, state, stack);
-                    world.playLevelEvent(null, 1010, pos, Item.getRawId(stack.getItem()));
+                    world.syncWorldEvent(1010, pos, Item.getRawId(stack.getItem()));
                     
                     return itemStack;
                 }
@@ -77,7 +84,7 @@ public class CarpetDispenserBehaviours
         }
     
         @Override
-        protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
+        public ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
         {
             if (!CarpetExtraSettings.dispensersFillMinecarts)
             {
@@ -86,7 +93,7 @@ public class CarpetDispenserBehaviours
             else
             {
                 BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
-                List<MinecartEntity> list = source.getWorld().<MinecartEntity>getEntities(MinecartEntity.class, new Box(pos), null);
+                List<MinecartEntity> list = source.getWorld().getEntitiesByClass(MinecartEntity.class, new Box(pos), EntityPredicates.VALID_ENTITY);
     
                 if (list.isEmpty())
                 {
@@ -122,6 +129,8 @@ public class CarpetDispenserBehaviours
             }
             else
             {
+                if (stack.getItem() instanceof BlockItem && PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock()))
+                    return PlaceBlockDispenserBehavior.getInstance().dispenseSilently(source, stack);
                 return super.dispenseSilently(source, stack);
             }
         }
@@ -129,7 +138,7 @@ public class CarpetDispenserBehaviours
         @Override
         protected void playSound(BlockPointer source)
         {
-            source.getWorld().playLevelEvent(1000, source.getBlockPos(), 0);
+            source.getWorld().syncWorldEvent(1000, source.getBlockPos(), 0);
         }
     }
   
@@ -138,8 +147,8 @@ public class CarpetDispenserBehaviours
         private static Set<Block> toggleable = Sets.newHashSet(
             Blocks.STONE_BUTTON, Blocks.ACACIA_BUTTON, Blocks.BIRCH_BUTTON, Blocks.DARK_OAK_BUTTON,
             Blocks.JUNGLE_BUTTON, Blocks.OAK_BUTTON, Blocks.SPRUCE_BUTTON, Blocks.REPEATER, 
-            Blocks.COMPARATOR, Blocks.LEVER, Blocks.DAYLIGHT_DETECTOR, Blocks.REDSTONE_ORE, Blocks.BELL,
-            Blocks.JUKEBOX
+            Blocks.COMPARATOR, Blocks.LEVER, Blocks.DAYLIGHT_DETECTOR, Blocks.REDSTONE_ORE,
+            Blocks.JUKEBOX, Blocks.NOTE_BLOCK, Blocks.REDSTONE_WIRE
         );
 
         @Override
@@ -158,7 +167,7 @@ public class CarpetDispenserBehaviours
                     null,
                     Hand.MAIN_HAND,
                     new BlockHitResult(
-                        new Vec3d(new Vec3i(pos.getX(), pos.getY(), pos.getZ())), 
+                        Vec3d.of(pos), // flat +0
                         direction, 
                         pos,
                         false
@@ -175,26 +184,31 @@ public class CarpetDispenserBehaviours
         @Override
         protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
             BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
-            List<AnimalEntity> list = source.getWorld().getEntities(AnimalEntity.class, new Box(pos),null);
+            List<AnimalEntity> list = source.getWorld().getEntitiesByClass(AnimalEntity.class, new Box(pos),EntityPredicates.VALID_ENTITY);
             boolean failure = false;
 
-            for(AnimalEntity mob : list) {
-                if(!mob.isBreedingItem(stack)) continue;
-                if(mob.getBreedingAge() != 0 || mob.isInLove()) {
+            for (AnimalEntity mob : list)
+            {
+                if (!mob.isBreedingItem(stack)) continue;
+                if (mob.getBreedingAge() == 0 && mob.canEat())
+                {
+                    mob.lovePlayer(null);
+                }
+                else if (mob.isBaby())
+                {
+                    mob.growUp((int) ((float) (-mob.getBreedingAge() / 20) * 0.1F), true);
+                }
+                else
+                {
                     failure = true;
                     continue;
                 }
                 stack.decrement(1);
-                mob.lovePlayer(null);
                 return stack;
             }
             if(failure) return stack;
             // fix here for now - if problem shows up next time, will need to fix it one level above.
-            if(
-                    CarpetExtraSettings.dispenserPlacesBlocks &&
-                    stack.getItem() instanceof BlockItem &&
-                    PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock())
-            )
+            if (stack.getItem() instanceof BlockItem && PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock()))
             {
                 return PlaceBlockDispenserBehavior.getInstance().dispenseSilently(source, stack);
             }
@@ -269,6 +283,68 @@ public class CarpetDispenserBehaviours
                 return stack;
             }
             return super.dispenseSilently(source, stack);
+        }
+    }
+    
+    public static class MushroomStewBehavior extends ItemDispenserBehavior
+    {
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack)
+        {
+            if (!CarpetExtraSettings.dispensersMilkCows)
+                return super.dispenseSilently(pointer, stack);
+    
+            World world = pointer.getWorld();
+            if (!world.isClient)
+            {
+                BlockPos pos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+                List<MooshroomEntity> mooshroom = world.getEntitiesByType(EntityType.MOOSHROOM, new Box(pos), e -> e.isAlive() && !e.isBaby());
+                if (!mooshroom.isEmpty())
+                {
+                    stack.decrement(1);
+                    if (stack.isEmpty())
+                    {
+                        return new ItemStack(Items.MUSHROOM_STEW);
+                    }
+                    else
+                    {
+                        if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(Items.MUSHROOM_STEW)) < 0)
+                        {
+                            super.dispenseSilently(pointer, new ItemStack(Items.MUSHROOM_STEW));
+                        }
+                        return stack;
+                    }
+                }
+            }
+            return super.dispenseSilently(pointer, stack);
+        }
+    }
+    
+    public static class BlazePowderBehavior extends ItemDispenserBehavior
+    {
+        @Override
+        protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack)
+        {
+            if (!CarpetExtraSettings.blazeMeal)
+                return super.dispenseSilently(pointer, stack);
+    
+            World world = pointer.getWorld();
+            Direction direction = pointer.getBlockState().get(DispenserBlock.FACING);
+            BlockPos front = pointer.getBlockPos().offset(direction);
+            BlockState state = world.getBlockState(front);
+            
+            if (state.getBlock() == Blocks.NETHER_WART)
+            {
+                int age = state.get(NetherWartBlock.AGE);
+                if (age < 3)
+                {
+                    world.setBlockState(front, Blocks.NETHER_WART.getDefaultState().with(NetherWartBlock.AGE, age + 1), 2);
+                    world.syncWorldEvent(2005, front, 0);
+                    stack.decrement(1);
+                    return stack;
+                }
+            }
+            return stack;
         }
     }
 }

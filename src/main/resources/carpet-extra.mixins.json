@@ -3,32 +3,45 @@
   "package": "carpetextra.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MinecraftServer_noopMixin",
+    "CrashReport_noopMixin",
     "DispenserBlockMixin",
     "FallingBlockEntityMixin",
     "WetSpongeBlockMixin",
     "RepeaterBlockMixin",
     "ComparatorBlockMixin",
     "DaylightDetectorBlockMixin",
-    "AnimalMateGoalMixin",
+    "AnimalEntity_dispenserMixin",
     "FoxMateGoalMixin",
     "TurtleMateGoalMixin",
     "AbstractPressurePlateBlock_variableWoodMixin",
     "AbstractButtonBlock_variableWoodMixin",
     "ItemFrameEntity_comparatorReadsClockMixin",
+    "ItemStackMixin",
+    "ThrownEntityMixin",
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",
     "HopperMinecartEntity_transferItemsOutFeatureMixin",
-
+    "AbsorbWaterMixin",
     "DropperBlock_craftingMixin",
     "DispenserBlockEntity_craftingMixin",
+
+    "DispenserBehaviorCarpetsMixin",
+    "DispenserBehaviorChestMixin",
+    "DispenserBehaviorFireChargeMixin",
+    "DispenserBehaviorGlowstoneMixin",
+    "DispenserBehaviorShearsMixin",
+    "DispenserBehaviorCarvedPumpkinMixin",
+    "DispenserBehaviorMobHeadMixin",
 
     "VillagerEntity_wartFarmMixin",
     "FarmerVillagerTask_wartFarmMixin",
     "VillagerTaskListProvider_wartFarmMixin",
     "VillagerProfession_wartFarmMixin",
     "SecondaryPointOfInterestSensor_wartFarmMixin",
-
+    "NoteBlockMixin",
+    "RedstoneWireBlockMixin",
+    "NetherWartBlock_fertilizerMixin",
+    "RedstoneWireBlockMixin_pistonRedirectsRedstone",
 
     "PlayerEntityMixin",
     "PistonBlockMixin",
@@ -40,7 +53,6 @@
     "BlocksMixin",
     "ChunkGeneratorMixin",
     "FallingBlockMixin",
-    "DispenserBehaviorFireChargeMixin",
     "ChickenEntityMixin",
     "LivingEntityMixin",
     "FlowerPotBlockMixin",
@@ -48,18 +60,20 @@
     "DispenserBehaviorBucketCowsMixin",
     "AbstractRedstoneGateBlockMixin",
     "IglooFeatureMixin",
-    "OverworldChunkGeneratorMixin",
+    "SurfaceChunkGeneratorMixin",
     "StrayEntityMixin",
-    "FlatChunkGeneratorMixin",
     "JungleTempleFeature_creeperMixin",
     "SkeletonEntityMixin",
     "SpiderEntityMixin",
-
     "ScaffoldingBlock_scaffoldingDistanceMixin",
-    "ScaffoldingItem_scaffoldingDistanceMixin"
+    "ScaffoldingItem_scaffoldingDistanceMixin",
+    "SugarCaneBlock_fertilizerMixin",
+    "CactusBlock_fertilizerMixin",
+
+    "MinecraftServer_updateSuppressionCrashFixMixin",
+    "World_updateSuppressionCrashFixMixin"
   ],
   "client": [
-    "MinecraftClient_noopMixin"
   ],
   "injectors": {
     "defaultRequire": 1

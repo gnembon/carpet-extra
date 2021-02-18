@@ -1,6 +1,7 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,13 +14,22 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+
+import java.util.Map;
 
 @Mixin(FallingBlockEntity.class)
 public abstract class FallingBlockEntityMixin extends Entity
 {
     private int iceCount = 0;
+    private Block currentIce = null;
+    private Map<Block, Block> iceProgression = ImmutableMap.of(
+            Blocks.FROSTED_ICE, Blocks.ICE,
+            Blocks.ICE, Blocks.PACKED_ICE,
+            Blocks.PACKED_ICE, Blocks.BLUE_ICE
+    );
     
     public FallingBlockEntityMixin(EntityType<?> entityType_1, World world_1)
     {
@@ -32,35 +42,45 @@ public abstract class FallingBlockEntityMixin extends Entity
         this.iceCount = 0;
     }
     
-    @Inject(
-            method = "tick",
-            at = @At(value = "INVOKE", shift = At.Shift.AFTER, ordinal = 1,
-                    target = "Lnet/minecraft/entity/FallingBlockEntity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V"),
+    @Inject(method = "tick", at = @At(value = "INVOKE", ordinal = 0,
+            target = "Lnet/minecraft/entity/FallingBlockEntity;remove()V"),
+            slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", ordinal = 1)),
             locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true
     )
     private void onTick(CallbackInfo ci, Block block_1, BlockPos blockPos_2, boolean b1, boolean bl2, BlockState blockState_1)
     {
-        if (block_1.matches(BlockTags.ANVIL))
+        if (block_1.isIn(BlockTags.ANVIL))
         {
-            if (CarpetExtraSettings.renewablePackedIce && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock() == Blocks.ICE)
+            if (CarpetExtraSettings.renewableIce)
             {
-                if (iceCount < 2)
+                Block below = this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();
+                if (iceProgression.containsKey(below))
                 {
-                    world.breakBlock(blockPos_2.down(), false, null);
-                    this.onGround = false;
-                    iceCount++;
-                    ci.cancel();
-                }
-                else
-                {
-                    world.setBlockState(blockPos_2.down(), Blocks.PACKED_ICE.getDefaultState(), 3);
-                    world.playLevelEvent(2001, blockPos_2.down(), Block.getRawIdFromState(Blocks.PACKED_ICE.getDefaultState()));
+                    if (currentIce != below)
+                    {
+                        currentIce = below;
+                        iceCount = 0;
+                    }
+                    if (iceCount < 2)
+                    {
+                        world.breakBlock(blockPos_2.down(), false, null);
+                        this.onGround = false;
+                        iceCount++;
+                        ci.cancel();
+                    }
+                    else
+                    {
+                        BlockState newBlock = iceProgression.get(below).getDefaultState();
+                        world.setBlockState(blockPos_2.down(), newBlock, 3);
+                        world.syncWorldEvent(2001, blockPos_2.down(), Block.getRawIdFromState(newBlock));
+                    }
                 }
             }
-            else if (CarpetExtraSettings.renewableSand && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
+
+            if (CarpetExtraSettings.renewableSand && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
             {
-                world.breakBlock(blockPos_2.down(1), false);
-                world.setBlockState(blockPos_2.down(1), Blocks.SAND.getDefaultState(), 3);
+                world.breakBlock(blockPos_2.down(), false);
+                world.setBlockState(blockPos_2.down(), Blocks.SAND.getDefaultState(), 3);
             }
         }
     }
