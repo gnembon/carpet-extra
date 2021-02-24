@@ -92,13 +92,6 @@ public class CarpetExtraServer implements CarpetExtension
 
         registerLogger("noteBlockChunkLoader", stardardLogger("noteBlockChunkLoader","dynamic", new String[]{"dynamic", "overworld", "nether","end"}));
         registerLogger("pistonHeadChunkLoader", stardardLogger("pistonHeadChunkLoader","dynamic", new String[]{"dynamic", "overworld", "nether","end"}));
-       /* try {
-            registerLogger("noteBlockChunkLoader",new Logger(CarpetExtraSettings.class.getField("__noteBlockChunkLoader"),"noteBlockChunkLoader","dynamic", new String[]{"dynamic", "overworld", "nether","end"}));
-            registerLogger("pistonHeadChunkLoader", new Logger(CarpetExtraSettings.class.getField("__pistonHeadChunkLoader"),"pistonHeadChunkLoader","dynamic", new String[]{"dynamic", "overworld", "nether","end"}));
-
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }*/
     }
 
     static Logger stardardLogger(String logName, String def, String [] options)

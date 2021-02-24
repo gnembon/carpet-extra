@@ -3,10 +3,8 @@ package carpetextra.logging;
 import carpet.logging.LoggerRegistry;
 import carpet.utils.Messenger;
 import carpetextra.CarpetExtraServer;
-import carpetextra.CarpetExtraSettings;
 import net.minecraft.text.BaseText;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
