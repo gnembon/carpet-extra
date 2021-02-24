@@ -5,7 +5,13 @@ import carpet.settings.Rule;
 import carpet.settings.Validator;
 import net.minecraft.server.command.ServerCommandSource;
 
-import static carpet.settings.RuleCategory.*;
+import static carpet.settings.RuleCategory.BUGFIX;
+import static carpet.settings.RuleCategory.COMMAND;
+import static carpet.settings.RuleCategory.CREATIVE;
+import static carpet.settings.RuleCategory.DISPENSER;
+import static carpet.settings.RuleCategory.EXPERIMENTAL;
+import static carpet.settings.RuleCategory.FEATURE;
+import static carpet.settings.RuleCategory.SURVIVAL;
 
 
 /**
