@@ -164,5 +164,23 @@
   "rule.blazeMeal.extra.0": "可透過發射器或玩家右鍵來催熟",
 
   "rule.disablePhantomSpawning.name": "停用夜魅生成",
-  "rule.disablePhantomSpawning.desc": "夜魅將不再生成"
+  "rule.disablePhantomSpawning.desc": "夜魅將不再生成",
+
+  "rule.noteBlockChunkLoader.name": "音階盒加載器",
+  "rule.noteBlockChunkLoader.desc": "啟用音階盒加載器(在 音階盒加載時長 更改遊戲刻)",
+
+  "rule.noteBlockChunkLoaderNote.name": "音階盒加載器設置音階",
+  "rule.noteBlockChunkLoaderNote.desc": "改變特定音階啟動加載器",
+  "rule.noteBlockChunkLoaderNote.extra.0": "預設為-1，是啟用全部",
+
+  "rule.noteBlockChunkLoaderRadius.name": "音階盒加載器加載半徑",
+  "rule.noteBlockChunkLoaderRadius.desc": "更換音階盒加載器加載半徑",
+  "rule.noteBlockChunkLoaderRadius.extra.0": "預設為3，模擬地獄門加載",
+
+  "rule.noteBlockChunkLoaderTick.name": "音階盒加載時長",
+  "rule.noteBlockChunkLoaderTick.desc": "更換音階盒加載時長",
+  "rule.noteBlockChunkLoaderTick.extra.0": "預設是300",
+
+  "rule.pistonHeadChunkLoader.name": "活塞頭加載器",
+  "rule.pistonHeadChunkLoader.desc": "啟用活塞頭加載器，在活塞座上方放置黑曜石可以在活塞頭產生/移除時加載頭部所在區塊，時長6gt"
 }
