@@ -376,7 +376,7 @@ public class CarpetExtraSettings
     )
     public static int noteBlockChunkLoaderRadius = 3;
 
-    public static class NoteBlockTicksValidator extends Validator<Integer>{
+    public static class NoteBlockTickValidator extends Validator<Integer>{
 
         @Override
         public Integer validate(ServerCommandSource source, ParsedRule<Integer> currentRule, Integer newValue, String string) {
@@ -393,7 +393,7 @@ public class CarpetExtraSettings
             options = {"300"},
             category = {EXTRA},
             strict = false,
-            validate = NoteBlockTicksValidator.class
+            validate = NoteBlockTickValidator.class
     )
     public static int noteBlockChunkLoaderTick = 300;
 
