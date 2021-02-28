@@ -26,7 +26,7 @@ public abstract class DispenserBlockMixin
     private void getBehaviorForItem(ItemStack itemStack_1, CallbackInfoReturnable<DispenserBehavior> cir)
     {
         Item item = itemStack_1.getItem();
-        if (CarpetExtraSettings.dispenserPlacesBlocks && !BEHAVIORS.containsKey(item) && item instanceof BlockItem)
+        if (CarpetExtraSettings.dispensersPlaceBlocks && !BEHAVIORS.containsKey(item) && item instanceof BlockItem)
         {
             if (PlaceBlockDispenserBehavior.canPlace(((BlockItem) item).getBlock()))
             {

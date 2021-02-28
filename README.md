@@ -95,7 +95,7 @@ Disables player entity collision.
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `CREATIVE`, `EXPERIMENTAL`  
   
-## dispenserPlacesBlocks
+## dispensersPlaceBlocks
 Dispensers can place blocks.  
 * Type: `boolean`  
 * Default value: `false`  

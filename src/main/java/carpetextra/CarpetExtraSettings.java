@@ -66,7 +66,7 @@ public class CarpetExtraSettings
     public static boolean autoCraftingDropper = false;
 
     @Rule(desc = "Dispensers can place blocks.", category = {CREATIVE, EXTRA, DISPENSER})
-    public static boolean dispenserPlacesBlocks = false;
+    public static boolean dispensersPlaceBlocks = false;
 
     @Rule(
             desc = "Variable delays on wooden components (buttons, pressure plates).",

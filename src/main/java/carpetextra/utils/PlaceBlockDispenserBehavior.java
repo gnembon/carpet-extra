@@ -45,7 +45,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
     @Override
     public ItemStack dispenseSilently(BlockPointer blockPointer, ItemStack itemStack) {
         Item item = itemStack.getItem();
-        if (!CarpetExtraSettings.dispenserPlacesBlocks || !(item instanceof BlockItem)) {
+        if (!CarpetExtraSettings.dispensersPlaceBlocks || !(item instanceof BlockItem)) {
             return super.dispenseSilently(blockPointer, itemStack);
         }
         Block block = ((BlockItem) item).getBlock();
@@ -154,7 +154,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
     }
 
     public static boolean canPlace(Block block) {
-        if (CarpetExtraSettings.dispenserPlacesBlocks) {
+        if (CarpetExtraSettings.dispensersPlaceBlocks) {
             // extra exceptions
             return true;
         }
