@@ -22,19 +22,19 @@ public class ScaffoldingBlock_scaffoldingDistanceMixin {
     }
      */
 
-    @ModifyConstant(method = "scheduledTick", constant = @Constant(intValue = 7))
+    @ModifyConstant(method = "scheduledTick", constant = @Constant(intValue = 7), require = 0)
     private int scheduledTick_maxDistance(int oldValue)
     {
         return CarpetExtraSettings.scaffoldingDistance;
     }
 
-    @ModifyConstant(method = "canPlaceAt", constant = @Constant(intValue = 7))
+    @ModifyConstant(method = "canPlaceAt", constant = @Constant(intValue = 7), require = 0)
     private int canPlaceAt_maxDistance(int oldValue)
     {
         return CarpetExtraSettings.scaffoldingDistance;
     }
 
-    @ModifyConstant(method = "calculateDistance", constant = @Constant(intValue = 7))
+    @ModifyConstant(method = "calculateDistance", constant = @Constant(intValue = 7), require = 0)
     private static int calculateDistance_maxDistance(int oldValue)
     {
         return CarpetExtraSettings.scaffoldingDistance;
