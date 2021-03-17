@@ -30,9 +30,6 @@
     "carpet": "*",
     "minecraft": "1.16.x"
   },
-  "suggests": {
-    "flamingo": "*"
-  },
   "custom": {
     "modmenu:parent": "carpet"
   }

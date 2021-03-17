@@ -96,21 +96,12 @@ public class CarpetExtraSettings
     @Rule(desc = "Enables `/ping` for players to get their ping.", category = {COMMAND, EXTRA})
     public static boolean commandPing = true;
     
-    /*@Rule(
-            desc = "Water bottles in dispensers fill with water when dispensed with water in front.",
-            category = {EXPERIMENTAL, FEATURE, EXTRA, DISPENSER}
-    )
-    public static boolean dispensersFillBottles;*/
-    
     @Rule(
             desc = "Minecarts can be filled with hoppers, chests, tnt and furnace.",
             category = {EXPERIMENTAL, FEATURE, EXTRA, DISPENSER}
     )
     public static boolean dispensersFillMinecarts = false;
     
-    //@Rule(desc = "Wet sponges dry in the nether dimension.", category = {EXTRA, FEATURE})
-    //public static boolean spongesDryInTheNether = false;
-
     @Rule(
             desc = "Clerics can warm nether farts.",
             extra = {"This will also allow them to pick up wart items, as well as pathfind to soulsand."},
@@ -323,8 +314,4 @@ public class CarpetExtraSettings
             category = {EXTRA, FEATURE, SURVIVAL}
     )
     public static boolean blazeMeal = false;
-
-    // Implemented in 1.15 - doInsomnia
-    /*@Rule(desc = "Disable phantom spawning", category = {CREATIVE, EXTRA})
-    public static boolean disablePhantomSpawning = false;*/
 }
