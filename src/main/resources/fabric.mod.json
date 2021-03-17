@@ -18,6 +18,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
+      "carpetextra.CarpetExtraServer"
     ]
   },
   "mixins": [

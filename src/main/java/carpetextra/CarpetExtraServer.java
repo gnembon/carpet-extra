@@ -5,13 +5,14 @@ import carpet.CarpetServer;
 import carpetextra.commands.PingCommand;
 import carpetextra.utils.CarpetExtraTranslations;
 import com.mojang.brigadier.CommandDispatcher;
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.Map;
 
-public class CarpetExtraServer implements CarpetExtension
+public class CarpetExtraServer implements CarpetExtension, ModInitializer
 {
     @Override
     public String version()
@@ -19,13 +20,9 @@ public class CarpetExtraServer implements CarpetExtension
         return "carpet-extra";
     }
 
-    public static void noop() { }
-
-    static
-    {
+    @Override
+    public void onInitialize() {
         CarpetServer.manageExtension(new CarpetExtraServer());
-        // temporary until CM proper runs tiny bit later
-        //CarpetServer.settingsManager.parseSettingsClass(CarpetExtraSettings.class);
     }
 
     @Override
