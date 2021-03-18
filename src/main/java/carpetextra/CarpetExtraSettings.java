@@ -258,6 +258,7 @@ public class CarpetExtraSettings
             extra = "0 is the default setting, no enchanted golden apples will be dropped",
             options = {"0", "50", "100"},
             category = {EXTRA, FEATURE},
+            strict = false,
             validate = ValidateSpiderJokeyDropChance.class
     )
     public static int spiderJockeysDropGapples = 0;
