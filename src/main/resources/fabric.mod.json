@@ -10,6 +10,7 @@
   ],
   "contact": {
     "homepage": "https://github.com/gnembon/carpet-extra",
+    "issues": "https://github.com/gnembon/carpet-extra/issues",
     "sources": "https://github.com/gnembon/carpet-extra"
   },
 
@@ -31,6 +32,8 @@
     "minecraft": "1.16.x"
   },
   "custom": {
-    "modmenu:parent": "carpet"
+    "modmenu": {
+      "parent": "carpet"
+    }
   }
 }
