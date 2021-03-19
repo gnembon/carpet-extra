@@ -23,8 +23,7 @@ public abstract class RedstoneWireBlockMixin_pistonRedirectsRedstone
         if ( CarpetExtraSettings.pistonRedirectsRedstone ) {
             if (state.getBlock() instanceof PistonBlock)
             {
-                cir.setReturnValue(dir != state.get(PistonBlock.FACING).getOpposite());
-                cir.cancel();
+                cir.setReturnValue(dir != null && dir != state.get(PistonBlock.FACING).getOpposite());
             }
         }
     }
