@@ -18,9 +18,15 @@ public class CarpetExtraServer implements CarpetExtension, ModInitializer
         return "carpet-extra";
     }
 
-    @Override
-    public void onInitialize() {
+    public static void loadExtension()
+    {
         CarpetServer.manageExtension(new CarpetExtraServer());
+    }
+
+    @Override
+    public void onInitialize()
+    {
+        CarpetExtraServer.loadExtension();
     }
 
     @Override

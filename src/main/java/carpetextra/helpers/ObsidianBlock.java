@@ -21,11 +21,14 @@ public class ObsidianBlock extends Block
     }
     
     @Override
+    public boolean hasRandomTicks(BlockState state)
+    {
+        return CarpetExtraSettings.renewableLava;
+    }
+
+    @Override
     public void randomTick(BlockState blockState_1, ServerWorld serverWorld_1, BlockPos blockPos_1, Random random_1)
     {
-        if(!CarpetExtraSettings.renewableLava)
-            return;
-
         for (Direction dir : Direction.values())
         {
             FluidState neighbor = serverWorld_1.getFluidState(blockPos_1.offset(dir));
