@@ -2,8 +2,8 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.entity.Entity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,7 +18,7 @@ public abstract class EntityMixin
 {
     @Shadow public abstract Box getBoundingBox();
     
-    @Shadow protected abstract ListTag toListTag(double... doubles_1);
+    @Shadow protected abstract NbtList toNbtList(double... doubles_1);
     
     @Shadow protected abstract boolean shouldSetPositionOnLoad();
     
@@ -35,14 +35,14 @@ public abstract class EntityMixin
     @Inject(
             method = "writeNbt",
             at = @At(value = "INVOKE", shift = At.Shift.BEFORE, ordinal = 0,
-                    target = "Lnet/minecraft/nbt/CompoundTag;put(Ljava/lang/String;Lnet/minecraft/nbt/Tag;)Lnet/minecraft/nbt/Tag;")
+                    target = "Lnet/minecraft/nbt/NbtCompound;put(Ljava/lang/String;Lnet/minecraft/nbt/NbtElement;)Lnet/minecraft/nbt/NbtElement;")
     )
-    private void onToTag(CompoundTag compoundTag_1, CallbackInfoReturnable<CompoundTag> cir)
+    private void onToTag(NbtCompound NbtCompound_1, CallbackInfoReturnable<NbtCompound> cir)
     {
         if (CarpetExtraSettings.reloadSuffocationFix)
         {
             Box box = this.getBoundingBox();
-            compoundTag_1.put("CM_Box", this.toListTag(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ));
+            NbtCompound_1.put("CM_Box", this.toNbtList(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ));
         }
     }
     
@@ -55,18 +55,18 @@ public abstract class EntityMixin
     @Inject(
             method = "readNbt",
             at = @At(value = "INVOKE", shift = At.Shift.AFTER,
-                    target = "Lnet/minecraft/entity/Entity;readCustomDataFromNbt(Lnet/minecraft/nbt/CompoundTag;)V")
+                    target = "Lnet/minecraft/entity/Entity;readCustomDataFromNbt(Lnet/minecraft/nbt/NbtCompound;)V")
     )
-    private void onFromTag(CompoundTag compoundTag_1, CallbackInfo ci)
+    private void onFromTag(NbtCompound NbtCompound_1, CallbackInfo ci)
     {
         if (this.shouldSetPositionOnLoad())
         {
             this.refreshPosition();
         }
         
-        if (CarpetExtraSettings.reloadSuffocationFix && compoundTag_1.contains("CM_Box", 9))
+        if (CarpetExtraSettings.reloadSuffocationFix && NbtCompound_1.contains("CM_Box", 9))
         {
-            ListTag box_tag = compoundTag_1.getList("CM_Box", 6);
+            NbtList box_tag = NbtCompound_1.getList("CM_Box", 6);
             
             Box box = new Box(box_tag.getDouble(0), box_tag.getDouble(1),
                     box_tag.getDouble(2), box_tag.getDouble(3),

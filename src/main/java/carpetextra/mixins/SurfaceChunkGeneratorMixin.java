@@ -1,6 +1,7 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
+import net.minecraft.class_6012;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -29,7 +30,7 @@ public abstract class SurfaceChunkGeneratorMixin extends ChunkGenerator
 
     @Inject( method = "getEntitySpawnList", at = @At("HEAD"), cancellable = true
     )
-    private void onGetEntitySpawnList(Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos, CallbackInfoReturnable<List<SpawnSettings.SpawnEntry>> cir)
+    private void onGetEntitySpawnList(Biome biome, StructureAccessor accessor, SpawnGroup group, BlockPos pos, CallbackInfoReturnable<class_6012<SpawnSettings.SpawnEntry>> cir)
     {
         if (CarpetExtraSettings.straySpawningInIgloos && group == SpawnGroup.MONSTER)
         {
