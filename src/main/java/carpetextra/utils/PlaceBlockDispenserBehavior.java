@@ -23,7 +23,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.property.Properties;
@@ -130,10 +130,10 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             boolean blockWasPlaced = world.setBlockState(pos, state);
             block.onPlaced(world, pos, state, null, itemStack);
             world.updateNeighbor(pos, state.getBlock(), pos);
-            CompoundTag blockEntityTag = itemStack.getSubTag("BlockEntityTag");
+            NbtCompound blockEntityTag = itemStack.getSubTag("BlockEntityTag");
             if (blockEntityTag != null && block instanceof BlockEntityProvider) {
                 BlockEntity be = world.getBlockEntity(pos);
-                blockEntityTag = new CompoundTag().copyFrom(blockEntityTag);
+                blockEntityTag = new NbtCompound().copyFrom(blockEntityTag);
                 blockEntityTag.putInt("x", pos.getX());
                 blockEntityTag.putInt("y", pos.getY());
                 blockEntityTag.putInt("z", pos.getZ());

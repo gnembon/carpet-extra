@@ -9,7 +9,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +29,7 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
         {
             WitherSkeletonEntity witherSkelly = new WitherSkeletonEntity(EntityType.WITHER_SKELETON, this.world);
             witherSkelly.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.yaw, this.pitch);
-            witherSkelly.initialize(serverWorld, this.world.getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, (EntityData) null, (CompoundTag) null);
+            witherSkelly.initialize(serverWorld, this.world.getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, (EntityData) null, (NbtCompound) null);
             witherSkelly.setAiDisabled(this.isAiDisabled());
             
             if (this.hasCustomName())

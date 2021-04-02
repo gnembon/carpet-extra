@@ -35,7 +35,7 @@ public abstract class SurfaceChunkGeneratorMixin extends ChunkGenerator
         {
             if (accessor.getStructureAt(pos, false, StructureFeature.IGLOO).hasChildren())
             {
-                cir.setReturnValue(StructureFeature.IGLOO.getMonsterSpawns());
+                cir.setReturnValue(StructureFeature.IGLOO.getMonsterSpawns().method_34994());
             }
         }
         
@@ -43,7 +43,7 @@ public abstract class SurfaceChunkGeneratorMixin extends ChunkGenerator
         {
             if (accessor.getStructureAt(pos, false, StructureFeature.JUNGLE_PYRAMID).hasChildren())
             {
-                cir.setReturnValue(StructureFeature.JUNGLE_PYRAMID.getMonsterSpawns());
+                cir.setReturnValue(StructureFeature.JUNGLE_PYRAMID.getMonsterSpawns().method_34994());
             }
         }
     }
