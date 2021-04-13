@@ -35,13 +35,13 @@ public abstract class LilyPadBlock_fertilizerMixin implements Fertilizable {
         if(!CarpetExtraSettings.betterBonemeal) return;
         BlockState blockState = Blocks.LILY_PAD.getDefaultState();
 
-        label:
+        stopGrowth:
         for(int i = 0; i < 24; ++i) {
             BlockPos growPos = pos;
             for (int j = 0; j < i / 16; ++j) {
                 growPos = growPos.add(random.nextInt(3) - 1, 0, random.nextInt(3) - 1);
                 if (world.getBlockState(growPos).isFullCube(world, growPos)) {
-                    continue label;
+                    continue stopGrowth;
                 }
             }
             if (canGrowTo(growPos,world)) {
