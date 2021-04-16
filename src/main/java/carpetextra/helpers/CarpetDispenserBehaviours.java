@@ -20,11 +20,15 @@ import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import net.minecraft.entity.vehicle.ChestMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
+import net.minecraft.entity.vehicle.StorageMinecartEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -40,6 +44,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class CarpetDispenserBehaviours
@@ -107,6 +112,20 @@ public class CarpetDispenserBehaviours
                     minecartEntity.setVelocity(minecart.getVelocity());
                     minecartEntity.pitch = minecart.pitch;
                     minecartEntity.yaw = minecart.yaw;
+
+                    if (minecartEntity instanceof StorageMinecartEntity)
+                    {
+                        try
+                        {
+                            Objects.requireNonNull(stack.getSubTag("BlockEntityTag"))
+                                    .getList("Items",10)
+                                    .iterator()
+                                    .forEachRemaining(c ->
+                                            ((StorageMinecartEntity)minecartEntity)
+                                                    .setStack(((CompoundTag)c).getByte("Slot"),ItemStack.fromTag((CompoundTag)c)));
+                        }
+                        catch(Throwable ignored) { }
+                    }
                     
                     minecart.world.spawnEntity(minecartEntity);
                     stack.decrement(1);

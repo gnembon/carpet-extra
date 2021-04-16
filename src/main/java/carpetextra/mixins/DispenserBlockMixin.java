@@ -41,12 +41,21 @@ public abstract class DispenserBlockMixin
         {
             if (item == Items.HOPPER)
                 cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.HOPPER));
-
+            else
             if (item == Items.FURNACE)
                 cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.FURNACE));
-
+            else
             if (item == Items.TNT)
                 cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.TNT));
+            else
+            if (item == Items.CHEST)
+                cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.CHEST));
+            else
+            if (item == Items.COMMAND_BLOCK)
+                cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.COMMAND_BLOCK));
+            else
+            if (item == Items.SPAWNER)
+                cir.setReturnValue(new MinecartDispenserBehaviour(AbstractMinecartEntity.Type.SPAWNER));
         }
 
         if (CarpetExtraSettings.dispensersToggleThings && item == Items.STICK)
