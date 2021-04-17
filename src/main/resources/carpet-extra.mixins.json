@@ -69,6 +69,7 @@
     "ScaffoldingItem_scaffoldingDistanceMixin",
     "SugarCaneBlock_fertilizerMixin",
     "CactusBlock_fertilizerMixin",
+    "LilyPadBlock_fertilizerMixin",
 
     "MinecraftServer_updateSuppressionCrashFixMixin",
     "World_updateSuppressionCrashFixMixin"

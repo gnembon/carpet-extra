@@ -306,7 +306,7 @@ public class CarpetExtraSettings
     public static boolean enderPearlChunkLoading = false;
 
     @Rule(
-            desc = "Bonemeal can be used to grow sugarcane and cactus.",
+            desc = "Bonemeal can be used to grow sugarcane, cactus and lily pads.",
             category = {FEATURE, EXTRA, SURVIVAL}
     )
     public static boolean betterBonemeal = false;
