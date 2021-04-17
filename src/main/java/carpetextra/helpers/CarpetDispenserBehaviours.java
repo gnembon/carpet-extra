@@ -12,11 +12,11 @@ import net.minecraft.block.NetherWartBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.block.entity.JukeboxBlockEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.*;
@@ -25,11 +25,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -38,8 +37,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.CommandBlockExecutor;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -81,12 +78,12 @@ public class CarpetDispenserBehaviours
     public static class MinecartDispenserBehaviour extends ItemDispenserBehavior
     {
         private final AbstractMinecartEntity.Type minecartType;
-    
+
         public MinecartDispenserBehaviour(AbstractMinecartEntity.Type minecartType)
         {
             this.minecartType = minecartType;
         }
-    
+
         @Override
         public ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
         {
@@ -98,7 +95,7 @@ public class CarpetDispenserBehaviours
             {
                 BlockPos pos = source.getBlockPos().offset((Direction) source.getBlockState().get(DispenserBlock.FACING));
                 List<MinecartEntity> list = source.getWorld().getEntitiesByClass(MinecartEntity.class, new Box(pos), EntityPredicates.VALID_ENTITY);
-    
+
                 if (list.isEmpty())
                 {
                     return defaultBehaviour(source, stack);
@@ -107,49 +104,61 @@ public class CarpetDispenserBehaviours
                 {
                     MinecartEntity minecart = list.get(0);
                     minecart.remove();
-                    AbstractMinecartEntity minecartEntity = AbstractMinecartEntity.create(minecart.world, minecart.getX(), minecart.getY(), minecart.getZ(), this.minecartType);
-                    minecartEntity.setVelocity(minecart.getVelocity());
-                    minecartEntity.pitch = minecart.pitch;
-                    minecartEntity.yaw = minecart.yaw;
-                    minecartEntity.setCustomName(minecart.getCustomName());
-                    minecartEntity.setCustomNameVisible(minecart.isCustomNameVisible());
-                    minecartEntity.setGlowing(minecart.isGlowing());
-                    minecartEntity.setInvulnerable(minecart.isInvulnerable());
-                    minecartEntity.setNoGravity(minecart.hasNoGravity());
-                    minecartEntity.setOnGround(minecart.isOnGround());
-                    minecartEntity.setAir(minecart.getAir());
-                    minecartEntity.setFireTicks(minecart.getFireTicks());
-
-                    if (minecartEntity instanceof StorageMinecartEntity)
-                    {
-                        try
-                        {
-                            Objects.requireNonNull(stack.getSubTag("BlockEntityTag"))
-                                    .getList("Items",10)
-                                    .iterator()
-                                    .forEachRemaining(c ->
-                                            ((StorageMinecartEntity)minecartEntity)
-                                                    .setStack(((CompoundTag)c).getByte("Slot"),ItemStack.fromTag((CompoundTag)c)));
-                        }
-                        catch(Throwable ignored) { }
-                    }
-                    else if (minecartEntity instanceof CommandBlockMinecartEntity)
-                    {
-                        try
-                        {
-                            CompoundTag ct = Objects.requireNonNull(stack.getSubTag("BlockEntityTag"));
-                            CommandBlockExecutor gcx = ((CommandBlockMinecartEntity)minecartEntity).getCommandExecutor();
-                            gcx.setCommand(ct.getString("Command"));
-                            gcx.setLastOutput(new LiteralText(ct.getString("LastOutput")));
-                            gcx.setSuccessCount(ct.getInt("SuccessCount"));
-                            gcx.shouldTrackOutput(ct.getBoolean("TrackOutput"));
-                        }
-                        catch(Throwable ignored) { }
-                    }
+                    AbstractMinecartEntity minecartEntity = AbstractMinecartWrapper.merge(minecart.world,minecart.getX(),minecart.getY(),minecart.getZ(),this.minecartType,stack,minecart);
                     minecart.world.spawnEntity(minecartEntity);
                     stack.decrement(1);
                     return stack;
                 }
+            }
+        }
+        public enum AbstractMinecartWrapper {;
+            public static AbstractMinecartEntity merge(World w,double x,double y,double z,AbstractMinecartEntity.Type t,ItemStack s,MinecartEntity o) {
+                AbstractMinecartEntity r = create(w,x,y,z,t,s);
+                r.setVelocity(o.getVelocity());
+                r.prevPitch = o.prevPitch;
+                r.prevYaw = o.prevYaw;
+                r.pitch = o.pitch;
+                r.yaw = o.yaw;
+                r.setCustomNameVisible(o.isCustomNameVisible());
+                r.setInvulnerable(o.isInvulnerable());
+                r.setNoGravity(o.hasNoGravity());
+                r.setFireTicks(o.getFireTicks());
+                r.setGlowing(o.isGlowing());
+                r.setAir(o.getAir());
+                //r.setTicksFrozen(o.getTicksFrozen());  // 1.17
+                return r;
+            }
+            public static AbstractMinecartEntity create(World w,double x,double y,double z,AbstractMinecartEntity.Type t,ItemStack s) {
+                System.out.println(s.getTag());
+                AbstractMinecartEntity r;
+                CompoundTag ct = s.getSubTag("BlockEntityTag");
+                switch(t) {
+                    case CHEST        : r = new ChestMinecartEntity       (w,x,y,z); if(ct != null) ((ChestMinecartEntity)r).readCustomDataFromTag(ct); break;
+                    case FURNACE      : r = new FurnaceMinecartEntity     (w,x,y,z); break;
+                    case TNT          : r = new TntMinecartEntity         (w,x,y,z); break;
+                    case SPAWNER      : r = new SpawnerMinecartEntity     (w,x,y,z); if(ct != null) ((SpawnerMinecartEntity)r).readCustomDataFromTag(ct); break;
+                    case HOPPER       : r = new HopperMinecartEntity      (w,x,y,z); if(ct != null) ((HopperMinecartEntity)r).readCustomDataFromTag(ct); break;
+                    case COMMAND_BLOCK: r = new CommandBlockMinecartEntity(w,x,y,z); if(ct != null) ((CommandBlockMinecartEntity)r).readCustomDataFromTag(ct); break;
+                    default           : r = new MinecartEntity            (w,x,y,z); break;
+                }
+                if(ct != null) r.setCustomName(Text.Serializer.fromJson(ct.getString("CustomName")));
+                return r;
+            }
+            public static class ChestMinecartEntity extends net.minecraft.entity.vehicle.ChestMinecartEntity {
+                public ChestMinecartEntity(World w,double x,double y,double z) { super(w,x,y,z); }
+                public void readCustomDataFromTag(CompoundTag t) { super.readCustomDataFromTag(t); }
+            }
+            public static class HopperMinecartEntity extends net.minecraft.entity.vehicle.HopperMinecartEntity {
+                public HopperMinecartEntity(World w,double x,double y,double z) { super(w,x,y,z); }
+                public void readCustomDataFromTag(CompoundTag t) { super.readCustomDataFromTag(t); }
+            }
+            public static class CommandBlockMinecartEntity extends net.minecraft.entity.vehicle.CommandBlockMinecartEntity {
+                public CommandBlockMinecartEntity(World w,double x,double y,double z) { super(w,x,y,z); }
+                public void readCustomDataFromTag(CompoundTag t) { super.readCustomDataFromTag(t); }
+            }
+            public static class SpawnerMinecartEntity extends net.minecraft.entity.vehicle.SpawnerMinecartEntity {
+                public SpawnerMinecartEntity(World w,double x,double y,double z) { super(w,x,y,z); }
+                public void readCustomDataFromTag(CompoundTag t) { super.readCustomDataFromTag(t); }
             }
         }
         
