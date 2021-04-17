@@ -19,10 +19,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.vehicle.AbstractMinecartEntity;
-import net.minecraft.entity.vehicle.ChestMinecartEntity;
-import net.minecraft.entity.vehicle.MinecartEntity;
-import net.minecraft.entity.vehicle.StorageMinecartEntity;
+import net.minecraft.entity.vehicle.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -32,6 +29,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -41,6 +39,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.world.CommandBlockExecutor;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -112,6 +111,14 @@ public class CarpetDispenserBehaviours
                     minecartEntity.setVelocity(minecart.getVelocity());
                     minecartEntity.pitch = minecart.pitch;
                     minecartEntity.yaw = minecart.yaw;
+                    minecartEntity.setCustomName(minecart.getCustomName());
+                    minecartEntity.setCustomNameVisible(minecart.isCustomNameVisible());
+                    minecartEntity.setGlowing(minecart.isGlowing());
+                    minecartEntity.setInvulnerable(minecart.isInvulnerable());
+                    minecartEntity.setNoGravity(minecart.hasNoGravity());
+                    minecartEntity.setOnGround(minecart.isOnGround());
+                    minecartEntity.setAir(minecart.getAir());
+                    minecartEntity.setFireTicks(minecart.getFireTicks());
 
                     if (minecartEntity instanceof StorageMinecartEntity)
                     {
@@ -126,7 +133,19 @@ public class CarpetDispenserBehaviours
                         }
                         catch(Throwable ignored) { }
                     }
-                    
+                    else if (minecartEntity instanceof CommandBlockMinecartEntity)
+                    {
+                        try
+                        {
+                            CompoundTag ct = Objects.requireNonNull(stack.getSubTag("BlockEntityTag"));
+                            CommandBlockExecutor gcx = ((CommandBlockMinecartEntity)minecartEntity).getCommandExecutor();
+                            gcx.setCommand(ct.getString("Command"));
+                            gcx.setLastOutput(new LiteralText(ct.getString("LastOutput")));
+                            gcx.setSuccessCount(ct.getInt("SuccessCount"));
+                            gcx.shouldTrackOutput(ct.getBoolean("TrackOutput"));
+                        }
+                        catch(Throwable ignored) { }
+                    }
                     minecart.world.spawnEntity(minecartEntity);
                     stack.decrement(1);
                     return stack;
