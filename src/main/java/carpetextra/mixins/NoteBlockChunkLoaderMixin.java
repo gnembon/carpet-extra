@@ -29,9 +29,7 @@ public abstract class NoteBlockChunkLoaderMixin {
             {
                 ChunkPos cp = new ChunkPos(pos.getX() >> 4, pos.getZ() >> 4);
 
-                ChunkTicketType ctt = ChunkTicketType.create("note_block",NoteBlockChunkLoader.LongComparator, CarpetExtraSettings.noteBlockChunkLoaderTick);
-
-                ((ServerWorld) world).getChunkManager().addTicket(ctt, cp, CarpetExtraSettings.noteBlockChunkLoaderRadius, cp);
+                ((ServerWorld) world).getChunkManager().addTicket(NoteBlockChunkLoader.ctt, cp, CarpetExtraSettings.noteBlockChunkLoaderRadius, cp);
 
                 NoteChunkLoaderDisplay.msgPrint(pos, world);
 

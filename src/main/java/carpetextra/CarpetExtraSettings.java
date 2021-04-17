@@ -3,6 +3,7 @@ package carpetextra;
 import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
 import carpet.settings.Validator;
+import carpetextra.utils.NoteBlockChunkLoader;
 import net.minecraft.server.command.ServerCommandSource;
 
 import static carpet.settings.RuleCategory.BUGFIX;
@@ -380,7 +381,12 @@ public class CarpetExtraSettings
 
         @Override
         public Integer validate(ServerCommandSource source, ParsedRule<Integer> currentRule, Integer newValue, String string) {
-            return (newValue >= 1 && newValue <= 18000) ? newValue : null;
+            if(newValue >= 1 && newValue <= 18000) {
+                NoteBlockChunkLoader.set_tick(newValue);
+                return newValue ;
+            }
+            else
+                return null;
         }
         @Override
         public String description() {
