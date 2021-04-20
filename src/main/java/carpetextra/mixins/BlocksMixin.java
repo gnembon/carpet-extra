@@ -27,6 +27,6 @@ public class BlocksMixin
             ordinal = 0))
     private static Block registerObsidian(String id, Block obsidian)
     {
-        return register("obsidian", new ObsidianBlock(Block.Settings.of(Material.STONE, MapColor.BLACK).requiresTool().strength(50.0F, 1200.0F)));
+        return register(id, new ObsidianBlock(Block.Settings.copy(obsidian).ticksRandomly()));
     }
 }

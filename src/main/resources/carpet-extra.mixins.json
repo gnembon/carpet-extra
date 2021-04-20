@@ -3,10 +3,8 @@
   "package": "carpetextra.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "CrashReport_noopMixin",
     "DispenserBlockMixin",
     "FallingBlockEntityMixin",
-    "WetSpongeBlockMixin",
     "RepeaterBlockMixin",
     "ComparatorBlockMixin",
     "DaylightDetectorBlockMixin",
@@ -69,11 +67,10 @@
     "ScaffoldingItem_scaffoldingDistanceMixin",
     "SugarCaneBlock_fertilizerMixin",
     "CactusBlock_fertilizerMixin",
+    "LilyPadBlock_fertilizerMixin",
 
     "MinecraftServer_updateSuppressionCrashFixMixin",
     "World_updateSuppressionCrashFixMixin"
-  ],
-  "client": [
   ],
   "injectors": {
     "defaultRequire": 1

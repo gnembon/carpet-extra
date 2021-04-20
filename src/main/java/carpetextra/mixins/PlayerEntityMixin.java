@@ -18,6 +18,6 @@ public abstract class PlayerEntityMixin extends LivingEntity
     @Override
     public boolean isPushable()
     {
-        return !CarpetExtraSettings.disablePlayerCollision;
+        return !CarpetExtraSettings.disablePlayerCollision && super.isPushable();
     }
 }

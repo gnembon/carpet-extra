@@ -17,7 +17,7 @@ public class CarpetExtraTranslations
         String dataJSON;
         try
         {
-            dataJSON = IOUtils.toString(Objects.requireNonNull(CarpetExtraTranslations.class.getClassLoader().getResourceAsStream(String.format("assets/lang/%s.json", lang))), StandardCharsets.UTF_8);
+            dataJSON = IOUtils.toString(Objects.requireNonNull(CarpetExtraTranslations.class.getClassLoader().getResourceAsStream(String.format("assets/carpet-extra/lang/%s.json", lang))), StandardCharsets.UTF_8);
         }
         catch (IOException | NullPointerException e)
         {
