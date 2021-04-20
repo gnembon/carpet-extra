@@ -1,24 +1,20 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
-import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
-import net.minecraft.class_6012;
 import net.minecraft.entity.EntityType;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.IglooFeature;
 import net.minecraft.world.gen.feature.StructureFeature;
 import org.spongepowered.asm.mixin.Mixin;
 
-import java.util.Collections;
-import java.util.List;
-
 @Mixin(IglooFeature.class)
 public abstract class IglooFeatureMixin extends StructureFeature<DefaultFeatureConfig>
 {
 
-    private static final class_6012<SpawnSettings.SpawnEntry> MONSTER_SPAWNS;
+    private static final Pool<SpawnSettings.SpawnEntry> MONSTER_SPAWNS;
 
     public IglooFeatureMixin(Codec<DefaultFeatureConfig> codec)
     {
@@ -26,7 +22,7 @@ public abstract class IglooFeatureMixin extends StructureFeature<DefaultFeatureC
     }
 
     @Override
-    public class_6012<SpawnSettings.SpawnEntry> getMonsterSpawns()
+    public Pool<SpawnSettings.SpawnEntry> getMonsterSpawns()
     {
         if (CarpetExtraSettings.straySpawningInIgloos)
         {
@@ -37,6 +33,6 @@ public abstract class IglooFeatureMixin extends StructureFeature<DefaultFeatureC
     
     static
     {
-        MONSTER_SPAWNS = class_6012.method_34989(new SpawnSettings.SpawnEntry(EntityType.STRAY, 1, 1, 1));
+        MONSTER_SPAWNS = Pool.of(new SpawnSettings.SpawnEntry(EntityType.STRAY, 1, 1, 1));
     }
 }
