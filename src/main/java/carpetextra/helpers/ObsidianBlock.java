@@ -27,7 +27,7 @@ public class ObsidianBlock extends Block
     }
 
     @Override
-    public void scheduledTick(BlockState blockState_1, ServerWorld serverWorld_1, BlockPos blockPos_1, Random random_1)
+    public void randomTick(BlockState blockState_1, ServerWorld serverWorld_1, BlockPos blockPos_1, Random random_1)
     {
         for (Direction dir : Direction.values())
         {

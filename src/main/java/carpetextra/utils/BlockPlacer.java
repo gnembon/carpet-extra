@@ -71,8 +71,13 @@ public class BlockPlacer
         }
         else if (block instanceof TrapdoorBlock)
         {
+            facing = Direction.byId(code % 16);
+            if(facing == Direction.UP || facing == Direction.DOWN)
+            {
+                facing = placer.getHorizontalFacing().getOpposite();
+            }
             return block.getDefaultState()
-                    .with(TrapdoorBlock.FACING, Direction.byId(code % 16))
+                    .with(TrapdoorBlock.FACING, facing)
                     .with(TrapdoorBlock.OPEN, Boolean.FALSE)
                     .with(TrapdoorBlock.HALF, (code >= 16) ? BlockHalf.TOP : BlockHalf.BOTTOM)
                     .with(TrapdoorBlock.OPEN, world.isReceivingRedstonePower(pos));
