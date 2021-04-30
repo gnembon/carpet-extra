@@ -29,7 +29,7 @@ public abstract class JungleTempleFeature_creeperMixin extends StructureFeature<
         {
             return MONSTER_SPAWNS;
         }
-        return SpawnSettings.field_30982;
+        return SpawnSettings.EMPTY_ENTRY_POOL;
     }
     
     static

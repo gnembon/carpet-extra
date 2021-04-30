@@ -105,8 +105,8 @@ public class CarpetDispenserBehaviours
                     minecart.discard();
                     AbstractMinecartEntity minecartEntity = AbstractMinecartEntity.create(minecart.world, minecart.getX(), minecart.getY(), minecart.getZ(), this.minecartType);
                     minecartEntity.setVelocity(minecart.getVelocity());
-                    minecartEntity.pitch = minecart.pitch;
-                    minecartEntity.yaw = minecart.yaw;
+                    minecartEntity.method_36457(minecart.method_36455());//pitch
+                    minecartEntity.method_36456(minecart.method_36454()); //yaw
                     
                     minecart.world.spawnEntity(minecartEntity);
                     stack.decrement(1);

@@ -28,7 +28,7 @@ public abstract class IglooFeatureMixin extends StructureFeature<DefaultFeatureC
         {
             return MONSTER_SPAWNS;
         }
-        return  SpawnSettings.field_30982;
+        return  SpawnSettings.EMPTY_ENTRY_POOL;
     }
     
     static

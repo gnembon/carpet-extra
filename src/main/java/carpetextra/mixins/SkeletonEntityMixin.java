@@ -26,7 +26,7 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
         if (!this.world.isClient && !this.isRemoved() && CarpetExtraSettings.renewableWitherSkeletons)
         {
             WitherSkeletonEntity witherSkelly = new WitherSkeletonEntity(EntityType.WITHER_SKELETON, this.world);
-            witherSkelly.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.yaw, this.pitch);
+            witherSkelly.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.method_36454(), this.method_36455()); // yaw pitch
             witherSkelly.initialize(serverWorld, this.world.getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, null, null);
             witherSkelly.setAiDisabled(this.isAiDisabled());
             
