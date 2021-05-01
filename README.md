@@ -50,7 +50,7 @@ Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
   
 ## chickenShearing
-Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!  
+Chickens can be sheared to get feathers. Beware! every time you shear a chicken, it gets damaged!  
 Baby chickens can't be sheared.  
 * Type: `boolean`  
 * Default value: `false`  
@@ -58,7 +58,7 @@ Baby chickens can't be sheared.
 * Categories: `EXTRAS`, `FEATURE`  
   
 ## clericsFarmWarts
-Clerics can warm nether farts.  
+Clerics can warm nether warts.  
 This will also allow them to pick up wart items, as well as pathfind to soulsand.  
 * Type: `boolean`  
 * Default value: `false`  
