@@ -10,14 +10,16 @@
   ],
   "contact": {
     "homepage": "https://github.com/gnembon/carpet-extra",
+    "issues": "https://github.com/gnembon/carpet-extra/issues",
     "sources": "https://github.com/gnembon/carpet-extra"
   },
 
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/carpet-extra/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
+      "carpetextra.CarpetExtraServer"
     ]
   },
   "mixins": [
@@ -29,10 +31,9 @@
     "carpet": "*",
     "minecraft": "1.16.x"
   },
-  "suggests": {
-    "flamingo": "*"
-  },
   "custom": {
-    "modmenu:parent": "carpet"
+    "modmenu": {
+      "parent": "carpet"
+    }
   }
 }

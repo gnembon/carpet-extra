@@ -6,15 +6,14 @@ import carpet.logging.Logger;
 import carpetextra.commands.PingCommand;
 import carpetextra.utils.CarpetExtraTranslations;
 import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.server.MinecraftServer;
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.Map;
 
 import static carpet.logging.LoggerRegistry.registerLogger;
 
-public class CarpetExtraServer implements CarpetExtension
+public class CarpetExtraServer implements CarpetExtension, ModInitializer
 {
 
     public static boolean __noteBlockChunkLoader;
@@ -26,13 +25,15 @@ public class CarpetExtraServer implements CarpetExtension
         return "carpet-extra";
     }
 
-    public static void noop() { }
-
-    static
+    public static void loadExtension()
     {
         CarpetServer.manageExtension(new CarpetExtraServer());
-        // temporary until CM proper runs tiny bit later
-        //CarpetServer.settingsManager.parseSettingsClass(CarpetExtraSettings.class);
+    }
+
+    @Override
+    public void onInitialize()
+    {
+        CarpetExtraServer.loadExtension();
     }
 
     @Override
@@ -40,26 +41,6 @@ public class CarpetExtraServer implements CarpetExtension
     {
         // let's /carpet handle our few simple settings
         CarpetServer.settingsManager.parseSettingsClass(CarpetExtraSettings.class);
-
-        // set-up a snooper to observe how rules are changing in carpet
-        CarpetServer.settingsManager.addRuleObserver( (serverCommandSource, currentRuleState, originalUserTest) ->
-        {
-            // here we will be snooping for command changes
-        });
-    }
-
-    @Override
-    public void onServerLoaded(MinecraftServer server)
-    {
-        // reloading of /carpet settings is handled by carpet
-        // reloading of own settings is handled as an extension, since we claim own settings manager
-        // in case something else falls into
-    }
-
-    @Override
-    public void onTick(MinecraftServer server)
-    {
-        // maybe, maybe
     }
 
     @Override
@@ -67,18 +48,6 @@ public class CarpetExtraServer implements CarpetExtension
     {
         // here goes extra stuff
         PingCommand.register(dispatcher);
-    }
-
-    @Override
-    public void onPlayerLoggedIn(ServerPlayerEntity player)
-    {
-         // will need that for client features
-    }
-
-    @Override
-    public void onPlayerLoggedOut(ServerPlayerEntity player)
-    {
-        // will need that for client features
     }
 
     @Override

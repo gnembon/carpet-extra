@@ -26,7 +26,7 @@ Also makes hoppers, droppers and dispensers input max 1 item per slot.
 * Categories: `CREATIVE`, `EXTRAS`, `DISPENSER`  
   
 ## betterBonemeal
-Bonemeal can be used to grow sugarcane and cactus.  
+Bonemeal can be used to grow sugarcane, cactus and lily pads.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
@@ -315,7 +315,7 @@ Gives Spider jockeys a specified chance to drop enchanted golden apples.
 0 is the default setting, no enchanted golden apples will be dropped  
 * Type: `int`  
 * Default value: `0`  
-* Required options: `0`, `50`, `100`  
+* Suggested options: `0`, `50`, `100`  
 * Categories: `EXTRAS`, `FEATURE`  
 * Additional notes:  
   * You must choose a value from 0 to 100  
