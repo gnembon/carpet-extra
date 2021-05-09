@@ -58,7 +58,7 @@ Baby chickens can't be sheared.
 * Categories: `EXTRAS`, `FEATURE`  
   
 ## clericsFarmWarts
-Clerics can warm nether warts.  
+Clerics can farm nether warts.  
 This will also allow them to pick up wart items, as well as pathfind to soulsand.  
 * Type: `boolean`  
 * Default value: `false`  
@@ -349,5 +349,4 @@ Requires dragonEggBedrockBreaking to be set to true.
 * Required options: `true`, `false`  
 * Categories: `EXPERIMENTAL`, `EXTRAS`  
   
-
 
