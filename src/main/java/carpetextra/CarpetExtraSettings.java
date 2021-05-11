@@ -19,6 +19,19 @@ import static carpet.settings.RuleCategory.SURVIVAL;
  */
 public class CarpetExtraSettings
 {
+    public enum comparatorOptions {
+        VANILLA(0),
+        BEHIND(1),
+        LENIENT(2),
+        EXTENDED(3);
+
+        public final int id;
+
+        private comparatorOptions(int id) {
+            this.id = id;
+        }
+    }
+
     public static final String EXTRA = "extras";
 
     public static class validatorScaffoldingDistance extends Validator<Integer> {
@@ -80,6 +93,17 @@ public class CarpetExtraSettings
         category = {FEATURE,EXTRA,EXPERIMENTAL}
     )
     public static boolean comparatorReadsClock = false;
+
+    @Rule(
+            desc = "Allows Comparators to see item frames that are horizontal in front of them and on top the the block in front of them",
+            extra = {
+                    "Behind: Allows comparators to detect item frames in the block behind them",
+                    "Lenient: Allows comparators to detect any item frames within the block behind a full block",
+                    "Extended: Allows comparators to detect item frames on a full block behind the comparator"
+            },
+            category = {FEATURE,EXTRA,EXPERIMENTAL}
+    )
+    public static comparatorOptions comparatorBetterItemFrames = comparatorOptions.VANILLA;
 
     @Rule(
         desc = "Makes Hopper Minecarts have an 8gt cooldown like hoppers.",

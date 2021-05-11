@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemFrameEntity.class)
@@ -52,5 +53,19 @@ public abstract class ItemFrameEntity_comparatorReadsClockMixin extends Abstract
             }
         }
         super.tick();
+    }
+
+    @Inject(method = "Lnet/minecraft/entity/decoration/ItemFrameEntity;setHeldItemStack(Lnet/minecraft/item/ItemStack;Z)V", at = @At(value = "INVOKE", target="Lnet/minecraft/world/World;updateComparators(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;)V"), cancellable = true)
+    private void onStackChangeUpdateComparatorDownwards(ItemStack value, boolean update, CallbackInfo ci) {
+        if (CarpetExtraSettings.comparatorBetterItemFrames.id == 3) {
+            this.world.updateComparators(this.attachmentPos.offset(this.getHorizontalFacing().getOpposite()), Blocks.AIR);
+        }
+    }
+
+    @Inject(method = "Lnet/minecraft/entity/decoration/ItemFrameEntity;setRotation(IZ)V", at = @At(value = "INVOKE", target="Lnet/minecraft/world/World;updateComparators(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;)V"), cancellable = true)
+    private void onRotationUpdateComparatorDownwards(int value, boolean bl, CallbackInfo ci) {
+        if (CarpetExtraSettings.comparatorBetterItemFrames.id == 3) {
+            this.world.updateComparators(this.attachmentPos.offset(this.getHorizontalFacing().getOpposite()), Blocks.AIR);
+        }
     }
 }
