@@ -19,7 +19,7 @@ import static carpet.settings.RuleCategory.SURVIVAL;
  */
 public class CarpetExtraSettings
 {
-    public enum comparatorOptions {
+    public enum ComparatorOptions {
         VANILLA(0),
         BEHIND(1),
         LENIENT(2),
@@ -27,7 +27,7 @@ public class CarpetExtraSettings
 
         public final int id;
 
-        private comparatorOptions(int id) {
+        ComparatorOptions(int id) {
             this.id = id;
         }
     }
@@ -103,7 +103,7 @@ public class CarpetExtraSettings
             },
             category = {FEATURE,EXTRA,EXPERIMENTAL}
     )
-    public static comparatorOptions comparatorBetterItemFrames = comparatorOptions.VANILLA;
+    public static ComparatorOptions comparatorBetterItemFrames = ComparatorOptions.VANILLA;
 
     @Rule(
         desc = "Makes Hopper Minecarts have an 8gt cooldown like hoppers.",
