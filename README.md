@@ -50,7 +50,7 @@ Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
   
 ## chickenShearing
-Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!  
+Chickens can be sheared to get feathers. Beware! every time you shear a chicken, it gets damaged!  
 Baby chickens can't be sheared.  
 * Type: `boolean`  
 * Default value: `false`  
@@ -201,8 +201,8 @@ Credits: Skyrising
   
 ## flowerPotChunkLoading
 Placing a wither rose in a flowerpot will load that chunk.  
-If u enable the rule the already existing chunks with flowerpots won't be loaded.   
-Also disabling the carpet rule won't remove the loaded chunks, u need to manually unload them using the /forceload command.   
+If you enable the rule the already existing chunks with flowerpots won't be loaded.   
+Also disabling the carpet rule won't remove the loaded chunks, you need to manually unload them using the /forceload command.   
 All the loaded chunks can be seen using `/forceload query`  
 * Type: `boolean`  
 * Default value: `false`  
