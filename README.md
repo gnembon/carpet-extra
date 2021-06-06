@@ -50,7 +50,7 @@ Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
   
 ## chickenShearing
-Chickens can be sheared to get feathers. Beware! every time you shear a chicken, it gets damaged!  
+Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!  
 Baby chickens can't be sheared.  
 * Type: `boolean`  
 * Default value: `false`  
@@ -201,8 +201,8 @@ Credits: Skyrising
   
 ## flowerPotChunkLoading
 Placing a wither rose in a flowerpot will load that chunk.  
-If you enable the rule the already existing chunks with flowerpots won't be loaded.   
-Also disabling the carpet rule won't remove the loaded chunks, you need to manually unload them using the /forceload command.   
+If u enable the rule the already existing chunks with flowerpots won't be loaded.   
+Also disabling the carpet rule won't remove the loaded chunks, u need to manually unload them using the /forceload command.   
 All the loaded chunks can be seen using `/forceload query`  
 * Type: `boolean`  
 * Default value: `false`  
@@ -326,6 +326,17 @@ Only strays spawn in igloos.
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`  
+  
+## updateSuppressionBlock
+Placing an activator rail on top of a barrier block will update suppress when the rail turns off.  
+Entering an integer will make the update suppression block auto-reset  
+Integer entered is the delay in ticks for it to reset  
+* Type: `String`  
+* Default value: `false`  
+* Suggested options: `false`, `true`, `1`, `6`  
+* Categories: `CREATIVE`, `EXTRAS`  
+* Additional notes:  
+  * Cannot be negative, can be true, false, or # > 0  
   
 ## updateSuppressionCrashFix
 Fixes updates suppression causing server crashes.  
