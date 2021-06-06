@@ -141,6 +141,7 @@ public class CarpetExtraSettings
 
     @Rule(
             desc = "Dispensers can feed animals if given their breeding item.",
+            extra = "Can also feed flowers to brown mooshrooms to give them a suspicious stew effect",
             category = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER}
     )
     public static boolean dispensersFeedAnimals = false;
@@ -216,7 +217,7 @@ public class CarpetExtraSettings
     public static boolean reloadSuffocationFix = false;
     
     @Rule(
-            desc = "Dispensers with empty buckets can milk cows/mooshrooms/goats, and get mushroom stew from mooshrooms with bowls.",
+            desc = "Dispensers with empty buckets can milk cows/mooshrooms/goats, and get mushroom/suspicious stew from mooshrooms with bowls.",
             category = {EXPERIMENTAL, EXTRA, FEATURE, DISPENSER}
     )
     public static boolean dispensersMilkAnimals = false;

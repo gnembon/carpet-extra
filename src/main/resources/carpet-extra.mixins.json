@@ -29,6 +29,7 @@
     "DispenserBehaviorGlowstoneMixin",
     "DispenserBehaviorCarvedPumpkinMixin",
     "DispenserBehaviorMobHeadMixin",
+    "MooshroomEntity_StatusEffectAccessorMixin",
     "HoeItem_TilledBlocksAccessorMixin",
 
     "VillagerEntity_wartFarmMixin",

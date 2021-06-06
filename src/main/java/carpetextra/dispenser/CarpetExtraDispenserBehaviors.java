@@ -7,6 +7,7 @@ import carpetextra.dispenser.behaviors.BlazePowderDispenserBehavior;
 import carpetextra.dispenser.behaviors.CarvePumpkinDispenserBehavior;
 import carpetextra.dispenser.behaviors.DragonBreathDispenserBehavior;
 import carpetextra.dispenser.behaviors.FeedAnimalDispenserBehavior;
+import carpetextra.dispenser.behaviors.FeedMooshroomDispenserBehavior;
 import carpetextra.dispenser.behaviors.FillMinecartDispenserBehavior;
 import carpetextra.dispenser.behaviors.FireChargeDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkAnimalDispenserBehavior;
@@ -24,6 +25,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.GoatEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -33,6 +35,7 @@ import net.minecraft.item.MusicDiscItem;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.ItemTags;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -46,6 +49,7 @@ public class CarpetExtraDispenserBehaviors {
     public static final DispenserBehavior CARVE_PUMPKIN = new CarvePumpkinDispenserBehavior();
     // dispensersFeedAnimals
     public static final DispenserBehavior FEED_ANIMAL = new FeedAnimalDispenserBehavior();
+    public static final DispenserBehavior FEED_MOOSHROOM = new FeedMooshroomDispenserBehavior();
     // dispensersFillMinecarts
     public static final DispenserBehavior FILL_MINECART_CHEST = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.CHEST);
     public static final DispenserBehavior FILL_MINECART_FURNACE = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.FURNACE);
@@ -97,6 +101,16 @@ public class CarpetExtraDispenserBehaviors {
 
             if(hasFeedableAnimals) {
                 return FEED_ANIMAL;
+            }
+
+            // get brown mooshrooms in front of dispenser
+            boolean hasFeedableMooshrooms = !world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) -> {
+                return ((MooshroomEntity) mooshroomEntity).getMooshroomType() == MooshroomEntity.Type.BROWN;
+            })).isEmpty();
+
+            // check if item is a small flower
+            if(hasFeedableMooshrooms && ItemTags.SMALL_FLOWERS.contains(item)) {
+                return FEED_MOOSHROOM;
             }
         }
 
