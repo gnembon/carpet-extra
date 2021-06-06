@@ -1,6 +1,5 @@
 package carpetextra.mixins;
 
-import net.minecraft.block.AbstractRedstoneGateBlock;
 import net.minecraft.block.ComparatorBlock;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,10 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ComparatorBlock.class)
-public abstract class ComparatorBlock_playerAbilityMixin extends AbstractRedstoneGateBlock {
-    protected ComparatorBlock_playerAbilityMixin(Settings settings) {
-        super(settings);
-    }
+public abstract class ComparatorBlock_playerAbilityMixin {
 
     @Redirect(
         method = "onUse",
