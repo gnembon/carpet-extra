@@ -326,4 +326,10 @@ public class CarpetExtraSettings
             category = {EXTRA, FEATURE, DISPENSER}
     )
     public static boolean dispensersStripBlocks = false;
+
+    @Rule(
+            desc = "Dispensers can empty/fill cauldrons with buckets or bottles, and undye leather armor/shulker boxes/banners",
+            category = {EXTRA, FEATURE, DISPENSER}
+    )
+    public static boolean dispensersUseCauldrons = false;
 }

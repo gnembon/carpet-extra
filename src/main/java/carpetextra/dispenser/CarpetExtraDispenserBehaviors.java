@@ -5,6 +5,9 @@ import java.util.Map;
 import carpetextra.CarpetExtraSettings;
 import carpetextra.dispenser.behaviors.BlazePowderDispenserBehavior;
 import carpetextra.dispenser.behaviors.CarvePumpkinDispenserBehavior;
+import carpetextra.dispenser.behaviors.CauldronEmptyingDispenserBehavior;
+import carpetextra.dispenser.behaviors.CauldronFillingDispenserBehavior;
+import carpetextra.dispenser.behaviors.CauldronWaterDispenserBehavior;
 import carpetextra.dispenser.behaviors.DragonBreathDispenserBehavior;
 import carpetextra.dispenser.behaviors.FeedAnimalDispenserBehavior;
 import carpetextra.dispenser.behaviors.FeedMooshroomDispenserBehavior;
@@ -16,6 +19,7 @@ import carpetextra.dispenser.behaviors.MusicDiscDispenserBehavior;
 import carpetextra.dispenser.behaviors.StripBlocksDispenserBehavior;
 import carpetextra.dispenser.behaviors.TillSoilDispenserBehavior;
 import carpetextra.dispenser.behaviors.ToggleBlockDispenserBehavior;
+import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -68,6 +72,10 @@ public class CarpetExtraDispenserBehaviors {
     public static final DispenserBehavior TILL_SOIL = new TillSoilDispenserBehavior();
     // dispensersToggleThings
     public static final DispenserBehavior TOGGLE_BLOCK = new ToggleBlockDispenserBehavior();
+    // dispensersUseCauldrons
+    public static final DispenserBehavior CAULDRON_FILLING_BUCKET = new CauldronFillingDispenserBehavior();
+    public static final DispenserBehavior CAULDRON_EMPTYING_BUCKET = new CauldronEmptyingDispenserBehavior();
+    public static final DispenserBehavior CAULDRON_WATER = new CauldronWaterDispenserBehavior();
     // renewableEndstone
     public static final DispenserBehavior DRAGON_BREATH_ENDSTONE = new DragonBreathDispenserBehavior();
     // renewableNetherrack
@@ -191,6 +199,22 @@ public class CarpetExtraDispenserBehaviors {
         // dispensersToggleThings
         if(CarpetExtraSettings.dispensersToggleThings && item == Items.STICK && ToggleBlockDispenserBehavior.TOGGLEABLE_BLOCKS.contains(frontBlock)) {
             return TOGGLE_BLOCK;
+        }
+
+        // dispensersUseCauldrons
+        if(CarpetExtraSettings.dispensersUseCauldrons && frontBlock instanceof AbstractCauldronBlock) {
+            // empty cauldron
+            if(item == Items.BUCKET) {
+                return CAULDRON_EMPTYING_BUCKET;
+            }
+            // fill cauldron
+            else if(item == Items.LAVA_BUCKET || item == Items.WATER_BUCKET || item == Items.POWDER_SNOW_BUCKET) {
+                return CAULDRON_FILLING_BUCKET;
+            }
+            // water cauldron behaviors (leather armor, shulker boxes, banners)
+            else if(CauldronWaterDispenserBehavior.isWaterCauldronItem(stack)) {
+                return CAULDRON_WATER;
+            }
         }
 
         // renewableEndstone
