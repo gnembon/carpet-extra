@@ -23,13 +23,13 @@
     "DropperBlock_craftingMixin",
     "DispenserBlockEntity_craftingMixin",
 
+    "DispenserBlock_GetCustomBehaviorMixin",
     "DispenserBehaviorCarpetsMixin",
     "DispenserBehaviorChestMixin",
-    "DispenserBehaviorFireChargeMixin",
     "DispenserBehaviorGlowstoneMixin",
-    "DispenserBehaviorShearsMixin",
     "DispenserBehaviorCarvedPumpkinMixin",
     "DispenserBehaviorMobHeadMixin",
+    "HoeItem_TilledBlocksAccessorMixin",
 
     "VillagerEntity_wartFarmMixin",
     "FarmerVillagerTask_wartFarmMixin",
@@ -55,7 +55,6 @@
     "LivingEntityMixin",
     "FlowerPotBlockMixin",
     "EntityMixin",
-    "DispenserBehaviorBucketCowsMixin",
     "AbstractRedstoneGateBlockMixin",
     "IglooFeatureMixin",
     "SurfaceChunkGeneratorMixin",

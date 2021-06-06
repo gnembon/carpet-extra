@@ -1,8 +1,6 @@
 package carpetextra.mixins;
 
-import carpetextra.helpers.CarpetDispenserBehaviours;
 import carpetextra.utils.PlaceBlockDispenserBehavior;
-import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPointer;
@@ -24,6 +22,6 @@ public abstract class DispenserBehaviorChestMixin
     private void handleBlockPlacing(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir)
     {
         if (stack.getItem() instanceof BlockItem && PlaceBlockDispenserBehavior.canPlace(((BlockItem) stack.getItem()).getBlock()))
-            cir.setReturnValue(new CarpetDispenserBehaviours.MinecartDispenserBehaviour(AbstractMinecartEntity.Type.CHEST).dispenseSilently(pointer, stack));
+            cir.setReturnValue(PlaceBlockDispenserBehavior.getInstance().dispenseSilently(pointer, stack));
     }
 }
