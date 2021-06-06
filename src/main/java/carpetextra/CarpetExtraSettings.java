@@ -187,8 +187,8 @@ public class CarpetExtraSettings
     
     @Rule(
             desc = "Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!",
-            category = {EXTRA, FEATURE},
-            extra = "Baby chickens can't be sheared."
+            category = {EXTRA, FEATURE, DISPENSER},
+            extra = {"Baby chickens can't be sheared.", "Also works with dispensers"}
     )
     public static boolean chickenShearing = false;
     

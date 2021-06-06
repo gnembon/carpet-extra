@@ -17,6 +17,7 @@ import carpetextra.dispenser.behaviors.FlowerPotDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkAnimalDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkMooshroomDispenserBehavior;
 import carpetextra.dispenser.behaviors.MusicDiscDispenserBehavior;
+import carpetextra.dispenser.behaviors.ShearChickenDispenserBehavior;
 import carpetextra.dispenser.behaviors.StripBlocksDispenserBehavior;
 import carpetextra.dispenser.behaviors.TillSoilDispenserBehavior;
 import carpetextra.dispenser.behaviors.ToggleBlockDispenserBehavior;
@@ -54,6 +55,8 @@ public class CarpetExtraDispenserBehaviors {
     // instances of custom dispenser behaviors
     // blazeMeal
     public static final DispenserBehavior BLAZE_MEAL = new BlazePowderDispenserBehavior();
+    // chickenShearing
+    public static final DispenserBehavior SHEAR_CHICKEN = new ShearChickenDispenserBehavior();
     // dispensersCarvePumpkins
     public static final DispenserBehavior CARVE_PUMPKIN = new CarvePumpkinDispenserBehavior();
     // dispensersFeedAnimals
@@ -102,6 +105,17 @@ public class CarpetExtraDispenserBehaviors {
         // blazeMeal
         if(CarpetExtraSettings.blazeMeal && item == Items.BLAZE_POWDER && frontBlock == Blocks.NETHER_WART) {
             return BLAZE_MEAL;
+        }
+
+        // chickenShearing
+        if(CarpetExtraSettings.chickenShearing && item == Items.SHEARS) {
+            boolean hasShearableChickens = !world.getEntitiesByType(EntityType.CHICKEN, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((chickenEntity) -> {
+                return !((AnimalEntity) chickenEntity).isBaby();
+            })).isEmpty();
+
+            if(hasShearableChickens) {
+                return SHEAR_CHICKEN;
+            }
         }
 
         // dispensersCarvePumpkins
