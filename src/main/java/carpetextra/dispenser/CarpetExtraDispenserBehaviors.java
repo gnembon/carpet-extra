@@ -13,6 +13,7 @@ import carpetextra.dispenser.behaviors.FireChargeDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkAnimalDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkMooshroomDispenserBehavior;
 import carpetextra.dispenser.behaviors.MusicDiscDispenserBehavior;
+import carpetextra.dispenser.behaviors.StripBlocksDispenserBehavior;
 import carpetextra.dispenser.behaviors.TillSoilDispenserBehavior;
 import carpetextra.dispenser.behaviors.ToggleBlockDispenserBehavior;
 import net.minecraft.block.Block;
@@ -27,6 +28,7 @@ import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.GoatEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -60,6 +62,8 @@ public class CarpetExtraDispenserBehaviors {
     public static final DispenserBehavior MILK_MOOSHROOM = new MilkMooshroomDispenserBehavior();
     // dispensersPlayRecords
     public static final DispenserBehavior PLAY_DISC = new MusicDiscDispenserBehavior();
+    // dispensersStripBlocks
+    public static final DispenserBehavior STRIP_BLOCK = new StripBlocksDispenserBehavior();
     // dispensersTillSoil
     public static final DispenserBehavior TILL_SOIL = new TillSoilDispenserBehavior();
     // dispensersToggleThings
@@ -163,6 +167,11 @@ public class CarpetExtraDispenserBehaviors {
         // dispensersPlayRecords
         if(CarpetExtraSettings.dispensersPlayRecords && item instanceof MusicDiscItem && frontBlock == Blocks.JUKEBOX) {
             return PLAY_DISC;
+        }
+
+        // dispensersStripBlocks
+        if(CarpetExtraSettings.dispensersStripBlocks && item instanceof AxeItem && (StripBlocksDispenserBehavior.canStrip(frontBlock) || StripBlocksDispenserBehavior.isStripResult(frontBlock))) {
+            return STRIP_BLOCK;
         }
 
         // dispensersTillSoil

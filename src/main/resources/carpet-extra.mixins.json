@@ -31,6 +31,7 @@
     "DispenserBehaviorMobHeadMixin",
     "MooshroomEntity_StatusEffectAccessorMixin",
     "HoeItem_TilledBlocksAccessorMixin",
+    "AxeItem_StrippedBlocksAccessorMixin",
 
     "VillagerEntity_wartFarmMixin",
     "FarmerVillagerTask_wartFarmMixin",

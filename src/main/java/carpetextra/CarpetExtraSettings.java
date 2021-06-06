@@ -319,4 +319,11 @@ public class CarpetExtraSettings
             category = {EXTRA, FEATURE, SURVIVAL}
     )
     public static boolean blazeMeal = false;
+
+    @Rule(
+            desc = "Dispensers with axes can strip blocks",
+            extra = "Can strip logs, remove oxidation, and remove wax",
+            category = {EXTRA, FEATURE, DISPENSER}
+    )
+    public static boolean dispensersStripBlocks = false;
 }
