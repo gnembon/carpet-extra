@@ -8,7 +8,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ComparatorBlock.class)
-public abstract class ComparatorBlockMixin {
+public abstract class ComparatorBlock_playerAbilityMixin {
+
     @Redirect(
         method = "onUse",
         at = @At(

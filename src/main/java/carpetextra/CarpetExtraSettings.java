@@ -19,6 +19,19 @@ import static carpet.settings.RuleCategory.SURVIVAL;
  */
 public class CarpetExtraSettings
 {
+    public enum ComparatorOptions {
+        VANILLA(0),
+        BEHIND(1),
+        LENIENT(2),
+        EXTENDED(3);
+
+        public final int id;
+
+        ComparatorOptions(int id) {
+            this.id = id;
+        }
+    }
+
     public static final String EXTRA = "extras";
 
     public static class validatorScaffoldingDistance extends Validator<Integer> {
@@ -82,6 +95,17 @@ public class CarpetExtraSettings
     public static boolean comparatorReadsClock = false;
 
     @Rule(
+            desc = "Allows Comparators to see item frames that are horizontal in front of them and on top the the block in front of them",
+            extra = {
+                    "Behind: Allows comparators to detect item frames in the block behind them",
+                    "Lenient: Allows comparators to detect any item frames within the block behind a full block",
+                    "Extended: Allows comparators to detect item frames on a full block behind the comparator"
+            },
+            category = {FEATURE,EXTRA,EXPERIMENTAL}
+    )
+    public static ComparatorOptions comparatorBetterItemFrames = ComparatorOptions.VANILLA;
+
+    @Rule(
         desc = "Makes Hopper Minecarts have an 8gt cooldown like hoppers.",
         category = {BUGFIX,FEATURE,EXTRA,EXPERIMENTAL}
     )
@@ -95,13 +119,13 @@ public class CarpetExtraSettings
     
     @Rule(desc = "Enables `/ping` for players to get their ping.", category = {COMMAND, EXTRA})
     public static boolean commandPing = true;
-    
+
     @Rule(
             desc = "Minecarts can be filled with hoppers, chests, tnt and furnace.",
             category = {EXPERIMENTAL, FEATURE, EXTRA, DISPENSER}
     )
     public static boolean dispensersFillMinecarts = false;
-    
+
     @Rule(
             desc = "Clerics can warm nether farts.",
             extra = {"This will also allow them to pick up wart items, as well as pathfind to soulsand."},
