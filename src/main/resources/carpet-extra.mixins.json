@@ -32,6 +32,7 @@
     "MooshroomEntity_StatusEffectAccessorMixin",
     "HoeItem_TilledBlocksAccessorMixin",
     "AxeItem_StrippedBlocksAccessorMixin",
+    "FlowerPotBlock_ContentAccessorMixin",
 
     "VillagerEntity_wartFarmMixin",
     "FarmerVillagerTask_wartFarmMixin",

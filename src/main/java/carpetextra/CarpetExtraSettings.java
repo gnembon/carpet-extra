@@ -332,4 +332,10 @@ public class CarpetExtraSettings
             category = {EXTRA, FEATURE, DISPENSER}
     )
     public static boolean dispensersUseCauldrons = false;
+
+    @Rule(
+            desc = "Dispensers can put flowers in flower pots",
+            category = {EXTRA, FEATURE, DISPENSER}
+    )
+    public static boolean dispensersPotPlants = false;
 }

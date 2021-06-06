@@ -13,17 +13,20 @@ import carpetextra.dispenser.behaviors.FeedAnimalDispenserBehavior;
 import carpetextra.dispenser.behaviors.FeedMooshroomDispenserBehavior;
 import carpetextra.dispenser.behaviors.FillMinecartDispenserBehavior;
 import carpetextra.dispenser.behaviors.FireChargeDispenserBehavior;
+import carpetextra.dispenser.behaviors.FlowerPotDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkAnimalDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkMooshroomDispenserBehavior;
 import carpetextra.dispenser.behaviors.MusicDiscDispenserBehavior;
 import carpetextra.dispenser.behaviors.StripBlocksDispenserBehavior;
 import carpetextra.dispenser.behaviors.TillSoilDispenserBehavior;
 import carpetextra.dispenser.behaviors.ToggleBlockDispenserBehavior;
+import carpetextra.helpers.FlowerPotHelper;
 import net.minecraft.block.AbstractCauldronBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.EntityType;
@@ -66,6 +69,8 @@ public class CarpetExtraDispenserBehaviors {
     public static final DispenserBehavior MILK_MOOSHROOM = new MilkMooshroomDispenserBehavior();
     // dispensersPlayRecords
     public static final DispenserBehavior PLAY_DISC = new MusicDiscDispenserBehavior();
+    // dispensersPotPlants
+    public static final DispenserBehavior FILL_FLOWER_POT = new FlowerPotDispenserBehavior();
     // dispensersStripBlocks
     public static final DispenserBehavior STRIP_BLOCK = new StripBlocksDispenserBehavior();
     // dispensersTillSoil
@@ -175,6 +180,11 @@ public class CarpetExtraDispenserBehaviors {
         // dispensersPlayRecords
         if(CarpetExtraSettings.dispensersPlayRecords && item instanceof MusicDiscItem && frontBlock == Blocks.JUKEBOX) {
             return PLAY_DISC;
+        }
+
+        // dispensersPotPlants
+        if(CarpetExtraSettings.dispensersPotPlants && frontBlock instanceof FlowerPotBlock && FlowerPotHelper.isPottable(item)) {
+            return FILL_FLOWER_POT;
         }
 
         // dispensersStripBlocks
