@@ -130,7 +130,7 @@ public class CarpetExtraSettings
     public static boolean accurateBlockPlacement = false;
 
     @Rule(
-            desc = "Dispensers containing a stick can toggle things.",
+            desc = "Dispensers containing a stick can toggle/activate things.",
             extra = {"Works with buttons, redstone, noteblocks, comparators, repeaters, ", "daylight detectors, etc."},
             category = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER}
     )
@@ -139,7 +139,11 @@ public class CarpetExtraSettings
     @Rule(desc = "Dispensers with hoes can till soil.", category = {EXTRA, FEATURE, DISPENSER})
     public static boolean dispensersTillSoil = false;
 
-    @Rule(desc = "Dispensers can feed animals.", category = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER})
+    @Rule(
+            desc = "Dispensers can feed animals if given their breeding item.",
+            extra = "Can also feed flowers to brown mooshrooms to give them a suspicious stew effect",
+            category = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER}
+    )
     public static boolean dispensersFeedAnimals = false;
     
     @Rule(desc = "Disables player entity collision.", category = {EXTRA, CREATIVE, EXPERIMENTAL})
@@ -179,12 +183,12 @@ public class CarpetExtraSettings
             category = {EXTRA, EXPERIMENTAL},
             extra = "Credits: Skyrising"
     )
-    public static boolean fireChargeConvertsToNetherrack = false;
+    public static boolean renewableNetherrack = false;
     
     @Rule(
             desc = "Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!",
-            category = {EXTRA, FEATURE},
-            extra = "Baby chickens can't be sheared."
+            category = {EXTRA, FEATURE, DISPENSER},
+            extra = {"Baby chickens can't be sheared.", "Also works with dispensers"}
     )
     public static boolean chickenShearing = false;
     
@@ -213,10 +217,10 @@ public class CarpetExtraSettings
     public static boolean reloadSuffocationFix = false;
     
     @Rule(
-            desc = "Dispensers with empty buckets can milk cows and get stew from mooshrooms with bowls.",
+            desc = "Dispensers with empty buckets can milk cows/mooshrooms/goats, and get mushroom/suspicious stew from mooshrooms with bowls.",
             category = {EXPERIMENTAL, EXTRA, FEATURE, DISPENSER}
     )
-    public static boolean dispensersMilkCows = false;
+    public static boolean dispensersMilkAnimals = false;
     
     @Rule(
             desc = "Quick pulses won't get lost in repeater setups.",
@@ -267,7 +271,7 @@ public class CarpetExtraSettings
             desc = "Dragon's breath from dispensers convert cobblestone to end stone.",
             category = {EXTRA, EXPERIMENTAL, DISPENSER}
     )
-    public static boolean dragonsBreathConvertsCobbleToEndstone = false;
+    public static boolean renewableEndstone = false;
 
     @Rule(
             desc = "Maximum water sucking for sponge.",
@@ -315,4 +319,23 @@ public class CarpetExtraSettings
             category = {EXTRA, FEATURE, SURVIVAL}
     )
     public static boolean blazeMeal = false;
+
+    @Rule(
+            desc = "Dispensers with axes can strip blocks",
+            extra = "Can strip logs, remove oxidation, and remove wax",
+            category = {EXTRA, FEATURE, DISPENSER}
+    )
+    public static boolean dispensersStripBlocks = false;
+
+    @Rule(
+            desc = "Dispensers can empty/fill cauldrons with buckets or bottles, and undye leather armor/shulker boxes/banners",
+            category = {EXTRA, FEATURE, DISPENSER}
+    )
+    public static boolean dispensersUseCauldrons = false;
+
+    @Rule(
+            desc = "Dispensers can put flowers in flower pots",
+            category = {EXTRA, FEATURE, DISPENSER}
+    )
+    public static boolean dispensersPotPlants = false;
 }
