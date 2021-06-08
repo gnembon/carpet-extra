@@ -74,6 +74,16 @@ Enables `/ping` for players to get their ping.
 * Additional notes:  
   * It has an accompanying command  
   
+## comparatorBetterItemFrames
+Allows Comparators to see item frames that are horizontal in front of them and on top the the block in front of them  
+Behind: Allows comparators to detect item frames in the block behind them  
+Lenient: Allows comparators to detect any item frames within the block behind a full block  
+Extended: Allows comparators to detect item frames on a full block behind the comparator  
+* Type: `ComparatorOptions`  
+* Default value: `vanilla`  
+* Required options: `vanilla`, `behind`, `lenient`, `extended`  
+* Categories: `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
+  
 ## comparatorReadsClock
 Allows Comparators to read the daytime instead of the rotation of clocks in item frames.  
 * Type: `boolean`  
