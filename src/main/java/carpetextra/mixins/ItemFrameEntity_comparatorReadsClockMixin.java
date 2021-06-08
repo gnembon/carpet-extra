@@ -42,7 +42,6 @@ public abstract class ItemFrameEntity_comparatorReadsClockMixin extends Abstract
     public void tick() {
         if(CarpetExtraSettings.comparatorReadsClock && this.getHeldItemStack().getItem() == Items.CLOCK) {
             //This doesn't handle time set commands yet
-
             //Every 1500 ticks, increase signal strength by one, so update comparators exactly then
             if(this.world.getTimeOfDay() % 1500 == 0 || firstTick) {
                 firstTick = false;

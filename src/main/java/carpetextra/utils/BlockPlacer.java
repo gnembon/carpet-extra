@@ -31,7 +31,7 @@ public class BlockPlacer
         Direction facing;
         Vec3d vec3d = context.getHitPos();
         BlockPos pos = context.getBlockPos();
-        float hitX = (float) vec3d.x - pos.getX();
+        double hitX = vec3d.x - pos.getX();
         if (hitX<2) // vanilla
             return null;
         int code = (int)(hitX-2)/2;
