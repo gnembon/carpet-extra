@@ -45,9 +45,7 @@ public abstract class FallingBlockEntityMixin extends Entity
         this.iceCount = 0;
     }
     
-    @Inject(method = "tick", at = @At(value = "INVOKE", ordinal = 0,
-            target = "Lnet/minecraft/entity/FallingBlockEntity;discard()V"),
-            slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", ordinal = 1)),
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", ordinal = 1),
             locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true
     )
     private void onTick(CallbackInfo ci, Block block_1, BlockPos blockPos_2, boolean b1, boolean bl2, BlockState blockState_1)
