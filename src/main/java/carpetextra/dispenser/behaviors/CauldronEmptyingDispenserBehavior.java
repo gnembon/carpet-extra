@@ -21,7 +21,7 @@ public class CauldronEmptyingDispenserBehavior extends DispenserBehaviorHelper {
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
         Block frontBlock = frontBlockState.getBlock();
 

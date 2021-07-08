@@ -22,7 +22,7 @@ public class FeedAnimalDispenserBehavior extends FallibleItemDispenserBehavior {
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
         Box frontBlockBox = new Box(frontBlockPos);
 
         // get all animals in front of dispenser that are able to be fed current item and can breed or grow up

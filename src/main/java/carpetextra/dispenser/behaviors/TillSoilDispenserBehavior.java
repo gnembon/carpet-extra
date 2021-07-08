@@ -25,7 +25,7 @@ public class TillSoilDispenserBehavior extends FallibleItemDispenserBehavior {
         this.setSuccess(true);
         ServerWorld world = pointer.getWorld();
         Direction dispenserFacing = pointer.getBlockState().get(DispenserBlock.FACING);
-        BlockPos frontBlockPos = pointer.getBlockPos().offset(dispenserFacing);
+        BlockPos frontBlockPos = pointer.getPos().offset(dispenserFacing);
 
         // check block in front of dispenser and one block down
         for(int i = 0; i < 2; i++) {

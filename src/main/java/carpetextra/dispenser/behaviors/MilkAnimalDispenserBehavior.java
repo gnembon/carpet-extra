@@ -24,7 +24,7 @@ public class MilkAnimalDispenserBehavior extends DispenserBehaviorHelper {
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
 
         // check if non-baby cows/mooshrooms/goats are in front of dispenser
         List<AnimalEntity> milkableAnimals = world.getEntitiesByClass(AnimalEntity.class, new Box(frontBlockPos), EntityPredicates.VALID_LIVING_ENTITY.and((animalEntity) -> {

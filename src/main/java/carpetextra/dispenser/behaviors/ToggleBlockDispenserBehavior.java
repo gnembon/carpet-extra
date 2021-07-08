@@ -46,7 +46,7 @@ public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior 
         this.setSuccess(true);
         ServerWorld world = pointer.getWorld();
         Direction dispenserFacing = pointer.getBlockState().get(DispenserBlock.FACING);
-        BlockPos frontBlockPos = pointer.getBlockPos().offset(dispenserFacing);
+        BlockPos frontBlockPos = pointer.getPos().offset(dispenserFacing);
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
 
         // check if block can be toggled

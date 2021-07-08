@@ -24,7 +24,7 @@ public class CauldronFillingDispenserBehavior extends FallibleItemDispenserBehav
         this.setSuccess(true);
         Item item = stack.getItem();
         ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
         Block frontBlock = frontBlockState.getBlock();
 

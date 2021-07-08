@@ -18,7 +18,7 @@ public class FireChargeDispenserBehavior extends FallibleItemDispenserBehavior {
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getBlockPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
         Block frontBlock = world.getBlockState(frontBlockPos).getBlock();
 
         // check if cobble, place netherrack
