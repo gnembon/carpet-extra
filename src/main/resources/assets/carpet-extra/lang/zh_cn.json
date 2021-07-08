@@ -164,5 +164,23 @@
   "rule.blazeMeal.extra.0": "可通过发射器或玩家右键动作来催熟",
 
   "rule.disablePhantomSpawning.name": "禁止幻翼生成",
-  "rule.disablePhantomSpawning.desc": "禁止幻翼的生成"
+  "rule.disablePhantomSpawning.desc": "禁止幻翼的生成",
+
+  "rule.noteBlockChunkLoader.name": "音符盒加载器",
+  "rule.noteBlockChunkLoader.desc": "启用音符盒加载器(在 音符盒加载时长 更改游戏刻)",
+
+  "rule.noteBlockChunkLoaderNote.name": "音符盒加载器设置音符",
+  "rule.noteBlockChunkLoaderNote.desc": "改变特定音符启用加载器",
+  "rule.noteBlockChunkLoaderNote.extra.0": "预设为-1，为启用全部",
+
+  "rule.noteBlockChunkLoaderRadius.name": "音符盒加载器加载半径",
+  "rule.noteBlockChunkLoaderRadius.desc": "更改音符盒加载器加载半径",
+  "rule.noteBlockChunkLoaderRadius.extra.0": "预设为3，模拟地狱门加载",
+
+  "rule.noteBlockChunkLoaderTick.name": "音符盒加载时长",
+  "rule.noteBlockChunkLoaderTick.desc": "更改音符盒加载时长",
+  "rule.noteBlockChunkLoaderTick.extra.0": "预设为300",
+
+  "rule.pistonHeadChunkLoader.name": "活塞头加载器",
+  "rule.pistonHeadChunkLoader.desc": "启用活塞头加载器，在活塞座上方放置黑曜石可以在活塞头产生/移除时加载头部所在区块，时长6gt"
 }

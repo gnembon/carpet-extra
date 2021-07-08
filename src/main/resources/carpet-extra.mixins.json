@@ -71,7 +71,10 @@
     "LilyPadBlock_fertilizerMixin",
 
     "MinecraftServer_updateSuppressionCrashFixMixin",
-    "World_updateSuppressionCrashFixMixin"
+    "World_updateSuppressionCrashFixMixin",
+
+    "NoteBlockChunkLoaderMixin",
+    "PistonHeadChunkLoaderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
