@@ -1,17 +1,21 @@
 package carpetextra.utils;
-
 import net.minecraft.block.Block;
+import net.minecraft.block.AbstractChestBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.ComparatorBlock;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.FacingBlock;
+import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.GlazedTerracottaBlock;
+import net.minecraft.block.HopperBlock;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.ObserverBlock;
 import net.minecraft.block.PistonBlock;
 import net.minecraft.block.RepeaterBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
+import net.minecraft.block.LecternBlock;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.ComparatorMode;
 import net.minecraft.entity.player.PlayerEntity;
@@ -113,7 +117,7 @@ public class BlockPlacer
                     .with(StairsBlock.FACING, Direction.byId(code % 16))
                     .with(StairsBlock.HALF, ( hitX >= 16)?BlockHalf.TOP : BlockHalf.BOTTOM);
         }
-        else if (block instanceof FacingBlock)
+        else if (block instanceof HopperBlock || block instanceof AbstractChestBlock || block instanceof FenceGateBlock || block instanceof LecternBlock || block instanceof BarrelBlock)
         {
             return block.getDefaultState()
                     .with(FacingBlock.FACING, Direction.byId(code));
