@@ -113,6 +113,10 @@ public class BlockPlacer
                     .with(StairsBlock.FACING, Direction.byId(code % 16))
                     .with(StairsBlock.HALF, ( hitX >= 16)?BlockHalf.TOP : BlockHalf.BOTTOM);
         }
-        return null;
+        else if (block instanceof FacingBlock)
+        {
+            return block.getDefaultState()
+                    .with(FacingBlock.FACING, Direction.byId(code))
+        }
     }
 }
