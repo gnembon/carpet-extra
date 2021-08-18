@@ -116,7 +116,8 @@ public class BlockPlacer
         else if (block instanceof FacingBlock)
         {
             return block.getDefaultState()
-                    .with(FacingBlock.FACING, Direction.byId(code))
+                    .with(FacingBlock.FACING, Direction.byId(code));
         }
+        return null;
     }
 }
