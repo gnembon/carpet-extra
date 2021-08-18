@@ -43,7 +43,7 @@ public class BlockPlacer
                 return (DirectionProperty) prop;
             }
         }
-        return DirectionProperty.of("north",Direction.NORTH);
+        return null;
     }
     public static BlockState alternativeBlockPlacement(Block block, ItemPlacementContext context)//World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
@@ -65,40 +65,23 @@ public class BlockPlacer
         //
         PlayerEntity placer = context.getPlayer();
         World world = context.getWorld();
-        
-        if (FacingId == 6) 
-        {
-            facing = placer.getHorizontalFacing().getOpposite();
-        }
-        else if (FacingId >= 0 && FacingId <= 5)
-        {
-            facing = Direction.byId(FacingId);
-        }
-        else
-        {
-            facing = Direction.UP;
-        }
-        
+        facing = Direction.byId(FacingId);
         if (property.getValues().contains(facing) == false) 
         {
             facing = placer.getHorizontalFacing().getOpposite();
-            state = state.with(HorizontalFacingBlock.FACING, facing);
         }
-        else
-        {
-            state = state.with(FacingBlock.FACING, facing);
-        }
+        state = state.with(property, facing);
        
         //check blocks with additional states first
         if (block instanceof RepeaterBlock)
         {
-            return state
+            state = state
                     .with(RepeaterBlock.DELAY, MathHelper.clamp(code / 16, 1, 4))
                     .with(RepeaterBlock.LOCKED, Boolean.FALSE);
         }
         else if (block instanceof TrapdoorBlock)
         {
-            return state
+            state = state
                     .with(TrapdoorBlock.OPEN, Boolean.FALSE)
                     .with(TrapdoorBlock.HALF, (code >= 16) ? BlockHalf.TOP : BlockHalf.BOTTOM)
                     .with(TrapdoorBlock.OPEN, world.isReceivingRedstonePower(pos));
@@ -106,13 +89,13 @@ public class BlockPlacer
         else if (block instanceof ComparatorBlock)
         {
             ComparatorMode m = (hitX >= 16)?ComparatorMode.SUBTRACT: ComparatorMode.COMPARE;
-            return block.getDefaultState()
+            state = state
                     .with(ComparatorBlock.POWERED, Boolean.FALSE)
                     .with(ComparatorBlock.MODE, m);
         }
         else if (block instanceof StairsBlock)
         {
-            return block.getPlacementState(context)//worldIn, pos, facing, hitX, hitY, hitZ, meta, placer)
+            state = block.getPlacementState(context)//worldIn, pos, facing, hitX, hitY, hitZ, meta, placer)
                     .with(StairsBlock.FACING, facing)
                     .with(StairsBlock.HALF, ( hitX >= 16)?BlockHalf.TOP : BlockHalf.BOTTOM);
         }
