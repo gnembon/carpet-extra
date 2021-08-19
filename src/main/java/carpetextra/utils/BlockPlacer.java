@@ -99,7 +99,6 @@ public class BlockPlacer
                     .with(StairsBlock.FACING, facing)
                     .with(StairsBlock.HALF, ( hitX >= 16)?BlockHalf.TOP : BlockHalf.BOTTOM);
         }
-        
         return state;
     }
 }
