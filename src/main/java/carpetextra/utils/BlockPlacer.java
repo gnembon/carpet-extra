@@ -108,7 +108,7 @@ public class BlockPlacer
         }
         else if (block instanceof ChestBlock)
         {
-            return block.getPlacementState(context).with(ChestBlock.FACING,facing); 
+            return null; 
         }
         return state;
     }
