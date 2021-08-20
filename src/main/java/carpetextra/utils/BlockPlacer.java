@@ -1,6 +1,7 @@
 package carpetextra.utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.block.ComparatorBlock;
 import net.minecraft.block.FacingBlock;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -104,6 +105,10 @@ public class BlockPlacer
         {
 	//unsupported
             return null; 
+        }
+        else if (block instanceof ChestBlock)
+        {
+            return block.getPlacementState(context).with(ChestBlock.FACING,facing); 
         }
         return state;
     }
