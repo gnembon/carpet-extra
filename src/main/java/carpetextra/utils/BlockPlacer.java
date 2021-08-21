@@ -10,6 +10,7 @@ import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WallMountedBlock;
 import net.minecraft.block.enums.BlockHalf;
+import net.minecraft.block.enums.ChestType;
 import net.minecraft.block.enums.ComparatorMode;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
@@ -23,7 +24,7 @@ import net.minecraft.world.World;
 
 public class BlockPlacer
 {
-    public static Boolean HasDirectionProperty(BlockState state)
+    private static Boolean HasDirectionProperty(BlockState state)
     {
         //malilib code
         for (Property<?> prop : state.getProperties())
@@ -46,6 +47,19 @@ public class BlockPlacer
             }
         }
         return null;
+    }
+    private static Boolean IsBlockAttachableChest(Block originBlock,Direction Facing, BlockPos checkPos, World world)
+    {
+        BlockState checkState = world.getBlockState(checkPos);
+        if ( checkState == null ) 
+        {
+	return false;
+        }
+        if( originBlock.getName().equals(checkState.getBlock().getName()) )
+        {
+        return checkState.get(ChestBlock.FACING).equals(Facing) && checkState.get(ChestBlock.CHEST_TYPE) == ChestType.SINGLE;
+        }
+        return false;
     }
     public static BlockState alternativeBlockPlacement(Block block, ItemPlacementContext context)//World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
@@ -107,8 +121,54 @@ public class BlockPlacer
             return null; 
         }
         else if (block instanceof ChestBlock)
+	//-x +x 
+	//+x east -x west +z south -z north
         {
-            return null; 
+	if(facing == Direction.SOUTH) 
+	{
+	    if (IsBlockAttachableChest(block, facing, pos.west(), world))
+	    {
+	    return state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
+	    }
+	    if (IsBlockAttachableChest(block, facing, pos.east(), world))
+	    {
+	    return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
+	    }
+	}
+	else if (facing == Direction.WEST)  //-z +z
+	{
+	    if (IsBlockAttachableChest(block, facing, pos.north(), world))
+	    {
+	    return state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
+	    }
+	    if (IsBlockAttachableChest(block, facing, pos.south(),world))
+	    {
+	    return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
+	    }
+	}
+	else if (facing == Direction.NORTH) //+x -x
+	{
+	    if (IsBlockAttachableChest(block, facing, pos.east(), world))
+	    {
+	    return state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
+	    }
+	    if (IsBlockAttachableChest(block, facing, pos.west(), world))
+	    {
+	    return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
+	    }
+	}
+	else if (facing == Direction.EAST) //+z -z
+	{
+	    if (IsBlockAttachableChest(block, facing, pos.south(), world))
+	    {
+	    return state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
+	    }
+	    if (IsBlockAttachableChest(block, facing, pos.north(), world))
+	    {
+	    return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
+	    }
+	}
+	return state.with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
         }
         return state;
     }
