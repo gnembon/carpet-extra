@@ -9,6 +9,7 @@ import net.minecraft.block.RepeaterBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WallMountedBlock;
+import net.minecraft.block.WallSkullBlock;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.block.enums.ComparatorMode;
@@ -115,7 +116,7 @@ public class BlockPlacer
                     .with(StairsBlock.FACING, facing)
                     .with(StairsBlock.HALF, ( hitX >= 16)?BlockHalf.TOP : BlockHalf.BOTTOM);
         }
-        else if (block instanceof WallMountedBlock)
+        else if (block instanceof WallMountedBlock || block instanceof WallSkullBlock )
         {
 	//unsupported
             return null; 
