@@ -81,7 +81,6 @@ public class BlockPlacer {
         World world = context.getWorld();
         if (block instanceof AbstractRailBlock){
             RailShape shapeEnumFound = RailShape.values()[code];
-            System.out.println(shapeEnumFound);
             if (block instanceof RailBlock){
                 state = state.with(RailBlock.SHAPE,shapeEnumFound);
             }
