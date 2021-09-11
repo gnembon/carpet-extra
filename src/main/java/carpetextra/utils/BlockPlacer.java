@@ -14,6 +14,7 @@ import net.minecraft.block.RepeaterBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WallMountedBlock;
+import net.minecraft.block.WallSkullBlock;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.block.enums.ComparatorMode;
@@ -29,16 +30,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class BlockPlacer {
-    private static Boolean HasDirectionProperty(BlockState state) {
-        //malilib code
-        for (Property<?> prop : state.getProperties()) {
-            if (prop instanceof DirectionProperty) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private static DirectionProperty getFirstDirectionProperty(BlockState state) {
         //malilib code
         for (Property<?> prop : state.getProperties()) {
@@ -49,13 +40,13 @@ public class BlockPlacer {
         return null;
     }
 
-    private static Boolean IsBlockAttachableChest(Block originBlock, Direction Facing, BlockPos checkPos, World world) {
+    private static boolean isBlockAttachableChest(Block originBlock, Direction facing, BlockPos checkPos, World world) {
         BlockState checkState = world.getBlockState(checkPos);
         if (checkState == null) {
             return false;
         }
-        if (originBlock.getName().equals(checkState.getBlock().getName())) {
-            return checkState.get(ChestBlock.FACING).equals(Facing) && checkState.get(ChestBlock.CHEST_TYPE) == ChestType.SINGLE;
+        if (originBlock.equals(checkState.getBlock())) {
+            return checkState.get(ChestBlock.FACING).equals(facing) && checkState.get(ChestBlock.CHEST_TYPE) == ChestType.SINGLE;
         }
         return false;
     }
@@ -69,7 +60,8 @@ public class BlockPlacer {
         BlockPos pos = context.getBlockPos();
         double hitX = vec3d.x - pos.getX();
         BlockState state = block.getDefaultState();
-        if (hitX < 2 || !(block instanceof AbstractRailBlock) && !HasDirectionProperty(state)) // vanilla
+        DirectionProperty directionProperty = getFirstDirectionProperty(state);
+        if (hitX < 2 || !(block instanceof AbstractRailBlock) && directionProperty == null) // vanilla
             return null;
         int code = (int) (hitX - 2) / 2;
 
@@ -81,26 +73,28 @@ public class BlockPlacer {
         World world = context.getWorld();
         if (block instanceof AbstractRailBlock){
             RailShape shapeEnumFound = RailShape.values()[code];
-            if (block instanceof RailBlock){
-                state = state.with(RailBlock.SHAPE,shapeEnumFound);
+            if (block instanceof RailBlock)
+            {
+                return state.with(RailBlock.SHAPE,shapeEnumFound);
+            }
+            else if (block instanceof DetectorRailBlock)
+            {
+                return state.with(DetectorRailBlock.SHAPE,shapeEnumFound);
             }
             else
             {
-                state = state.with(PoweredRailBlock.SHAPE,shapeEnumFound);
+                return state.with(PoweredRailBlock.SHAPE,shapeEnumFound);
             }
         }
         else
         {
-            DirectionProperty property = getFirstDirectionProperty(state);
             int FacingId = code % 16;
             facing = Direction.byId(FacingId);
-            if (property.getValues().contains(facing) == false) {
+            if (directionProperty.getValues().contains(facing) == false) {
                 facing = placer.getHorizontalFacing().getOpposite();
             }
-            state = state.with(property, facing);
+            state = state.with(directionProperty, facing);
         }
-
-
 
         //check blocks with additional states first
         if (block instanceof RepeaterBlock) {
@@ -121,44 +115,16 @@ public class BlockPlacer {
             state = block.getPlacementState(context)//worldIn, pos, facing, hitX, hitY, hitZ, meta, placer)
                     .with(StairsBlock.FACING, facing)
                     .with(StairsBlock.HALF, (hitX >= 16) ? BlockHalf.TOP : BlockHalf.BOTTOM);
-        } else if (block instanceof WallMountedBlock) {
+        } else if (block instanceof WallMountedBlock || block instanceof WallSkullBlock) {
             //unsupported
             return null;
         } else if (block instanceof ChestBlock)
-        //-x +x
-        //+x east -x west +z south -z north
         {
-            if (facing == Direction.SOUTH) {
-                if (IsBlockAttachableChest(block, facing, pos.west(), world)) {
-                    return state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
-                }
-                if (IsBlockAttachableChest(block, facing, pos.east(), world)) {
-                    return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
-                }
-            } else if (facing == Direction.WEST)  //-z +z
-            {
-                if (IsBlockAttachableChest(block, facing, pos.north(), world)) {
-                    return state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
-                }
-                if (IsBlockAttachableChest(block, facing, pos.south(), world)) {
-                    return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
-                }
-            } else if (facing == Direction.NORTH) //+x -x
-            {
-                if (IsBlockAttachableChest(block, facing, pos.east(), world)) {
-                    return state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
-                }
-                if (IsBlockAttachableChest(block, facing, pos.west(), world)) {
-                    return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
-                }
-            } else if (facing == Direction.EAST) //+z -z
-            {
-                if (IsBlockAttachableChest(block, facing, pos.south(), world)) {
-                    return state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
-                }
-                if (IsBlockAttachableChest(block, facing, pos.north(), world)) {
-                    return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
-                }
+            if (isBlockAttachableChest(block, facing, pos.offset(facing.rotateYClockwise()), world)) {
+                return state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
+            }
+            else if (isBlockAttachableChest(block, facing, pos.offset(facing.rotateYCounterclockwise()), world)) {
+                return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
             }
             return state.with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
         }
