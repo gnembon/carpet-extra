@@ -116,7 +116,9 @@ public class BlockPlacer {
                 return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
             }
             return state.with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
-        } else if (block instanceof BedBlock && !isBlockOffsetReplaceableBlock(pos, facing, world)){
+        } else if (block instanceof BedBlock && !isBlockOffsetReplaceableBlock(pos, facing, world)) {
+            return null;
+        } else if (block instanceof DoorBlock && !isBlockOffsetReplaceableBlock(pos, Direction.UP, world)) {
             return null;
         }
         return state;
