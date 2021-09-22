@@ -1,20 +1,6 @@
 package carpetextra.utils;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.AbstractRailBlock;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.ComparatorBlock;
-import net.minecraft.block.DetectorRailBlock;
-import net.minecraft.block.FacingBlock;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.PoweredRailBlock;
-import net.minecraft.block.RailBlock;
-import net.minecraft.block.RepeaterBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.TrapdoorBlock;
-import net.minecraft.block.WallMountedBlock;
-import net.minecraft.block.WallSkullBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.block.enums.ComparatorMode;
@@ -49,6 +35,9 @@ public class BlockPlacer {
             return checkState.get(ChestBlock.FACING).equals(facing) && checkState.get(ChestBlock.CHEST_TYPE) == ChestType.SINGLE;
         }
         return false;
+    }
+    private static boolean isBlockOffsetReplaceableBlock(BlockPos checkPos, Direction facing, World world){
+        return world.getBlockState(checkPos.offset(facing)).getMaterial().isReplaceable();
     }
 
     public static BlockState alternativeBlockPlacement(Block block, ItemPlacementContext context)//World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
@@ -127,6 +116,8 @@ public class BlockPlacer {
                 return state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
             }
             return state.with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
+        } else if (block instanceof BedBlock && !isBlockOffsetReplaceableBlock(pos, facing, world)){
+            return null;
         }
         return state;
     }
