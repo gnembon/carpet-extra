@@ -17,6 +17,6 @@ public abstract class StrayEntityMixin
     private static boolean isSkylightOrIglooVisible(ServerWorldAccess serverWorldAccess, BlockPos pos)
     {
         return serverWorldAccess.isSkyVisible(pos) ||
-                       (CarpetExtraSettings.straySpawningInIgloos && (((ServerWorld)serverWorldAccess).getStructureAccessor().getStructureAt(pos, false, StructureFeature.IGLOO).hasChildren()));
+                       (CarpetExtraSettings.straySpawningInIgloos && (((ServerWorld)serverWorldAccess).getStructureAccessor().getStructureAt(pos, StructureFeature.IGLOO).hasChildren()));
     }
 }

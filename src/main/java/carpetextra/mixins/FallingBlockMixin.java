@@ -43,7 +43,7 @@ public abstract class FallingBlockMixin extends Block
             if (canFallThrough(serverWorld_1.getBlockState(blockPos_1.down(1))) && blockPos_1.getY() >= serverWorld_1.getBottomY())
             {
                 if (!DragonEggBedrockBreaking.fallInstantly &&
-                        serverWorld_1.method_37118(blockPos_1))
+                        serverWorld_1.shouldTickEntity(blockPos_1))
                 {
                     if (!serverWorld_1.isClient)
                     {
