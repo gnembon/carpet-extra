@@ -15,7 +15,7 @@ import net.minecraft.item.ItemUsageContext;
 
 @Mixin(HoeItem.class)
 public interface HoeItem_TilledBlocksAccessorMixin {
-    @Accessor("TILLED_BLOCKS")
+    @Accessor("TILLING_ACTIONS")
     static Map<Block, Pair<Predicate<ItemUsageContext>, Consumer<ItemUsageContext>>> getTilledBlocks() {
         throw new AssertionError();
     }

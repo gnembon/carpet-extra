@@ -100,7 +100,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
             if (!itemStack_3.isEmpty()) {
                 if (itemStack_2.isEmpty()) {
                     dispenserBlockEntity_1.setStack(int_1, itemStack_3);
-                } else if (ItemStack.areItemsEqualIgnoreDamage(itemStack_2, itemStack_3) && ItemStack.areTagsEqual(itemStack_2, itemStack_3)) {
+                } else if (ItemStack.areItemsEqualIgnoreDamage(itemStack_2, itemStack_3) && ItemStack.areNbtEqual(itemStack_2, itemStack_3)) {
                     itemStack_3.increment(itemStack_2.getCount());
                     dispenserBlockEntity_1.setStack(int_1, itemStack_3);
                 } else {

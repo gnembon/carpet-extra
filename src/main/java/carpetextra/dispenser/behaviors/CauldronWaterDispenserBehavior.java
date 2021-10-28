@@ -60,8 +60,8 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
                     LeveledCauldronBlock.decrementFluidLevel(frontBlockState, world, frontBlockPos);
                     // turn dyed shulker box into undyed shulker box
                     ItemStack undyedShulkerBox = new ItemStack(Items.SHULKER_BOX);
-                    if(stack.hasTag()) {
-                        undyedShulkerBox.setTag(stack.getTag().copy());
+                    if(stack.hasNbt()) {
+                        undyedShulkerBox.setNbt(stack.getNbt().copy());
                     }
 
                     // return undyed shulker box

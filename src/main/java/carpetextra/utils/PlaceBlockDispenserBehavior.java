@@ -130,7 +130,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             boolean blockWasPlaced = world.setBlockState(pos, state);
             block.onPlaced(world, pos, state, null, itemStack);
             world.updateNeighbor(pos, state.getBlock(), pos);
-            NbtCompound blockEntityTag = itemStack.getSubTag("BlockEntityTag");
+            NbtCompound blockEntityTag = itemStack.getSubNbt("BlockEntityTag");
             if (blockEntityTag != null && block instanceof BlockEntityProvider) {
                 BlockEntity be = world.getBlockEntity(pos);
                 blockEntityTag = new NbtCompound().copyFrom(blockEntityTag);
