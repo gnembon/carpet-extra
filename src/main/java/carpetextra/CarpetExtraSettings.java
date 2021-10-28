@@ -62,12 +62,6 @@ public class CarpetExtraSettings
     public static boolean pistonRedirectsRedstone = false;
 
     @Rule(
-            desc = "Fixes updates suppression causing server crashes.",
-            category = {BUGFIX, EXTRA}
-    )
-    public static boolean updateSuppressionCrashFix = false;
-
-    @Rule(
             desc = "Auto-crafting dropper",
             extra = {"If a dropper points into a crafting table and contains a valid 3x3 crafting recipe, firing that ",
                     "dropper will cause it to craft (drop as item) that recipe. ",
