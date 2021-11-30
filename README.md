@@ -52,10 +52,11 @@ Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.
 ## chickenShearing
 Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!  
 Baby chickens can't be sheared.  
+Also works with dispensers  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
-* Categories: `EXTRAS`, `FEATURE`  
+* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
 ## clericsFarmWarts
 Clerics can warm nether farts.  
@@ -120,7 +121,8 @@ Dispensers containing shears can carve pumpkins.
 * Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
 ## dispensersFeedAnimals
-Dispensers can feed animals.  
+Dispensers can feed animals if given their breeding item.  
+Can also feed flowers to brown mooshrooms to give them a suspicious stew effect  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
@@ -133,8 +135,8 @@ Minecarts can be filled with hoppers, chests, tnt and furnace.
 * Required options: `true`, `false`  
 * Categories: `EXPERIMENTAL`, `FEATURE`, `EXTRAS`, `DISPENSER`  
   
-## dispensersMilkCows
-Dispensers with empty buckets can milk cows and get stew from mooshrooms with bowls.  
+## dispensersMilkAnimals
+Dispensers with empty buckets can milk cows/mooshrooms/goats, and get mushroom/suspicious stew from mooshrooms with bowls.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
@@ -148,6 +150,21 @@ If a record already exists in the jukebox, it gets placed back in the dispenser.
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
+## dispensersPotPlants
+Dispensers can put flowers in flower pots  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
+  
+## dispensersStripBlocks
+Dispensers with axes can strip blocks  
+Can strip logs, remove oxidation, and remove wax  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
+  
 ## dispensersTillSoil
 Dispensers with hoes can till soil.  
 * Type: `boolean`  
@@ -156,13 +173,20 @@ Dispensers with hoes can till soil.
 * Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
 ## dispensersToggleThings
-Dispensers containing a stick can toggle things.  
+Dispensers containing a stick can toggle/activate things.  
 Works with buttons, redstone, noteblocks, comparators, repeaters,   
 daylight detectors, etc.  
 * Type: `boolean`  
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`, `DISPENSER`  
+  
+## dispensersUseCauldrons
+Dispensers can empty/fill cauldrons with buckets or bottles, and undye leather armor/shulker boxes/banners  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
 ## doubleRetraction
 Re-adds 1.8 double retraction to pistons.  
@@ -180,13 +204,6 @@ Reintroduce the Dragon Egg Bedrock breaking bug from 1.12.
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`  
   
-## dragonsBreathConvertsCobbleToEndstone
-Dragon's breath from dispensers convert cobblestone to end stone.  
-* Type: `boolean`  
-* Default value: `false`  
-* Required options: `true`, `false`  
-* Categories: `EXTRAS`, `EXPERIMENTAL`, `DISPENSER`  
-  
 ## emptyShulkerBoxStackAlways
 Empty Shulker Boxes will always stack, even inside inventories.  
 * Type: `boolean`  
@@ -200,14 +217,6 @@ Allow horizontally moving Ender Pearls to load chunks as entity ticking.
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`  
-  
-## fireChargeConvertsToNetherrack
-Fire charges from dispensers convert cobblestone to netherrack.  
-Credits: Skyrising  
-* Type: `boolean`  
-* Default value: `false`  
-* Required options: `true`, `false`  
-* Categories: `EXTRAS`, `EXPERIMENTAL`  
   
 ## flowerPotChunkLoading
 Placing a wither rose in a flowerpot will load that chunk.  
@@ -272,6 +281,13 @@ Fixes [MC-2025](https://bugs.mojang.com/browse/MC-2025).
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `BUGFIX`, `EXPERIMENTAL`  
   
+## renewableEndstone
+Dragon's breath from dispensers convert cobblestone to end stone.  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`, `DISPENSER`  
+  
 ## renewableIce
 Multiple ice crushed by falling anvils make denser ice.  
 frosted turns into normal, normal into packed and packed into blue  
@@ -287,6 +303,14 @@ Credits: Skyrising
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
+  
+## renewableNetherrack
+Fire charges from dispensers convert cobblestone to netherrack.  
+Credits: Skyrising  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `EXPERIMENTAL`  
   
 ## renewableSand
 Cobblestone crushed by falling anvils makes sand.  
@@ -347,13 +371,6 @@ Integer entered is the delay in ticks for it to reset
 * Categories: `CREATIVE`, `EXTRAS`  
 * Additional notes:  
   * Cannot be negative, can be true, false, or # > 0  
-  
-## updateSuppressionCrashFix
-Fixes updates suppression causing server crashes.  
-* Type: `boolean`  
-* Default value: `false`  
-* Required options: `true`, `false`  
-* Categories: `BUGFIX`, `EXTRAS`  
   
 ## variableWoodDelays
 Variable delays on wooden components (buttons, pressure plates).  
