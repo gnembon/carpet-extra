@@ -47,8 +47,7 @@ processResources {
 tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
 
-	// Minecraft 1.17 (21w19a) upwards uses Java 16.
-	it.options.release = 16
+	it.options.release = 17
 }
 
 java {
