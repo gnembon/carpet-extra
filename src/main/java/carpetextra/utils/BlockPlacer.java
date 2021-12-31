@@ -104,7 +104,7 @@ public class BlockPlacer {
 				return state.with(StairsBlock.FACING, facing)
 				.with(StairsBlock.HALF, (hitX >= 16) ? BlockHalf.TOP : BlockHalf.BOTTOM);
 		} else if (block instanceof WallMountedBlock) {
-			return state.with(WallMountedBlock.FACE, (code >= 16) ? WallMountLocation.CEILING: WallMountLocation.FLOOR).
+			return state.with(WallMountedBlock.FACE, (code >= 32) ? WallMountLocation.CEILING: (code >= 16) ? WallMountLocation.WALL : WallMountLocation.FLOOR).
 				with(WallMountedBlock.FACING, facing);
 		} else if (block instanceof WallSkullBlock){
 			return state.with(WallMountedBlock.FACING, facing);
