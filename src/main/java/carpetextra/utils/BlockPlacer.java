@@ -45,7 +45,7 @@ public class BlockPlacer {
 		double hitX = vec3d.x - pos.getX();
 		BlockState state = block.getDefaultState();
 		DirectionProperty directionProperty = getFirstDirectionProperty(state);
-		if (hitX < 2 || !(block instanceof AbstractRailBlock) && directionProperty == null) // vanilla
+		if (hitX < 2 || !(block instanceof AbstractRailBlock || block instanceof PillarBlock) && directionProperty == null) // vanilla
 			return null;
 		int code = (int) (hitX - 2) / 2;
 
@@ -56,7 +56,7 @@ public class BlockPlacer {
 		PlayerEntity placer = context.getPlayer();
 		World world = context.getWorld();
 		if (block instanceof AbstractRailBlock){
-			RailShape shapeEnumFound = RailShape.values()[code];
+			RailShape shapeEnumFound = RailShape.values()[code%RailShape.values().length]; //avoid NPE
 			if (block instanceof RailBlock)
 			{
 				return state.with(RailBlock.SHAPE,shapeEnumFound);
@@ -69,6 +69,8 @@ public class BlockPlacer {
 			{
 				return state.with(PoweredRailBlock.SHAPE,shapeEnumFound);
 			}
+		} else if (block instanceof PillarBlock) {
+			return state.with(PillarBlock.AXIS, Direction.Axis.values()[code % Direction.Axis.VALUES.length]);
 		}
 		else
 		{
