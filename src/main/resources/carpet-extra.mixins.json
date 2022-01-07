@@ -34,6 +34,7 @@
     "HoeItem_TilledBlocksAccessorMixin",
     "AxeItem_StrippedBlocksAccessorMixin",
     "FlowerPotBlock_ContentAccessorMixin",
+    "BoatItemAccessorMixin",
 
     "VillagerEntity_wartFarmMixin",
     "FarmerVillagerTask_wartFarmMixin",
