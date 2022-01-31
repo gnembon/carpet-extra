@@ -59,7 +59,7 @@ Also works with dispensers
 * Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
 ## clericsFarmWarts
-Clerics can warm nether farts.  
+Clerics can warm nether warts.  
 This will also allow them to pick up wart items, as well as pathfind to soulsand.  
 * Type: `boolean`  
 * Default value: `false`  
