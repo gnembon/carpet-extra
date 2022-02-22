@@ -30,7 +30,8 @@ public class FeedMooshroomDispenserBehavior extends FallibleItemDispenserBehavio
         BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
 
         // check if item is in SMALL_FLOWERS item tag
-        if(ItemTags.SMALL_FLOWERS.contains(stack.getItem())) {
+        if(stack.isIn(ItemTags.SMALL_FLOWERS))
+        {
             // get brown mooshrooms in front of dispenser
             List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityType.MOOSHROOM, new Box(frontBlockPos), EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) -> {
                 return ((MooshroomEntity) mooshroomEntity).getMooshroomType() == MooshroomEntity.Type.BROWN;

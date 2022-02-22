@@ -47,7 +47,7 @@ public abstract class FallingBlockMixin extends Block
                 {
                     if (!serverWorld_1.isClient)
                     {
-                        FallingBlockEntity fallingBlockEntity_1 = FallingBlockEntity.method_40005(serverWorld_1, blockPos_1, serverWorld_1.getBlockState(blockPos_1) );// new  FallingBlockEntity(serverWorld_1, (double) blockPos_1.getX() + 0.5D, (double) blockPos_1.getY(), (double) blockPos_1.getZ() + 0.5D, serverWorld_1.getBlockState(blockPos_1));
+                        FallingBlockEntity fallingBlockEntity_1 = FallingBlockEntity.spawnFromBlock(serverWorld_1, blockPos_1, serverWorld_1.getBlockState(blockPos_1) );
                         this.configureFallingBlockEntity(fallingBlockEntity_1);
                         //serverWorld_1.spawnEntity(fallingBlockEntity_1);
                     }
