@@ -296,14 +296,6 @@ frosted turns into normal, normal into packed and packed into blue
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
   
-## renewableLava
-Obsidian surrounded by 6 lava sources has a chance of converting to lava.  
-Credits: Skyrising  
-* Type: `boolean`  
-* Default value: `false`  
-* Required options: `true`, `false`  
-* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
-  
 ## renewableNetherrack
 Fire charges from dispensers convert cobblestone to netherrack.  
 Credits: Skyrising  
@@ -387,5 +379,6 @@ Requires dragonEggBedrockBreaking to be set to true.
 * Required options: `true`, `false`  
 * Categories: `EXPERIMENTAL`, `EXTRAS`  
   
+Deprecated Loom APIs were used in this build, making it incompatible with future versions of Loom. Use Gradle warning modes to control the verbosity of the warnings.
 
 
