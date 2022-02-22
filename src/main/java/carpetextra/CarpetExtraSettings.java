@@ -168,13 +168,6 @@ public class CarpetExtraSettings
     public static boolean disablePlayerCollision = false;
     
     @Rule(
-            desc = "Obsidian surrounded by 6 lava sources has a chance of converting to lava.",
-            category = {EXTRA, EXPERIMENTAL, FEATURE},
-            extra = "Credits: Skyrising"
-    )
-    public static boolean renewableLava = false;
-    
-    @Rule(
             desc = "Re-adds 1.8 double retraction to pistons.",
             category = {EXTRA, EXPERIMENTAL},
             extra = { "Gives pistons the ability to double retract without side effects.",
