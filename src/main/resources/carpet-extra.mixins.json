@@ -16,6 +16,7 @@
     "AbstractButtonBlock_variableWoodMixin",
     "ItemFrameEntity_comparatorReadsClockMixin",
     "ItemStackMixin",
+    "ServerPlayNetworkHandlerMixin",
     "ThrownEntityMixin",
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",
