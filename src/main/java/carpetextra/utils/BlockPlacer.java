@@ -1,118 +1,126 @@
 package carpetextra.utils;
 
+import org.jetbrains.annotations.Nullable;
+import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ComparatorBlock;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.FacingBlock;
-import net.minecraft.block.GlazedTerracottaBlock;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.ObserverBlock;
-import net.minecraft.block.PistonBlock;
 import net.minecraft.block.RepeaterBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.ComparatorMode;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.enums.SlabType;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 
 public class BlockPlacer
 {
-    public static BlockState alternativeBlockPlacement(Block block, ItemPlacementContext context)//World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public static BlockState alternativeBlockPlacement(Block block, ItemPlacementContext context)
     {
-        //actual alternative block placement code
+        Vec3d hitPos = context.getHitPos();
+        BlockPos blockPos = context.getBlockPos();
+        double relativeHitX = hitPos.x - blockPos.getX();
+        BlockState state = block.getPlacementState(context);
 
-        Direction facing;
-        Vec3d vec3d = context.getHitPos();
-        BlockPos pos = context.getBlockPos();
-        double hitX = vec3d.x - pos.getX();
-        if (hitX<2) // vanilla
+        if (relativeHitX < 2 || state == null) // vanilla handling
             return null;
-        int code = (int)(hitX-2)/2;
-        //
-        // now it would be great if hitX was adjusted in context to original range from 0.0 to 1.0
-        // since its actually using it. Its private - maybe with Reflections?
-        //
-        PlayerEntity placer = context.getPlayer();
-        World world = context.getWorld();
 
-        if (block instanceof GlazedTerracottaBlock)
+        // It would be nice if relativeHitX was adjusted in context to original range from 0.0 to 1.0,
+        // since some blocks are actually using it.
+        DirectionProperty directionProp = getFirstDirectionProperty(state);
+        int protocolValue = ((int) relativeHitX - 2) / 2;
+
+        if (directionProp != null)
         {
-            facing = Direction.byId(code);
-            if(facing == Direction.UP || facing == Direction.DOWN)
+            Direction origFacing = state.get(directionProp);
+            Direction facing = origFacing;
+            int facingIndex = protocolValue & 0xF;
+
+            if (facingIndex == 6) // the opposite of the normal facing requested
             {
-                facing = placer.getHorizontalFacing().getOpposite();
+                facing = facing.getOpposite();
             }
-            return block.getDefaultState().with(HorizontalFacingBlock.FACING, facing);
-        }
-        else if (block instanceof ObserverBlock)
-        {
-            return block.getDefaultState()
-                    .with(FacingBlock.FACING, Direction.byId(code))
-                    .with(ObserverBlock.POWERED, true);
-        }
-        else if (block instanceof RepeaterBlock)
-        {
-            facing = Direction.byId(code % 16);
-            if(facing == Direction.UP || facing == Direction.DOWN)
+            else if (facingIndex >= 0 && facingIndex <= 5)
             {
-                facing = placer.getHorizontalFacing().getOpposite();
+                facing = Direction.byId(facingIndex);
             }
-            return block.getDefaultState()
-                    .with(HorizontalFacingBlock.FACING, facing)
-                    .with(RepeaterBlock.DELAY, MathHelper.clamp(code / 16, 1, 4))
-                    .with(RepeaterBlock.LOCKED, Boolean.FALSE);
-        }
-        else if (block instanceof TrapdoorBlock)
-        {
-            facing = Direction.byId(code % 16);
-            if(facing == Direction.UP || facing == Direction.DOWN)
+
+            if (directionProp.getValues().contains(facing) == false)
             {
-                facing = placer.getHorizontalFacing().getOpposite();
+                facing = context.getPlayer().getHorizontalFacing().getOpposite();
             }
-            return block.getDefaultState()
-                    .with(TrapdoorBlock.FACING, facing)
-                    .with(TrapdoorBlock.OPEN, Boolean.FALSE)
-                    .with(TrapdoorBlock.HALF, (code >= 16) ? BlockHalf.TOP : BlockHalf.BOTTOM)
-                    .with(TrapdoorBlock.OPEN, world.isReceivingRedstonePower(pos));
-        }
-        else if (block instanceof ComparatorBlock)
-        {
-            facing = Direction.byId(code % 16);
-            if((facing == Direction.UP) || (facing == Direction.DOWN))
+
+            if (facing != origFacing && directionProp.getValues().contains(facing))
             {
-                facing = placer.getHorizontalFacing().getOpposite();
+                if (state.getBlock() instanceof BedBlock)
+                {
+                    BlockPos headPos = blockPos.offset(facing);
+
+                    if (context.getWorld().getBlockState(headPos).canReplace(context) == false)
+                    {
+                        return null;
+                    }
+                }
+
+                state = state.with(directionProp, facing);
             }
-            ComparatorMode m = (hitX >= 16)?ComparatorMode.SUBTRACT: ComparatorMode.COMPARE;
-            return block.getDefaultState()
-                    .with(HorizontalFacingBlock.FACING, facing)
-                    .with(ComparatorBlock.POWERED, Boolean.FALSE)
-                    .with(ComparatorBlock.MODE, m);
         }
-        else if (block instanceof DispenserBlock)
+        else if (state.contains(Properties.AXIS))
         {
-            return block.getDefaultState()
-                    .with(DispenserBlock.FACING, Direction.byId(code))
-                    .with(DispenserBlock.TRIGGERED, Boolean.FALSE);
+            Direction.Axis axis = Direction.Axis.VALUES[protocolValue % 3];
+            state = state.with(Properties.AXIS, axis);
         }
-        else if (block instanceof PistonBlock)
+
+        protocolValue &= 0xFFFFFFF0;
+
+        if (protocolValue >= 16)
         {
-            return block.getDefaultState()
-                    .with(FacingBlock.FACING, Direction.byId(code))
-                    .with(PistonBlock.EXTENDED, Boolean.FALSE);
+            if (block instanceof RepeaterBlock)
+            {
+                Integer delay = (protocolValue / 16);
+
+                if (RepeaterBlock.DELAY.getValues().contains(delay))
+                {
+                    state = state.with(RepeaterBlock.DELAY, delay);
+                }
+            }
+            else if (protocolValue == 16)
+            {
+                if (block instanceof ComparatorBlock)
+                {
+                    state = state.with(ComparatorBlock.MODE, ComparatorMode.SUBTRACT);
+                }
+                else if (state.contains(Properties.BLOCK_HALF) &&
+                         state.get(Properties.BLOCK_HALF) == BlockHalf.BOTTOM)
+                {
+                    state = state.with(Properties.BLOCK_HALF, BlockHalf.TOP);
+                }
+                else if (state.contains(Properties.SLAB_TYPE) &&
+                         state.get(Properties.SLAB_TYPE) == SlabType.BOTTOM)
+                {
+                    state = state.with(Properties.SLAB_TYPE, SlabType.TOP);
+                }
+            }
         }
-        else if (block instanceof StairsBlock)
+
+        return state;
+    }
+
+    @Nullable
+    public static DirectionProperty getFirstDirectionProperty(BlockState state)
+    {
+        for (Property<?> prop : state.getProperties())
         {
-            return block.getPlacementState(context)//worldIn, pos, facing, hitX, hitY, hitZ, meta, placer)
-                    .with(StairsBlock.FACING, Direction.byId(code % 16))
-                    .with(StairsBlock.HALF, ( hitX >= 16)?BlockHalf.TOP : BlockHalf.BOTTOM);
+            if (prop instanceof DirectionProperty)
+            {
+                return (DirectionProperty) prop;
+            }
         }
+
         return null;
     }
 }
