@@ -46,6 +46,7 @@
     "RedstoneWireBlockMixin_pistonRedirectsRedstone",
 
     "PlayerEntityMixin",
+    "BuddingAmethystBlockMixin",
     "PistonBlockMixin",
     "CactusBlock_syncMixin",
     "DispenserBlock_syncMixin",

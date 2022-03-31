@@ -349,4 +349,10 @@ public class CarpetExtraSettings
             category = {EXTRA, FEATURE, DISPENSER}
     )
     public static boolean dispensersPotPlants = false;
+
+    @Rule(
+            desc = "Budding Amathyst piston behavior",
+            category = {EXTRA, FEATURE}
+    )
+    public static String amethystPistonBehavior = "break";
 }

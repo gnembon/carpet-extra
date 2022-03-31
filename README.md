@@ -14,6 +14,13 @@ Client can provide alternative block placement.
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `SURVIVAL`  
   
+## amethystPistonBehavior
+Changes how pistons and budding amethyst interact
+* Type: `string`
+* Default value: `break`
+* Required options: `break`, `push`, `block`
+* Categories: `EXTRAS`, `FEATURE`
+
 ## autoCraftingDropper
 Auto-crafting dropper  
 If a dropper points into a crafting table and contains a valid 3x3 crafting recipe, firing that   
