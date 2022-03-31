@@ -53,6 +53,6 @@ public class CauldronEmptyingDispenserBehavior extends DispenserBehaviorHelper {
     private static void setCauldron(ServerWorld world, BlockPos pos, SoundEvent soundEvent) {
         world.setBlockState(pos, Blocks.CAULDRON.getDefaultState());
         world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        world.emitGameEvent(GameEvent.FLUID_PICKUP, pos);
+        world.emitGameEvent(null, GameEvent.FLUID_PICKUP, pos);
     }
 }
