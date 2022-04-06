@@ -128,7 +128,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEnti
                 {
                     serverWorld.playSound(null,
                             currentTarget.getX(), currentTarget.getY(), this.currentTarget.getZ(),
-                            SoundEvents.ITEM_NETHER_WART_PLANT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                            SoundEvents.ITEM_NETHER_WART_PLANT, SoundCategory.BLOCKS, 1.0F, 1.0F, serverWorld.getRandom().nextLong());
                     itemStack.decrement(1);
                     if (itemStack.isEmpty())
                     {

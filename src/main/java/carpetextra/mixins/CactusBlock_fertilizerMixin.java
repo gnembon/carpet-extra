@@ -9,6 +9,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.random.AbstractRandom;
 import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Random;
@@ -25,13 +26,13 @@ public abstract class CactusBlock_fertilizerMixin implements Fertilizable
     }
     
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
+    public boolean canGrow(World world, AbstractRandom random, BlockPos pos, BlockState state)
     {
         return true;
     }
     
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
+    public void grow(ServerWorld world, AbstractRandom random, BlockPos pos, BlockState state)
     {
         int i = this.countCactusAbove(world, pos);
         BlockPos growPos = pos.up(i + 1);
