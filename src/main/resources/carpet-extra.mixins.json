@@ -67,7 +67,9 @@
     "ScaffoldingItem_scaffoldingDistanceMixin",
     "SugarCaneBlock_fertilizerMixin",
     "CactusBlock_fertilizerMixin",
-    "LilyPadBlock_fertilizerMixin"
+    "LilyPadBlock_fertilizerMixin",
+    "DispenserBlock_fallingBlockMixin",
+    "FallingBlockEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
