@@ -9,10 +9,6 @@ repositories {
 	}
 }
 
-runClient.doFirst {
-	args = ['--username', "Player${new Random().nextInt(1000)}", '--uuid', UUID.randomUUID()]
-}
-
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
