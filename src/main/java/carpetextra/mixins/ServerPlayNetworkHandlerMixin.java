@@ -12,7 +12,8 @@ public abstract class ServerPlayNetworkHandlerMixin
 {
     @Redirect(method = "onPlayerInteractBlock",
               at = @At(value = "INVOKE",
-                       target = "Lnet/minecraft/util/math/Vec3d;subtract(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;"))
+                       target = "Lnet/minecraft/util/math/Vec3d;subtract(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;"),
+              require = 0)
     private Vec3d carpetextra_removeHitPosCheck(Vec3d hitVec, Vec3d blockCenter)
     {
         if (CarpetExtraSettings.accurateBlockPlacement)
