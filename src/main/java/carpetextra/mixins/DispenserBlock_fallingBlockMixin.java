@@ -12,8 +12,8 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.AbstractRandom;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.random.AbstractRandom;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,7 +44,7 @@ public class DispenserBlock_fallingBlockMixin {
 
     @Inject(
             method = "scheduledTick(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;" +
-                    "Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/gen/random/AbstractRandom;)V",
+                    "Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/random/AbstractRandom;)V",
             at = @At("HEAD"),
             cancellable = true
     )
