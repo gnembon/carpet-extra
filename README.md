@@ -218,6 +218,14 @@ Allow horizontally moving Ender Pearls to load chunks as entity ticking.
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`  
   
+## fallingBlockDispensers
+Dispensers/Droppers with a block in front of them when powered will turn that block into a falling block  
+dispenser & dropper give the same velocity to the falling block like they do in 22w13oneblockatatime  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
+  
 ## flowerPotChunkLoading
 Placing a wither rose in a flowerpot will load that chunk.  
 If u enable the rule the already existing chunks with flowerpots won't be loaded.   
