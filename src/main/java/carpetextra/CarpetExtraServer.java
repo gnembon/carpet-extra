@@ -3,6 +3,7 @@ package carpetextra;
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpetextra.commands.PingCommand;
+import carpetextra.dispenser.DispenserEvent;
 import carpetextra.helpers.CustomSpawnLists;
 import carpetextra.utils.CarpetExtraTranslations;
 import com.mojang.brigadier.CommandDispatcher;
@@ -37,6 +38,7 @@ public class CarpetExtraServer implements CarpetExtension, ModInitializer
         // let's /carpet handle our few simple settings
         CarpetServer.settingsManager.parseSettingsClass(CarpetExtraSettings.class);
         CustomSpawnLists.addExtraSpawnRules();
+        DispenserEvent.init();
     }
 
     @Override
