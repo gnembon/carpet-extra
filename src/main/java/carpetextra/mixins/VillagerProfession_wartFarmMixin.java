@@ -18,11 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(VillagerProfession.class)
 public abstract class VillagerProfession_wartFarmMixin
 {
-
-
     @Shadow static VillagerProfession register(String string, RegistryKey<PointOfInterestType> pointOfInterestType, ImmutableSet<Item> immutableSet, ImmutableSet<Block> immutableSet2, /*@Nullable*/ SoundEvent soundEvent) {return null;};
 
-    @Inject(method = "register(Ljava/lang/String;Lnet/minecraft/world/poi/PointOfInterestType;Lnet/minecraft/sound/SoundEvent;)Lnet/minecraft/village/VillagerProfession;", cancellable = true, at = @At("HEAD"))
+    @Inject(method = "Lnet/minecraft/village/VillagerProfession;register(Ljava/lang/String;Lnet/minecraft/util/registry/RegistryKey;Lnet/minecraft/sound/SoundEvent;)Lnet/minecraft/village/VillagerProfession;", cancellable = true, at = @At("HEAD"))
     private static void registerCleric(String key, RegistryKey<PointOfInterestType> pointOfInterestType, SoundEvent soundEvent, CallbackInfoReturnable<VillagerProfession> cir)
     {
         if (key.equals("cleric"))
