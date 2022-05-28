@@ -1,0 +1,201 @@
+{
+  // Categories:
+  "carpet.category.extras": "extras",
+
+  // Rules:
+
+  // accurateBlockPlacement
+  "carpet.rule.accurateBlockPlacement.desc": "Client can provide alternative block placement.",
+
+  // autoCraftingDropper
+  "carpet.rule.autoCraftingDropper.desc": "Auto-crafting dropper",
+
+  "carpet.rule.autoCraftingDropper.extra.0": "If a dropper points into a crafting table and contains a valid 3x3 crafting recipe, firing that ",
+  "carpet.rule.autoCraftingDropper.extra.1": "dropper will cause it to craft (drop as item) that recipe. ",
+  "carpet.rule.autoCraftingDropper.extra.2": "Overrides comparators so they indicate number of filled slots instead.",
+  "carpet.rule.autoCraftingDropper.extra.3": "Also makes hoppers, droppers and dispensers input max 1 item per slot.",
+
+  // betterBonemeal
+  "carpet.rule.betterBonemeal.desc": "Bonemeal can be used to grow sugarcane, cactus and lily pads.",
+
+  // blazeMeal
+  "carpet.rule.blazeMeal.desc": "Blaze powder fertilizes netherwart.",
+
+  "carpet.rule.blazeMeal.extra.0": "Via dispenser or player right click actions.",
+
+  // blockStateSyncing
+  "carpet.rule.blockStateSyncing.desc": "Fixes block states in F3 debug mode not updating for some blocks.",
+
+  "carpet.rule.blockStateSyncing.extra.0": "May cause increased network traffic.",
+  "carpet.rule.blockStateSyncing.extra.1": "Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.",
+
+  // chickenShearing
+  "carpet.rule.chickenShearing.desc": "Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!",
+
+  "carpet.rule.chickenShearing.extra.0": "Baby chickens can't be sheared.",
+  "carpet.rule.chickenShearing.extra.1": "Also works with dispensers",
+
+  // clericsFarmWarts
+  "carpet.rule.clericsFarmWarts.desc": "Clerics can warm nether farts.",
+
+  "carpet.rule.clericsFarmWarts.extra.0": "This will also allow them to pick up wart items, as well as pathfind to soulsand.",
+
+  // commandPing
+  "carpet.rule.commandPing.desc": "Enables `/ping` for players to get their ping.",
+
+  // comparatorBetterItemFrames
+  "carpet.rule.comparatorBetterItemFrames.desc": "Allows Comparators to see item frames that are horizontal in front of them and on top the the block in front of them",
+
+  "carpet.rule.comparatorBetterItemFrames.extra.0": "Behind: Allows comparators to detect item frames in the block behind them",
+  "carpet.rule.comparatorBetterItemFrames.extra.1": "Lenient: Allows comparators to detect any item frames within the block behind a full block",
+  "carpet.rule.comparatorBetterItemFrames.extra.2": "Extended: Allows comparators to detect item frames on a full block behind the comparator",
+
+  // comparatorReadsClock
+  "carpet.rule.comparatorReadsClock.desc": "Allows Comparators to read the daytime instead of the rotation of clocks in item frames.",
+
+  // creeperSpawningInJungleTemples
+  "carpet.rule.creeperSpawningInJungleTemples.desc": "Only creepers spawn in jungle temples.",
+
+  // disablePlayerCollision
+  "carpet.rule.disablePlayerCollision.desc": "Disables player entity collision.",
+
+  // dispenserPlacesBlocks
+  "carpet.rule.dispenserPlacesBlocks.desc": "Dispensers can place blocks.",
+
+  // dispensersCarvePumpkins
+  "carpet.rule.dispensersCarvePumpkins.desc": "Dispensers containing shears can carve pumpkins.",
+
+  // dispensersFeedAnimals
+  "carpet.rule.dispensersFeedAnimals.desc": "Dispensers can feed animals if given their breeding item.",
+
+  "carpet.rule.dispensersFeedAnimals.extra.0": "Can also feed flowers to brown mooshrooms to give them a suspicious stew effect",
+
+  // dispensersFillMinecarts
+  "carpet.rule.dispensersFillMinecarts.desc": "Minecarts can be filled with hoppers, chests, tnt and furnace.",
+
+  // dispensersMilkAnimals
+  "carpet.rule.dispensersMilkAnimals.desc": "Dispensers with empty buckets can milk cows/mooshrooms/goats, and get mushroom/suspicious stew from mooshrooms with bowls.",
+
+  // dispensersPlayRecords
+  "carpet.rule.dispensersPlayRecords.desc": "Dispensers can play records if there's a jukebox in front of them.",
+
+  "carpet.rule.dispensersPlayRecords.extra.0": "If a record already exists in the jukebox, it gets placed back in the dispenser.",
+
+  // dispensersPotPlants
+  "carpet.rule.dispensersPotPlants.desc": "Dispensers can put flowers in flower pots",
+
+  // dispensersStripBlocks
+  "carpet.rule.dispensersStripBlocks.desc": "Dispensers with axes can strip blocks",
+
+  "carpet.rule.dispensersStripBlocks.extra.0": "Can strip logs, remove oxidation, and remove wax",
+
+  // dispensersTillSoil
+  "carpet.rule.dispensersTillSoil.desc": "Dispensers with hoes can till soil.",
+
+  // dispensersToggleThings
+  "carpet.rule.dispensersToggleThings.desc": "Dispensers containing a stick can toggle/activate things.",
+
+  "carpet.rule.dispensersToggleThings.extra.0": "Works with buttons, redstone, noteblocks, comparators, repeaters, ",
+  "carpet.rule.dispensersToggleThings.extra.1": "daylight detectors, etc.",
+
+  // dispensersUseCauldrons
+  "carpet.rule.dispensersUseCauldrons.desc": "Dispensers can empty/fill cauldrons with buckets or bottles, and undye leather armor/shulker boxes/banners",
+
+  // doubleRetraction
+  "carpet.rule.doubleRetraction.desc": "Re-adds 1.8 double retraction to pistons.",
+
+  "carpet.rule.doubleRetraction.extra.0": "Gives pistons the ability to double retract without side effects.",
+  "carpet.rule.doubleRetraction.extra.1": "Fixes [MC-88959](https://bugs.mojang.com/browse/MC-88959).",
+
+  // dragonEggBedrockBreaking
+  "carpet.rule.dragonEggBedrockBreaking.desc": "Reintroduce the Dragon Egg Bedrock breaking bug from 1.12.",
+
+  // emptyShulkerBoxStackAlways
+  "carpet.rule.emptyShulkerBoxStackAlways.desc": "Empty Shulker Boxes will always stack, even inside inventories.",
+
+  // enderPearlChunkLoading
+  "carpet.rule.enderPearlChunkLoading.desc": "Allow horizontally moving Ender Pearls to load chunks as entity ticking.",
+
+  // fallingBlockDispensers
+  "carpet.rule.fallingBlockDispensers.desc": "Dispensers/Droppers with a block in front of them when powered will turn that block into a falling block",
+
+  "carpet.rule.fallingBlockDispensers.extra.0": "dispenser & dropper give the same velocity to the falling block like they do in 22w13oneblockatatime",
+
+  // flowerPotChunkLoading
+  "carpet.rule.flowerPotChunkLoading.desc": "Placing a wither rose in a flowerpot will load that chunk.",
+
+  "carpet.rule.flowerPotChunkLoading.extra.0": "If u enable the rule the already existing chunks with flowerpots won't be loaded. ",
+  "carpet.rule.flowerPotChunkLoading.extra.1": "Also disabling the carpet rule won't remove the loaded chunks, u need to manually unload them using the /forceload command. ",
+  "carpet.rule.flowerPotChunkLoading.extra.2": "All the loaded chunks can be seen using `/forceload query`",
+
+  // hopperMinecart8gtCooldown
+  "carpet.rule.hopperMinecart8gtCooldown.desc": "Makes Hopper Minecarts have an 8gt cooldown like hoppers.",
+
+  // hopperMinecartItemTransfer
+  "carpet.rule.hopperMinecartItemTransfer.desc": "Allows Hopper Minecarts to transfer items into containers below them.",
+
+  // maxSpongeRange
+  "carpet.rule.maxSpongeRange.desc": "Maximum offset limit for sponge.",
+
+  // maxSpongeSuck
+  "carpet.rule.maxSpongeSuck.desc": "Maximum water sucking for sponge.",
+
+  // mobInFireConvertsSandToSoulsand
+  "carpet.rule.mobInFireConvertsSandToSoulsand.desc": "If a living entity dies on sand with fire on top the sand will convert into soul sand.",
+
+  // pistonRedirectsRedstone
+  "carpet.rule.pistonRedirectsRedstone.desc": "Pistons and sticky pistons redirect redstone",
+
+  "carpet.rule.pistonRedirectsRedstone.extra.0": "When retracting, they will blink visually",
+  "carpet.rule.pistonRedirectsRedstone.extra.1": "but that's only to minimize changes required for it to work",
+
+  // reloadSuffocationFix
+  "carpet.rule.reloadSuffocationFix.desc": "Won't let mobs glitch into blocks when reloaded.",
+
+  "carpet.rule.reloadSuffocationFix.extra.0": "Can cause slight differences in mobs behaviour.",
+  "carpet.rule.reloadSuffocationFix.extra.1": "Fixes [MC-2025](https://bugs.mojang.com/browse/MC-2025).",
+
+  // renewableEndstone
+  "carpet.rule.renewableEndstone.desc": "Dragon's breath from dispensers convert cobblestone to end stone.",
+
+  // renewableIce
+  "carpet.rule.renewableIce.desc": "Multiple ice crushed by falling anvils make denser ice.",
+
+  "carpet.rule.renewableIce.extra.0": "frosted turns into normal, normal into packed and packed into blue",
+
+  // renewableNetherrack
+  "carpet.rule.renewableNetherrack.desc": "Fire charges from dispensers convert cobblestone to netherrack.",
+
+  "carpet.rule.renewableNetherrack.extra.0": "Credits: Skyrising",
+
+  // renewableSand
+  "carpet.rule.renewableSand.desc": "Cobblestone crushed by falling anvils makes sand.",
+
+  // renewableWitherSkeletons
+  "carpet.rule.renewableWitherSkeletons.desc": "Skeletons turn into wither skeletons when struck by lightning.",
+
+  // repeaterPriorityFix
+  "carpet.rule.repeaterPriorityFix.desc": "Quick pulses won't get lost in repeater setups.",
+
+  "carpet.rule.repeaterPriorityFix.extra.0": "Probably brings back pre 1.8 behaviour.",
+  "carpet.rule.repeaterPriorityFix.extra.1": "Fixes [MC-54711](https://bugs.mojang.com/browse/MC-54711).",
+
+  // scaffoldingDistance
+  "carpet.rule.scaffoldingDistance.desc": "Max distance for scaffolding.",
+
+  // spiderJockeysDropGapples
+  "carpet.rule.spiderJockeysDropGapples.desc": "Gives Spider jockeys a specified chance to drop enchanted golden apples.",
+
+  "carpet.rule.spiderJockeysDropGapples.extra.0": "0 is the default setting, no enchanted golden apples will be dropped",
+
+  // straySpawningInIgloos
+  "carpet.rule.straySpawningInIgloos.desc": "Only strays spawn in igloos.",
+
+  // variableWoodDelays
+  "carpet.rule.variableWoodDelays.desc": "Variable delays on wooden components (buttons, pressure plates).",
+
+  // y0DragonEggBedrockBreaking
+  "carpet.rule.y0DragonEggBedrockBreaking.desc": "Let dragon eggs break Y0 bedrock.",
+
+  "carpet.rule.y0DragonEggBedrockBreaking.extra.0": "Requires dragonEggBedrockBreaking to be set to true."
+}
