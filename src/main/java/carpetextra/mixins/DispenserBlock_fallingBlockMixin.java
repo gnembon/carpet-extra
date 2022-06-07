@@ -12,7 +12,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.AbstractRandom;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -43,12 +43,11 @@ public class DispenserBlock_fallingBlockMixin {
     }
 
     @Inject(
-            method = "scheduledTick(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;" +
-                    "Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/random/AbstractRandom;)V",
+            method = "scheduledTick",
             at = @At("HEAD"),
             cancellable = true
     )
-    public void onScheduledTick(BlockState state, ServerWorld world, BlockPos pos, AbstractRandom rand, CallbackInfo ci) {
+    public void onScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random rand, CallbackInfo ci) {
         if (CarpetExtraSettings.fallingBlockDispensers) {
             Direction direction = state.get(DispenserBlock.FACING);
             BlockPos facingPos = pos.offset(direction);
