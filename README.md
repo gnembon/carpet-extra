@@ -363,17 +363,6 @@ Only strays spawn in igloos.
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`  
   
-## updateSuppressionBlock
-Placing an activator rail on top of a barrier block will update suppress when the rail turns off.  
-Entering an integer will make the update suppression block auto-reset  
-Integer entered is the delay in ticks for it to reset  
-* Type: `String`  
-* Default value: `false`  
-* Suggested options: `false`, `true`, `1`, `6`  
-* Categories: `CREATIVE`, `EXTRAS`  
-* Additional notes:  
-  * Cannot be negative, can be true, false, or # > 0  
-  
 ## variableWoodDelays
 Variable delays on wooden components (buttons, pressure plates).  
 * Type: `boolean`  
