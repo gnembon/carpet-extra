@@ -58,6 +58,6 @@ public class CauldronFillingDispenserBehavior extends FallibleItemDispenserBehav
     private static void setCauldron(ServerWorld world, BlockPos pos, BlockState state, SoundEvent soundEvent) {
         world.setBlockState(pos, state);
         world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        world.emitGameEvent(GameEvent.FLUID_PLACE, pos);
+        world.emitGameEvent(null, GameEvent.FLUID_PLACE, pos);
     }
 }

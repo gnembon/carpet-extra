@@ -16,6 +16,7 @@
     "AbstractButtonBlock_variableWoodMixin",
     "ItemFrameEntity_comparatorReadsClockMixin",
     "ItemStackMixin",
+    "ServerPlayNetworkHandlerMixin",
     "ThrownEntityMixin",
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_cooldownFixMixin",
@@ -53,7 +54,6 @@
     "HopperBlock_syncMixin",
     "SaplingBlock_syncMixin",
     "SugarCaneBlock_syncMixin",
-    "BlocksMixin",
     "ChunkGeneratorMixin",
     "FallingBlockMixin",
     "ChickenEntityMixin",
@@ -61,17 +61,16 @@
     "FlowerPotBlockMixin",
     "EntityMixin",
     "AbstractRedstoneGateBlockMixin",
-    "IglooFeatureMixin",
-    "SurfaceChunkGeneratorMixin",
     "StrayEntityMixin",
-    "JungleTempleFeature_creeperMixin",
     "SkeletonEntityMixin",
     "SpiderEntityMixin",
     "ScaffoldingBlock_scaffoldingDistanceMixin",
     "ScaffoldingItem_scaffoldingDistanceMixin",
     "SugarCaneBlock_fertilizerMixin",
     "CactusBlock_fertilizerMixin",
-    "LilyPadBlock_fertilizerMixin"
+    "LilyPadBlock_fertilizerMixin",
+    "DispenserBlock_fallingBlockMixin",
+    "FallingBlockEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

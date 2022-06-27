@@ -145,7 +145,7 @@ public class CarpetExtraDispenserBehaviors {
             })).isEmpty();
 
             // check if item is a small flower
-            if(hasFeedableMooshrooms && ItemTags.SMALL_FLOWERS.contains(item)) {
+            if(hasFeedableMooshrooms && item.getRegistryEntry().isIn(ItemTags.SMALL_FLOWERS)) {
                 return FEED_MOOSHROOM;
             }
         }

@@ -1,6 +1,7 @@
 package carpetextra.mixins;
 
-import carpet.CarpetServer;
+import java.util.Random;
+
 import carpetextra.CarpetExtraSettings;
 import carpetextra.fakes.DispenserBlockEntityInterface;
 import carpetextra.utils.VoidContainer;
@@ -29,6 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(DropperBlock.class)
 public class DropperBlock_craftingMixin extends DispenserBlock
 {
+    private static final Random rand = new Random();
     protected DropperBlock_craftingMixin(Settings block$Settings_1)
     {
         super(block$Settings_1);
@@ -59,11 +61,11 @@ public class DropperBlock_craftingMixin extends DispenserBlock
 
     private void spawn(World world_1, double double_1, double double_2, double double_3, ItemStack itemStack_1) {
         while(!itemStack_1.isEmpty()) {
-            ItemEntity itemEntity_1 = new ItemEntity(world_1, double_1, double_2, double_3, itemStack_1.split(CarpetServer.rand.nextInt(21) + 10));
+            ItemEntity itemEntity_1 = new ItemEntity(world_1, double_1, double_2, double_3, itemStack_1.split(rand.nextInt(21) + 10));
             itemEntity_1.setVelocity(
-                    (CarpetServer.rand.nextDouble()-CarpetServer.rand.nextDouble()) * 0.05,
-                    CarpetServer.rand.nextDouble() * 0.05,
-                    (CarpetServer.rand.nextDouble()-CarpetServer.rand.nextDouble()) * 0.05
+                    (rand.nextDouble()-rand.nextDouble()) * 0.05,
+                    rand.nextDouble() * 0.05,
+                    (rand.nextDouble()-rand.nextDouble()) * 0.05
             );
             world_1.spawnEntity(itemEntity_1);
         }

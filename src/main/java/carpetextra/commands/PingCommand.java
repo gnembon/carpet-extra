@@ -5,8 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.Util;
+import net.minecraft.text.Text;
 
 import static net.minecraft.server.command.CommandManager.literal;
 
@@ -20,7 +19,7 @@ public class PingCommand
                         {
                             ServerPlayerEntity playerEntity = c.getSource().getPlayer();
                             int ping = playerEntity.pingMilliseconds;
-                            playerEntity.sendSystemMessage(new LiteralText("Your ping is: " + ping + " ms"), Util.NIL_UUID);
+                            c.getSource().sendFeedback(Text.literal("Your ping is: " + ping + " ms"), false);
                             return 1;
                         });
         

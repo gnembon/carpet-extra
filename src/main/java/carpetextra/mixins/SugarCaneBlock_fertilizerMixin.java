@@ -4,11 +4,10 @@ import carpetextra.CarpetExtraSettings;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-
-import java.util.Random;
 
 @Mixin(SugarCaneBlock.class)
 public abstract class SugarCaneBlock_fertilizerMixin implements Fertilizable

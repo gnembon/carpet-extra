@@ -5,6 +5,8 @@ Use along side base [fabric-carpet](https://github.com/gnembon/fabric-carpet) mo
 
 Due to how autoCraftingTable feature is implemented, it has been moved to [a standalone extension](https://github.com/gnembon/carpet-autoCraftingTable).
 
+Carpet Extra provides a Scarpet event you can find the documentation of [here](docs/scarpet/ScarpetEvents.md).
+
 # Carpet Extra Features
 
 ## accurateBlockPlacement
@@ -218,6 +220,14 @@ Allow horizontally moving Ender Pearls to load chunks as entity ticking.
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`  
   
+## fallingBlockDispensers
+Dispensers/Droppers with a block in front of them when powered will turn that block into a falling block  
+dispenser & dropper give the same velocity to the falling block like they do in 22w13oneblockatatime  
+* Type: `boolean`  
+* Default value: `false`  
+* Required options: `true`, `false`  
+* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
+  
 ## flowerPotChunkLoading
 Placing a wither rose in a flowerpot will load that chunk.  
 If u enable the rule the already existing chunks with flowerpots won't be loaded.   
@@ -296,14 +306,6 @@ frosted turns into normal, normal into packed and packed into blue
 * Required options: `true`, `false`  
 * Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
   
-## renewableLava
-Obsidian surrounded by 6 lava sources has a chance of converting to lava.  
-Credits: Skyrising  
-* Type: `boolean`  
-* Default value: `false`  
-* Required options: `true`, `false`  
-* Categories: `EXTRAS`, `EXPERIMENTAL`, `FEATURE`  
-  
 ## renewableNetherrack
 Fire charges from dispensers convert cobblestone to netherrack.  
 Credits: Skyrising  
@@ -360,17 +362,6 @@ Only strays spawn in igloos.
 * Default value: `false`  
 * Required options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`  
-  
-## updateSuppressionBlock
-Placing an activator rail on top of a barrier block will update suppress when the rail turns off.  
-Entering an integer will make the update suppression block auto-reset  
-Integer entered is the delay in ticks for it to reset  
-* Type: `String`  
-* Default value: `false`  
-* Suggested options: `false`, `true`, `1`, `6`  
-* Categories: `CREATIVE`, `EXTRAS`  
-* Additional notes:  
-  * Cannot be negative, can be true, false, or # > 0  
   
 ## variableWoodDelays
 Variable delays on wooden components (buttons, pressure plates).  

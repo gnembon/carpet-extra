@@ -9,14 +9,12 @@ import net.minecraft.block.FallingBlock;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.random.Random;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Random;
 
 @Mixin(FallingBlock.class)
 public abstract class FallingBlockMixin extends Block
@@ -36,20 +34,20 @@ public abstract class FallingBlockMixin extends Block
     
     @SuppressWarnings("ConstantConditions")
     @Inject(method = "scheduledTick", at = @At("HEAD"), cancellable = true)
-    private void onTryStartFalling(BlockState blockState_1, ServerWorld serverWorld_1, BlockPos blockPos_1, Random random_1, CallbackInfo ci)
+    private void onTryStartFalling(BlockState state, ServerWorld serverWorld_1, BlockPos blockPos_1, Random random, CallbackInfo ci)
     {
         if (CarpetExtraSettings.dragonEggBedrockBreaking && (FallingBlock)(Object)this instanceof DragonEggBlock)
         {
             if (canFallThrough(serverWorld_1.getBlockState(blockPos_1.down(1))) && blockPos_1.getY() >= serverWorld_1.getBottomY())
             {
                 if (!DragonEggBedrockBreaking.fallInstantly &&
-                        serverWorld_1.method_37118(blockPos_1))
+                        serverWorld_1.shouldTickEntity(blockPos_1))
                 {
                     if (!serverWorld_1.isClient)
                     {
-                        FallingBlockEntity fallingBlockEntity_1 = new FallingBlockEntity(serverWorld_1, (double) blockPos_1.getX() + 0.5D, (double) blockPos_1.getY(), (double) blockPos_1.getZ() + 0.5D, serverWorld_1.getBlockState(blockPos_1));
+                        FallingBlockEntity fallingBlockEntity_1 = FallingBlockEntity.spawnFromBlock(serverWorld_1, blockPos_1, serverWorld_1.getBlockState(blockPos_1) );
                         this.configureFallingBlockEntity(fallingBlockEntity_1);
-                        serverWorld_1.spawnEntity(fallingBlockEntity_1);
+                        //serverWorld_1.spawnEntity(fallingBlockEntity_1);
                     }
                 }
                 else

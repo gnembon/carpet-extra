@@ -116,7 +116,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
     private static void setCauldron(ServerWorld world, BlockPos pos, BlockState state, SoundEvent soundEvent, GameEvent gameEvent) {
         world.setBlockState(pos, state);
         world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
-        world.emitGameEvent(gameEvent, pos);
+        world.emitGameEvent(null, gameEvent, pos);
     }
 
     public static boolean isWaterCauldronItem(ItemStack stack) {
