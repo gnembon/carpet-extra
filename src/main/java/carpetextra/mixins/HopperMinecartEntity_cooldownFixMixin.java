@@ -3,6 +3,7 @@ package carpetextra.mixins;
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.block.entity.Hopper;
 import net.minecraft.block.entity.HopperBlockEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.vehicle.HopperMinecartEntity;
@@ -45,7 +46,7 @@ public abstract class HopperMinecartEntity_cooldownFixMixin extends StorageMinec
 
     //Bugfix 1: Picking up an item doesn't set the cooldown because the return value is false even when successful
     @Inject(method = "canOperate", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z", shift = At.Shift.BEFORE),cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-    private void extractAndReturnSuccess(CallbackInfoReturnable<Boolean> cir, List list_1) {
+    private void extractAndReturnSuccess(CallbackInfoReturnable<Boolean> cir, List<Entity> list_1) {
         if (CarpetExtraSettings.hopperMinecart8gtCooldown) {
             boolean result = HopperBlockEntity.extract(this, (ItemEntity) list_1.get(0));
             cir.setReturnValue(result);

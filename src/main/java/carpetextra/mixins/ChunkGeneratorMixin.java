@@ -2,7 +2,6 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import carpetextra.helpers.DragonEggBedrockBreaking;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.StructureAccessor;

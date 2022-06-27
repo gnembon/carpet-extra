@@ -1,7 +1,6 @@
 package carpetextra.mixins;
 
 import net.minecraft.block.NoteBlock;
-import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
