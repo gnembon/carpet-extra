@@ -257,10 +257,10 @@ public class CarpetExtraDispenserBehaviors {
         }
 
         // dispensersPlaceBoatsOnIce
-        if(CarpetExtraSettings.dispensersPlaceBoatsOnIce && item instanceof BoatItem && frontBlock == Blocks.AIR) {
+        if (CarpetExtraSettings.dispensersPlaceBoatsOnIce && item instanceof BoatItem && frontBlock == Blocks.AIR) {
             BlockPos blockBelowFrontBlockPos = frontBlockPos.down();
             Block blockBelowFrontBlock = world.getBlockState(blockBelowFrontBlockPos).getBlock();
-            if(BlockTags.ICE.values().contains(blockBelowFrontBlock)) {
+            if (world.getBlockState(blockBelowFrontBlockPos).isIn(BlockTags.ICE)) {
                 return PLACE_BOAT_ON_ICE;
             }
         }
