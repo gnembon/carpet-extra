@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.ChestBoatEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
@@ -32,8 +33,14 @@ public class PlaceBoatOnIceDispenserBehavior extends FallibleItemDispenserBehavi
         BlockState blockBelowFrontState = world.getBlockState(blockBelowFrontBlockPos);
 
         if (frontBlock == Blocks.AIR && blockBelowFrontState.isIn(BlockTags.ICE)) {
-            BoatEntity boatEntity = new BoatEntity(world, boatXPos, boatYPos, boatZPos);
-            boatEntity.setBoatType(((BoatItemAccessorMixin) stack.getItem()).getType());
+            BoatItemAccessorMixin boatInfo = (BoatItemAccessorMixin) stack.getItem();
+            BoatEntity boatEntity;
+            if (boatInfo.isChest()) {
+                boatEntity = new ChestBoatEntity(world, boatXPos, boatYPos, boatZPos);
+            } else {
+                boatEntity = new BoatEntity(world, boatXPos, boatYPos, boatZPos);
+            }
+            boatEntity.setBoatType(boatInfo.getType());
             boatEntity.setYaw(dispenserFacing.asRotation());
             world.spawnEntity(boatEntity);
             stack.decrement(1);

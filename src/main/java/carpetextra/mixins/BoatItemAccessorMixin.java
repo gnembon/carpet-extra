@@ -9,4 +9,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface BoatItemAccessorMixin {
     @Accessor
     BoatEntity.Type getType();
+    @Accessor
+    boolean isChest();
 }

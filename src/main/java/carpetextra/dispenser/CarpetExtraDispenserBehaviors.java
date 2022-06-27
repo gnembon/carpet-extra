@@ -259,7 +259,6 @@ public class CarpetExtraDispenserBehaviors {
         // dispensersPlaceBoatsOnIce
         if (CarpetExtraSettings.dispensersPlaceBoatsOnIce && item instanceof BoatItem && frontBlock == Blocks.AIR) {
             BlockPos blockBelowFrontBlockPos = frontBlockPos.down();
-            Block blockBelowFrontBlock = world.getBlockState(blockBelowFrontBlockPos).getBlock();
             if (world.getBlockState(blockBelowFrontBlockPos).isIn(BlockTags.ICE)) {
                 return PLACE_BOAT_ON_ICE;
             }
