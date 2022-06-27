@@ -1,6 +1,5 @@
 package carpetextra.mixins;
 
-import carpetextra.CarpetExtraSettings;
 import carpetextra.utils.PlaceBlockDispenserBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;

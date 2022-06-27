@@ -76,6 +76,9 @@
   // dispensersMilkAnimals
   "carpet.rule.dispensersMilkAnimals.desc": "Dispensers with empty buckets can milk cows/mooshrooms/goats, and get mushroom/suspicious stew from mooshrooms with bowls.",
 
+  // dispensersPlaceBoatsOnIce
+  "carpet.rule.dispensersPlaceBoatsOnIce.desc": "Dispensers can place boats on ice",
+
   // dispensersPlayRecords
   "carpet.rule.dispensersPlayRecords.desc": "Dispensers can play records if there's a jukebox in front of them.",
 

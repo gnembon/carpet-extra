@@ -2,13 +2,9 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.block.ScaffoldingBlock;
-import net.minecraft.state.property.IntProperty;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ScaffoldingBlock.class)
 public class ScaffoldingBlock_scaffoldingDistanceMixin {

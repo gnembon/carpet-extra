@@ -29,7 +29,7 @@ public class MusicDiscDispenserBehavior extends FallibleItemDispenserBehavior {
             ItemStack jukeboxItem = ((JukeboxBlockEntity) frontBlockEntity).getRecord();
 
             // set record
-            ((JukeboxBlock) frontBlock).setRecord(world, frontBlockPos, frontBlockState, stack);
+            ((JukeboxBlock) frontBlock).setRecord(null, world, frontBlockPos, frontBlockState, stack);
             // play music
             world.syncWorldEvent(1010, frontBlockPos, Item.getRawId(stack.getItem()));
 

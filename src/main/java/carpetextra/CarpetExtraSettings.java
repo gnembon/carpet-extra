@@ -275,5 +275,10 @@ public class CarpetExtraSettings
     @Rule(
             categories = {EXTRA, FEATURE, DISPENSER}
     )
+    public static boolean dispensersPlaceBoatsOnIce = false;
+
+    @Rule(
+            categories = {EXTRA, FEATURE, DISPENSER}
+    )
     public static boolean fallingBlockDispensers = false;
 }

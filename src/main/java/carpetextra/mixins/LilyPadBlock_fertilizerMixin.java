@@ -7,9 +7,9 @@ import net.minecraft.block.Fertilizable;
 import net.minecraft.block.LilyPadBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.util.math.random.AbstractRandom;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -23,13 +23,13 @@ public abstract class LilyPadBlock_fertilizerMixin implements Fertilizable {
     }
 
     @Override
-    public boolean canGrow(World world, AbstractRandom random, BlockPos pos, BlockState state)
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
     {
         return true;
     }
 
     @Override
-    public void grow(ServerWorld world, AbstractRandom random, BlockPos pos, BlockState state)
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
     {
         if(!CarpetExtraSettings.betterBonemeal) return;
         BlockState blockState = Blocks.LILY_PAD.getDefaultState();

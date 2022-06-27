@@ -9,7 +9,7 @@ import net.minecraft.block.FallingBlock;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.AbstractRandom;
+import net.minecraft.util.math.random.Random;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,7 +34,7 @@ public abstract class FallingBlockMixin extends Block
     
     @SuppressWarnings("ConstantConditions")
     @Inject(method = "scheduledTick", at = @At("HEAD"), cancellable = true)
-    private void onTryStartFalling(BlockState blockState_1, ServerWorld serverWorld_1, BlockPos blockPos_1, AbstractRandom random_1, CallbackInfo ci)
+    private void onTryStartFalling(BlockState state, ServerWorld serverWorld_1, BlockPos blockPos_1, Random random, CallbackInfo ci)
     {
         if (CarpetExtraSettings.dragonEggBedrockBreaking && (FallingBlock)(Object)this instanceof DragonEggBlock)
         {
