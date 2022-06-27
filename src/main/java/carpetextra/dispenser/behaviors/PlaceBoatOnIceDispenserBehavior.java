@@ -29,10 +29,9 @@ public class PlaceBoatOnIceDispenserBehavior extends FallibleItemDispenserBehavi
         BlockPos frontBlockPos = pointer.getPos().offset(dispenserFacing);
         Block frontBlock = world.getBlockState(frontBlockPos).getBlock();
         BlockPos blockBelowFrontBlockPos = frontBlockPos.down();
-        BlockState blockBelowFrontBlockState = world.getBlockState(blockBelowFrontBlockPos);
-        Block blockBelowFrontBlock = blockBelowFrontBlockState.getBlock();
+        BlockState blockBelowFrontState = world.getBlockState(blockBelowFrontBlockPos);
 
-        if(frontBlock == Blocks.AIR && BlockTags.ICE.values().contains(blockBelowFrontBlock)) {
+        if (frontBlock == Blocks.AIR && blockBelowFrontState.isIn(BlockTags.ICE)) {
             BoatEntity boatEntity = new BoatEntity(world, boatXPos, boatYPos, boatZPos);
             boatEntity.setBoatType(((BoatItemAccessorMixin) stack.getItem()).getType());
             boatEntity.setYaw(dispenserFacing.asRotation());
