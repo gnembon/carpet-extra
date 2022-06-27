@@ -351,6 +351,12 @@ public class CarpetExtraSettings
     public static boolean dispensersPotPlants = false;
 
     @Rule(
+            desc = "Dispensers can place boats on ice",
+            category = {EXTRA, FEATURE, DISPENSER}
+    )
+    public static boolean dispensersPlaceBoatsOnIce = false;
+
+    @Rule(
             desc = "Dispensers/Droppers with a block in front of them when powered will turn that block into a falling block",
             extra = "dispenser & dropper give the same velocity to the falling block like they do in 22w13oneblockatatime",
             category = {EXTRA, FEATURE, DISPENSER}

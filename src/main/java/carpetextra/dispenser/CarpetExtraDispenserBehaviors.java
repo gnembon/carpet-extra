@@ -17,6 +17,7 @@ import carpetextra.dispenser.behaviors.FlowerPotDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkAnimalDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkMooshroomDispenserBehavior;
 import carpetextra.dispenser.behaviors.MusicDiscDispenserBehavior;
+import carpetextra.dispenser.behaviors.PlaceBoatOnIceDispenserBehavior;
 import carpetextra.dispenser.behaviors.ShearChickenDispenserBehavior;
 import carpetextra.dispenser.behaviors.StripBlocksDispenserBehavior;
 import carpetextra.dispenser.behaviors.TillSoilDispenserBehavior;
@@ -37,6 +38,7 @@ import net.minecraft.entity.passive.GoatEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.BoatItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -45,6 +47,7 @@ import net.minecraft.item.MusicDiscItem;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
@@ -88,6 +91,8 @@ public class CarpetExtraDispenserBehaviors {
     public static final DispenserBehavior DRAGON_BREATH_ENDSTONE = new DragonBreathDispenserBehavior();
     // renewableNetherrack
     public static final DispenserBehavior FIRE_CHARGE_NETHERRACK = new FireChargeDispenserBehavior();
+    // dispensersPlaceBoatsOnIce
+    public static final DispenserBehavior PLACE_BOAT_ON_ICE = new PlaceBoatOnIceDispenserBehavior();
 
 
     // get custom dispenser behavior
@@ -251,6 +256,14 @@ public class CarpetExtraDispenserBehaviors {
             return FIRE_CHARGE_NETHERRACK;
         }
 
+        // dispensersPlaceBoatsOnIce
+        if (CarpetExtraSettings.dispensersPlaceBoatsOnIce && item instanceof BoatItem && frontBlock == Blocks.AIR) {
+            BlockPos blockBelowFrontBlockPos = frontBlockPos.down();
+            Block blockBelowFrontBlock = world.getBlockState(blockBelowFrontBlockPos).getBlock();
+            if (world.getBlockState(blockBelowFrontBlockPos).isIn(BlockTags.ICE)) {
+                return PLACE_BOAT_ON_ICE;
+            }
+        }
 
 
         // no custom behavior, return null
