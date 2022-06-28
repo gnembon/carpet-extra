@@ -1,11 +1,16 @@
 package carpetextra.utils;
 
-import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.block.ComparatorBlock;
 import net.minecraft.block.RepeaterBlock;
+
+import net.minecraft.block.enums.ChestType;
+import net.minecraft.world.World;
+
+import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.ComparatorMode;
 import net.minecraft.block.enums.SlabType;
@@ -19,6 +24,17 @@ import net.minecraft.util.math.Vec3d;
 
 public class BlockPlacer
 {
+	private static boolean isBlockAttachableChest(Block originBlock, Direction facing, BlockPos checkPos, World world) {
+		BlockState checkState = world.getBlockState(checkPos);
+		if (checkState == null) {
+			return false;
+		}
+		if (originBlock.equals(checkState.getBlock())) {
+			return checkState.get(ChestBlock.FACING).equals(facing) && checkState.get(ChestBlock.CHEST_TYPE) == ChestType.SINGLE;
+		}
+		return false;
+	}
+
     public static BlockState alternativeBlockPlacement(Block block, ItemPlacementContext context)
     {
         Vec3d hitPos = context.getHitPos();
@@ -68,6 +84,16 @@ public class BlockPlacer
 
                 state = state.with(directionProp, facing);
             }
+	        if (block instanceof ChestBlock)
+	        {
+		        if (isBlockAttachableChest(block, facing, blockPos.offset(facing.rotateYClockwise()), context.getWorld())) {
+			        state = state.with(ChestBlock.CHEST_TYPE, ChestType.LEFT);
+		        }
+		        else if (isBlockAttachableChest(block, facing, blockPos.offset(facing.rotateYCounterclockwise()), context.getWorld())) {
+			        state = state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
+		        }
+		        state = state.with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
+	        }
         }
         else if (state.contains(Properties.AXIS))
         {
