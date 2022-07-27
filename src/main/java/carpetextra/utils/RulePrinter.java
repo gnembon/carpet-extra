@@ -12,7 +12,7 @@ public class RulePrinter implements ModInitializer {
         System.setOut(CarpetRulePrinter.OLD_OUT);
         CarpetExtraServer.loadExtension();
         CarpetServer.onGameStarted();
-        CarpetServer.settingsManager.printAllRulesToLog("extras");
+        CarpetServer.settingsManager.dumpAllRulesToStream(System.out, "extras");
         System.exit(0);
     }
 }
