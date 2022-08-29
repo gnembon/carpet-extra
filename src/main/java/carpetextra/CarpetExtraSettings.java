@@ -281,4 +281,11 @@ public class CarpetExtraSettings
             categories = {EXTRA, FEATURE, DISPENSER}
     )
     public static boolean fallingBlockDispensers = false;
+
+    @Rule(
+            options = {"5", "10", "20"},
+            strict = false,
+            categories = {EXTRA, FEATURE}
+    )
+    public static int xpPerSculkCatalyst = 5;
 }

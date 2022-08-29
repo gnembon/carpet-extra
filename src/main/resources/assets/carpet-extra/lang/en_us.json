@@ -200,5 +200,8 @@
   // y0DragonEggBedrockBreaking
   "carpet.rule.y0DragonEggBedrockBreaking.desc": "Let dragon eggs break Y0 bedrock.",
 
-  "carpet.rule.y0DragonEggBedrockBreaking.extra.0": "Requires dragonEggBedrockBreaking to be set to true."
+  "carpet.rule.y0DragonEggBedrockBreaking.extra.0": "Requires dragonEggBedrockBreaking to be set to true.",
+
+  //xpPerSculkCatalyst
+  "carpet.rule.xpPerSculkCatalyst.desc": "Sets the amount of xp dropped when breaking a sculk catalyst."
 }
