@@ -16,7 +16,7 @@ public class SculkCatalystMixin {
         at = @At(value="INVOKE", target = "Lnet/minecraft/block/SculkCatalystBlock;dropExperienceWhenMined(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/math/intprovider/IntProvider;)V"),
         index = 3
     )
-    private IntProvider mixin(IntProvider experience){
+    private IntProvider xpModifier(IntProvider experience){
         return ConstantIntProvider.create(xpPerSculkCatalyst);
     }
 }
