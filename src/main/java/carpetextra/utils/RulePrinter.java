@@ -9,7 +9,7 @@ import java.lang.System;
 public class RulePrinter implements ModInitializer {
     @Override
     public void onInitialize() {
-        System.setOut(CarpetRulePrinter.OLD_OUT);
+        //System.setOut(CarpetRulePrinter.OLD_OUT);
         CarpetExtraServer.loadExtension();
         CarpetServer.onGameStarted();
         CarpetServer.settingsManager.dumpAllRulesToStream(System.out, "extras");
