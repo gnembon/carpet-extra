@@ -120,36 +120,11 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           cache: 'gradle'
-      - name: Replace fabric.mod.json
-        run: |
-          cd src/main/resources
-          rm fabric.mod.json
-          echo '
-          {
-            "schemaVersion": 1,
-            "id": "carpetextra",
-            "version": "1.4.11",
-            "entrypoints": {
-              "main": [ "carpetextra.utils.RulePrinter" ],
-              "preLaunch": [ "carpet.utils.CarpetRulePrinter" ]
-            }
-           }' > fabric.mod.json
-          cd ../../../
-      - name: Run solution
+      - name: Update README with changes to rules
         run: |
           chmod +x gradlew
-          ./gradlew runServer > settings-toProccess.txt
-      - name: Proccess Gradle log into a pretty readme page
-        run: |
-          cat README-header.md > README.md
-          from1="# Carpet Mod Settings";
-          File=settings-toProccess.txt
-          if grep -q "Deprecated Gradle features" "$File"; then # Happens after update to Gradle 6
-            to2="Deprecated Gradle features";
-          else
-            to2="BUILD SUCCESSFUL"
-          fi
-          a="$(cat settings-toProccess.txt)";a="$(echo "${a#*"$from1"}")"; echo "${a%%"$to2"*}" >> README.md
+          ./gradlew runServer --args="-- -carpetDumpRules -dumpFilter=extras -dumpPath ../rules.md"
+          cat README-header.md rules.md > README.md
       - name: Commit updated Readme page
         continue-on-error: true
         run: |
