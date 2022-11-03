@@ -162,9 +162,13 @@
   "carpet.rule.renewableEndstone.desc": "Dragon's breath from dispensers convert cobblestone to end stone.",
 
   // renewableIce
-  "carpet.rule.renewableIce.desc": "Multiple ice crushed by falling anvils make denser ice.",
+  "carpet.rule.renewableIce.desc": "Ice crushed by falling anvils make denser ice.",
 
-  "carpet.rule.renewableIce.extra.0": "frosted turns into normal, normal into packed and packed into blue",
+  "carpet.rule.renewableIce.extra.0": "Frosted turns into normal, normal into packed, and packed into blue",
+  "carpet.rule.renewableIce.extra.1": "Set the amount required to crush with renewableIceCrushCount",
+
+  // renewableIceCrushCount
+  "carpet.rule.renewableIceCrushCount.desc": "Required amount of ice to crush for renewableIce to convert the block",
 
   // renewableNetherrack
   "carpet.rule.renewableNetherrack.desc": "Fire charges from dispensers convert cobblestone to netherrack.",
