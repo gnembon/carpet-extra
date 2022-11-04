@@ -14,7 +14,7 @@ public class PingCommand
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher)
     {
         LiteralArgumentBuilder<ServerCommandSource> command = literal("ping").
-                requires( (player) -> CarpetExtraSettings.commandPing).
+                requires( (source) -> CarpetExtraSettings.commandPing && source.isExecutedByPlayer()).
                         executes( c ->
                         {
                             ServerPlayerEntity playerEntity = c.getSource().getPlayer();
