@@ -1,6 +1,7 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +20,7 @@ public abstract class DispenserBlock_syncMixin
     private boolean setWithFlags(World world, BlockPos pos, BlockState state, int flags)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return world.setBlockState(pos, state, flags | 2);
+            return world.setBlockState(pos, state, flags | Block.NOTIFY_LISTENERS);
         return world.setBlockState(pos, state, flags);
     }
 }
