@@ -120,7 +120,7 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           cache: 'gradle'
-      - name: Update README with changes to rules
+      - name: Update README page
         run: |
           chmod +x gradlew
           ./gradlew runServer --args="-- -carpetDumpRules -dumpFilter=extras -dumpPath ../rules.md"
