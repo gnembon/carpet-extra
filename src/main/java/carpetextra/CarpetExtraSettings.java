@@ -100,6 +100,24 @@ public class CarpetExtraSettings
             categories = {EXTRA, EXPERIMENTAL, FEATURE}
     )
     public static boolean renewableIce = false;
+
+    public static class ValidateIceCrushCount extends Validator<Integer> {
+        @Override
+        public Integer validate(ServerCommandSource source, CarpetRule<Integer> currentRule, Integer newValue, String string) {
+            return newValue >= 1 && newValue <= 9 ? newValue : null;
+        }
+
+        @Override
+        public String description() { return "You must choose a value from 1 to 9"; }
+    }
+
+    @Rule(
+        options = {"1", "3", "9"},
+        categories = {EXTRA, EXPERIMENTAL, FEATURE},
+        strict = false,
+        validators = ValidateIceCrushCount.class
+    )
+    public static int renewableIceCrushCount = 3;
     
     @Rule(
             categories = {EXTRA, FEATURE, DISPENSER}
