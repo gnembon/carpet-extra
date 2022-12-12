@@ -14,7 +14,7 @@ public class VoidContainer extends ScreenHandler
     public void onContentChanged(Inventory inventory_1) { }
 
     @Override
-    public ItemStack transferSlot(PlayerEntity player, int index) {
+    public ItemStack quickMove(PlayerEntity player, int index) {
         throw new IllegalStateException("Didn't expect transferSlot to be called in fake container");
     }
 }

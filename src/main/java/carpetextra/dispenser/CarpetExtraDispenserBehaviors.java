@@ -47,8 +47,8 @@ import net.minecraft.item.MusicDiscItem;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.ItemTags;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -141,7 +141,7 @@ public class CarpetExtraDispenserBehaviors {
 
             // get brown mooshrooms in front of dispenser
             boolean hasFeedableMooshrooms = !world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) -> {
-                return ((MooshroomEntity) mooshroomEntity).getMooshroomType() == MooshroomEntity.Type.BROWN;
+                return ((MooshroomEntity) mooshroomEntity).getVariant() == MooshroomEntity.Type.BROWN;
             })).isEmpty();
 
             // check if item is a small flower
