@@ -2,6 +2,7 @@ package carpetextra.dispenser.behaviors;
 
 import java.util.Set;
 
+import carpetextra.fakes.FakePlayerEntity;
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
@@ -19,6 +20,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior {
+
+    private FakePlayerEntity fakePlayerEntity;
+
     public static Set<Block> TOGGLEABLE_BLOCKS = Sets.newHashSet(
         Blocks.OAK_BUTTON,
         Blocks.SPRUCE_BUTTON,
@@ -53,8 +57,12 @@ public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior 
         if(TOGGLEABLE_BLOCKS.contains(frontBlockState.getBlock())) {
             BlockHitResult hitResult = new BlockHitResult(Vec3d.of(frontBlockPos), dispenserFacing.getOpposite(), frontBlockPos, false);
 
+            // make fake player
+            if (fakePlayerEntity == null) fakePlayerEntity = new FakePlayerEntity(world, pointer.getPos());
+            fakePlayerEntity.setStackInHand(Hand.MAIN_HAND, stack);
+
             // try to use block
-            if(frontBlockState.onUse(world, null, Hand.MAIN_HAND, hitResult).isAccepted()) {
+            if(frontBlockState.onUse(world, fakePlayerEntity, Hand.MAIN_HAND, hitResult).isAccepted()) {
                 return stack;
             }
         }
