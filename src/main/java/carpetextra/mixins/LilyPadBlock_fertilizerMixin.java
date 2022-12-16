@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -18,7 +19,7 @@ public abstract class LilyPadBlock_fertilizerMixin implements Fertilizable {
     @Shadow protected abstract boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos);
 
     @Override
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         return CarpetExtraSettings.betterBonemeal;
     }
 

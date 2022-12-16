@@ -10,7 +10,7 @@ import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.ChestBoatEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -40,7 +40,7 @@ public class PlaceBoatOnIceDispenserBehavior extends FallibleItemDispenserBehavi
             } else {
                 boatEntity = new BoatEntity(world, boatXPos, boatYPos, boatZPos);
             }
-            boatEntity.setBoatType(boatInfo.getType());
+            boatEntity.setVariant(boatInfo.getType());
             boatEntity.setYaw(dispenserFacing.asRotation());
             world.spawnEntity(boatEntity);
             stack.decrement(1);

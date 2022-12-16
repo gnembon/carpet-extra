@@ -9,7 +9,7 @@ import net.minecraft.block.NetherWartBlock;
 import net.minecraft.entity.ai.brain.MemoryModuleState;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.brain.task.FarmerVillagerTask;
-import net.minecraft.entity.ai.brain.task.Task;
+import net.minecraft.entity.ai.brain.task.MultiTickTask;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Map;
 
 @Mixin(FarmerVillagerTask.class)
-public abstract class FarmerVillagerTask_wartFarmMixin extends Task<VillagerEntity>
+public abstract class FarmerVillagerTask_wartFarmMixin extends MultiTickTask<VillagerEntity>
 {
     //@Shadow private boolean ableToPlant;
     @Shadow /*@Nullable*/ private BlockPos currentTarget;
