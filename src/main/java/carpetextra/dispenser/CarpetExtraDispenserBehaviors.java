@@ -16,7 +16,6 @@ import carpetextra.dispenser.behaviors.FireChargeDispenserBehavior;
 import carpetextra.dispenser.behaviors.FlowerPotDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkAnimalDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkMooshroomDispenserBehavior;
-import carpetextra.dispenser.behaviors.MusicDiscDispenserBehavior;
 import carpetextra.dispenser.behaviors.PlaceBoatOnIceDispenserBehavior;
 import carpetextra.dispenser.behaviors.ShearChickenDispenserBehavior;
 import carpetextra.dispenser.behaviors.StripBlocksDispenserBehavior;
@@ -73,8 +72,6 @@ public class CarpetExtraDispenserBehaviors {
     // dispensersMilkAnimals
     public static final DispenserBehavior MILK_ANIMAL = new MilkAnimalDispenserBehavior();
     public static final DispenserBehavior MILK_MOOSHROOM = new MilkMooshroomDispenserBehavior();
-    // dispensersPlayRecords
-    public static final DispenserBehavior PLAY_DISC = new MusicDiscDispenserBehavior();
     // dispensersPotPlants
     public static final DispenserBehavior FILL_FLOWER_POT = new FlowerPotDispenserBehavior();
     // dispensersStripBlocks
@@ -194,11 +191,6 @@ public class CarpetExtraDispenserBehaviors {
                     return MILK_MOOSHROOM;
                 }
             }
-        }
-
-        // dispensersPlayRecords
-        if(CarpetExtraSettings.dispensersPlayRecords && item instanceof MusicDiscItem && frontBlock == Blocks.JUKEBOX) {
-            return PLAY_DISC;
         }
 
         // dispensersPotPlants

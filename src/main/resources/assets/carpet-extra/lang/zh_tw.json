@@ -26,9 +26,6 @@
   "carpet.rule.comparatorReadsClock.name": "比較器讀取時鐘",
   "carpet.rule.comparatorReadsClock.desc": "讓比較器讀取展示框內時鐘的，而非時鐘物品在展示框中旋轉角度",
 
-  "carpet.rule.hopperMinecart8gtCooldown.name": "漏斗礦車8gt冷卻",
-  "carpet.rule.hopperMinecart8gtCooldown.desc": "讓漏斗礦車具有類似漏斗8gt延遲",
-
   "carpet.rule.hopperMinecartItemTransfer.name": "漏斗礦車輸出物品",
   "carpet.rule.hopperMinecartItemTransfer.desc": "讓漏斗礦車可以向下方容器輸出物品",
 
@@ -51,10 +48,6 @@
 
   "carpet.rule.renewablePackedIce.name": "可再生冰磚",
   "carpet.rule.renewablePackedIce.desc": "掉落的鐵砧壓縮多個冰塊時會將冰塊轉為冰磚",
-
-  "carpet.rule.dispensersPlayRecords.name": "發射器播放唱片",
-  "carpet.rule.dispensersPlayRecords.desc": "發射器可以使用前方唱片機播放唱片",
-  "carpet.rule.dispensersPlayRecords.extra.0": "如果唱片機已存在唱片，已存在唱片會被放回發射器中",
 
   "carpet.rule.accurateBlockPlacement.name": "準確方塊放置支持",
   "carpet.rule.accurateBlockPlacement.desc": "啟用對tweakroo mod的tweakAccurateBlockPlacement選項的支持",

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(HopperBlock.class)
 public abstract class HopperBlock_syncMixin
 {
-    @ModifyConstant(method = "updateEnabled", constant = @Constant(intValue = Block.NO_REDRAW))
+    @ModifyConstant(method = "neighborUpdate", constant = @Constant(intValue = Block.NO_REDRAW))
     private int onUpdateEnabled(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)

@@ -33,8 +33,6 @@ import static net.minecraft.block.entity.HopperBlockEntity.transfer;
 @Mixin(HopperMinecartEntity.class)
 public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends StorageMinecartEntity implements Hopper
 {
-    @Shadow @Final @Mutable
-    private BlockPos currentBlockPos;
     @Shadow
     public abstract boolean canOperate();
 
@@ -42,7 +40,6 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
 
     public HopperMinecartEntity_transferItemsOutFeatureMixin(EntityType<? extends HopperMinecartEntity> entityType_1, World world_1) {
         super(entityType_1, world_1);
-        this.currentBlockPos = BlockPos.ORIGIN;
     }
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/vehicle/HopperMinecartEntity;canOperate()Z"))
@@ -87,7 +84,7 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
         Vec3d offsetToInventory = getBlockBelowCartOffset();
         //The visual rotation point of the minecart is roughly 0.5 above its feet (determined visually ingame)
         //Search 0.5 Blocks below the feet for an inventory
-        Inventory inv =  HopperBlockEntity.getInventoryAt(this.world, new BlockPos(this.getX() + offsetToInventory.x, this.getY() + 0.5 + offsetToInventory.y, this.getZ() + offsetToInventory.z));
+        Inventory inv =  HopperBlockEntity.getInventoryAt(this.world, BlockPos.ofFloored(this.getX() + offsetToInventory.x, this.getY() + 0.5 + offsetToInventory.y, this.getZ() + offsetToInventory.z));
 
         //There is probably a way nicer way to determine the access side of the target inventory
         if(inv instanceof BlockEntity){
@@ -158,6 +155,4 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
     private static IntStream getAvailableSlots(Inventory inventory_1, Direction direction_1) {
         return inventory_1 instanceof SidedInventory ? IntStream.of(((SidedInventory)inventory_1).getAvailableSlots(direction_1)) : IntStream.range(0, inventory_1.size());
     }
-
-
 }

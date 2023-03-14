@@ -66,7 +66,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
                 }
 
                 @Override
-                public Direction getPlayerFacing() {
+                public Direction getHorizontalPlayerFacing() {
                     return ffacing.getAxis() == Direction.Axis.Y ? Direction.NORTH : ffacing;
                 }
 

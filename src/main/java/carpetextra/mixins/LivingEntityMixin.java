@@ -38,7 +38,7 @@ public abstract class LivingEntityMixin extends Entity
         if (!CarpetExtraSettings.mobInFireConvertsSandToSoulsand)
             return;
         
-        BlockPos pos = new BlockPos(this.getX(), this.getY(), this.getZ());
+        BlockPos pos = BlockPos.ofFloored(this.getX(), this.getY(), this.getZ());
         BlockState statePos = this.world.getBlockState(pos);
         
         BlockPos below = pos.down(1);

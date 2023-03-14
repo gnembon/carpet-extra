@@ -55,7 +55,7 @@ public abstract class FallingBlockEntityMixin extends Entity
         {
             if (CarpetExtraSettings.renewableIce)
             {
-                Block below = this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();
+                Block below = this.world.getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();
                 if (iceProgression.containsKey(below))
                 {
                     if (currentIce != below)
@@ -79,7 +79,7 @@ public abstract class FallingBlockEntityMixin extends Entity
                 }
             }
 
-            if (CarpetExtraSettings.renewableSand && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
+            if (CarpetExtraSettings.renewableSand && this.world.getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
             {
                 world.breakBlock(blockPos_2.down(), false);
                 world.setBlockState(blockPos_2.down(), Blocks.SAND.getDefaultState(), 3);

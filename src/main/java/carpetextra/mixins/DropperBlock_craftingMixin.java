@@ -86,7 +86,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         if (recipe == null) return;
         // crafting it
         Vec3d target = Vec3d.ofBottomCenter(front).add(0.0, 0.2, 0.0);
-        ItemStack result = recipe.craft(craftingInventory);
+        ItemStack result = recipe.craft(craftingInventory, world.getRegistryManager());
         spawn(world, target.x, target.y, target.z, result);
 
         // copied from CraftingResultSlot.onTakeItem()

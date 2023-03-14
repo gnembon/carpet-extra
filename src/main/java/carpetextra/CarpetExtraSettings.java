@@ -74,11 +74,6 @@ public class CarpetExtraSettings
     public static ComparatorOptions comparatorBetterItemFrames = ComparatorOptions.VANILLA;
 
     @Rule(
-        categories = {BUGFIX,FEATURE,EXTRA,EXPERIMENTAL}
-    )
-    public static boolean hopperMinecart8gtCooldown = false;
-
-    @Rule(
         categories = {BUGFIX, FEATURE, EXTRA, EXPERIMENTAL}
     )
     public static boolean hopperMinecartItemTransfer = false;
@@ -100,11 +95,6 @@ public class CarpetExtraSettings
             categories = {EXTRA, EXPERIMENTAL, FEATURE}
     )
     public static boolean renewableIce = false;
-    
-    @Rule(
-            categories = {EXTRA, FEATURE, DISPENSER}
-    )
-    public static boolean dispensersPlayRecords = false;
 
     @Rule(
             categories = {EXTRA, SURVIVAL}
