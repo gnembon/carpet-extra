@@ -27,7 +27,7 @@ public abstract class ThrownEntityMixin extends Entity
         if (CarpetExtraSettings.enderPearlChunkLoading &&
             ((Object) this) instanceof EnderPearlEntity)
         {
-            ChunkUtils.addEnderPearlChunkTicket(this);
+            ChunkUtils.addCustomChunkTicket(this, ChunkUtils.ENDER_PEARL_TICKET);
         }
     }
 }
