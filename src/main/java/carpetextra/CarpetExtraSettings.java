@@ -285,7 +285,8 @@ public class CarpetExtraSettings
     @Rule(
             options = {"5", "10", "20"},
             strict = false,
-            categories = {EXTRA, FEATURE}
+            categories = {EXTRA, FEATURE},
+            validators = Validators.NonNegativeNumber.class
     )
     public static int xpPerSculkCatalyst = 5;
 }
