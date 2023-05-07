@@ -1,6 +1,6 @@
 <img src="./src/main/resources/assets/carpet-extra/icon.png" align="right" width="128px"/>
 
-## Carpet Extra
+# Carpet Extra
 
 [![Development Builds](https://github.com/gnembon/carpet-extra/actions/workflows/devbuild.yml/badge.svg)](https://github.com/gnembon/carpet-extra/actions/workflows/devbuild.yml)
 [![CurseForge downloads](http://cf.way2muchnoise.eu/full_349240_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/carpet-extra)
