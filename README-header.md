@@ -6,7 +6,7 @@ Carpet Extra is an extension adding extra features to [Fabric Carpet], like coun
 
 For its enabled dispenser behaviours it also adds a new [Scarpet event] that triggers when those happen, allowing you to further customize them.
 
-[Scarpet event]: https://github.com/gnembon/carpet-extra/blob/master/docs/scarpet/ScarpetEvents.md
+[Scarpet event]: /docs/scarpet/ScarpetEvents.md
 
 ## Added rules
 
