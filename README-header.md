@@ -17,12 +17,6 @@ For its enabled dispenser behaviours it also adds a new [Scarpet event] that tri
 
 [Scarpet event]: /docs/scarpet/ScarpetEvents.md
 
-## Added rules
-
-You can find the [list of all added rules][rules] on the repo.
-
-[rules]: #carpet-extra-features
-
 ## More extensions
 
 If you're looking for Carpet autocrafting table, it has been moved to a standalone extension you can find on [its repository on Github][Autocraftingtable repo].
