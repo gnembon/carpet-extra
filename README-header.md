@@ -1,3 +1,5 @@
+<img src="./src/main/resources/assets/carpet-extra/icon.png" align="right" width="128px"/>
+
 ## Carpet Extra
 
 Carpet Extra is an extension adding extra features to [Fabric Carpet], like countless new dispenser behaviours, new ways to get resources in a renewable way and many others!
