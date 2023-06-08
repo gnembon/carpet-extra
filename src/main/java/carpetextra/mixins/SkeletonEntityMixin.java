@@ -23,11 +23,11 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
     @Override
     public void onStruckByLightning(ServerWorld serverWorld, LightningEntity lightningEntity)
     {
-        if (!this.world.isClient && !this.isRemoved() && CarpetExtraSettings.renewableWitherSkeletons)
+        if (!this.getWorld().isClient && !this.isRemoved() && CarpetExtraSettings.renewableWitherSkeletons)
         {
-            WitherSkeletonEntity witherSkelly = new WitherSkeletonEntity(EntityType.WITHER_SKELETON, this.world);
+            WitherSkeletonEntity witherSkelly = new WitherSkeletonEntity(EntityType.WITHER_SKELETON, this.getWorld());
             witherSkelly.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch()); // yaw pitch
-            witherSkelly.initialize(serverWorld, this.world.getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, null, null);
+            witherSkelly.initialize(serverWorld, this.getWorld().getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, null, null);
             witherSkelly.setAiDisabled(this.isAiDisabled());
             
             if (this.hasCustomName())
@@ -36,7 +36,7 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
                 witherSkelly.setCustomNameVisible(this.isCustomNameVisible());
             }
             
-            this.world.spawnEntity(witherSkelly);
+            this.getWorld().spawnEntity(witherSkelly);
 
             if (getVehicle() != null)
             {

@@ -7,14 +7,14 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(SpongeBlock.class)
-public abstract class AbsorbWaterMixin {
+public abstract class SpongeBlockMixin {
 
     @ModifyConstant(
         method = "absorbWater",
-        constant = @Constant(intValue = 64)
+        constant = @Constant(intValue = 65)
     )
     private int onCheckBlockLimit(int blockLimit) {
-        return CarpetExtraSettings.maxSpongeSuck;
+        return CarpetExtraSettings.maxSpongeSuck + 1;
     }
 
     

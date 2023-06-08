@@ -20,7 +20,7 @@
     "ThrownEntityMixin",
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_transferItemsOutFeatureMixin",
-    "AbsorbWaterMixin",
+    "SpongeBlockMixin",
     "DropperBlock_craftingMixin",
     "DispenserBlockEntity_craftingMixin",
 

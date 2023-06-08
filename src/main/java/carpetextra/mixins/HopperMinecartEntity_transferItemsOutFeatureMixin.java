@@ -59,7 +59,7 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
     private static final Vec3d ascending_south_offset= new Vec3d( 0,1,-1).normalize().multiply(-1);
 
     private Vec3d getBlockBelowCartOffset(){
-        BlockState blockState_1 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getY()), MathHelper.floor(this.getZ())));
+        BlockState blockState_1 = this.getWorld().getBlockState(new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getY()), MathHelper.floor(this.getZ())));
         if (blockState_1.isIn(BlockTags.RAILS)) {
             RailShape railShape = (RailShape)blockState_1.get(((AbstractRailBlock)blockState_1.getBlock()).getShapeProperty());
             switch (railShape){
@@ -84,7 +84,7 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
         Vec3d offsetToInventory = getBlockBelowCartOffset();
         //The visual rotation point of the minecart is roughly 0.5 above its feet (determined visually ingame)
         //Search 0.5 Blocks below the feet for an inventory
-        Inventory inv =  HopperBlockEntity.getInventoryAt(this.world, BlockPos.ofFloored(this.getX() + offsetToInventory.x, this.getY() + 0.5 + offsetToInventory.y, this.getZ() + offsetToInventory.z));
+        Inventory inv =  HopperBlockEntity.getInventoryAt(this.getWorld(), BlockPos.ofFloored(this.getX() + offsetToInventory.x, this.getY() + 0.5 + offsetToInventory.y, this.getZ() + offsetToInventory.z));
 
         //There is probably a way nicer way to determine the access side of the target inventory
         if(inv instanceof BlockEntity){

@@ -24,6 +24,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.property.Properties;
@@ -125,7 +126,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
 
         BlockState currentBlockState = world.getBlockState(pos);
         FluidState currentFluidState = world.getFluidState(pos);
-        if ((currentBlockState.isAir() || currentBlockState.getMaterial().isReplaceable()) && currentBlockState.getBlock() != block && state.canPlaceAt(world, pos)) {
+        if ((currentBlockState.isAir() || currentBlockState.isIn(BlockTags.REPLACEABLE)) && currentBlockState.getBlock() != block && state.canPlaceAt(world, pos)) {
             state = Block.postProcessState(state, world, pos);
             boolean blockWasPlaced = world.setBlockState(pos, state);
             block.onPlaced(world, pos, state, null, itemStack);

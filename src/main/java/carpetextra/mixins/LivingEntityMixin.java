@@ -39,14 +39,14 @@ public abstract class LivingEntityMixin extends Entity
             return;
         
         BlockPos pos = BlockPos.ofFloored(this.getX(), this.getY(), this.getZ());
-        BlockState statePos = this.world.getBlockState(pos);
+        BlockState statePos = this.getWorld().getBlockState(pos);
         
         BlockPos below = pos.down(1);
-        BlockState stateBelow = this.world.getBlockState(below);
+        BlockState stateBelow = this.getWorld().getBlockState(below);
         
         if (statePos.getBlock() == Blocks.FIRE && stateBelow.isIn(BlockTags.SAND))
         {
-            this.world.setBlockState(below, Blocks.SOUL_SAND.getDefaultState());
+            this.getWorld().setBlockState(below, Blocks.SOUL_SAND.getDefaultState());
         }
     }
     

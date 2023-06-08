@@ -19,7 +19,7 @@ public class PingCommand
                         {
                             ServerPlayerEntity playerEntity = c.getSource().getPlayer();
                             int ping = playerEntity.pingMilliseconds;
-                            c.getSource().sendFeedback(Text.literal("Your ping is: " + ping + " ms"), false);
+                            c.getSource().sendFeedback(() -> Text.literal("Your ping is: " + ping + " ms"), false);
                             return 1;
                         });
         

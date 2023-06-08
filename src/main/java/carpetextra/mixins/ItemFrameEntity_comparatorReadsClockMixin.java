@@ -29,7 +29,7 @@ public abstract class ItemFrameEntity_comparatorReadsClockMixin extends Abstract
         if(CarpetExtraSettings.comparatorReadsClock && this.getHeldItemStack().getItem() == Items.CLOCK) {
             int power;
             //Every 1500 ticks, increase signal strength by one
-            power = (int)(this.world.getTimeOfDay() % 24000) / 1500;
+            power = (int)(this.getWorld().getTimeOfDay() % 24000) / 1500;
             //in case negative time of day every happens, make comparator output the according positive value
             if(power < 0)
                 power = power + 16;
@@ -43,10 +43,10 @@ public abstract class ItemFrameEntity_comparatorReadsClockMixin extends Abstract
         if(CarpetExtraSettings.comparatorReadsClock && this.getHeldItemStack().getItem() == Items.CLOCK) {
             //This doesn't handle time set commands yet
             //Every 1500 ticks, increase signal strength by one, so update comparators exactly then
-            if(this.world.getTimeOfDay() % 1500 == 0 || firstTick) {
+            if(this.getWorld().getTimeOfDay() % 1500 == 0 || firstTick) {
                 firstTick = false;
                 if(this.attachmentPos != null) {
-                    this.world.updateComparators(this.attachmentPos, Blocks.AIR);
+                    this.getWorld().updateComparators(this.attachmentPos, Blocks.AIR);
                 }
             }
         }
