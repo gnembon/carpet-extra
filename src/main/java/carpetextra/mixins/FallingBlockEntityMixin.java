@@ -44,12 +44,12 @@ public abstract class FallingBlockEntityMixin extends Entity
         this.iceCount = 0;
     }
     
-    @Inject(method = "tick", locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true, at = @At(
+    @Inject(method = "tick", cancellable = true, at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/entity/FallingBlockEntity;destroyedOnLanding:Z",
             shift = At.Shift.BEFORE
     ))
-    private void onTick(CallbackInfo ci, Block block_1, BlockPos blockPos_2, boolean b1, boolean bl2, BlockState blockState_1)
+    private void onTick(CallbackInfo ci)
     {
         if (getBlockState().isIn(BlockTags.ANVIL))
         {
@@ -65,7 +65,7 @@ public abstract class FallingBlockEntityMixin extends Entity
                     }
                     if (iceCount < 2)
                     {
-                        getWorld().breakBlock(blockPos_2.down(), false, null);
+                        getWorld().breakBlock(getBlockPos().down(), false, null);
                         this.setOnGround(false);
                         iceCount++;
                         ci.cancel();
@@ -73,16 +73,16 @@ public abstract class FallingBlockEntityMixin extends Entity
                     else
                     {
                         BlockState newBlock = iceProgression.get(below).getDefaultState();
-                        getWorld().setBlockState(blockPos_2.down(), newBlock, 3);
-                        getWorld().syncWorldEvent(2001, blockPos_2.down(), Block.getRawIdFromState(newBlock));
+                        getWorld().setBlockState(getBlockPos().down(), newBlock, 3);
+                        getWorld().syncWorldEvent(2001, getBlockPos().down(), Block.getRawIdFromState(newBlock));
                     }
                 }
             }
 
             if (CarpetExtraSettings.renewableSand && this.getWorld().getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
             {
-                getWorld().breakBlock(blockPos_2.down(), false);
-                getWorld().setBlockState(blockPos_2.down(), Blocks.SAND.getDefaultState(), 3);
+                getWorld().breakBlock(getBlockPos().down(), false);
+                getWorld().setBlockState(getBlockPos().down(), Blocks.SAND.getDefaultState(), 3);
             }
         }
     }
