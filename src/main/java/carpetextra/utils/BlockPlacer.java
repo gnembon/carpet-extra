@@ -92,7 +92,9 @@ public class BlockPlacer
 		        else if (isBlockAttachableChest(block, facing, blockPos.offset(facing.rotateYCounterclockwise()), context.getWorld())) {
 			        state = state.with(ChestBlock.CHEST_TYPE, ChestType.RIGHT);
 		        }
-		        state = state.with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
+			else {
+		        	state = state.with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
+			}
 	        }
         }
         else if (state.contains(Properties.AXIS))
