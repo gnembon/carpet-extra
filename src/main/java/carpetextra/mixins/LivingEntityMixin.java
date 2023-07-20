@@ -10,7 +10,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,15 +38,15 @@ public abstract class LivingEntityMixin extends Entity
         if (!CarpetExtraSettings.mobInFireConvertsSandToSoulsand)
             return;
         
-        BlockPos pos = new BlockPos(this.getX(), this.getY(), this.getZ());
-        BlockState statePos = this.world.getBlockState(pos);
+        BlockPos pos = BlockPos.ofFloored(this.getX(), this.getY(), this.getZ());
+        BlockState statePos = this.getWorld().getBlockState(pos);
         
         BlockPos below = pos.down(1);
-        BlockState stateBelow = this.world.getBlockState(below);
+        BlockState stateBelow = this.getWorld().getBlockState(below);
         
         if (statePos.getBlock() == Blocks.FIRE && stateBelow.isIn(BlockTags.SAND))
         {
-            this.world.setBlockState(below, Blocks.SOUL_SAND.getDefaultState());
+            this.getWorld().setBlockState(below, Blocks.SOUL_SAND.getDefaultState());
         }
     }
     

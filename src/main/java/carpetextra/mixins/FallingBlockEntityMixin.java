@@ -8,7 +8,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FallingBlockEntity;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,18 +44,18 @@ public abstract class FallingBlockEntityMixin extends Entity
         this.iceCount = 0;
     }
     
-    @Inject(method = "tick", locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true, at = @At(
+    @Inject(method = "tick", cancellable = true, at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/entity/FallingBlockEntity;destroyedOnLanding:Z",
             shift = At.Shift.BEFORE
     ))
-    private void onTick(CallbackInfo ci, Block block_1, BlockPos blockPos_2, boolean b1, boolean bl2, BlockState blockState_1)
+    private void onTick(CallbackInfo ci)
     {
         if (getBlockState().isIn(BlockTags.ANVIL))
         {
             if (CarpetExtraSettings.renewableIce)
             {
-                Block below = this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();
+                Block below = this.getWorld().getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();
                 if (iceProgression.containsKey(below))
                 {
                     if (currentIce != below)
@@ -65,24 +65,24 @@ public abstract class FallingBlockEntityMixin extends Entity
                     }
                     if (iceCount < 2)
                     {
-                        world.breakBlock(blockPos_2.down(), false, null);
-                        this.onGround = false;
+                        getWorld().breakBlock(getBlockPos().down(), false, null);
+                        this.setOnGround(false);
                         iceCount++;
                         ci.cancel();
                     }
                     else
                     {
                         BlockState newBlock = iceProgression.get(below).getDefaultState();
-                        world.setBlockState(blockPos_2.down(), newBlock, 3);
-                        world.syncWorldEvent(2001, blockPos_2.down(), Block.getRawIdFromState(newBlock));
+                        getWorld().setBlockState(getBlockPos().down(), newBlock, 3);
+                        getWorld().syncWorldEvent(2001, getBlockPos().down(), Block.getRawIdFromState(newBlock));
                     }
                 }
             }
 
-            if (CarpetExtraSettings.renewableSand && this.world.getBlockState(new BlockPos(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
+            if (CarpetExtraSettings.renewableSand && this.getWorld().getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
             {
-                world.breakBlock(blockPos_2.down(), false);
-                world.setBlockState(blockPos_2.down(), Blocks.SAND.getDefaultState(), 3);
+                getWorld().breakBlock(getBlockPos().down(), false);
+                getWorld().setBlockState(getBlockPos().down(), Blocks.SAND.getDefaultState(), 3);
             }
         }
     }

@@ -63,7 +63,7 @@ public class FeedAnimalDispenserBehavior extends FallibleItemDispenserBehavior {
                 // grow up baby animal slightly
                 animal.growUp((int)(-animal.getBreedingAge() / 200), true);
                 // spawn growth sparkle particle
-                animal.world.addParticle(ParticleTypes.HAPPY_VILLAGER, animal.getParticleX(1.0D), animal.getRandomBodyY() + 0.5D, animal.getParticleZ(1.0D), 0.0D, 0.0D, 0.0D);
+                animal.getWorld().addParticle(ParticleTypes.HAPPY_VILLAGER, animal.getParticleX(1.0D), animal.getRandomBodyY() + 0.5D, animal.getParticleZ(1.0D), 0.0D, 0.0D, 0.0D);
 
                 // eat item
                 return eatItem(animal, foodStack);

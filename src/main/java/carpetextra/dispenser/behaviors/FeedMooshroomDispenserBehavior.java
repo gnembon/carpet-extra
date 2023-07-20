@@ -3,6 +3,7 @@ package carpetextra.dispenser.behaviors;
 import java.util.List;
 import java.util.Optional;
 
+import net.minecraft.registry.tag.ItemTags;
 import org.apache.commons.lang3.tuple.Pair;
 
 import carpetextra.mixins.MooshroomEntity_StatusEffectAccessorMixin;
@@ -17,7 +18,6 @@ import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.ItemTags;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -34,7 +34,7 @@ public class FeedMooshroomDispenserBehavior extends FallibleItemDispenserBehavio
         {
             // get brown mooshrooms in front of dispenser
             List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityType.MOOSHROOM, new Box(frontBlockPos), EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) -> {
-                return ((MooshroomEntity) mooshroomEntity).getMooshroomType() == MooshroomEntity.Type.BROWN;
+                return ((MooshroomEntity) mooshroomEntity).getVariant() == MooshroomEntity.Type.BROWN;
             }));
 
             // check all mooshrooms

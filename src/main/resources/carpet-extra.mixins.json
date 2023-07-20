@@ -19,9 +19,8 @@
     "ServerPlayNetworkHandlerMixin",
     "ThrownEntityMixin",
     "BlockItemMixin_accurateBlockPlacement",
-    "HopperMinecartEntity_cooldownFixMixin",
     "HopperMinecartEntity_transferItemsOutFeatureMixin",
-    "AbsorbWaterMixin",
+    "SpongeBlockMixin",
     "DropperBlock_craftingMixin",
     "DispenserBlockEntity_craftingMixin",
 

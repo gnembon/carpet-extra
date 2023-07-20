@@ -16,7 +16,6 @@ import carpetextra.dispenser.behaviors.FireChargeDispenserBehavior;
 import carpetextra.dispenser.behaviors.FlowerPotDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkAnimalDispenserBehavior;
 import carpetextra.dispenser.behaviors.MilkMooshroomDispenserBehavior;
-import carpetextra.dispenser.behaviors.MusicDiscDispenserBehavior;
 import carpetextra.dispenser.behaviors.PlaceBoatOnIceDispenserBehavior;
 import carpetextra.dispenser.behaviors.ShearChickenDispenserBehavior;
 import carpetextra.dispenser.behaviors.StripBlocksDispenserBehavior;
@@ -47,8 +46,8 @@ import net.minecraft.item.MusicDiscItem;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.ItemTags;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -73,8 +72,6 @@ public class CarpetExtraDispenserBehaviors {
     // dispensersMilkAnimals
     public static final DispenserBehavior MILK_ANIMAL = new MilkAnimalDispenserBehavior();
     public static final DispenserBehavior MILK_MOOSHROOM = new MilkMooshroomDispenserBehavior();
-    // dispensersPlayRecords
-    public static final DispenserBehavior PLAY_DISC = new MusicDiscDispenserBehavior();
     // dispensersPotPlants
     public static final DispenserBehavior FILL_FLOWER_POT = new FlowerPotDispenserBehavior();
     // dispensersStripBlocks
@@ -141,7 +138,7 @@ public class CarpetExtraDispenserBehaviors {
 
             // get brown mooshrooms in front of dispenser
             boolean hasFeedableMooshrooms = !world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) -> {
-                return ((MooshroomEntity) mooshroomEntity).getMooshroomType() == MooshroomEntity.Type.BROWN;
+                return ((MooshroomEntity) mooshroomEntity).getVariant() == MooshroomEntity.Type.BROWN;
             })).isEmpty();
 
             // check if item is a small flower
@@ -194,11 +191,6 @@ public class CarpetExtraDispenserBehaviors {
                     return MILK_MOOSHROOM;
                 }
             }
-        }
-
-        // dispensersPlayRecords
-        if(CarpetExtraSettings.dispensersPlayRecords && item instanceof MusicDiscItem && frontBlock == Blocks.JUKEBOX) {
-            return PLAY_DISC;
         }
 
         // dispensersPotPlants

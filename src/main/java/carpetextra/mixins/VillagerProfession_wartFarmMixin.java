@@ -5,8 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.poi.PointOfInterestType;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +20,7 @@ public abstract class VillagerProfession_wartFarmMixin
 {
     @Shadow static VillagerProfession register(String string, RegistryKey<PointOfInterestType> pointOfInterestType, ImmutableSet<Item> immutableSet, ImmutableSet<Block> immutableSet2, /*@Nullable*/ SoundEvent soundEvent) {return null;};
 
-    @Inject(method = "Lnet/minecraft/village/VillagerProfession;register(Ljava/lang/String;Lnet/minecraft/util/registry/RegistryKey;Lnet/minecraft/sound/SoundEvent;)Lnet/minecraft/village/VillagerProfession;", cancellable = true, at = @At("HEAD"))
+    @Inject(method = "register(Ljava/lang/String;Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/sound/SoundEvent;)Lnet/minecraft/village/VillagerProfession;", cancellable = true, at = @At("HEAD"))
     private static void registerCleric(String key, RegistryKey<PointOfInterestType> pointOfInterestType, SoundEvent soundEvent, CallbackInfoReturnable<VillagerProfession> cir)
     {
         if (key.equals("cleric"))

@@ -6,27 +6,27 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Map;
-import java.util.Objects;
 
 public class CarpetExtraTranslations
 {
     public static Map<String, String> getTranslationFromResourcePath(String lang)
     {
-        String dataJSON;
-        try
-        {
-            dataJSON = IOUtils.toString(Objects.requireNonNull(CarpetExtraTranslations.class.getClassLoader().getResourceAsStream(String.format("assets/carpet-extra/lang/%s.json", lang))), StandardCharsets.UTF_8);
+    	InputStream langFile = CarpetExtraTranslations.class.getClassLoader().getResourceAsStream("assets/carpet-extra/lang/%s.json".formatted(lang));
+        if (langFile == null) {
+            // we don't have that language
+            return Collections.emptyMap();
         }
-        catch (IOException | NullPointerException e)
-        {
-            return null;
+        String jsonData;
+        try {
+            jsonData = IOUtils.toString(langFile, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            return Collections.emptyMap();
         }
-
-        Gson gson = (new GsonBuilder()).enableComplexMapKeySerialization().create();
-        return gson.fromJson(dataJSON, (new TypeToken<Map<String, String>>()
-        {
-        }).getType());
+        Gson gson = new GsonBuilder().setLenient().create(); // lenient allows for comments
+        return gson.fromJson(jsonData, new TypeToken<Map<String, String>>() {}.getType());
     }
 }

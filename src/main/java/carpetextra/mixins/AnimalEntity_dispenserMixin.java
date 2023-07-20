@@ -2,8 +2,10 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,7 +18,7 @@ public abstract class AnimalEntity_dispenserMixin
     @Shadow /*@Nullable*/ public abstract ServerPlayerEntity getLovingPlayer();
 
     @Inject(
-            method = "breed",
+            method = "breed(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/passive/AnimalEntity;Lnet/minecraft/entity/passive/PassiveEntity;)V",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/world/ServerWorld;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
@@ -24,7 +26,7 @@ public abstract class AnimalEntity_dispenserMixin
             ),
             cancellable = true
     )
-    protected void onSpawnExperience(ServerWorld serverWorld, AnimalEntity other, CallbackInfo ci) {
+    protected void onSpawnExperience(ServerWorld world, AnimalEntity other, PassiveEntity baby, CallbackInfo ci) {
         ServerPlayerEntity serverPlayerEntity_1 = getLovingPlayer();
         if (serverPlayerEntity_1 == null) {
             serverPlayerEntity_1 = other.getLovingPlayer();

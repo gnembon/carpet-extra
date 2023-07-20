@@ -2,9 +2,9 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.entity.mob.StrayEntity;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureKeys;
@@ -22,7 +22,7 @@ public abstract class StrayEntityMixin
         if (!CarpetExtraSettings.straySpawningInIgloos) {
             return serverWorldAccess.isSkyVisible(pos);
         }
-        Structure structure = serverWorldAccess.getRegistryManager().get(Registry.STRUCTURE_KEY).get(StructureKeys.IGLOO);
+        Structure structure = serverWorldAccess.getRegistryManager().get(RegistryKeys.STRUCTURE).get(StructureKeys.IGLOO);
         return serverWorldAccess.isSkyVisible(pos) ||
                        ((ServerWorld)serverWorldAccess).getStructureAccessor().getStructureAt(pos,structure).hasChildren();
     }
