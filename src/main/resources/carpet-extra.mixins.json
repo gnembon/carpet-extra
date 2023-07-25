@@ -35,6 +35,7 @@
     "AxeItem_StrippedBlocksAccessorMixin",
     "FlowerPotBlock_ContentAccessorMixin",
     "BoatItemAccessorMixin",
+    "SculkCatalystMixin",
 
     "VillagerEntity_wartFarmMixin",
     "FarmerVillagerTask_wartFarmMixin",
