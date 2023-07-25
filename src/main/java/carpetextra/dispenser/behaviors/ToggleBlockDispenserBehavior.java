@@ -2,8 +2,6 @@ package carpetextra.dispenser.behaviors;
 
 import java.util.Set;
 
-import com.google.common.collect.Sets;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -19,7 +17,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior {
-    public static Set<Block> TOGGLEABLE_BLOCKS = Sets.newHashSet(
+    public static final Set<Block> TOGGLEABLE_BLOCKS = Set.of(
         Blocks.OAK_BUTTON,
         Blocks.SPRUCE_BUTTON,
         Blocks.BIRCH_BUTTON,
