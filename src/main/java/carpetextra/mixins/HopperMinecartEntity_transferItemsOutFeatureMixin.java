@@ -19,9 +19,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -51,18 +49,17 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
         return workDone;
     }
 
+    private static final Vec3d upwardVec = new Vec3d(0, 1, 0).normalize().multiply(-1);
+    private static final Vec3d ascending_east_offset  = new Vec3d(-1, 1,  0).normalize().multiply(-1);
+    private static final Vec3d ascending_west_offset  = new Vec3d( 1, 1,  0).normalize().multiply(-1);
+    private static final Vec3d ascending_north_offset = new Vec3d( 0, 1,  1).normalize().multiply(-1);
+    private static final Vec3d ascending_south_offset = new Vec3d( 0, 1, -1).normalize().multiply(-1);
 
-    private static final Vec3d upwardVec = new Vec3d(0,1,0).normalize().multiply(-1);
-    private static final Vec3d ascending_east_offset = new Vec3d(-1,1, 0).normalize().multiply(-1);
-    private static final Vec3d ascending_west_offset = new Vec3d( 1,1, 0).normalize().multiply(-1);
-    private static final Vec3d ascending_north_offset= new Vec3d( 0,1, 1).normalize().multiply(-1);
-    private static final Vec3d ascending_south_offset= new Vec3d( 0,1,-1).normalize().multiply(-1);
-
-    private Vec3d getBlockBelowCartOffset(){
-        BlockState blockState_1 = this.getWorld().getBlockState(new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getY()), MathHelper.floor(this.getZ())));
-        if (blockState_1.isIn(BlockTags.RAILS)) {
-            RailShape railShape = (RailShape)blockState_1.get(((AbstractRailBlock)blockState_1.getBlock()).getShapeProperty());
-            switch (railShape){
+    private Vec3d getBlockBelowCartOffset() {
+        BlockState state = this.getWorld().getBlockState(BlockPos.ofFloored(this.getPos()));
+        if (state.isIn(BlockTags.RAILS)) {
+            RailShape railShape = state.get(((AbstractRailBlock)state.getBlock()).getShapeProperty());
+            switch (railShape) {
                 case ASCENDING_EAST:
                     return ascending_east_offset;
                 case ASCENDING_WEST:
@@ -87,9 +84,9 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
         Inventory inv =  HopperBlockEntity.getInventoryAt(this.getWorld(), BlockPos.ofFloored(this.getPos().add(offsetToInventory)));
 
         //There is probably a way nicer way to determine the access side of the target inventory
-        if(inv instanceof BlockEntity){
-            BlockPos pos = ((BlockEntity) inv).getPos();
-            if(pos.getY() < MathHelper.floor(this.getY()))
+        if(inv instanceof BlockEntity be) {
+            BlockPos pos = be.getPos();
+            if (pos.getY() < MathHelper.floor(this.getY()))
                 outputDirection = Direction.DOWN;
             else if(pos.getX() > MathHelper.floor(this.getX()))
                 outputDirection = Direction.EAST;
@@ -114,25 +111,25 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
 
     //copied from HopperBlockEntity, (code originally taken from 1.14.4 pre 6)
     private boolean insert(){
-        if(!this.isEmpty()){
-            Inventory inventory_1 = this.getOutputInventory();
-            if (inventory_1 == null) {
+        if (!this.isEmpty()) {
+            Inventory inventory = this.getOutputInventory();
+            if (inventory == null) {
                 return false;
             } else {
-                Direction direction_1 = getLastOutputDirection().getOpposite();
-                if (this.isInventoryFull(inventory_1, direction_1)) {
+                Direction direction = getLastOutputDirection().getOpposite();
+                if (this.isInventoryFull(inventory, direction)) {
                     return false;
                 } else {
-                    for(int int_1 = 0; int_1 < this.size(); ++int_1) {
-                        if (!this.getStack(int_1).isEmpty()) {
-                            ItemStack itemStack_1 = this.getStack(int_1).copy();
-                            ItemStack itemStack_2 = transfer(this, inventory_1, this.removeStack(int_1, 1), direction_1);
+                    for (int i = 0; i < this.size(); ++i) {
+                        if (!this.getStack(i).isEmpty()) {
+                            ItemStack itemStack_1 = this.getStack(i).copy();
+                            ItemStack itemStack_2 = transfer(this, inventory, this.removeStack(i, 1), direction);
                             if (itemStack_2.isEmpty()) {
-                                inventory_1.markDirty();
+                                inventory.markDirty();
                                 return true;
                             }
 
-                            this.setStack(int_1, itemStack_1);
+                            this.setStack(i, itemStack_1);
                         }
                     }
 
