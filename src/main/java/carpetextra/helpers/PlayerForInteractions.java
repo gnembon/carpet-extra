@@ -31,7 +31,7 @@ public class PlayerForInteractions {
      * a constant {@link MethodHandle} that simply returns {@code null} if that API isn't available, which
      * is good enough given we handle passing {@code null} to where vanilla would fail ourselves.
      */
-    private static final MethodHandle INVOKER; // setup at the end
+    private static final MethodHandle INVOKER;
 
     static {
         MethodHandle invoker = null;
