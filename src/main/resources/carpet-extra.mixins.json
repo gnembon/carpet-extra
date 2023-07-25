@@ -9,7 +9,6 @@
     "ComparatorBlock_comparatorBetterItemFramesMixin",
     "ComparatorBlock_playerAbilityMixin",
     "DaylightDetectorBlockMixin",
-    "AnimalEntity_dispenserMixin",
     "FoxMateGoalMixin",
     "TurtleMateGoalMixin",
     "AbstractPressurePlateBlock_variableWoodMixin",
