@@ -171,14 +171,6 @@ Dispensers can place boats on ice
 * Allowed options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
-## dispensersPlayRecords
-Dispensers can play records if there's a jukebox in front of them.  
-If a record already exists in the jukebox, it gets placed back in the dispenser.  
-* Type: `Boolean`  
-* Default value: `false`  
-* Allowed options: `true`, `false`  
-* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
-  
 ## dispensersPotPlants
 Dispensers can put flowers in flower pots  
 * Type: `Boolean`  
@@ -264,13 +256,6 @@ All the loaded chunks can be seen using `/forceload query`
 * Default value: `false`  
 * Allowed options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
-  
-## hopperMinecart8gtCooldown
-Makes Hopper Minecarts have an 8gt cooldown like hoppers.  
-* Type: `Boolean`  
-* Default value: `false`  
-* Allowed options: `true`, `false`  
-* Categories: `BUGFIX`, `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
   
 ## hopperMinecartItemTransfer
 Allows Hopper Minecarts to transfer items into containers below them.  
