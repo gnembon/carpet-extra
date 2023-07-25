@@ -13,10 +13,9 @@ import static carpetextra.CarpetExtraSettings.xpPerSculkCatalyst;
 public class SculkCatalystMixin {
     @ModifyArg(
         method = "onStacksDropped",
-        at = @At(value="INVOKE", target = "Lnet/minecraft/block/SculkCatalystBlock;dropExperienceWhenMined(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/math/intprovider/IntProvider;)V"),
-        index = 3
+        at = @At(value="INVOKE", target = "Lnet/minecraft/block/SculkCatalystBlock;dropExperienceWhenMined(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/math/intprovider/IntProvider;)V")
     )
-    private IntProvider xpModifier(IntProvider experience){
+    private IntProvider xpModifier(IntProvider experience) {
         return ConstantIntProvider.create(xpPerSculkCatalyst);
     }
 }
