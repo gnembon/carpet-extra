@@ -26,7 +26,7 @@ public abstract class FoxMateGoalMixin extends AnimalMateGoal {
         ),
         cancellable = true
     )
-    protected void onSpawnExperience(CallbackInfo ci) {
+    protected void preventDispenserSpawningExperience(CallbackInfo ci) {
         ServerPlayerEntity serverPlayerEntity_1 = super.animal.getLovingPlayer();
         if (serverPlayerEntity_1 == null) {
             serverPlayerEntity_1 = super.mate.getLovingPlayer();

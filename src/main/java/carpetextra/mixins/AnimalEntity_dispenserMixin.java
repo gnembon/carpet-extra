@@ -26,7 +26,7 @@ public abstract class AnimalEntity_dispenserMixin
             ),
             cancellable = true
     )
-    protected void onSpawnExperience(ServerWorld world, AnimalEntity other, PassiveEntity baby, CallbackInfo ci) {
+    protected void preventDispenserSpawningExperience(ServerWorld world, AnimalEntity other, PassiveEntity baby, CallbackInfo ci) {
         ServerPlayerEntity serverPlayerEntity_1 = getLovingPlayer();
         if (serverPlayerEntity_1 == null) {
             serverPlayerEntity_1 = other.getLovingPlayer();
