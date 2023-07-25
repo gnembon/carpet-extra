@@ -3,6 +3,7 @@ package carpetextra;
 import carpet.api.settings.Rule;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.Validator;
+import carpet.api.settings.Validators;
 import net.minecraft.server.command.ServerCommandSource;
 
 import static carpet.api.settings.RuleCategory.*;
