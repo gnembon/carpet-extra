@@ -27,11 +27,9 @@ public class PlayerForInteractions {
         }
     }
     /**
-     * Holds either a Direct* {@link MethodHandle} to Fabric API's FakePlayer.get(ServerWorld) method, or
+     * Holds either a Direct {@link MethodHandle} to Fabric API's FakePlayer.get(ServerWorld) method, or
      * a constant {@link MethodHandle} that simply returns {@code null} if that API isn't available, which
-     * is good enough given we handle passing {@code null} to where vanilla would fail ourselves.<br>
-     * 
-     * * Not truly Direct given we need to adapt its return type to not use a type from them
+     * is good enough given we handle passing {@code null} to where vanilla would fail ourselves.
      */
     private static final MethodHandle INVOKER; // setup at the end
 
