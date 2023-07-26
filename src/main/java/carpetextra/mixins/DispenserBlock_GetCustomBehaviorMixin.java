@@ -44,7 +44,7 @@ public abstract class DispenserBlock_GetCustomBehaviorMixin {
         if (behavior != null) {
             // run custom behavior
             Value previousStackSnapshot = null;
-            if (DispenserEvent.needed()) previousStackSnapshot = ValueConversions.of(itemStack);
+            if (DispenserEvent.needed()) previousStackSnapshot = ValueConversions.of(itemStack, serverWorld.getRegistryManager());
 
             ItemStack resultStack = behavior.dispense(blockPointer, itemStack);
             dispenserBlockEntity.setStack(i, resultStack);

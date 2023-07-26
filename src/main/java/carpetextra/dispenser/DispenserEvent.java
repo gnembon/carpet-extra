@@ -25,7 +25,7 @@ public class DispenserEvent extends Event {
                     ValueConversions.of(pos),
                     new StringValue(pointer.getBlockState().get(DispenserBlock.FACING).name().toLowerCase()),
                     item, // value directly because it needs to be a snapshot, stack is mutable
-                    ValueConversions.of(resultItem)
+                    ValueConversions.of(resultItem, pointer.getWorld().getRegistryManager())
                 ),
                 () ->  pointer.getWorld().getServer().getCommandSource().withWorld(pointer.getWorld())
         );
