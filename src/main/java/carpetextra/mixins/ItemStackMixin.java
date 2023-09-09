@@ -26,7 +26,6 @@ public abstract class ItemStackMixin
         if (CarpetExtraSettings.emptyShulkerBoxStackAlways && this.getItem() instanceof BlockItem)
         {
             BlockItem item = (BlockItem) this.getItem();
-
             if (item.getBlock() instanceof ShulkerBoxBlock &&
                 InventoryUtils.shulkerBoxHasItems((ItemStack) (Object) this) == false)
             {
