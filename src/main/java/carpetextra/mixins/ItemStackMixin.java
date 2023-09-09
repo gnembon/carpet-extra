@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import carpetextra.CarpetExtraSettings;
 import carpetextra.utils.InventoryUtils;
 
+import carpet.CarpetSettings;
+
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin
 {
@@ -24,11 +26,10 @@ public abstract class ItemStackMixin
         if (CarpetExtraSettings.emptyShulkerBoxStackAlways && this.getItem() instanceof BlockItem)
         {
             BlockItem item = (BlockItem) this.getItem();
-
             if (item.getBlock() instanceof ShulkerBoxBlock &&
                 InventoryUtils.shulkerBoxHasItems((ItemStack) (Object) this) == false)
             {
-                cir.setReturnValue(64);
+                cir.setReturnValue(CarpetSettings.shulkerBoxStackSize);
             }
         }
     }
