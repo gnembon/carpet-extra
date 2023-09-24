@@ -19,8 +19,8 @@ public class ShearChickenDispenserBehavior extends FallibleItemDispenserBehavior
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        ServerWorld world = pointer.world();
+        BlockPos frontBlockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
         Box frontBlockBox = new Box(frontBlockPos);
 
         // get adult chickens in front of dispenser

@@ -42,9 +42,9 @@ public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior 
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        Direction dispenserFacing = pointer.getBlockState().get(DispenserBlock.FACING);
-        BlockPos frontBlockPos = pointer.getPos().offset(dispenserFacing);
+        ServerWorld world = pointer.world();
+        Direction dispenserFacing = pointer.state().get(DispenserBlock.FACING);
+        BlockPos frontBlockPos = pointer.pos().offset(dispenserFacing);
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
 
         // check if block can be toggled

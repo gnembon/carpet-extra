@@ -51,10 +51,10 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
         }
         Block block = ((BlockItem) item).getBlock();
 
-        Direction facing = blockPointer.getBlockState().get(DispenserBlock.FACING);
+        Direction facing = blockPointer.state().get(DispenserBlock.FACING);
         Direction.Axis axis = facing.getAxis();
-        World world = blockPointer.getWorld();
-        BlockPos pos = blockPointer.getPos();
+        World world = blockPointer.world();
+        BlockPos pos = blockPointer.pos();
 
         final Direction ffacing = facing;
 

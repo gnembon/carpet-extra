@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class CactusBlock_fertilizerMixin implements Fertilizable
 {
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient)
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state)
     {
         int i = this.countCactusAbove(world, pos);
         int j = this.countCactusBelow(world, pos);

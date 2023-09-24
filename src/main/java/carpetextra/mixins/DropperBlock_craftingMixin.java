@@ -14,6 +14,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.CraftingRecipe;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -73,7 +74,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
     }
 
     @Inject(method = "dispense", at = @At("HEAD"), cancellable = true)
-    private void tryCraft(ServerWorld world, BlockPos pos, CallbackInfo ci)
+    private void tryCraft(ServerWorld world, BlockState state, BlockPos pos, CallbackInfo ci)
     {
         if (!CarpetExtraSettings.autoCraftingDropper) return;
         BlockPos front = pos.offset(world.getBlockState(pos).get(DispenserBlock.FACING));
@@ -82,11 +83,11 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         if (dispenserBlockEntity_1 == null) return;
         CraftingInventory craftingInventory = new CraftingInventory(new VoidContainer(), 3, 3);
         for (int i=0; i < 9; i++) craftingInventory.setStack(i, dispenserBlockEntity_1.getStack(i));
-        CraftingRecipe recipe = world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, craftingInventory, world).orElse(null);
+        RecipeEntry<CraftingRecipe> recipe = world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, craftingInventory, world).orElse(null);
         if (recipe == null) return;
         // crafting it
         Vec3d target = Vec3d.ofBottomCenter(front).add(0.0, 0.2, 0.0);
-        ItemStack result = recipe.craft(craftingInventory, world.getRegistryManager());
+        ItemStack result = recipe.value().craft(craftingInventory, world.getRegistryManager());
         spawn(world, target.x, target.y, target.z, result);
 
         // copied from CraftingResultSlot.onTakeItem()

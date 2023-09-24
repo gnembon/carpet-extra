@@ -17,8 +17,8 @@ public class PingCommand
                 requires( (source) -> CarpetExtraSettings.commandPing && source.isExecutedByPlayer()).
                         executes( c ->
                         {
-                            ServerPlayerEntity playerEntity = c.getSource().getPlayer();
-                            int ping = playerEntity.pingMilliseconds;
+                            ServerPlayerEntity player = c.getSource().getPlayer();
+                            int ping = player.networkHandler.getLatency();
                             c.getSource().sendFeedback(() -> Text.literal("Your ping is: " + ping + " ms"), false);
                             return 1;
                         });

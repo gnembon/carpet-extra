@@ -5,8 +5,8 @@ import java.util.List;
 import carpetextra.dispenser.DispenserBehaviorHelper;
 import carpetextra.mixins.MooshroomEntity_StatusEffectAccessorMixin;
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.SuspiciousStewIngredient.StewEffect;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -24,8 +24,8 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        ServerWorld world = pointer.world();
+        BlockPos frontBlockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
         Box frontBlockBox = new Box(frontBlockPos);
 
         // get non-baby mooshrooms in front of dispenser
@@ -54,17 +54,17 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
 
     private static ItemStack getStewType(List<MooshroomEntity> mooshrooms) {
         // check each mooshroom for stew effect, return suspicious stew of that type if exists
-        for(MooshroomEntity mooshroom : mooshrooms) {
+        for (MooshroomEntity mooshroom : mooshrooms) {
+            // from MooshroomEntity#interact
             MooshroomEntity_StatusEffectAccessorMixin mooshroomAccessor = (MooshroomEntity_StatusEffectAccessorMixin) mooshroom;
-            StatusEffect stewEffect = mooshroomAccessor.getStewEffect();
-            if(stewEffect != null) {
+            List<StewEffect> stewEffects = mooshroomAccessor.getStewEffects();
+            if (stewEffects != null) {
                 // create suspicious stew and add mooshroom's stew effect to it
                 ItemStack stewStack = new ItemStack(Items.SUSPICIOUS_STEW);
-                SuspiciousStewItem.addEffectToStew(stewStack, stewEffect, mooshroomAccessor.getStewEffectDuration());
+                SuspiciousStewItem.writeEffectsToStew(stewStack, stewEffects);
 
                 // clear mooshroom's stew effect
-                mooshroomAccessor.setStatusEffect(null);
-                mooshroomAccessor.setStewEffectDuration(0);
+                mooshroomAccessor.setStewEffects(null);
 
                 return stewStack;
             }
