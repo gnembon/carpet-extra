@@ -27,7 +27,7 @@
   "carpet.rule.blockStateSyncing.desc": "Fixes block states in F3 debug mode not updating for some blocks.",
 
   "carpet.rule.blockStateSyncing.extra.0": "May cause increased network traffic.",
-  "carpet.rule.blockStateSyncing.extra.1": "Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.",
+  "carpet.rule.blockStateSyncing.extra.1": "Works with cactus, sugar cane and saplings.",
 
   // chickenShearing
   "carpet.rule.chickenShearing.desc": "Chickens can be sheared to get feathers. Beware! every time u shear a chicken, it gets damaged!",
