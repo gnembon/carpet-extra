@@ -1,6 +1,6 @@
 <img src="./src/main/resources/assets/carpet-extra/icon.png" align="right" width="128px"/>
 
-## Carpet Extra
+# Carpet Extra
 
 [![Development Builds](https://github.com/gnembon/carpet-extra/actions/workflows/devbuild.yml/badge.svg)](https://github.com/gnembon/carpet-extra/actions/workflows/devbuild.yml)
 [![CurseForge downloads](http://cf.way2muchnoise.eu/full_349240_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/carpet-extra)
@@ -65,7 +65,7 @@ Via dispenser or player right click actions.
 ## blockStateSyncing
 Fixes block states in F3 debug mode not updating for some blocks.  
 May cause increased network traffic.  
-Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.  
+Works with cactus, sugar cane and saplings.  
 * Type: `Boolean`  
 * Default value: `false`  
 * Allowed options: `true`, `false`  
@@ -381,6 +381,15 @@ Variable delays on wooden components (buttons, pressure plates).
 * Default value: `false`  
 * Allowed options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`  
+  
+## xpPerSculkCatalyst
+Sets the amount of xp dropped when breaking a sculk catalyst.  
+* Type: `Integer`  
+* Default value: `5`  
+* Suggested options: `5`, `10`, `20`  
+* Categories: `EXTRAS`, `FEATURE`  
+* Additional notes:  
+  * Must be a positive number or 0  
   
 ## y0DragonEggBedrockBreaking
 Let dragon eggs break Y0 bedrock.  
