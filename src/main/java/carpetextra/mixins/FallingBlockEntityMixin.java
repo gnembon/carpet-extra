@@ -1,7 +1,6 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
-import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,7 +25,7 @@ public abstract class FallingBlockEntityMixin extends Entity
 
     private int iceCount = 0;
     private Block currentIce = null;
-    private Map<Block, Block> iceProgression = ImmutableMap.of(
+    private static final Map<Block, Block> iceProgression = Map.of(
             Blocks.FROSTED_ICE, Blocks.ICE,
             Blocks.ICE, Blocks.PACKED_ICE,
             Blocks.PACKED_ICE, Blocks.BLUE_ICE
@@ -52,9 +51,10 @@ public abstract class FallingBlockEntityMixin extends Entity
     {
         if (getBlockState().isIn(BlockTags.ANVIL))
         {
+            World world = this.getWorld();
             if (CarpetExtraSettings.renewableIce)
             {
-                Block below = this.getWorld().getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();
+                Block below = world.getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();
                 if (iceProgression.containsKey(below))
                 {
                     if (currentIce != below)
@@ -64,7 +64,7 @@ public abstract class FallingBlockEntityMixin extends Entity
                     }
                     if (iceCount < 2)
                     {
-                        getWorld().breakBlock(getBlockPos().down(), false, null);
+                    	world.breakBlock(getBlockPos().down(), false, null);
                         this.setOnGround(false);
                         iceCount++;
                         ci.cancel();
@@ -72,16 +72,16 @@ public abstract class FallingBlockEntityMixin extends Entity
                     else
                     {
                         BlockState newBlock = iceProgression.get(below).getDefaultState();
-                        getWorld().setBlockState(getBlockPos().down(), newBlock, 3);
-                        getWorld().syncWorldEvent(2001, getBlockPos().down(), Block.getRawIdFromState(newBlock));
+                        world.setBlockState(getBlockPos().down(), newBlock, 3);
+                        world.syncWorldEvent(2001, getBlockPos().down(), Block.getRawIdFromState(newBlock));
                     }
                 }
             }
 
-            if (CarpetExtraSettings.renewableSand && this.getWorld().getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
+            if (CarpetExtraSettings.renewableSand && world.getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
             {
-                getWorld().breakBlock(getBlockPos().down(), false);
-                getWorld().setBlockState(getBlockPos().down(), Blocks.SAND.getDefaultState(), 3);
+            	world.breakBlock(getBlockPos().down(), false);
+            	world.setBlockState(getBlockPos().down(), Blocks.SAND.getDefaultState(), 3);
             }
         }
     }
