@@ -10,6 +10,8 @@ import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -73,7 +75,7 @@ public abstract class FallingBlockEntityMixin extends Entity
                     {
                         BlockState newBlock = iceProgression.get(below).getDefaultState();
                         world.setBlockState(getBlockPos().down(), newBlock, 3);
-                        world.syncWorldEvent(2001, getBlockPos().down(), Block.getRawIdFromState(newBlock));
+                        world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, getBlockPos().down(), Block.getRawIdFromState(newBlock));
                     }
                 }
             }
