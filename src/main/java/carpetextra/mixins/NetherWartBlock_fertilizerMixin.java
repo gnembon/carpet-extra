@@ -12,6 +12,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
+
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(NetherWartBlock.class)
@@ -30,7 +32,7 @@ public abstract class NetherWartBlock_fertilizerMixin extends PlantBlock
         if (CarpetExtraSettings.blazeMeal && stack.getItem() == Items.BLAZE_POWDER && age < 3)
         {
             world.setBlockState(pos, this.getDefaultState().with(NetherWartBlock.AGE, age + 1), 2);
-            world.syncWorldEvent(2005, pos, 0);
+            world.syncWorldEvent(WorldEvents.PLANT_FERTILIZED, pos, 0);
             if (!player.isCreative()) stack.decrement(1);
             return ActionResult.SUCCESS;
         }

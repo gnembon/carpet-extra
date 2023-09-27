@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.WorldEvents;
 
 public class BlazePowderDispenserBehavior extends FallibleItemDispenserBehavior {
     @Override
@@ -26,7 +27,7 @@ public class BlazePowderDispenserBehavior extends FallibleItemDispenserBehavior 
                 // grow netherwart one stage
                 world.setBlockState(frontBlockPos, frontBlockState.with(NetherWartBlock.AGE, age + 1), Block.NOTIFY_LISTENERS);
                 // green sparkles
-                world.syncWorldEvent(2005, frontBlockPos, 0);
+                world.syncWorldEvent(WorldEvents.PLANT_FERTILIZED, frontBlockPos, 0);
 
                 // decrement item and return
                 stack.decrement(1);
