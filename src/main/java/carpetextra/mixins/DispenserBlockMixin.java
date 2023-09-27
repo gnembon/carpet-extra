@@ -22,9 +22,9 @@ public abstract class DispenserBlockMixin
     // this is old code to keep dispenserPlacesBlocks working as is
     // new behaviors should go in CarpetExtraDispenserBehaviors class
     @Inject(method = "getBehaviorForItem", at = @At("HEAD"), cancellable = true)
-    private void getBehaviorForItem(ItemStack itemStack_1, CallbackInfoReturnable<DispenserBehavior> cir)
+    private void getBehaviorForItem(ItemStack stack, CallbackInfoReturnable<DispenserBehavior> cir)
     {
-        Item item = itemStack_1.getItem();
+        Item item = stack.getItem();
         if (CarpetExtraSettings.dispenserPlacesBlocks && !BEHAVIORS.containsKey(item) && item instanceof BlockItem)
         {
             if (PlaceBlockDispenserBehavior.canPlace(((BlockItem) item).getBlock()))

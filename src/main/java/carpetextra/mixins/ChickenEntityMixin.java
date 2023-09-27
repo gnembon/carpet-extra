@@ -22,21 +22,19 @@ public abstract class ChickenEntityMixin extends AnimalEntity
     }
     
     @Override
-    public ActionResult interactMob(PlayerEntity playerEntity_1, Hand hand_1)
+    public ActionResult interactMob(PlayerEntity player, Hand hand)
     {
-        ItemStack stack = playerEntity_1.getStackInHand(hand_1);
+        ItemStack stack = player.getStackInHand(hand);
         if (CarpetExtraSettings.chickenShearing && stack.getItem() == Items.SHEARS && !this.isBaby())
         {
-            boolean tookDamage = this.damage(playerEntity_1.getWorld().getDamageSources().generic(), 1);
+            boolean tookDamage = this.damage(player.getWorld().getDamageSources().generic(), 1);
             if (tookDamage)
             {
                 this.dropItem(Items.FEATHER, 1);
-                stack.damage(1, (LivingEntity)playerEntity_1, ((playerEntity_1x) -> {
-                    playerEntity_1x.sendToolBreakStatus(hand_1);
-                }));
+                stack.damage(1, (LivingEntity)player, p -> p.sendToolBreakStatus(hand));
                 return ActionResult.SUCCESS;
             }
         }
-        return super.interactMob(playerEntity_1, hand_1);
+        return super.interactMob(player, hand);
     }
 }

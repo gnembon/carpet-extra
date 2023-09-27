@@ -22,13 +22,12 @@ public abstract class AbstractPressurePlateBlock_variableWoodMixin
             value = "INVOKE",
             target ="Lnet/minecraft/block/AbstractPressurePlateBlock;getTickRate()I"
     ))
-    private int getCustomTickRate(AbstractPressurePlateBlock abstractPressurePlateBlock,
-                                  Entity entity, World world_1, BlockPos blockPos_1, BlockState blockState_1, int int_1)
+    private int getCustomTickRate(AbstractPressurePlateBlock block, Entity entity, World world, BlockPos pos, BlockState state, int redstoneLevel)
     {
         if (!CarpetExtraSettings.variableWoodDelays)
         {
             return getTickRate();
         }
-        return WoodDelayMultipliers.getForDelay(blockState_1.getBlock(), getTickRate());
+        return WoodDelayMultipliers.getForDelay(state.getBlock(), getTickRate());
     }
 }
