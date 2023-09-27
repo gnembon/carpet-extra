@@ -33,7 +33,7 @@ public abstract class LivingEntityMixin extends Entity
                     target = "Lnet/minecraft/entity/damage/DamageSource;getAttacker()Lnet/minecraft/entity/Entity;",
                     shift = At.Shift.BEFORE)
     )
-    private void convertSandToSoulsand(DamageSource damageSource_1, CallbackInfo ci)
+    private void convertSandToSoulsand(DamageSource damageSource, CallbackInfo ci)
     {
         if (!CarpetExtraSettings.mobInFireConvertsSandToSoulsand)
             return;

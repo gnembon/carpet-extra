@@ -17,13 +17,13 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class StrayEntityMixin
 {
     @Redirect(method = "canSpawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/ServerWorldAccess;isSkyVisible(Lnet/minecraft/util/math/BlockPos;)Z"))
-    private static boolean isSkylightOrIglooVisible(ServerWorldAccess serverWorldAccess, BlockPos pos)
+    private static boolean isSkylightOrIglooVisible(ServerWorldAccess world, BlockPos pos)
     {
         if (!CarpetExtraSettings.straySpawningInIgloos) {
-            return serverWorldAccess.isSkyVisible(pos);
+            return world.isSkyVisible(pos);
         }
-        Structure structure = serverWorldAccess.getRegistryManager().get(RegistryKeys.STRUCTURE).get(StructureKeys.IGLOO);
-        return serverWorldAccess.isSkyVisible(pos) ||
-                       ((ServerWorld)serverWorldAccess).getStructureAccessor().getStructureAt(pos,structure).hasChildren();
+        Structure structure = world.getRegistryManager().get(RegistryKeys.STRUCTURE).get(StructureKeys.IGLOO);
+        return world.isSkyVisible(pos) ||
+                       ((ServerWorld)world).getStructureAccessor().getStructureAt(pos,structure).hasChildren();
     }
 }

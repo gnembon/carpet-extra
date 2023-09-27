@@ -20,55 +20,55 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class FallingBlockMixin extends Block
 {
     @Shadow
-    public static boolean canFallThrough(BlockState blockState_1)
+    public static boolean canFallThrough(BlockState state)
     {
-        return false;
+        throw new AssertionError();
     }
     
     @Shadow protected abstract void configureFallingBlockEntity(FallingBlockEntity fallingBlockEntity_1);
     
-    public FallingBlockMixin(Settings block$Settings_1)
+    public FallingBlockMixin(Settings settings)
     {
-        super(block$Settings_1);
+        super(settings);
     }
     
     @SuppressWarnings("ConstantConditions")
     @Inject(method = "scheduledTick", at = @At("HEAD"), cancellable = true)
-    private void onTryStartFalling(BlockState state, ServerWorld serverWorld_1, BlockPos blockPos_1, Random random, CallbackInfo ci)
+    private void onTryStartFalling(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci)
     {
         if (CarpetExtraSettings.dragonEggBedrockBreaking && (FallingBlock)(Object)this instanceof DragonEggBlock)
         {
-            if (canFallThrough(serverWorld_1.getBlockState(blockPos_1.down(1))) && blockPos_1.getY() >= serverWorld_1.getBottomY())
+            if (canFallThrough(world.getBlockState(pos.down(1))) && pos.getY() >= world.getBottomY())
             {
                 if (!DragonEggBedrockBreaking.fallInstantly &&
-                        serverWorld_1.shouldTickEntity(blockPos_1))
+                        world.shouldTickEntity(pos))
                 {
-                    if (!serverWorld_1.isClient)
+                    if (!world.isClient)
                     {
-                        FallingBlockEntity fallingBlockEntity_1 = FallingBlockEntity.spawnFromBlock(serverWorld_1, blockPos_1, serverWorld_1.getBlockState(blockPos_1) );
-                        this.configureFallingBlockEntity(fallingBlockEntity_1);
-                        //serverWorld_1.spawnEntity(fallingBlockEntity_1);
+                        FallingBlockEntity fallingBlock = FallingBlockEntity.spawnFromBlock(world, pos, world.getBlockState(pos) );
+                        this.configureFallingBlockEntity(fallingBlock);
+                        //serverWorld_1.spawnEntity(fallingBlock);
                     }
                 }
                 else
                 {
-                    if (serverWorld_1.getBlockState(blockPos_1).getBlock() == this)
+                    if (world.getBlockState(pos).getBlock() == this)
                     {
-                        serverWorld_1.removeBlock(blockPos_1, false);
+                        world.removeBlock(pos, false);
                     }
 
                     BlockPos blockPos;
                     
-                    int minY = CarpetExtraSettings.y0DragonEggBedrockBreaking ? serverWorld_1.getBottomY() - 1 : serverWorld_1.getBottomY();
+                    int minY = CarpetExtraSettings.y0DragonEggBedrockBreaking ? world.getBottomY() - 1 : world.getBottomY();
                     
-                    for (blockPos = blockPos_1.down(1); canFallThrough(serverWorld_1.getBlockState(blockPos)) && blockPos.getY() > minY; blockPos = blockPos.down(1))
+                    for (blockPos = pos.down(1); canFallThrough(world.getBlockState(blockPos)) && blockPos.getY() > minY; blockPos = blockPos.down(1))
                     {
                         ;
                     }
                     
                     if (blockPos.getY() > minY)
                     {
-                        serverWorld_1.setBlockState(blockPos, this.getDefaultState());
+                        world.setBlockState(blockPos, this.getDefaultState());
                     }
                 }
             }

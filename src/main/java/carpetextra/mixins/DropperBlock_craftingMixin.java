@@ -32,24 +32,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class DropperBlock_craftingMixin extends DispenserBlock
 {
     private static final Random rand = new Random();
-    protected DropperBlock_craftingMixin(Settings block$Settings_1)
+    protected DropperBlock_craftingMixin(Settings settings)
     {
-        super(block$Settings_1);
+        super(settings);
     }
 
     @Override
-    public int getComparatorOutput(BlockState blockState_1, World world_1, BlockPos blockPos_1)
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos)
     {
         if (CarpetExtraSettings.autoCraftingDropper)
         {
-            BlockPos front = blockPos_1.offset(world_1.getBlockState(blockPos_1).get(DispenserBlock.FACING));
-            if (world_1.getBlockState(front).getBlock() == Blocks.CRAFTING_TABLE)
+            BlockPos front = pos.offset(world.getBlockState(pos).get(DispenserBlock.FACING));
+            if (world.getBlockState(front).getBlock() == Blocks.CRAFTING_TABLE)
             {
-                DispenserBlockEntity dispenserBlockEntity_1 = (DispenserBlockEntity) world_1.getBlockEntity(blockPos_1);
-                if (dispenserBlockEntity_1 != null)
+                DispenserBlockEntity dispenser = (DispenserBlockEntity) world.getBlockEntity(pos);
+                if (dispenser != null)
                 {
                     int filled = 0;
-                    for (ItemStack stack : ((DispenserBlockEntityInterface) dispenserBlockEntity_1).getInventory())
+                    for (ItemStack stack : ((DispenserBlockEntityInterface) dispenser).getInventory())
                     {
                         if (!stack.isEmpty()) filled++;
                     }
@@ -57,20 +57,19 @@ public class DropperBlock_craftingMixin extends DispenserBlock
                 }
             }
         }
-        return super.getComparatorOutput(blockState_1, world_1, blockPos_1);
+        return super.getComparatorOutput(state, world, pos);
     }
 
-    private void spawn(World world_1, double double_1, double double_2, double double_3, ItemStack itemStack_1) {
-        while(!itemStack_1.isEmpty()) {
-            ItemEntity itemEntity_1 = new ItemEntity(world_1, double_1, double_2, double_3, itemStack_1.split(rand.nextInt(21) + 10));
-            itemEntity_1.setVelocity(
+    private void spawn(World world, double x, double y, double z, ItemStack stack) {
+        while(!stack.isEmpty()) {
+            ItemEntity item = new ItemEntity(world, x, y, z, stack.split(rand.nextInt(21) + 10));
+            item.setVelocity(
                     (rand.nextDouble()-rand.nextDouble()) * 0.05,
                     rand.nextDouble() * 0.05,
                     (rand.nextDouble()-rand.nextDouble()) * 0.05
             );
-            world_1.spawnEntity(itemEntity_1);
+            world.spawnEntity(item);
         }
-
     }
 
     @Inject(method = "dispense", at = @At("HEAD"), cancellable = true)
@@ -79,10 +78,10 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         if (!CarpetExtraSettings.autoCraftingDropper) return;
         BlockPos front = pos.offset(world.getBlockState(pos).get(DispenserBlock.FACING));
         if (world.getBlockState(front).getBlock() != Blocks.CRAFTING_TABLE) return;
-        DispenserBlockEntity dispenserBlockEntity_1 = (DispenserBlockEntity) world.getBlockEntity(pos);
-        if (dispenserBlockEntity_1 == null) return;
+        DispenserBlockEntity dispenser = (DispenserBlockEntity) world.getBlockEntity(pos);
+        if (dispenser == null) return;
         CraftingInventory craftingInventory = new CraftingInventory(new VoidContainer(), 3, 3);
-        for (int i=0; i < 9; i++) craftingInventory.setStack(i, dispenserBlockEntity_1.getStack(i));
+        for (int i=0; i < 9; i++) craftingInventory.setStack(i, dispenser.getStack(i));
         RecipeEntry<CraftingRecipe> recipe = world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, craftingInventory, world).orElse(null);
         if (recipe == null) return;
         // crafting it
@@ -91,23 +90,23 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         spawn(world, target.x, target.y, target.z, result);
 
         // copied from CraftingResultSlot.onTakeItem()
-        DefaultedList<ItemStack> defaultedList_1 = world.getRecipeManager().getRemainingStacks(RecipeType.CRAFTING, craftingInventory, world);
-        for(int int_1 = 0; int_1 < defaultedList_1.size(); ++int_1) {
-            ItemStack itemStack_2 = dispenserBlockEntity_1.getStack(int_1);
-            ItemStack itemStack_3 = defaultedList_1.get(int_1);
-            if (!itemStack_2.isEmpty()) {
-                dispenserBlockEntity_1.removeStack(int_1, 1);
-                itemStack_2 = dispenserBlockEntity_1.getStack(int_1);
+        DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(RecipeType.CRAFTING, craftingInventory, world);
+        for(int i = 0; i < defaultedList.size(); ++i) {
+            ItemStack itemStack = dispenser.getStack(i);
+            ItemStack itemStack2 = defaultedList.get(i);
+            if (!itemStack.isEmpty()) {
+                dispenser.removeStack(i, 1);
+                itemStack = dispenser.getStack(i);
             }
 
-            if (!itemStack_3.isEmpty()) {
-                if (itemStack_2.isEmpty()) {
-                    dispenserBlockEntity_1.setStack(int_1, itemStack_3);
-                } else if (ItemStack.canCombine(itemStack_2, itemStack_3)) {
-                    itemStack_3.increment(itemStack_2.getCount());
-                    dispenserBlockEntity_1.setStack(int_1, itemStack_3);
+            if (!itemStack2.isEmpty()) {
+                if (itemStack.isEmpty()) {
+                    dispenser.setStack(i, itemStack2);
+                } else if (ItemStack.canCombine(itemStack, itemStack2)) {
+                    itemStack2.increment(itemStack.getCount());
+                    dispenser.setStack(i, itemStack2);
                 } else {
-                    spawn(world, target.x, target.y, target.z, itemStack_3);
+                    spawn(world, target.x, target.y, target.z, itemStack2);
                 }
             }
         }

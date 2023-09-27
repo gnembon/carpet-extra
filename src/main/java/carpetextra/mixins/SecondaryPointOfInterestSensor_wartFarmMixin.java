@@ -19,12 +19,12 @@ public class SecondaryPointOfInterestSensor_wartFarmMixin
     // this might come in handy in general making sure villagers don't check 405 blocks around them every 2 seconds
     // for nothing, but hey?
     @Inject(method = "sense", at = @At("HEAD"), cancellable = true)
-    private void notVanillaCleric(ServerWorld serverWorld, VillagerEntity villagerEntity, CallbackInfo ci)
+    private void notVanillaCleric(ServerWorld world, VillagerEntity villager, CallbackInfo ci)
     {
-        if(!CarpetExtraSettings.clericsFarmWarts && villagerEntity.getVillagerData().getProfession() == VillagerProfession.CLERIC)
+        if(!CarpetExtraSettings.clericsFarmWarts && villager.getVillagerData().getProfession() == VillagerProfession.CLERIC)
         {
             // in vanilla we want not to find secondary POI for clerics
-            Brain<?> brain = villagerEntity.getBrain();
+            Brain<?> brain = villager.getBrain();
             brain.forget(MemoryModuleType.SECONDARY_JOB_SITE);
             ci.cancel();
 

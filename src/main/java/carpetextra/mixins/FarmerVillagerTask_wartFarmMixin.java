@@ -58,13 +58,13 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends MultiTickTask<Vil
     }
 
     @Inject(method = "isSuitableTarget", at = @At("HEAD"), cancellable = true)
-    private void isValidSoulSand(BlockPos blockPos, ServerWorld serverWorld, CallbackInfoReturnable<Boolean> cir)
+    private void isValidSoulSand(BlockPos pos, ServerWorld world, CallbackInfoReturnable<Boolean> cir)
     {
         if (isFarmingCleric)
         {
-            BlockState blockState = serverWorld.getBlockState(blockPos);
+            BlockState blockState = world.getBlockState(pos);
             Block block = blockState.getBlock();
-            Block block2 = serverWorld.getBlockState(blockPos.down()).getBlock(); // down()
+            Block block2 = world.getBlockState(pos.down()).getBlock();
             cir.setReturnValue(
                     block == Blocks.NETHER_WART && blockState.get(NetherWartBlock.AGE)== 3 ||
                             blockState.isAir() && block2 == Blocks.SOUL_SAND);

@@ -26,9 +26,9 @@ public abstract class FlowerPotBlockMixin extends Block
 {
     @Shadow @Final private Block content;
 
-    public FlowerPotBlockMixin(Settings block$Settings_1)
+    public FlowerPotBlockMixin(Settings settings)
     {
-        super(block$Settings_1);
+        super(settings);
     }
 
     @Inject(

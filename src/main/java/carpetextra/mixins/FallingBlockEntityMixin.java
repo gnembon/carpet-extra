@@ -33,13 +33,13 @@ public abstract class FallingBlockEntityMixin extends Entity
             Blocks.PACKED_ICE, Blocks.BLUE_ICE
     );
     
-    public FallingBlockEntityMixin(EntityType<?> entityType_1, World world_1)
+    public FallingBlockEntityMixin(EntityType<?> type, World world)
     {
-        super(entityType_1, world_1);
+        super(type, world);
     }
     
     @Inject(method = "<init>(Lnet/minecraft/world/World;DDDLnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
-    private void onCtor(World world_1, double double_1, double double_2, double double_3, BlockState blockState_1, CallbackInfo ci)
+    private void onCtor(World world, double x, double y, double z, BlockState state, CallbackInfo ci)
     {
         this.iceCount = 0;
     }

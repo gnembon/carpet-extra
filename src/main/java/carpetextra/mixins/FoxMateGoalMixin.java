@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class FoxMateGoalMixin extends AnimalMateGoal {
 
 
-	public FoxMateGoalMixin(AnimalEntity animalEntity_1, double double_1) {
-        super(animalEntity_1, double_1);
+	public FoxMateGoalMixin(AnimalEntity fox, double speed) {
+        super(fox, speed);
     }
 
     @Inject(
@@ -27,11 +27,11 @@ public abstract class FoxMateGoalMixin extends AnimalMateGoal {
         cancellable = true
     )
     protected void preventDispenserSpawningExperience(CallbackInfo ci) {
-        ServerPlayerEntity serverPlayerEntity_1 = super.animal.getLovingPlayer();
-        if (serverPlayerEntity_1 == null) {
-            serverPlayerEntity_1 = super.mate.getLovingPlayer();
+        ServerPlayerEntity player = super.animal.getLovingPlayer();
+        if (player == null) {
+            player = super.mate.getLovingPlayer();
         }
-        if(serverPlayerEntity_1 == null && CarpetExtraSettings.dispensersFeedAnimals) {
+        if (player == null && CarpetExtraSettings.dispensersFeedAnimals) {
             ci.cancel();
         }
     }
