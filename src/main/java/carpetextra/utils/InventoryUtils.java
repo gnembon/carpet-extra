@@ -2,6 +2,7 @@ package carpetextra.utils;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 
 public class InventoryUtils
@@ -15,13 +16,13 @@ public class InventoryUtils
     {
         NbtCompound nbt = stackShulkerBox.getNbt();
 
-        if (nbt != null && nbt.contains("BlockEntityTag", Constants.NBT.COMPOUND_TAG))
+        if (nbt != null && nbt.contains("BlockEntityTag", NbtElement.COMPOUND_TYPE))
         {
             NbtCompound tag = nbt.getCompound("BlockEntityTag");
 
-            if (tag.contains("Items", Constants.NBT.LIST_TAG))
+            if (tag.contains("Items", NbtElement.LIST_TYPE))
             {
-                NbtList tagList = tag.getList("Items", Constants.NBT.COMPOUND_TAG);
+                NbtList tagList = tag.getList("Items", NbtElement.COMPOUND_TYPE);
                 return tagList.size() > 0;
             }
         }
