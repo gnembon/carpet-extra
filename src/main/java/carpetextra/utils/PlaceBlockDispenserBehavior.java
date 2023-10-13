@@ -41,7 +41,7 @@ import net.minecraft.world.World;
 import java.util.Collection;
 
 public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
-    private static PlaceBlockDispenserBehavior instance = new PlaceBlockDispenserBehavior();
+    private static final PlaceBlockDispenserBehavior instance = new PlaceBlockDispenserBehavior();
     public static PlaceBlockDispenserBehavior getInstance() {return instance;}
     @Override
     public ItemStack dispenseSilently(BlockPointer blockPointer, ItemStack itemStack) {
