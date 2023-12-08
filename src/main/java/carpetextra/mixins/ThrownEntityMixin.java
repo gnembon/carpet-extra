@@ -20,8 +20,7 @@ public abstract class ThrownEntityMixin extends Entity
         super(type, world);
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/entity/projectile/thrown/ThrownEntity;setPosition(DDD)V"))
+    @Inject(method = "tick()V", at = @At(value = "HEAD"))
     private void chunkLoadNextChunk(CallbackInfo ci)
     {
         if (CarpetExtraSettings.enderPearlChunkLoading &&
