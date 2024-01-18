@@ -2,6 +2,7 @@ package carpetextra.dispenser.behaviors;
 
 import java.util.Set;
 
+import carpetextra.helpers.PlayerForInteractions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -52,7 +53,7 @@ public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior 
             BlockHitResult hitResult = new BlockHitResult(Vec3d.of(frontBlockPos), dispenserFacing.getOpposite(), frontBlockPos, false);
 
             // try to use block
-            if(frontBlockState.onUse(world, null, Hand.MAIN_HAND, hitResult).isAccepted()) {
+            if(frontBlockState.onUse(world, PlayerForInteractions.get(world), Hand.MAIN_HAND, hitResult).isAccepted()) {
                 return stack;
             }
         }
