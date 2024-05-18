@@ -29,8 +29,8 @@
   "depends": {
     "fabricloader": ">=0.15.2",
     "carpet": ">=1.4.128",
-    "minecraft": ["1.20.3", "1.20.4"],
-    "java": ">=17"
+    "minecraft": ["1.20.6"],
+    "java": ">=21"
   },
   "custom": {
     "modmenu": {
