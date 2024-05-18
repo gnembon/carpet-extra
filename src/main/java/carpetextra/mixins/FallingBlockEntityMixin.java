@@ -11,7 +11,6 @@ import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,18 +31,18 @@ public abstract class FallingBlockEntityMixin extends Entity
             Blocks.ICE, Blocks.PACKED_ICE,
             Blocks.PACKED_ICE, Blocks.BLUE_ICE
     );
-    
+
     public FallingBlockEntityMixin(EntityType<?> type, World world)
     {
         super(type, world);
     }
-    
+
     @Inject(method = "<init>(Lnet/minecraft/world/World;DDDLnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     private void onCtor(World world, double x, double y, double z, BlockState state, CallbackInfo ci)
     {
         this.iceCount = 0;
     }
-    
+
     @Inject(method = "tick", cancellable = true, at = @At(
             value = "FIELD",
             target = "Lnet/minecraft/entity/FallingBlockEntity;destroyedOnLanding:Z",
