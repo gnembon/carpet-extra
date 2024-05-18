@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$18")
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$7")
 public abstract class DispenserBehaviorGlowstoneMixin
 {
     @SuppressWarnings("UnresolvedMixinReference")
