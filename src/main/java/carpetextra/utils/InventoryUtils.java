@@ -1,5 +1,7 @@
 package carpetextra.utils;
 
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -14,7 +16,11 @@ public class InventoryUtils
      */
     public static boolean shulkerBoxHasItems(ItemStack stackShulkerBox)
     {
-        NbtCompound nbt = stackShulkerBox.getNbt();
+        NbtComponent nbtComponent = stackShulkerBox.get(DataComponentTypes.BLOCK_ENTITY_DATA);
+        if (nbtComponent == null)
+            return false;
+        /* FIXME find a new way of doing this */
+        NbtCompound nbt = nbtComponent.getNbt();
 
         if (nbt != null && nbt.contains("BlockEntityTag", NbtElement.COMPOUND_TYPE))
         {
@@ -23,7 +29,7 @@ public class InventoryUtils
             if (tag.contains("Items", NbtElement.LIST_TYPE))
             {
                 NbtList tagList = tag.getList("Items", NbtElement.COMPOUND_TYPE);
-                return tagList.size() > 0;
+                return !tagList.isEmpty();
             }
         }
 

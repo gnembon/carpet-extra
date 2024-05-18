@@ -1,21 +1,8 @@
 package carpetextra.utils;
 
 import carpetextra.CarpetExtraSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.FluidFillable;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.ObserverBlock;
-import net.minecraft.block.SeaPickleBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.TurtleEggBlock;
-import net.minecraft.block.SeagrassBlock;
-import net.minecraft.block.KelpBlock;
-import net.minecraft.block.CoralParentBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.fluid.FluidState;
@@ -23,7 +10,6 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
@@ -131,15 +117,8 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             boolean blockWasPlaced = world.setBlockState(pos, state);
             block.onPlaced(world, pos, state, null, itemStack);
             world.updateNeighbor(pos, state.getBlock(), pos);
-            NbtCompound blockEntityTag = itemStack.getSubNbt("BlockEntityTag");
-            if (blockEntityTag != null && block instanceof BlockEntityProvider) {
-                BlockEntity be = world.getBlockEntity(pos);
-                blockEntityTag = new NbtCompound().copyFrom(blockEntityTag);
-                blockEntityTag.putInt("x", pos.getX());
-                blockEntityTag.putInt("y", pos.getY());
-                blockEntityTag.putInt("z", pos.getZ());
-                be.readNbt(blockEntityTag);
-            }
+            BlockItem.writeNbtToBlockEntity(world, null, pos, itemStack);
+            /* not sure if we still should update x,y,z here after 1.20.3->1.20.6 update, see git blame/diff */
             if (currentFluidState.isStill() && block instanceof FluidFillable) {
                 ((FluidFillable) block).tryFillWithFluid(world, pos, state, currentFluidState);
             }
