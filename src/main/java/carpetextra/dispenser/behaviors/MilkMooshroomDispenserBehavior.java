@@ -1,16 +1,13 @@
 package carpetextra.dispenser.behaviors;
 
-import java.util.List;
-
 import carpetextra.dispenser.DispenserBehaviorHelper;
 import carpetextra.mixins.MooshroomEntity_StatusEffectAccessorMixin;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.SuspiciousStewIngredient.StewEffect;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.SuspiciousStewItem;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -19,6 +16,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+
+import java.util.List;
 
 public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
     @Override
@@ -57,11 +56,11 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
         for (MooshroomEntity mooshroom : mooshrooms) {
             // from MooshroomEntity#interact
             MooshroomEntity_StatusEffectAccessorMixin mooshroomAccessor = (MooshroomEntity_StatusEffectAccessorMixin) mooshroom;
-            List<StewEffect> stewEffects = mooshroomAccessor.getStewEffects();
+            var stewEffects = mooshroomAccessor.getStewEffects();
             if (stewEffects != null) {
                 // create suspicious stew and add mooshroom's stew effect to it
                 ItemStack stewStack = new ItemStack(Items.SUSPICIOUS_STEW);
-                SuspiciousStewItem.writeEffectsToStew(stewStack, stewEffects);
+                stewStack.set(DataComponentTypes.SUSPICIOUS_STEW_EFFECTS, mooshroomAccessor.getStewEffects());
 
                 // clear mooshroom's stew effect
                 mooshroomAccessor.setStewEffects(null);
