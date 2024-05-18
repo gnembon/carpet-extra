@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$7")
 public abstract class DispenserBehaviorGlowstoneMixin
 {
-    @SuppressWarnings("UnresolvedMixinReference")
     @Inject(
             method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;",
             at = @At(value = "INVOKE", shift = At.Shift.BEFORE,

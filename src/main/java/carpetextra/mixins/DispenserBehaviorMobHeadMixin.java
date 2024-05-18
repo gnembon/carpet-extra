@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(targets = {"net/minecraft/block/dispenser/DispenserBehavior$3"})
 public abstract class DispenserBehaviorMobHeadMixin extends FallibleItemDispenserBehavior {
-    @SuppressWarnings("UnresolvedMixinReference")
     @Inject(
             method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;",
             at = @At("RETURN"),
