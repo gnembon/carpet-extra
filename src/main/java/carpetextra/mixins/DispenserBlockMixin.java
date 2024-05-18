@@ -20,7 +20,7 @@ import java.util.Map;
 @Mixin(DispenserBlock.class)
 public abstract class DispenserBlockMixin
 {
-    @Shadow @Final private static Map<Item, DispenserBehavior> BEHAVIORS;
+    @Shadow @Final public static Map<Item, DispenserBehavior> BEHAVIORS;
 
     // this is old code to keep dispenserPlacesBlocks working as is
     // new behaviors should go in CarpetExtraDispenserBehaviors class
