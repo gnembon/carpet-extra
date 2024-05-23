@@ -3,6 +3,7 @@ package carpetextra.utils;
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.BlockHalf;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.fluid.FluidState;
@@ -118,7 +119,12 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             block.onPlaced(world, pos, state, null, itemStack);
             world.updateNeighbor(pos, state.getBlock(), pos);
             BlockItem.writeNbtToBlockEntity(world, null, pos, itemStack);
-            /* not sure if we still should update x,y,z here after 1.20.3->1.20.6 update, see git blame/diff */
+            /* copy contents, mark it dirty to save & update comparators */
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity != null) {
+                blockEntity.readComponents(itemStack);
+                blockEntity.markDirty();
+            }
             if (currentFluidState.isStill() && block instanceof FluidFillable) {
                 ((FluidFillable) block).tryFillWithFluid(world, pos, state, currentFluidState);
             }
