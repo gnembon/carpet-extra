@@ -60,7 +60,7 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
             if (stewEffects != null) {
                 // create suspicious stew and add mooshroom's stew effect to it
                 ItemStack stewStack = new ItemStack(Items.SUSPICIOUS_STEW);
-                stewStack.set(DataComponentTypes.SUSPICIOUS_STEW_EFFECTS, mooshroomAccessor.getStewEffects());
+                stewStack.set(DataComponentTypes.SUSPICIOUS_STEW_EFFECTS, stewEffects);
 
                 // clear mooshroom's stew effect
                 mooshroomAccessor.setStewEffects(null);
