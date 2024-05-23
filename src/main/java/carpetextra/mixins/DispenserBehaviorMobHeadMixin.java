@@ -10,7 +10,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(targets = {"net/minecraft/block/dispenser/DispenserBehavior$3"})
+@Mixin(targets = {
+        /* mob & player heads */
+        "net/minecraft/block/dispenser/DispenserBehavior$3",
+        /* wither skull */
+        "net/minecraft/block/dispenser/DispenserBehavior$4"
+})
 public abstract class DispenserBehaviorMobHeadMixin extends FallibleItemDispenserBehavior {
     @Inject(
             method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;",
