@@ -84,7 +84,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
                     ItemStack cleanedBanner = stack.copy();
                     cleanedBanner.setCount(1);
                     // remove layer from banner
-                    stack.set(DataComponentTypes.BANNER_PATTERNS, bannerPatternsComponent.withoutTopLayer());
+                    cleanedBanner.set(DataComponentTypes.BANNER_PATTERNS, bannerPatternsComponent.withoutTopLayer());
                     // return cleaned banner
                     return this.addOrDispense(pointer, stack, cleanedBanner);
                 }
@@ -120,11 +120,14 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
         if (item == Items.GLASS_BOTTLE || item instanceof BannerItem)
             return true;
         if (item == Items.POTION) {
-            var potionContentsComponent = item.getComponents().get(DataComponentTypes.POTION_CONTENTS);
+            var potionContentsComponent = stack.getComponents().get(DataComponentTypes.POTION_CONTENTS);
             return potionContentsComponent != null && potionContentsComponent.matches(Potions.WATER);
         }
-        if (item.getDefaultStack().isIn(ItemTags.DYEABLE)) {
-            return item.getComponents().contains(DataComponentTypes.DYED_COLOR);
+        if (Block.getBlockFromItem(item) instanceof ShulkerBoxBlock) {
+            return item != Items.SHULKER_BOX; // dyed Shulkers only
+        }
+        if (stack.isIn(ItemTags.DYEABLE)) {
+            return stack.getComponents().contains(DataComponentTypes.DYED_COLOR);
         }
         return false;
     }
