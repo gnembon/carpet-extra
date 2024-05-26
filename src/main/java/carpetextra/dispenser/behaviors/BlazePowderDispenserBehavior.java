@@ -1,12 +1,11 @@
 package carpetextra.dispenser.behaviors;
 
 import net.minecraft.block.*;
-import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldEvents;
+import net.minecraft.block.dispenser.*;
+import net.minecraft.item.*;
+import net.minecraft.server.world.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.*;
 
 public class BlazePowderDispenserBehavior extends FallibleItemDispenserBehavior {
     @Override

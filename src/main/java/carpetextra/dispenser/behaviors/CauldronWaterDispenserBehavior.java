@@ -1,24 +1,17 @@
 package carpetextra.dispenser.behaviors;
 
-import carpetextra.dispenser.DispenserBehaviorHelper;
+import carpetextra.dispenser.*;
 import net.minecraft.block.*;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.BannerPatternsComponent;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.item.BannerItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potions;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.component.*;
+import net.minecraft.component.type.*;
+import net.minecraft.item.*;
+import net.minecraft.potion.*;
+import net.minecraft.registry.entry.*;
+import net.minecraft.registry.tag.*;
+import net.minecraft.server.world.*;
+import net.minecraft.sound.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.event.*;
 
 public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
     @Override
