@@ -7,7 +7,6 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
@@ -27,6 +26,9 @@ public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior 
         Blocks.CRIMSON_BUTTON,
         Blocks.WARPED_BUTTON,
         Blocks.STONE_BUTTON,
+        Blocks.MANGROVE_BUTTON,
+        Blocks.BAMBOO_BUTTON,
+        Blocks.CHERRY_BUTTON,
         Blocks.POLISHED_BLACKSTONE_BUTTON,
         Blocks.LEVER,
         Blocks.REPEATER,
@@ -51,8 +53,8 @@ public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior 
         if(TOGGLEABLE_BLOCKS.contains(frontBlockState.getBlock())) {
             BlockHitResult hitResult = new BlockHitResult(Vec3d.of(frontBlockPos), dispenserFacing.getOpposite(), frontBlockPos, false);
 
-            // try to use block
-            if(frontBlockState.onUseWithItem(stack, world, null, Hand.MAIN_HAND, hitResult).isAccepted()) {
+            // use on block, test if successful
+            if(frontBlockState.onUse(world, null, hitResult).isAccepted()) {
                 return stack;
             }
         }
