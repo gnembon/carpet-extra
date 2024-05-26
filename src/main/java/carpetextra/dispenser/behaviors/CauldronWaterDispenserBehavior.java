@@ -25,6 +25,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
 
         if(frontBlock == Blocks.WATER_CAULDRON) {
             if(item == Items.POTION) {
+                // check if it's a water bottle (https://minecraft.wiki/w/Potion#Base_potions)
                 var potionContentsComponent = stack.get(DataComponentTypes.POTION_CONTENTS);
                 if (potionContentsComponent != null && potionContentsComponent.matches(Potions.WATER)) {
                     // check if cauldron is not full
@@ -69,6 +70,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
                 }
             }
             else if(item instanceof BannerItem) {
+                // check if banner has layers (https://minecraft.wiki/w/Banner#Patterns)
                 BannerPatternsComponent bannerPatternsComponent = stack.getOrDefault(DataComponentTypes.BANNER_PATTERNS, BannerPatternsComponent.DEFAULT);
                 if (!bannerPatternsComponent.layers().isEmpty()) {
                     // decrease cauldron level
@@ -84,6 +86,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
             }
         }
         else if(frontBlock == Blocks.CAULDRON && item == Items.POTION) {
+            // check if it's a water bottle (https://minecraft.wiki/w/Potion#Base_potions)
             var potionContentsComponent = stack.get(DataComponentTypes.POTION_CONTENTS);
             if (potionContentsComponent != null && potionContentsComponent.matches(Potions.WATER)) {
                 // increase cauldron level
