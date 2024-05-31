@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -82,31 +83,39 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         if (dispenser == null) return;
         CraftingInventory craftingInventory = new CraftingInventory(new VoidContainer(), 3, 3);
         for (int i=0; i < 9; i++) craftingInventory.setStack(i, dispenser.getStack(i));
-        RecipeEntry<CraftingRecipe> recipe = world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, craftingInventory, world).orElse(null);
+        CraftingRecipeInput recipeInput = craftingInventory.createRecipeInput();
+        RecipeEntry<CraftingRecipe> recipe = world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, recipeInput, world).orElse(null);
         if (recipe == null) return;
         // crafting it
         Vec3d target = Vec3d.ofBottomCenter(front).add(0.0, 0.2, 0.0);
-        ItemStack result = recipe.value().craft(craftingInventory, world.getRegistryManager());
+        ItemStack result = recipe.value().craft(recipeInput, world.getRegistryManager());
         spawn(world, target.x, target.y, target.z, result);
 
         // copied from CraftingResultSlot.onTakeItem()
-        DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(RecipeType.CRAFTING, craftingInventory, world);
-        for(int i = 0; i < defaultedList.size(); ++i) {
-            ItemStack itemStack = dispenser.getStack(i);
-            ItemStack itemStack2 = defaultedList.get(i);
-            if (!itemStack.isEmpty()) {
-                dispenser.removeStack(i, 1);
-                itemStack = dispenser.getStack(i);
-            }
+        CraftingRecipeInput.Positioned positioned = craftingInventory.createPositionedRecipeInput();
+        int left = positioned.left();
+        int top = positioned.top();
+        DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(RecipeType.CRAFTING, recipeInput, world);
 
-            if (!itemStack2.isEmpty()) {
-                if (itemStack.isEmpty()) {
-                    dispenser.setStack(i, itemStack2);
-                } else if (ItemStack.areItemsAndComponentsEqual(itemStack, itemStack2)) {
-                    itemStack2.increment(itemStack.getCount());
-                    dispenser.setStack(i, itemStack2);
-                } else {
-                    spawn(world, target.x, target.y, target.z, itemStack2);
+        for (int row = 0; row < recipeInput.getHeight(); ++row) {
+            for (int column = 0; column < recipeInput.getWidth(); ++column) {
+                int index = column + left + (row + top) * craftingInventory.getWidth();
+                ItemStack itemStack = dispenser.getStack(index);
+                ItemStack itemStack2 = defaultedList.get(column + row * craftingInventory.getWidth());
+                if (!itemStack.isEmpty()) {
+                    dispenser.removeStack(index, 1);
+                    itemStack = dispenser.getStack(index);
+                }
+
+                if (!itemStack2.isEmpty()) {
+                    if (itemStack.isEmpty()) {
+                        dispenser.setStack(index, itemStack2);
+                    } else if (ItemStack.areItemsAndComponentsEqual(itemStack, itemStack2)) {
+                        itemStack2.increment(itemStack.getCount());
+                        dispenser.setStack(index, itemStack2);
+                    } else {
+                        spawn(world, target.x, target.y, target.z, itemStack2);
+                    }
                 }
             }
         }
