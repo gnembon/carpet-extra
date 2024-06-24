@@ -27,15 +27,15 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
         {
             WitherSkeletonEntity witherSkelly = new WitherSkeletonEntity(EntityType.WITHER_SKELETON, world);
             witherSkelly.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
-            witherSkelly.initialize(world, world.getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, null, null);
+            witherSkelly.initialize(world, world.getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, null);
             witherSkelly.setAiDisabled(this.isAiDisabled());
-            
+
             if (this.hasCustomName())
             {
                 witherSkelly.setCustomName(this.getCustomName());
                 witherSkelly.setCustomNameVisible(this.isCustomNameVisible());
             }
-            
+
             world.spawnEntity(witherSkelly);
 
             if (getVehicle() != null)

@@ -102,7 +102,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
             if (!itemStack2.isEmpty()) {
                 if (itemStack.isEmpty()) {
                     dispenser.setStack(i, itemStack2);
-                } else if (ItemStack.canCombine(itemStack, itemStack2)) {
+                } else if (ItemStack.areItemsAndComponentsEqual(itemStack, itemStack2)) {
                     itemStack2.increment(itemStack.getCount());
                     dispenser.setStack(i, itemStack2);
                 } else {

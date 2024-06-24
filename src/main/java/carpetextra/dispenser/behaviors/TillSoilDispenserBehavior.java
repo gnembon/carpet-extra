@@ -38,13 +38,10 @@ public class TillSoilDispenserBehavior extends FallibleItemDispenserBehavior {
                 BlockHitResult hitResult = new BlockHitResult(Vec3d.of(hoeBlockPos), dispenserFacing.getOpposite(), hoeBlockPos, false);
                 ItemUsageContext context = new DispenserItemUsageContext(world, stack, hitResult);
 
-                // use on block, test if sucessful
+                // use on block, test if successful
                 if(stack.getItem().useOnBlock(context).isAccepted()) {
                     // damage hoe, remove if broken
-                    if(stack.damage(1, world.random, null)) {
-                        stack.setCount(0);
-                    }
-
+                    stack.damage(1, world.random, null, () -> stack.setCount(0));
                     return stack;
                 }
             }

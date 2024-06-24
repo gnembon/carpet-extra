@@ -26,13 +26,13 @@ import net.minecraft.util.math.BlockPos;
 
 @Mixin(DispenserBlock.class)
 public abstract class DispenserBlock_GetCustomBehaviorMixin {
-    @Shadow @Final private static Map<Item, DispenserBehavior> BEHAVIORS;
+    @Shadow @Final public static Map<Item, DispenserBehavior> BEHAVIORS;
 
     @Inject(
         method = "dispense",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/block/DispenserBlock;getBehaviorForItem(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/block/dispenser/DispenserBehavior;"
+            target = "Lnet/minecraft/block/DispenserBlock;getBehaviorForItem(Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/block/dispenser/DispenserBehavior;"
         ),
         locals = LocalCapture.CAPTURE_FAILHARD,
         cancellable = true

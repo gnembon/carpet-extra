@@ -41,9 +41,7 @@ public class CarvePumpkinDispenserBehavior extends FallibleItemDispenserBehavior
             world.emitGameEvent(null, GameEvent.SHEAR, frontBlockPos);
 
             // damage shears, remove if broken
-            if(stack.damage(1, world.random, null)) {
-                stack.setCount(0);
-            }
+            stack.damage(1, world.random, null, () -> stack.setCount(0));
 
             return stack;
         }

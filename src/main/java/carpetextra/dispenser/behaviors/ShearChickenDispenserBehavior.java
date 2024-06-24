@@ -37,9 +37,7 @@ public class ShearChickenDispenserBehavior extends FallibleItemDispenserBehavior
                 chicken.dropItem(Items.FEATHER);
 
                 // damage shears, remove if broken
-                if(stack.damage(1, world.random, null)) {
-                    stack.setCount(0);
-                }
+                stack.damage(1, world.random, null, () -> stack.setCount(0));
 
                 // return shears
                 return stack;

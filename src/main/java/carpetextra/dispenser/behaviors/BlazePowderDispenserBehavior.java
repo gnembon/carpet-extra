@@ -27,12 +27,11 @@ public class BlazePowderDispenserBehavior extends FallibleItemDispenserBehavior 
                 // grow netherwart one stage
                 world.setBlockState(frontBlockPos, frontBlockState.with(NetherWartBlock.AGE, age + 1), Block.NOTIFY_LISTENERS);
                 // green sparkles
-                world.syncWorldEvent(WorldEvents.PLANT_FERTILIZED, frontBlockPos, 0);
+                world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, frontBlockPos, 0);
 
                 // decrement item and return
                 stack.decrement(1);
                 return stack;
-
             }
         }
 
