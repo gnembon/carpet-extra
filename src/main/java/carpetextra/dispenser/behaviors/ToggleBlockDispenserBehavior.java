@@ -1,5 +1,7 @@
 package carpetextra.dispenser.behaviors;
 
+import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -12,8 +14,6 @@ import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-
-import java.util.Set;
 
 public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior {
     public static final Set<Block> TOGGLEABLE_BLOCKS = Set.of(

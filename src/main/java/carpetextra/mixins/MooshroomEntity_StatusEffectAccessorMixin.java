@@ -10,7 +10,6 @@ import net.minecraft.component.type.SuspiciousStewEffectsComponent;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.item.ItemStack;
 
-
 @Mixin(MooshroomEntity.class)
 public interface MooshroomEntity_StatusEffectAccessorMixin {
     @Accessor("stewEffects")

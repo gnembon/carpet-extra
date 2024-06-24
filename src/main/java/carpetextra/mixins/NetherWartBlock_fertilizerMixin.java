@@ -13,6 +13,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
+
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(NetherWartBlock.class)
