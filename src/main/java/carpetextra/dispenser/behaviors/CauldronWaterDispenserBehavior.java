@@ -80,15 +80,15 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
             }
             else if (item instanceof BannerItem) {
                 // check if banner has layers (https://minecraft.wiki/w/Banner#Patterns)
-                BannerPatternsComponent bannerPatternsComponent = stack.getOrDefault(DataComponentTypes.BANNER_PATTERNS, BannerPatternsComponent.DEFAULT);
-                if (!bannerPatternsComponent.layers().isEmpty()) {
+                BannerPatternsComponent bannerPatterns = stack.getOrDefault(DataComponentTypes.BANNER_PATTERNS, BannerPatternsComponent.DEFAULT);
+                if (!bannerPatterns.layers().isEmpty()) {
                     // decrease cauldron level
                     LeveledCauldronBlock.decrementFluidLevel(frontBlockState, world, frontBlockPos);
                     // copy banner stack, set to one item
                     ItemStack cleanedBanner = stack.copy();
                     cleanedBanner.setCount(1);
                     // remove layer from banner
-                    cleanedBanner.set(DataComponentTypes.BANNER_PATTERNS, bannerPatternsComponent.withoutTopLayer());
+                    cleanedBanner.set(DataComponentTypes.BANNER_PATTERNS, bannerPatterns.withoutTopLayer());
                     // return cleaned banner
                     return this.addOrDispense(pointer, stack, cleanedBanner);
                 }
@@ -114,7 +114,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
         world.playSound(null, pos, soundEvent, SoundCategory.BLOCKS, 1.0F, 1.0F);
         world.emitGameEvent(null, gameEvent, pos);
     }
-
+    
     private static boolean isWaterBottle(ItemStack stack) {
         if (stack.getItem() != Items.POTION) {
             return false;
