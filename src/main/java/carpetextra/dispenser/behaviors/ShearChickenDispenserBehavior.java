@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.item.ItemStack;
@@ -20,8 +19,8 @@ public class ShearChickenDispenserBehavior extends FallibleItemDispenserBehavior
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        ServerWorld world = pointer.world();
+        BlockPos frontBlockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
         Box frontBlockBox = new Box(frontBlockPos);
 
         // get adult chickens in front of dispenser
@@ -38,9 +37,7 @@ public class ShearChickenDispenserBehavior extends FallibleItemDispenserBehavior
                 chicken.dropItem(Items.FEATHER);
 
                 // damage shears, remove if broken
-                if(stack.damage(1, world.random, null)) {
-                    stack.setCount(0);
-                }
+                stack.damage(1, world.random, null, () -> stack.setCount(0));
 
                 // return shears
                 return stack;

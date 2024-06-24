@@ -27,10 +27,10 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.19",
-    "carpet": ">=1.4.112",
-    "minecraft": ["1.20", "1.20.1"],
-    "java": ">=17"
+    "fabricloader": ">=0.15.11",
+    "carpet": ">=1.4.141",
+    "minecraft": ["1.20.5", "1.20.6"],
+    "java": ">=21"
   },
   "custom": {
     "modmenu": {

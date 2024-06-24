@@ -24,8 +24,8 @@ public class FillMinecartDispenserBehavior extends FallibleItemDispenserBehavior
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        ServerWorld world = pointer.world();
+        BlockPos frontBlockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
         Box frontBlockBox = new Box(frontBlockPos);
 
         // get non-mounted minecarts in front of dispenser
@@ -34,7 +34,7 @@ public class FillMinecartDispenserBehavior extends FallibleItemDispenserBehavior
         if(!minecarts.isEmpty()) {
             // choose a random minecart in front of dispenser to fill
             MinecartEntity oldMinecart = minecarts.get(world.random.nextInt(minecarts.size()));
-            AbstractMinecartEntity newMinecart = AbstractMinecartEntity.create(world, oldMinecart.getX(), oldMinecart.getY(), oldMinecart.getZ(), this.MINECART_TYPE);
+            AbstractMinecartEntity newMinecart = AbstractMinecartEntity.create(world, oldMinecart.getX(), oldMinecart.getY(), oldMinecart.getZ(), this.MINECART_TYPE, ItemStack.EMPTY, null);
 
             // Copy data from original minecart to new minecart
             // Possibly missing some things to copy here. Add more if needed

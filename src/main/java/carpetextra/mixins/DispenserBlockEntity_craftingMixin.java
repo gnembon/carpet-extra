@@ -31,7 +31,7 @@ public abstract class DispenserBlockEntity_craftingMixin extends LootableContain
     }
 
     @Override
-    public boolean isValid(int int_1, ItemStack itemStack_1)
+    public boolean isValid(int slot, ItemStack stack)
     {
 
         if (CarpetExtraSettings.autoCraftingDropper && world != null)
@@ -41,10 +41,10 @@ public abstract class DispenserBlockEntity_craftingMixin extends LootableContain
             {
                 if (world.getBlockState(pos.offset(state.get(DispenserBlock.FACING))).getBlock() == Blocks.CRAFTING_TABLE)
                 {
-                    return inventory.get(int_1).isEmpty();
+                    return inventory.get(slot).isEmpty();
                 }
             }
         }
-        return super.isValid(int_1, itemStack_1);
+        return super.isValid(slot, stack);
     }
 }

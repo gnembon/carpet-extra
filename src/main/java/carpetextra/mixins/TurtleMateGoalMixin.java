@@ -27,11 +27,11 @@ public abstract class TurtleMateGoalMixin extends AnimalMateGoal {
         cancellable = true
     )
     protected void preventDispenserSpawningExperience(CallbackInfo ci) {
-        ServerPlayerEntity serverPlayerEntity_1 = super.animal.getLovingPlayer();
-        if (serverPlayerEntity_1 == null) {
-            serverPlayerEntity_1 = super.mate.getLovingPlayer();
+        ServerPlayerEntity player = super.animal.getLovingPlayer();
+        if (player == null) {
+            player = super.mate.getLovingPlayer();
         }
-        if(serverPlayerEntity_1 == null && CarpetExtraSettings.dispensersFeedAnimals) {
+        if(player == null && CarpetExtraSettings.dispensersFeedAnimals) {
             ci.cancel();
         }
     }

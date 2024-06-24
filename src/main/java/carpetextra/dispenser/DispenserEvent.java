@@ -23,11 +23,11 @@ public class DispenserEvent extends Event {
         INSTANCE.handler.call(() -> List.of(
                     new StringValue(getScarpetName(name.getClass().getSimpleName())),
                     ValueConversions.of(pos),
-                    new StringValue(pointer.getBlockState().get(DispenserBlock.FACING).name().toLowerCase()),
+                    new StringValue(pointer.state().get(DispenserBlock.FACING).name().toLowerCase()),
                     item, // value directly because it needs to be a snapshot, stack is mutable
-                    ValueConversions.of(resultItem)
+                    ValueConversions.of(resultItem, pointer.world().getRegistryManager())
                 ),
-                () ->  pointer.getWorld().getServer().getCommandSource().withWorld(pointer.getWorld())
+                () ->  pointer.world().getServer().getCommandSource().withWorld(pointer.world())
         );
     }
 

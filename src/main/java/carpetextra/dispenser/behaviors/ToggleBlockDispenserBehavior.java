@@ -10,7 +10,6 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
@@ -28,6 +27,9 @@ public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior 
         Blocks.CRIMSON_BUTTON,
         Blocks.WARPED_BUTTON,
         Blocks.STONE_BUTTON,
+        Blocks.MANGROVE_BUTTON,
+        Blocks.BAMBOO_BUTTON,
+        Blocks.CHERRY_BUTTON,
         Blocks.POLISHED_BLACKSTONE_BUTTON,
         Blocks.LEVER,
         Blocks.REPEATER,
@@ -43,17 +45,17 @@ public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior 
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        Direction dispenserFacing = pointer.getBlockState().get(DispenserBlock.FACING);
-        BlockPos frontBlockPos = pointer.getPos().offset(dispenserFacing);
+        ServerWorld world = pointer.world();
+        Direction dispenserFacing = pointer.state().get(DispenserBlock.FACING);
+        BlockPos frontBlockPos = pointer.pos().offset(dispenserFacing);
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
 
         // check if block can be toggled
-        if(TOGGLEABLE_BLOCKS.contains(frontBlockState.getBlock())) {
+        if (TOGGLEABLE_BLOCKS.contains(frontBlockState.getBlock())) {
             BlockHitResult hitResult = new BlockHitResult(Vec3d.of(frontBlockPos), dispenserFacing.getOpposite(), frontBlockPos, false);
 
-            // try to use block
-            if(frontBlockState.onUse(world, PlayerForInteractions.get(world), Hand.MAIN_HAND, hitResult).isAccepted()) {
+            // use on block, test if successful
+            if (frontBlockState.onUse(world, PlayerForInteractions.get(world), hitResult).isAccepted()) {
                 return stack;
             }
         }

@@ -18,14 +18,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(VillagerProfession.class)
 public abstract class VillagerProfession_wartFarmMixin
 {
-    @Shadow static VillagerProfession register(String string, RegistryKey<PointOfInterestType> pointOfInterestType, ImmutableSet<Item> immutableSet, ImmutableSet<Block> immutableSet2, /*@Nullable*/ SoundEvent soundEvent) {return null;};
+    @Shadow
+    static VillagerProfession register(String id, RegistryKey<PointOfInterestType> poiType, ImmutableSet<Item> gatherableItems, ImmutableSet<Block> secondaryJobSites, /*@Nullable*/ SoundEvent soundEvent) {
+        throw new AssertionError();
+    };
 
     @Inject(method = "register(Ljava/lang/String;Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/sound/SoundEvent;)Lnet/minecraft/village/VillagerProfession;", cancellable = true, at = @At("HEAD"))
-    private static void registerCleric(String key, RegistryKey<PointOfInterestType> pointOfInterestType, SoundEvent soundEvent, CallbackInfoReturnable<VillagerProfession> cir)
+    private static void registerCleric(String key, RegistryKey<PointOfInterestType> poiType, SoundEvent soundEvent, CallbackInfoReturnable<VillagerProfession> cir)
     {
         if (key.equals("cleric"))
         {
-            cir.setReturnValue(register(key, pointOfInterestType, ImmutableSet.of(Items.NETHER_WART), ImmutableSet.of(Blocks.SOUL_SAND), soundEvent));
+            cir.setReturnValue(register(key, poiType, ImmutableSet.of(Items.NETHER_WART), ImmutableSet.of(Blocks.SOUL_SAND), soundEvent));
         }
     }
 }

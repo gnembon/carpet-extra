@@ -42,7 +42,6 @@ import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.MusicDiscItem;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
@@ -98,7 +97,7 @@ public class CarpetExtraDispenserBehaviors {
     // returns null to fallback to vanilla (or another mod's) behavior for the given item
     public static DispenserBehavior getCustomDispenserBehavior(ServerWorld world, BlockPos pos, BlockPointer pointer, DispenserBlockEntity dispenserBlockEntity, ItemStack stack, Map<Item, DispenserBehavior> VANILLA_BEHAVIORS) {
         Item item = stack.getItem();
-        Direction dispenserFacing = pointer.getBlockState().get(DispenserBlock.FACING);
+        Direction dispenserFacing = pointer.state().get(DispenserBlock.FACING);
         BlockPos frontBlockPos = pos.offset(dispenserFacing);
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
         Block frontBlock = frontBlockState.getBlock();

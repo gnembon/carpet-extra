@@ -20,14 +20,14 @@ public class PlaceBoatOnIceDispenserBehavior extends FallibleItemDispenserBehavi
     @Override
     public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        Direction dispenserFacing = pointer.getBlockState().get(DispenserBlock.FACING);
+        ServerWorld world = pointer.world();
+        Direction dispenserFacing = pointer.state().get(DispenserBlock.FACING);
 
-        double boatXPos = pointer.getX() + (double) ((float) dispenserFacing.getOffsetX() * 1.125F);
-        double boatYPos = pointer.getY() + (double) ((float) dispenserFacing.getOffsetY() * 1.125F);
-        double boatZPos = pointer.getZ() + (double) ((float) dispenserFacing.getOffsetZ() * 1.125F);
+        double boatXPos = pointer.pos().getX() + (double) ((float) dispenserFacing.getOffsetX() * 1.125F);
+        double boatYPos = pointer.pos().getY() + (double) ((float) dispenserFacing.getOffsetY() * 1.125F);
+        double boatZPos = pointer.pos().getZ() + (double) ((float) dispenserFacing.getOffsetZ() * 1.125F);
 
-        BlockPos frontBlockPos = pointer.getPos().offset(dispenserFacing);
+        BlockPos frontBlockPos = pointer.pos().offset(dispenserFacing);
         Block frontBlock = world.getBlockState(frontBlockPos).getBlock();
         BlockPos blockBelowFrontBlockPos = frontBlockPos.down();
         BlockState blockBelowFrontState = world.getBlockState(blockBelowFrontBlockPos);

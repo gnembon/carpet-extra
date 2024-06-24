@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "carpetextra.mixins",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "DispenserBlockMixin",
     "FallingBlockEntityMixin",
@@ -50,8 +50,6 @@
     "PlayerEntityMixin",
     "PistonBlockMixin",
     "CactusBlock_syncMixin",
-    "DispenserBlock_syncMixin",
-    "HopperBlock_syncMixin",
     "SaplingBlock_syncMixin",
     "SugarCaneBlock_syncMixin",
     "ChunkGeneratorMixin",

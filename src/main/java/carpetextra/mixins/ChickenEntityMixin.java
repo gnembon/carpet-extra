@@ -2,8 +2,7 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,23 +20,21 @@ public abstract class ChickenEntityMixin extends AnimalEntity
     {
         super(entityType_1, world_1);
     }
-    
+
     @Override
-    public ActionResult interactMob(PlayerEntity playerEntity_1, Hand hand_1)
+    public ActionResult interactMob(PlayerEntity player, Hand hand)
     {
-        ItemStack stack = playerEntity_1.getStackInHand(hand_1);
+        ItemStack stack = player.getStackInHand(hand);
         if (CarpetExtraSettings.chickenShearing && stack.getItem() == Items.SHEARS && !this.isBaby())
         {
-            boolean tookDamage = this.damage(playerEntity_1.getWorld().getDamageSources().generic(), 1);
+            boolean tookDamage = this.damage(player.getWorld().getDamageSources().generic(), 1);
             if (tookDamage)
             {
                 this.dropItem(Items.FEATHER, 1);
-                stack.damage(1, (LivingEntity)playerEntity_1, ((playerEntity_1x) -> {
-                    playerEntity_1x.sendToolBreakStatus(hand_1);
-                }));
+                stack.damage(1, player, hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
                 return ActionResult.SUCCESS;
             }
         }
-        return super.interactMob(playerEntity_1, hand_1);
+        return super.interactMob(player, hand);
     }
 }

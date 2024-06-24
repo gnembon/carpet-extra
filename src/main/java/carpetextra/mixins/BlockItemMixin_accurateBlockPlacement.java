@@ -17,15 +17,15 @@ public class BlockItemMixin_accurateBlockPlacement
             value = "INVOKE",
             target = "Lnet/minecraft/block/Block;getPlacementState(Lnet/minecraft/item/ItemPlacementContext;)Lnet/minecraft/block/BlockState;"
     ))
-    private BlockState getAlternatePlacement(Block block, ItemPlacementContext itemPlacementContext_1)
+    private BlockState getAlternatePlacement(Block block, ItemPlacementContext context)
     {
         if (CarpetExtraSettings.accurateBlockPlacement)
         {
-            BlockState tryAlternative = BlockPlacer.alternativeBlockPlacement(block, itemPlacementContext_1);
+            BlockState tryAlternative = BlockPlacer.alternativeBlockPlacement(block, context);
             if (tryAlternative != null)
                 return tryAlternative;
         }
-        return block.getPlacementState(itemPlacementContext_1);
+        return block.getPlacementState(context);
     }
 
 }

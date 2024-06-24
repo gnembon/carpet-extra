@@ -35,9 +35,9 @@ public class StripBlocksDispenserBehavior extends FallibleItemDispenserBehavior 
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        Direction dispenserFacing = pointer.getBlockState().get(DispenserBlock.FACING);
-        BlockPos frontBlockPos = pointer.getPos().offset(dispenserFacing);
+        ServerWorld world = pointer.world();
+        Direction dispenserFacing = pointer.state().get(DispenserBlock.FACING);
+        BlockPos frontBlockPos = pointer.pos().offset(dispenserFacing);
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
         Block frontBlock = frontBlockState.getBlock();
 
@@ -49,9 +49,7 @@ public class StripBlocksDispenserBehavior extends FallibleItemDispenserBehavior 
             // use on block, test if sucessful
             if(stack.getItem().useOnBlock(context).isAccepted()) {
                 // damage axe, remove if broken
-                if(stack.damage(1, world.random, null)) {
-                    stack.setCount(0);
-                }
+                stack.damage(1, world.random, null, () -> stack.setCount(0));
 
                 return stack;
             }
@@ -62,7 +60,7 @@ public class StripBlocksDispenserBehavior extends FallibleItemDispenserBehavior 
         return stack;
     }
 
-    // checks if a block is able to be stripped with an axe
+    // checks if a block can be stripped with an axe
     public static boolean canStrip(Block block) {
         return STRIPPED_BLOCKS.contains(block) || DEOXIDIZE_BLOCKS.contains(block) || DEWAX_BLOCKS.contains(block);
     }

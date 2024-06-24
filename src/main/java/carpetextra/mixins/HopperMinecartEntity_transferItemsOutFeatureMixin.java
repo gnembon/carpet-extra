@@ -19,9 +19,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -38,12 +36,12 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
 
     @Shadow public abstract int size();
 
-    public HopperMinecartEntity_transferItemsOutFeatureMixin(EntityType<? extends HopperMinecartEntity> entityType_1, World world_1) {
-        super(entityType_1, world_1);
+    public HopperMinecartEntity_transferItemsOutFeatureMixin(EntityType<? extends HopperMinecartEntity> type, World world) {
+        super(type, world);
     }
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/vehicle/HopperMinecartEntity;canOperate()Z"))
-    private boolean operate(HopperMinecartEntity hopperMinecartEntity){
+    private boolean operate(HopperMinecartEntity entity) {
         boolean workDone = false;
         if(CarpetExtraSettings.hopperMinecartItemTransfer)
             workDone  = this.insert();
@@ -51,29 +49,23 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
         return workDone;
     }
 
+    private static final Vec3d upwardVec = new Vec3d(0, 1, 0).normalize().multiply(-1);
+    private static final Vec3d ascending_east_offset  = new Vec3d(-1, 1,  0).normalize().multiply(-1);
+    private static final Vec3d ascending_west_offset  = new Vec3d( 1, 1,  0).normalize().multiply(-1);
+    private static final Vec3d ascending_north_offset = new Vec3d( 0, 1,  1).normalize().multiply(-1);
+    private static final Vec3d ascending_south_offset = new Vec3d( 0, 1, -1).normalize().multiply(-1);
 
-    private static final Vec3d upwardVec = new Vec3d(0,1,0).normalize().multiply(-1);
-    private static final Vec3d ascending_east_offset = new Vec3d(-1,1, 0).normalize().multiply(-1);
-    private static final Vec3d ascending_west_offset = new Vec3d( 1,1, 0).normalize().multiply(-1);
-    private static final Vec3d ascending_north_offset= new Vec3d( 0,1, 1).normalize().multiply(-1);
-    private static final Vec3d ascending_south_offset= new Vec3d( 0,1,-1).normalize().multiply(-1);
-
-    private Vec3d getBlockBelowCartOffset(){
-        BlockState blockState_1 = this.getWorld().getBlockState(new BlockPos(MathHelper.floor(this.getX()), MathHelper.floor(this.getY()), MathHelper.floor(this.getZ())));
-        if (blockState_1.isIn(BlockTags.RAILS)) {
-            RailShape railShape = (RailShape)blockState_1.get(((AbstractRailBlock)blockState_1.getBlock()).getShapeProperty());
-            switch (railShape){
-                case ASCENDING_EAST:
-                    return ascending_east_offset;
-                case ASCENDING_WEST:
-                    return ascending_west_offset;
-                case ASCENDING_NORTH:
-                    return ascending_north_offset;
-                case ASCENDING_SOUTH:
-                    return ascending_south_offset;
-                default:
-                    return upwardVec;
-            }
+    private Vec3d getBlockBelowCartOffset() {
+        BlockState state = this.getWorld().getBlockState(BlockPos.ofFloored(this.getPos()));
+        if (state.isIn(BlockTags.RAILS)) {
+            RailShape railShape = state.get(((AbstractRailBlock)state.getBlock()).getShapeProperty());
+            return switch (railShape) {
+                case ASCENDING_EAST -> ascending_east_offset;
+                case ASCENDING_WEST -> ascending_west_offset;
+                case ASCENDING_NORTH -> ascending_north_offset;
+                case ASCENDING_SOUTH -> ascending_south_offset;
+                default -> upwardVec;
+            };
         }
         return upwardVec;
     }
@@ -84,12 +76,12 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
         Vec3d offsetToInventory = getBlockBelowCartOffset();
         //The visual rotation point of the minecart is roughly 0.5 above its feet (determined visually ingame)
         //Search 0.5 Blocks below the feet for an inventory
-        Inventory inv =  HopperBlockEntity.getInventoryAt(this.getWorld(), BlockPos.ofFloored(this.getX() + offsetToInventory.x, this.getY() + 0.5 + offsetToInventory.y, this.getZ() + offsetToInventory.z));
+        Inventory inv =  HopperBlockEntity.getInventoryAt(this.getWorld(), BlockPos.ofFloored(this.getPos().add(offsetToInventory)));
 
         //There is probably a way nicer way to determine the access side of the target inventory
-        if(inv instanceof BlockEntity){
-            BlockPos pos = ((BlockEntity) inv).getPos();
-            if(pos.getY() < MathHelper.floor(this.getY()))
+        if (inv instanceof BlockEntity be) {
+            BlockPos pos = be.getPos();
+            if (pos.getY() < MathHelper.floor(this.getY()))
                 outputDirection = Direction.DOWN;
             else if(pos.getX() > MathHelper.floor(this.getX()))
                 outputDirection = Direction.EAST;
@@ -100,10 +92,9 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
             else if(pos.getZ() < MathHelper.floor(this.getZ()))
                 outputDirection = Direction.NORTH;
             else outputDirection = Direction.DOWN;
-        }else
+        } else {
             outputDirection = Direction.DOWN;
-
-
+        }
 
         return inv;
     }
@@ -113,26 +104,26 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
     }
 
     //copied from HopperBlockEntity, (code originally taken from 1.14.4 pre 6)
-    private boolean insert(){
-        if(!this.isEmpty()){
-            Inventory inventory_1 = this.getOutputInventory();
-            if (inventory_1 == null) {
+    private boolean insert() {
+        if (!this.isEmpty()) {
+            Inventory inventory = this.getOutputInventory();
+            if (inventory == null) {
                 return false;
             } else {
-                Direction direction_1 = getLastOutputDirection().getOpposite();
-                if (this.isInventoryFull(inventory_1, direction_1)) {
+                Direction direction = getLastOutputDirection().getOpposite();
+                if (this.isInventoryFull(inventory, direction)) {
                     return false;
                 } else {
-                    for(int int_1 = 0; int_1 < this.size(); ++int_1) {
-                        if (!this.getStack(int_1).isEmpty()) {
-                            ItemStack itemStack_1 = this.getStack(int_1).copy();
-                            ItemStack itemStack_2 = transfer(this, inventory_1, this.removeStack(int_1, 1), direction_1);
+                    for (int i = 0; i < this.size(); ++i) {
+                        if (!this.getStack(i).isEmpty()) {
+                            ItemStack itemStack_1 = this.getStack(i).copy();
+                            ItemStack itemStack_2 = transfer(this, inventory, this.removeStack(i, 1), direction);
                             if (itemStack_2.isEmpty()) {
-                                inventory_1.markDirty();
+                                inventory.markDirty();
                                 return true;
                             }
 
-                            this.setStack(int_1, itemStack_1);
+                            this.setStack(i, itemStack_1);
                         }
                     }
 
@@ -145,14 +136,14 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
 
 
     //Copied from HopperBlockEntity as it is private there
-    private boolean isInventoryFull(Inventory inventory_1, Direction direction_1) {
-        return getAvailableSlots(inventory_1, direction_1).allMatch((int_1) -> {
-            ItemStack itemStack_1 = inventory_1.getStack(int_1);
-            return itemStack_1.getCount() >= itemStack_1.getMaxCount();
+    private boolean isInventoryFull(Inventory inventory, Direction direction) {
+        return getAvailableSlots(inventory, direction).allMatch((slot) -> {
+            ItemStack stack = inventory.getStack(slot);
+            return stack.getCount() >= stack.getMaxCount();
         });
     }
     //Copied from HopperBlockEntity as it is private there
-    private static IntStream getAvailableSlots(Inventory inventory_1, Direction direction_1) {
-        return inventory_1 instanceof SidedInventory ? IntStream.of(((SidedInventory)inventory_1).getAvailableSlots(direction_1)) : IntStream.range(0, inventory_1.size());
+    private static IntStream getAvailableSlots(Inventory inventory, Direction direction) {
+        return inventory instanceof SidedInventory ? IntStream.of(((SidedInventory)inventory).getAvailableSlots(direction)) : IntStream.range(0, inventory.size());
     }
 }

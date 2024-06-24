@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import net.minecraft.registry.tag.ItemTags;
-import org.apache.commons.lang3.tuple.Pair;
 
 import carpetextra.mixins.MooshroomEntity_StatusEffectAccessorMixin;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
+import net.minecraft.component.type.SuspiciousStewEffectsComponent;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
@@ -26,33 +25,31 @@ public class FeedMooshroomDispenserBehavior extends FallibleItemDispenserBehavio
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        BlockPos frontBlockPos = pointer.getPos().offset(pointer.getBlockState().get(DispenserBlock.FACING));
+        ServerWorld world = pointer.world();
+        BlockPos frontBlockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
 
         // check if item is in SMALL_FLOWERS item tag
         if(stack.isIn(ItemTags.SMALL_FLOWERS))
         {
             // get brown mooshrooms in front of dispenser
-            List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityType.MOOSHROOM, new Box(frontBlockPos), EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) -> {
-                return ((MooshroomEntity) mooshroomEntity).getVariant() == MooshroomEntity.Type.BROWN;
+            List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityType.MOOSHROOM, new Box(frontBlockPos), EntityPredicates.VALID_LIVING_ENTITY.and((mooshroom) -> {
+                return ((MooshroomEntity) mooshroom).getVariant() == MooshroomEntity.Type.BROWN;
             }));
 
             // check all mooshrooms
-            for(MooshroomEntity mooshroom : mooshrooms) {
+            for (MooshroomEntity mooshroom : mooshrooms) {
                 MooshroomEntity_StatusEffectAccessorMixin mooshroomAccessor = (MooshroomEntity_StatusEffectAccessorMixin) mooshroom;
 
                 // check if mooshroom has no stew effect
-                if(mooshroomAccessor.getStewEffect() == null) {
+                if (mooshroomAccessor.getStewEffects() == null) {
                     // get stew effect and length for flower
-                    Optional<Pair<StatusEffect, Integer>> effect = mooshroomAccessor.invokeGetStewEffectFrom(stack);
+                	Optional<SuspiciousStewEffectsComponent> effect = mooshroomAccessor.invokeGetStewEffectFrom(stack);
 
                     // check if effect is present
-                    if(effect.isPresent()) {
-                        Pair<StatusEffect, Integer> pair = effect.get();
+                    if (effect.isPresent()) {
 
                         // set stew effect for mooshroom
-                        mooshroomAccessor.setStatusEffect(pair.getLeft());
-                        mooshroomAccessor.setStewEffectDuration(pair.getRight());
+                        mooshroomAccessor.setStewEffects(effect.get());
 
                         // play sound effect and show particles
                         world.playSound(null, frontBlockPos, SoundEvents.ENTITY_MOOSHROOM_EAT, SoundCategory.NEUTRAL, 2.0F, 1.0F);

@@ -23,9 +23,9 @@ public class TillSoilDispenserBehavior extends FallibleItemDispenserBehavior {
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
-        ServerWorld world = pointer.getWorld();
-        Direction dispenserFacing = pointer.getBlockState().get(DispenserBlock.FACING);
-        BlockPos frontBlockPos = pointer.getPos().offset(dispenserFacing);
+        ServerWorld world = pointer.world();
+        Direction dispenserFacing = pointer.state().get(DispenserBlock.FACING);
+        BlockPos frontBlockPos = pointer.pos().offset(dispenserFacing);
 
         // check block in front of dispenser and one block down
         for(int i = 0; i < 2; i++) {
@@ -38,13 +38,10 @@ public class TillSoilDispenserBehavior extends FallibleItemDispenserBehavior {
                 BlockHitResult hitResult = new BlockHitResult(Vec3d.of(hoeBlockPos), dispenserFacing.getOpposite(), hoeBlockPos, false);
                 ItemUsageContext context = new DispenserItemUsageContext(world, stack, hitResult);
 
-                // use on block, test if sucessful
+                // use on block, test if successful
                 if(stack.getItem().useOnBlock(context).isAccepted()) {
                     // damage hoe, remove if broken
-                    if(stack.damage(1, world.random, null)) {
-                        stack.setCount(0);
-                    }
-
+                    stack.damage(1, world.random, null, () -> stack.setCount(0));
                     return stack;
                 }
             }

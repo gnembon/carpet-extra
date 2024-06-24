@@ -19,7 +19,7 @@ public abstract class LilyPadBlock_fertilizerMixin implements Fertilizable {
     @Shadow protected abstract boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos);
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         return CarpetExtraSettings.betterBonemeal;
     }
 

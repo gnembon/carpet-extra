@@ -14,16 +14,10 @@ import static carpet.api.settings.RuleCategory.*;
 public class CarpetExtraSettings
 {
     public enum ComparatorOptions {
-        VANILLA(0),
-        BEHIND(1),
-        LENIENT(2),
-        EXTENDED(3);
-
-        public final int id;
-
-        ComparatorOptions(int id) {
-            this.id = id;
-        }
+        VANILLA,
+        BEHIND,
+        LENIENT,
+        EXTENDED;
     }
 
     public static final String EXTRA = "extras";

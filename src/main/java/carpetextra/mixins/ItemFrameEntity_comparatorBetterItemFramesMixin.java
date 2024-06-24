@@ -1,6 +1,7 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
+import carpetextra.CarpetExtraSettings.ComparatorOptions;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.decoration.AbstractDecorationEntity;
@@ -14,20 +15,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemFrameEntity.class)
 public abstract class ItemFrameEntity_comparatorBetterItemFramesMixin extends AbstractDecorationEntity {
-    public ItemFrameEntity_comparatorBetterItemFramesMixin(EntityType<? extends ItemFrameEntity> entityType_1, World world_1) {
-        super(entityType_1, world_1);
+    public ItemFrameEntity_comparatorBetterItemFramesMixin(EntityType<? extends ItemFrameEntity> type, World world) {
+        super(type, world);
     }
 
     @Inject(method = "setHeldItemStack(Lnet/minecraft/item/ItemStack;Z)V", at = @At(value = "INVOKE", target="Lnet/minecraft/world/World;updateComparators(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;)V"), cancellable = true)
     private void onStackChangeUpdateComparatorDownwards(ItemStack value, boolean update, CallbackInfo ci) {
-        if (CarpetExtraSettings.comparatorBetterItemFrames.id == 3) {
+        if (CarpetExtraSettings.comparatorBetterItemFrames == ComparatorOptions.EXTENDED) {
             this.getWorld().updateComparators(this.attachmentPos.offset(this.getHorizontalFacing().getOpposite()), Blocks.AIR);
         }
     }
 
     @Inject(method = "setRotation(IZ)V", at = @At(value = "INVOKE", target="Lnet/minecraft/world/World;updateComparators(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;)V"), cancellable = true)
     private void onRotationUpdateComparatorDownwards(int value, boolean bl, CallbackInfo ci) {
-        if (CarpetExtraSettings.comparatorBetterItemFrames.id == 3) {
+        if (CarpetExtraSettings.comparatorBetterItemFrames == ComparatorOptions.EXTENDED) {
             this.getWorld().updateComparators(this.attachmentPos.offset(this.getHorizontalFacing().getOpposite()), Blocks.AIR);
         }
     }

@@ -1,6 +1,6 @@
 <img src="./src/main/resources/assets/carpet-extra/icon.png" align="right" width="128px"/>
 
-## Carpet Extra
+# Carpet Extra
 
 [![Development Builds](https://github.com/gnembon/carpet-extra/actions/workflows/devbuild.yml/badge.svg)](https://github.com/gnembon/carpet-extra/actions/workflows/devbuild.yml)
 [![CurseForge downloads](http://cf.way2muchnoise.eu/full_349240_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/carpet-extra)
@@ -65,7 +65,7 @@ Via dispenser or player right click actions.
 ## blockStateSyncing
 Fixes block states in F3 debug mode not updating for some blocks.  
 May cause increased network traffic.  
-Works with cactus, sugar cane, saplings, hoppers, dispensers and droppers.  
+Works with cactus, sugar cane and saplings.  
 * Type: `Boolean`  
 * Default value: `false`  
 * Allowed options: `true`, `false`  
@@ -171,14 +171,6 @@ Dispensers can place boats on ice
 * Allowed options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
   
-## dispensersPlayRecords
-Dispensers can play records if there's a jukebox in front of them.  
-If a record already exists in the jukebox, it gets placed back in the dispenser.  
-* Type: `Boolean`  
-* Default value: `false`  
-* Allowed options: `true`, `false`  
-* Categories: `EXTRAS`, `FEATURE`, `DISPENSER`  
-  
 ## dispensersPotPlants
 Dispensers can put flowers in flower pots  
 * Type: `Boolean`  
@@ -264,13 +256,6 @@ All the loaded chunks can be seen using `/forceload query`
 * Default value: `false`  
 * Allowed options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`, `EXPERIMENTAL`  
-  
-## hopperMinecart8gtCooldown
-Makes Hopper Minecarts have an 8gt cooldown like hoppers.  
-* Type: `Boolean`  
-* Default value: `false`  
-* Allowed options: `true`, `false`  
-* Categories: `BUGFIX`, `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
   
 ## hopperMinecartItemTransfer
 Allows Hopper Minecarts to transfer items into containers below them.  
@@ -396,6 +381,15 @@ Variable delays on wooden components (buttons, pressure plates).
 * Default value: `false`  
 * Allowed options: `true`, `false`  
 * Categories: `EXTRAS`, `FEATURE`  
+  
+## xpPerSculkCatalyst
+Sets the amount of xp dropped when breaking a sculk catalyst.  
+* Type: `Integer`  
+* Default value: `5`  
+* Suggested options: `5`, `10`, `20`  
+* Categories: `EXTRAS`, `FEATURE`  
+* Additional notes:  
+  * Must be a positive number or 0  
   
 ## y0DragonEggBedrockBreaking
 Let dragon eggs break Y0 bedrock.  
