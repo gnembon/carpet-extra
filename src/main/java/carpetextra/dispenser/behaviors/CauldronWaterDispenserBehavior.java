@@ -37,20 +37,16 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
         Block frontBlock = frontBlockState.getBlock();
 
         if (frontBlock == Blocks.WATER_CAULDRON) {
-            if (item == Items.POTION) {
-                // check if it's a water bottle (https://minecraft.wiki/w/Potion#Base_potions)
-                PotionContentsComponent potionContentsComponent = stack.get(DataComponentTypes.POTION_CONTENTS);
-                if (potionContentsComponent != null && potionContentsComponent.matches(Potions.WATER)) {
-                    // check if cauldron is not full
-                    if (!((AbstractCauldronBlock) frontBlock).isFull(frontBlockState)) {
-                        // increase cauldron level
-                        int level = frontBlockState.get(LeveledCauldronBlock.LEVEL);
-                        BlockState cauldronState = frontBlockState.with(LeveledCauldronBlock.LEVEL, level + 1);
-                        setCauldron(world, frontBlockPos, cauldronState, SoundEvents.ITEM_BOTTLE_EMPTY, GameEvent.FLUID_PLACE);
+            if (isWaterBottle(stack)) {
+                // check if cauldron is not full
+                if (!((AbstractCauldronBlock) frontBlock).isFull(frontBlockState)) {
+                    // increase cauldron level
+                    int level = frontBlockState.get(LeveledCauldronBlock.LEVEL);
+                    BlockState cauldronState = frontBlockState.with(LeveledCauldronBlock.LEVEL, level + 1);
+                    setCauldron(world, frontBlockPos, cauldronState, SoundEvents.ITEM_BOTTLE_EMPTY, GameEvent.FLUID_PLACE);
 
-                        // return glass bottle
-                        return this.addOrDispense(pointer, stack, new ItemStack(Items.GLASS_BOTTLE));
-                    }
+                    // return glass bottle
+                    return this.addOrDispense(pointer, stack, new ItemStack(Items.GLASS_BOTTLE));
                 }
             }
             else if (item == Items.GLASS_BOTTLE) {
@@ -98,17 +94,13 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
                 }
             }
         }
-        else if(frontBlock == Blocks.CAULDRON && item == Items.POTION) {
-            // check if it's a water bottle (https://minecraft.wiki/w/Potion#Base_potions)
-            PotionContentsComponent potionContentsComponent = stack.get(DataComponentTypes.POTION_CONTENTS);
-            if (potionContentsComponent != null && potionContentsComponent.matches(Potions.WATER)) {
-                // increase cauldron level
-                BlockState cauldronState = Blocks.WATER_CAULDRON.getDefaultState();
-                setCauldron(world, frontBlockPos, cauldronState, SoundEvents.ITEM_BOTTLE_EMPTY, GameEvent.FLUID_PLACE);
+        else if (frontBlock == Blocks.CAULDRON && isWaterBottle(stack)) {
+            // increase cauldron level
+            BlockState cauldronState = Blocks.WATER_CAULDRON.getDefaultState();
+            setCauldron(world, frontBlockPos, cauldronState, SoundEvents.ITEM_BOTTLE_EMPTY, GameEvent.FLUID_PLACE);
 
-                // return glass bottle
-                return this.addOrDispense(pointer, stack, new ItemStack(Items.GLASS_BOTTLE));
-            }
+            // return glass bottle
+            return this.addOrDispense(pointer, stack, new ItemStack(Items.GLASS_BOTTLE));
         }
 
         // fail to dispense
@@ -123,15 +115,20 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
         world.emitGameEvent(null, gameEvent, pos);
     }
 
+    private static boolean isWaterBottle(ItemStack stack) {
+        if (stack.getItem() != Items.POTION) {
+            return false;
+        }
+
+        PotionContentsComponent content = stack.get(DataComponentTypes.POTION_CONTENTS);
+        return content != null && content.matches(Potions.WATER);
+    }
+
     public static boolean isWaterCauldronItem(ItemStack stack) {
         /* accept empty and water bottles, banners and dyeable items */
         Item item = stack.getItem();
-        if (item == Items.GLASS_BOTTLE || item instanceof BannerItem)
+        if (item == Items.GLASS_BOTTLE || item instanceof BannerItem || isWaterBottle(stack))
             return true;
-        if (item == Items.POTION) {
-            PotionContentsComponent potionContentsComponent = stack.getComponents().get(DataComponentTypes.POTION_CONTENTS);
-            return potionContentsComponent != null && potionContentsComponent.matches(Potions.WATER);
-        }
         if (Block.getBlockFromItem(item) instanceof ShulkerBoxBlock) {
             return item != Items.SHULKER_BOX; // dyed Shulkers only
         }
