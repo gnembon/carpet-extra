@@ -50,11 +50,11 @@ public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior 
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
 
         // check if block can be toggled
-        if(TOGGLEABLE_BLOCKS.contains(frontBlockState.getBlock())) {
+        if (TOGGLEABLE_BLOCKS.contains(frontBlockState.getBlock())) {
             BlockHitResult hitResult = new BlockHitResult(Vec3d.of(frontBlockPos), dispenserFacing.getOpposite(), frontBlockPos, false);
 
             // use on block, test if successful
-            if(frontBlockState.onUse(world, null, hitResult).isAccepted()) {
+            if (frontBlockState.onUse(world, null, hitResult).isAccepted()) {
                 return stack;
             }
         }

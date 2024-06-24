@@ -1,17 +1,30 @@
 package carpetextra.dispenser.behaviors;
 
-import carpetextra.dispenser.*;
-import net.minecraft.block.*;
-import net.minecraft.component.*;
-import net.minecraft.component.type.*;
-import net.minecraft.item.*;
-import net.minecraft.potion.*;
-import net.minecraft.registry.entry.*;
-import net.minecraft.registry.tag.*;
-import net.minecraft.server.world.*;
-import net.minecraft.sound.*;
-import net.minecraft.util.math.*;
-import net.minecraft.world.event.*;
+import carpetextra.dispenser.DispenserBehaviorHelper;
+import net.minecraft.block.AbstractCauldronBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.LeveledCauldronBlock;
+import net.minecraft.block.ShulkerBoxBlock;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.BannerPatternsComponent;
+import net.minecraft.component.type.PotionContentsComponent;
+import net.minecraft.item.BannerItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Potions;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.event.GameEvent;
 
 public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
     @Override
@@ -23,13 +36,13 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
         Block frontBlock = frontBlockState.getBlock();
 
-        if(frontBlock == Blocks.WATER_CAULDRON) {
-            if(item == Items.POTION) {
+        if (frontBlock == Blocks.WATER_CAULDRON) {
+            if (item == Items.POTION) {
                 // check if it's a water bottle (https://minecraft.wiki/w/Potion#Base_potions)
-                var potionContentsComponent = stack.get(DataComponentTypes.POTION_CONTENTS);
+                PotionContentsComponent potionContentsComponent = stack.get(DataComponentTypes.POTION_CONTENTS);
                 if (potionContentsComponent != null && potionContentsComponent.matches(Potions.WATER)) {
                     // check if cauldron is not full
-                    if(!((AbstractCauldronBlock) frontBlock).isFull(frontBlockState)) {
+                    if (!((AbstractCauldronBlock) frontBlock).isFull(frontBlockState)) {
                         // increase cauldron level
                         int level = frontBlockState.get(LeveledCauldronBlock.LEVEL);
                         BlockState cauldronState = frontBlockState.with(LeveledCauldronBlock.LEVEL, level + 1);
@@ -40,15 +53,15 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
                     }
                 }
             }
-            else if(item == Items.GLASS_BOTTLE) {
+            else if (item == Items.GLASS_BOTTLE) {
                 // decrease cauldron level
                 LeveledCauldronBlock.decrementFluidLevel(frontBlockState, world, frontBlockPos);
                 // return water bottle
                 return this.addOrDispense(pointer, stack, PotionContentsComponent.createStack(Items.POTION, Potions.WATER));
             }
-            else if(Block.getBlockFromItem(item) instanceof ShulkerBoxBlock) {
+            else if (Block.getBlockFromItem(item) instanceof ShulkerBoxBlock) {
                 // make sure item isn't plain shulker box
-                if(item != Items.SHULKER_BOX) {
+                if (item != Items.SHULKER_BOX) {
                     // decrease cauldron level
                     LeveledCauldronBlock.decrementFluidLevel(frontBlockState, world, frontBlockPos);
                     // turn dyed shulker box into undyed shulker box
@@ -58,9 +71,9 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
                     return this.addOrDispense(pointer, stack, undyedShulkerBox);
                 }
             }
-            if(stack.isIn(ItemTags.DYEABLE)) {
+            if (stack.isIn(ItemTags.DYEABLE)) {
                 // check if dyeable item has color
-                if(stack.contains(DataComponentTypes.DYED_COLOR)) {
+                if (stack.contains(DataComponentTypes.DYED_COLOR)) {
                     // decrease cauldron level
                     LeveledCauldronBlock.decrementFluidLevel(frontBlockState, world, frontBlockPos);
                     // remove color
@@ -69,7 +82,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
                     return stack;
                 }
             }
-            else if(item instanceof BannerItem) {
+            else if (item instanceof BannerItem) {
                 // check if banner has layers (https://minecraft.wiki/w/Banner#Patterns)
                 BannerPatternsComponent bannerPatternsComponent = stack.getOrDefault(DataComponentTypes.BANNER_PATTERNS, BannerPatternsComponent.DEFAULT);
                 if (!bannerPatternsComponent.layers().isEmpty()) {
@@ -87,7 +100,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
         }
         else if(frontBlock == Blocks.CAULDRON && item == Items.POTION) {
             // check if it's a water bottle (https://minecraft.wiki/w/Potion#Base_potions)
-            var potionContentsComponent = stack.get(DataComponentTypes.POTION_CONTENTS);
+            PotionContentsComponent potionContentsComponent = stack.get(DataComponentTypes.POTION_CONTENTS);
             if (potionContentsComponent != null && potionContentsComponent.matches(Potions.WATER)) {
                 // increase cauldron level
                 BlockState cauldronState = Blocks.WATER_CAULDRON.getDefaultState();
@@ -116,7 +129,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
         if (item == Items.GLASS_BOTTLE || item instanceof BannerItem)
             return true;
         if (item == Items.POTION) {
-            var potionContentsComponent = stack.getComponents().get(DataComponentTypes.POTION_CONTENTS);
+            PotionContentsComponent potionContentsComponent = stack.getComponents().get(DataComponentTypes.POTION_CONTENTS);
             return potionContentsComponent != null && potionContentsComponent.matches(Potions.WATER);
         }
         if (Block.getBlockFromItem(item) instanceof ShulkerBoxBlock) {

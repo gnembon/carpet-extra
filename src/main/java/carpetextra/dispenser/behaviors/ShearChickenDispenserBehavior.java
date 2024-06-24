@@ -1,5 +1,7 @@
 package carpetextra.dispenser.behaviors;
 
+import java.util.List;
+
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
@@ -12,8 +14,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-
-import java.util.List;
 
 public class ShearChickenDispenserBehavior extends FallibleItemDispenserBehavior {
     @Override

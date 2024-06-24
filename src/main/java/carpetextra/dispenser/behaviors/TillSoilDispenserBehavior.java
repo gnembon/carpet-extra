@@ -1,5 +1,7 @@
 package carpetextra.dispenser.behaviors;
 
+import java.util.Set;
+
 import carpetextra.dispenser.DispenserItemUsageContext;
 import carpetextra.mixins.HoeItem_TilledBlocksAccessorMixin;
 import net.minecraft.block.Block;
@@ -14,8 +16,6 @@ import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-
-import java.util.Set;
 
 public class TillSoilDispenserBehavior extends FallibleItemDispenserBehavior {
     public static final Set<Block> TILLED_BLOCKS = HoeItem_TilledBlocksAccessorMixin.getTilledBlocks().keySet();

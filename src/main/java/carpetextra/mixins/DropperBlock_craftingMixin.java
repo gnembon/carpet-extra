@@ -1,5 +1,7 @@
 package carpetextra.mixins;
 
+import java.util.Random;
+
 import carpetextra.CarpetExtraSettings;
 import carpetextra.fakes.DispenserBlockEntityInterface;
 import carpetextra.utils.VoidContainer;
@@ -25,8 +27,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Random;
 
 @Mixin(DropperBlock.class)
 public class DropperBlock_craftingMixin extends DispenserBlock
