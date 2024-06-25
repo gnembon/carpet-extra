@@ -22,14 +22,14 @@ public abstract class ItemFrameEntity_comparatorBetterItemFramesMixin extends Ab
     @Inject(method = "setHeldItemStack(Lnet/minecraft/item/ItemStack;Z)V", at = @At(value = "INVOKE", target="Lnet/minecraft/world/World;updateComparators(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;)V"), cancellable = true)
     private void onStackChangeUpdateComparatorDownwards(ItemStack value, boolean update, CallbackInfo ci) {
         if (CarpetExtraSettings.comparatorBetterItemFrames == ComparatorOptions.EXTENDED) {
-            this.getWorld().updateComparators(this.attachmentPos.offset(this.getHorizontalFacing().getOpposite()), Blocks.AIR);
+            this.getWorld().updateComparators(this.attachedBlockPos.offset(this.getHorizontalFacing().getOpposite()), Blocks.AIR);
         }
     }
 
     @Inject(method = "setRotation(IZ)V", at = @At(value = "INVOKE", target="Lnet/minecraft/world/World;updateComparators(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;)V"), cancellable = true)
     private void onRotationUpdateComparatorDownwards(int value, boolean bl, CallbackInfo ci) {
         if (CarpetExtraSettings.comparatorBetterItemFrames == ComparatorOptions.EXTENDED) {
-            this.getWorld().updateComparators(this.attachmentPos.offset(this.getHorizontalFacing().getOpposite()), Blocks.AIR);
+            this.getWorld().updateComparators(this.attachedBlockPos.offset(this.getHorizontalFacing().getOpposite()), Blocks.AIR);
         }
     }
 }
