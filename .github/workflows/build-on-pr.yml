@@ -28,6 +28,12 @@ jobs:
         name: "Compiled artifacts for Pull Request #${{github.event.number}}"
         path: build/libs
     - uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: "Test results for Pull Request #${{github.event.number}}"
         path: build/junit.xml
+    - name: Test Summary
+      uses: test-summary/action@v2
+      with:
+        paths: "build/junit.xml"
+      if: always()
