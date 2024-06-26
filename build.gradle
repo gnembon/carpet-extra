@@ -47,7 +47,7 @@ loom {
 			inherit server
 			name "Game Test"
 			vmArg "-Dfabric-api.gametest"
-			//vmArg "-Dmixin.debug.countInjections=true"
+			//vmArg "-Dmixin.debug.countInjections=true" // gnembon/fabric-carpet#1938
 			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
 			source sourceSets.gametest
 			runDir "build/gametest"
