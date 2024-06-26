@@ -33,7 +33,7 @@ jobs:
         name: "Test results for Pull Request #${{github.event.number}}"
         path: build/junit.xml
     - name: Test Summary
-      uses: test-summary/action@v2
+      uses: test-summary/action@v2.4
       with:
         paths: "build/junit.xml"
       if: always()
