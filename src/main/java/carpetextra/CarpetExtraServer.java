@@ -8,7 +8,6 @@ import carpetextra.helpers.CustomSpawnLists;
 import carpetextra.utils.CarpetExtraTranslations;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -31,21 +30,6 @@ public class CarpetExtraServer implements CarpetExtension, ModInitializer
     public void onInitialize()
     {
         CarpetExtraServer.loadExtension();
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-            try {
-                Class.forName("carpetextra.testbootstrap.TestBootstraper");
-            } catch (ClassNotFoundException e) {
-                // Class may not be available if in a different mod's dev env
-                // However, we'd still like to crash if we can make sure we're in Carpet extra's, for debugging purposes
-                String version = FabricLoader.getInstance()
-                        .getModContainer("carpet-extra").orElseThrow()
-                        .getMetadata().getVersion()
-                        .getFriendlyString();
-                if (version.equals("${version}")) {
-                    throw new IllegalStateException("Couldn't bootstrap CarpetExtra tests!");
-                }
-            }
-        }
     }
 
     @Override

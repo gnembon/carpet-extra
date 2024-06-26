@@ -58,6 +58,14 @@ loom {
 		// to be able to create and run gametests on regular debug
 		source sourceSets.gametest
 	}
+	mods {
+		"carpet-extra" {
+			sourceSet sourceSets.main
+		}
+		"carpet-extra-gametest" {
+			sourceSet sourceSets.gametest
+		}
+	}
 }
 
 processResources {

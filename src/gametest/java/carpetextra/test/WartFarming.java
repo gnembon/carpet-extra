@@ -1,4 +1,4 @@
-package carpetextra.tests;
+package carpetextra.test;
 
 import static net.minecraft.block.NetherWartBlock.*;
 

@@ -1,4 +1,4 @@
-package carpetextra.tests;
+package carpetextra.test;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -96,31 +96,6 @@ public class DispenserWithBlock {
     }
     
     @CustomTestProvider
-    public Collection<TestFunction> tillTests() {
-        List<TestFunction> fns = new ArrayList<>();
-        fns.add(makeDispenserTest("tillDirtAbove", (ctx) -> {
-            tillTest(ctx, Blocks.DIRT, Blocks.FARMLAND, 1);
-        }));
-        fns.add(makeDispenserTest("tillGrass", (ctx) -> {
-            tillTest(ctx, Blocks.GRASS_BLOCK, Blocks.FARMLAND, 0);
-        }));
-        fns.add(makeDispenserTest("tillCoarseDirt", (ctx) -> {
-            tillTest(ctx, Blocks.COARSE_DIRT, Blocks.DIRT, 0);
-        }));
-        fns.add(makeDispenserTest("tillRootedDirt", (ctx) -> {
-            tillTest(ctx, Blocks.ROOTED_DIRT, Blocks.DIRT, 0, () -> ctx.expectItem(Items.HANGING_ROOTS));
-        }));
-        
-        for (Item hoe : List.of(Items.WOODEN_HOE, Items.STONE_HOE, Items.GOLDEN_HOE, Items.IRON_HOE, Items.DIAMOND_HOE, Items.NETHERITE_HOE)) {
-            fns.add(makeDispenserTest("tillDirtWith" + hoe, (ctx) -> {
-                itemConversionTest(ctx, hoe, Blocks.DIRT, Blocks.FARMLAND, 0, false);
-            }));
-        }
-        
-        return fns;
-    }
-    
-    @CustomTestProvider
     public Collection<TestFunction> cauldronTests() {
         List<TestFunction> fns = new ArrayList<>();
         for (int i = 0; i < 2; i++) { // 3 is handled separately
@@ -170,7 +145,32 @@ public class DispenserWithBlock {
         }
         return Blocks.WATER_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, level);
     }
-    
+
+    @CustomTestProvider
+    public Collection<TestFunction> tillTests() {
+        List<TestFunction> fns = new ArrayList<>();
+        fns.add(makeDispenserTest("tillDirtAbove", (ctx) -> {
+            tillTest(ctx, Blocks.DIRT, Blocks.FARMLAND, 1);
+        }));
+        fns.add(makeDispenserTest("tillGrass", (ctx) -> {
+            tillTest(ctx, Blocks.GRASS_BLOCK, Blocks.FARMLAND, 0);
+        }));
+        fns.add(makeDispenserTest("tillCoarseDirt", (ctx) -> {
+            tillTest(ctx, Blocks.COARSE_DIRT, Blocks.DIRT, 0);
+        }));
+        fns.add(makeDispenserTest("tillRootedDirt", (ctx) -> {
+            tillTest(ctx, Blocks.ROOTED_DIRT, Blocks.DIRT, 0, () -> ctx.expectItem(Items.HANGING_ROOTS));
+        }));
+        
+        for (Item hoe : List.of(Items.WOODEN_HOE, Items.STONE_HOE, Items.GOLDEN_HOE, Items.IRON_HOE, Items.DIAMOND_HOE, Items.NETHERITE_HOE)) {
+            fns.add(makeDispenserTest("tillDirtWith" + hoe, (ctx) -> {
+                itemConversionTest(ctx, hoe, Blocks.DIRT, Blocks.FARMLAND, 0, false);
+            }));
+        }
+
+        return fns;
+    }
+
     private void tillTest(TestContext ctx, Block from, Block to, int offset, Runnable... extras) {
         ctx.setBlockState(dispenser.down(), Blocks.WATER);
         itemConversionTest(ctx, Items.IRON_HOE, from, to, offset, false, extras);
