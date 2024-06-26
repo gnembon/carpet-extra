@@ -8,6 +8,7 @@ on: [pull_request]
 permissions:
   checks: write
   contents: read
+  pull-requests: write
 
 jobs:
   Build:
