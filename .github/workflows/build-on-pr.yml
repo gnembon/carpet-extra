@@ -36,10 +36,8 @@ jobs:
       with:
         name: "Test results for Pull Request #${{github.event.number}}"
         path: build/junit.xml
-    - name: Test Report
-      uses: dorny/test-reporter@v1
-      if: success() || failure()    # run this step even if previous step failed
+    - uses: ashley-taylor/junit-report-annotations-action@1.4
+      if: always()
       with:
-        name: Gametests            # Name of the check run which will be created
-        path: build/junit.xml    # Path to test results
-        reporter: java-junit        # Format of test results
+        access-token: ${{ secrets.GITHUB_TOKEN }}
+        path: build/junit.xml
