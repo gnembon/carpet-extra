@@ -22,7 +22,7 @@ jobs:
     - name: Grant execute permission to gradlew
       run: chmod +x gradlew
     - name: Build and run Gametest with Gradle
-      run: ./gradlew build
+      run: ./gradlew build runGametest
     - uses: actions/upload-artifact@v4
       with:
         name: "Compiled artifacts for Pull Request #${{github.event.number}}"
