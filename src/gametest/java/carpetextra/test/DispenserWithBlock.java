@@ -57,12 +57,12 @@ public class DispenserWithBlock {
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void shearPumpkin(TestContext ctx) {
-        itemConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, false, () -> ctx.expectItem(Items.PUMPKIN_SEEDS));
+        blockConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, false, () -> ctx.expectItem(Items.PUMPKIN_SEEDS));
     }
 
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void shearPumpkinBreaks(TestContext ctx) {
-        itemConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, true, () -> ctx.expectItem(Items.PUMPKIN_SEEDS));
+        blockConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, true, () -> ctx.expectItem(Items.PUMPKIN_SEEDS));
     }
 
     @CustomTestProvider
@@ -92,7 +92,7 @@ public class DispenserWithBlock {
     }
     
     private void stripTest(TestContext ctx, Item tool, Block blockFrom, Block blockTo) {
-        itemConversionTest(ctx, tool, blockFrom, blockTo, 1, false);
+        blockConversionTest(ctx, tool, blockFrom, blockTo, 1, false);
     }
     
     @CustomTestProvider
@@ -122,12 +122,12 @@ public class DispenserWithBlock {
                                 //Items.POWDER_SNOW_BUCKET, Blocks.POWDER_SNOW_CAULDRON
                                 ).entrySet()) {
             fns.add(makeDispenserTest("cauldronFillWith" + entry.getKey(), (ctx) -> {
-                itemConversionTest(ctx, entry.getKey(), Blocks.CAULDRON, entry.getValue(), 1, false, () -> {
+                blockConversionTest(ctx, entry.getKey(), Blocks.CAULDRON, entry.getValue(), 1, false, () -> {
                     checkFirstSlotHas(ctx, Items.BUCKET, false);
                 });
             }));
             fns.add(makeDispenserTest("cauldronEmptyTo" + entry.getKey(), (ctx) -> {
-                itemConversionTest(ctx, Items.BUCKET, entry.getValue(), Blocks.CAULDRON, 1, false, () -> {
+                blockConversionTest(ctx, Items.BUCKET, entry.getValue(), Blocks.CAULDRON, 1, false, () -> {
                     checkFirstSlotHas(ctx, entry.getKey(), false);
                 });
             }));
@@ -150,33 +150,31 @@ public class DispenserWithBlock {
     public Collection<TestFunction> tillTests() {
         List<TestFunction> fns = new ArrayList<>();
         fns.add(makeDispenserTest("tillDirtAbove", (ctx) -> {
-            tillTest(ctx, Blocks.DIRT, Blocks.FARMLAND, 1);
+            blockConversionTest(ctx, Items.IRON_HOE, Blocks.DIRT, Blocks.FARMLAND, 1, false);
         }));
         fns.add(makeDispenserTest("tillGrass", (ctx) -> {
-            tillTest(ctx, Blocks.GRASS_BLOCK, Blocks.FARMLAND, 0);
+            blockConversionTest(ctx, Items.IRON_HOE, Blocks.GRASS_BLOCK, Blocks.FARMLAND, 0, false);
+        }));
+        fns.add(makeDispenserTest("tillCheckDurability", (ctx) -> {
+            blockConversionTest(ctx, Items.IRON_HOE, Blocks.DIRT, Blocks.FARMLAND, 0, true);
         }));
         fns.add(makeDispenserTest("tillCoarseDirt", (ctx) -> {
-            tillTest(ctx, Blocks.COARSE_DIRT, Blocks.DIRT, 0);
+            blockConversionTest(ctx, Items.IRON_HOE, Blocks.COARSE_DIRT, Blocks.DIRT, 0, false);
         }));
         fns.add(makeDispenserTest("tillRootedDirt", (ctx) -> {
-            tillTest(ctx, Blocks.ROOTED_DIRT, Blocks.DIRT, 0, () -> ctx.expectItem(Items.HANGING_ROOTS));
+            blockConversionTest(ctx, Items.IRON_HOE, Blocks.ROOTED_DIRT, Blocks.DIRT, 0, false, () -> ctx.expectItem(Items.HANGING_ROOTS));
         }));
         
         for (Item hoe : List.of(Items.WOODEN_HOE, Items.STONE_HOE, Items.GOLDEN_HOE, Items.IRON_HOE, Items.DIAMOND_HOE, Items.NETHERITE_HOE)) {
             fns.add(makeDispenserTest("tillDirtWith" + hoe, (ctx) -> {
-                itemConversionTest(ctx, hoe, Blocks.DIRT, Blocks.FARMLAND, 0, false);
+                blockConversionTest(ctx, hoe, Blocks.DIRT, Blocks.FARMLAND, 0, false);
             }));
         }
 
         return fns;
     }
 
-    private void tillTest(TestContext ctx, Block from, Block to, int offset, Runnable... extras) {
-        ctx.setBlockState(dispenser.down(), Blocks.WATER);
-        itemConversionTest(ctx, Items.IRON_HOE, from, to, offset, false, extras);
-    }
-    
-    private void itemConversionTest(TestContext ctx, Item tool, Block from, Block to, int offset, boolean putDamaged, Runnable... extras) {
+    private void blockConversionTest(TestContext ctx, Item tool, Block from, Block to, int offset, boolean putDamaged, Runnable... extras) {
         if (putDamaged) {
             putAtOneDurability(ctx, tool);
         } else {
