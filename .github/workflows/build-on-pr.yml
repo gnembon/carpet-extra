@@ -32,8 +32,8 @@ jobs:
       with:
         name: "Test results for Pull Request #${{github.event.number}}"
         path: build/junit.xml
-    - name: Test Summary
-      uses: test-summary/action@v2.4
-      with:
-        paths: "build/junit.xml"
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v4
       if: always()
+      with:
+        report_paths: 'build/junit.xml'
