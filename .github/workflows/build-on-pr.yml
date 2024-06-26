@@ -5,7 +5,8 @@
 name: Pull Request Builds
 
 on: [pull_request]
-
+permissions:
+  checks: write
 jobs:
   Build:
 
