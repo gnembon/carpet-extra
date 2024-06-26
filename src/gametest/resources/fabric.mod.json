@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "carpet-extra-gametest",
+  "version": "0.0.0",
+
+  "name": "Carpet Extra GameTests",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "carpetextra.ExportPathChanger"
+    ],
+    "fabric-gametest": [
+      "carpetextra.test.DispenserWithBlock",
+      "carpetextra.test.WartFarming"
+    ]
+  }
+}
