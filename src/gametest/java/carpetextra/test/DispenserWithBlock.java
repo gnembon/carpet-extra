@@ -118,7 +118,7 @@ public class DispenserWithBlock {
             }
         }
         // TODO powdered snow
-        for (var entry : Map.of(Items.LAVA_BUCKET, Blocks.LAVA_CAULDRON
+        for (Map.Entry<Item, Block> entry : Map.of(Items.LAVA_BUCKET, Blocks.LAVA_CAULDRON
                                 //Items.POWDER_SNOW_BUCKET, Blocks.POWDER_SNOW_CAULDRON
                                 ).entrySet()) {
             fns.add(makeDispenserTest("cauldronFillWith" + entry.getKey(), (ctx) -> {
