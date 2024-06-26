@@ -21,9 +21,14 @@ jobs:
         cache: 'gradle'
     - name: Grant execute permission to gradlew
       run: chmod +x gradlew
-    - name: Build with Gradle
+    - name: Build and run Gametest with Gradle
       run: ./gradlew build
     - uses: actions/upload-artifact@v4
       with:
         name: "Compiled artifacts for Pull Request #${{github.event.number}}"
         path: build/libs
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: gametest-results
+        path: build/junit.xml
