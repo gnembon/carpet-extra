@@ -27,6 +27,7 @@ jobs:
         name: Compiled artifacts for ${{ github.sha }}
         path: build/libs
     - uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: Gametest results for ${{ github.sha }}
         path: build/junit.xml
