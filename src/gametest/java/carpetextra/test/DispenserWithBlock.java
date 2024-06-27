@@ -44,6 +44,7 @@ public class DispenserWithBlock {
         CarpetExtraSettings.dispensersStripBlocks = true;
         CarpetExtraSettings.dispensersTillSoil = true;
         CarpetExtraSettings.dispensersUseCauldrons = true;
+        CarpetExtraSettings.dispensersPlaceBoatsOnIce = true;
     }
     
     @AfterBatch(batchId = BATCH)
@@ -53,6 +54,7 @@ public class DispenserWithBlock {
         CarpetExtraSettings.dispensersStripBlocks = false;
         CarpetExtraSettings.dispensersTillSoil = false;
         CarpetExtraSettings.dispensersUseCauldrons = false;
+        CarpetExtraSettings.dispensersPlaceBoatsOnIce = false;
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
@@ -63,6 +65,37 @@ public class DispenserWithBlock {
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void shearPumpkinBreaks(TestContext ctx) {
         blockConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, true, () -> ctx.expectItem(Items.PUMPKIN_SEEDS));
+    }
+
+    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    public void boatOnRegularIce(TestContext ctx) {
+        boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityType.BOAT);
+    }
+    
+    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    public void boatOnPackedIce(TestContext ctx) {
+        boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityType.BOAT);
+    }
+    
+    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    public void boatOnBlueIce(TestContext ctx) {
+        boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityType.BOAT);
+    }
+    
+    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    public void chestBoatOnIce(TestContext ctx) {
+        boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityType.CHEST_BOAT);
+    }
+    
+    private void boatTest(TestContext ctx, Item item, Block block, EntityType<?> expectedEntity) {
+        putInDispenser(ctx, item.getDefaultStack());
+        ctx.setBlockState(lapis, block);
+        
+        ctx.pushButton(button);
+        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
+            ctx.expectEmptyContainer(dispenser);
+            ctx.expectEntityAt(expectedEntity, lapis.up());
+        });
     }
 
     @CustomTestProvider
@@ -251,7 +284,7 @@ public class DispenserWithBlock {
     
     // Setup util
     private TestFunction makeDispenserTest(String name, Consumer<TestContext> runner) {
-        name = name.replace("minecraft\\:", "");
+        name = name.replace("minecraft:", "");
         return new TestFunction(BATCH, BATCH + '.' + name, STRUCTURE, 20, 0, true, runner);
     }
 }
