@@ -47,6 +47,7 @@ public class DispenserWithBlock {
         CarpetExtraSettings.dispensersUseCauldrons = true;
         CarpetExtraSettings.dispensersPlaceBoatsOnIce = true;
         CarpetExtraSettings.blazeMeal = true;
+        CarpetExtraSettings.renewableEndstone = true;
     }
     
     @AfterBatch(batchId = BATCH)
@@ -58,6 +59,12 @@ public class DispenserWithBlock {
         CarpetExtraSettings.dispensersUseCauldrons = false;
         CarpetExtraSettings.dispensersPlaceBoatsOnIce = false;
         CarpetExtraSettings.blazeMeal = false;
+        CarpetExtraSettings.renewableEndstone = false;
+    }
+    
+    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    public void renewableEndstone(TestContext ctx) {
+        blockConversionTest(ctx, Items.DRAGON_BREATH, Blocks.COBBLESTONE, Blocks.END_STONE, 1, true);
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
