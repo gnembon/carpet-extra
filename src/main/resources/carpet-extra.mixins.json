@@ -69,7 +69,8 @@
     "CactusBlock_fertilizerMixin",
     "LilyPadBlock_fertilizerMixin",
     "DispenserBlock_fallingBlockMixin",
-    "FallingBlockEntityAccessor"
+    "FallingBlockEntityAccessor",
+    "AbstractMinecartEntity_chunkLoadingMixin"
   ],
   "injectors": {
     "defaultRequire": 1
