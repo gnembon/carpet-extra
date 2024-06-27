@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LeveledCauldronBlock;
+import net.minecraft.block.NetherWartBlock;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.EntityType;
@@ -45,6 +46,7 @@ public class DispenserWithBlock {
         CarpetExtraSettings.dispensersTillSoil = true;
         CarpetExtraSettings.dispensersUseCauldrons = true;
         CarpetExtraSettings.dispensersPlaceBoatsOnIce = true;
+        CarpetExtraSettings.blazeMeal = true;
     }
     
     @AfterBatch(batchId = BATCH)
@@ -55,6 +57,35 @@ public class DispenserWithBlock {
         CarpetExtraSettings.dispensersTillSoil = false;
         CarpetExtraSettings.dispensersUseCauldrons = false;
         CarpetExtraSettings.dispensersPlaceBoatsOnIce = false;
+        CarpetExtraSettings.blazeMeal = false;
+    }
+    
+    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    public void blazeMeal(TestContext ctx) {
+        putInDispenser(ctx, Items.BLAZE_POWDER.getDefaultStack());
+        ctx.setBlockState(lapis, Blocks.SOUL_SAND);
+        ctx.setBlockState(lapis.up(), Blocks.NETHER_WART);
+        
+        ctx.pushButton(button);
+        
+        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
+            ctx.expectEmptyContainer(dispenser);
+            ctx.expectBlockProperty(lapis.up(), NetherWartBlock.AGE, 1);
+        });
+    }
+    
+    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    public void blazeMealMaxed(TestContext ctx) {
+        putInDispenser(ctx, Items.BLAZE_POWDER.getDefaultStack());
+        ctx.setBlockState(lapis, Blocks.SOUL_SAND);
+        ctx.setBlockState(lapis.up(), Blocks.NETHER_WART.getDefaultState().with(NetherWartBlock.AGE, NetherWartBlock.MAX_AGE));
+        
+        ctx.pushButton(button);
+        
+        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
+            checkFirstSlotHas(ctx, Items.BLAZE_POWDER, false);
+            ctx.expectBlockProperty(lapis.up(), NetherWartBlock.AGE, NetherWartBlock.MAX_AGE);
+        });
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
