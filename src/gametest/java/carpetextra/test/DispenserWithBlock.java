@@ -82,9 +82,10 @@ public class DispenserWithBlock {
         
         ctx.pushButton(button);
         
-        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
+        ctx.runAtTick(DISPENSER_DELAY, () -> {
             checkFirstSlotHas(ctx, Items.BLAZE_POWDER, false);
             ctx.expectBlockProperty(lapis.up(), NetherWartBlock.AGE, NetherWartBlock.MAX_AGE);
+            ctx.complete();
         });
     }
     
