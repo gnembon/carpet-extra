@@ -1,7 +1,6 @@
 package carpetextra.dispenser;
 
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
-import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPointer;
 
@@ -15,7 +14,9 @@ public abstract class DispenserBehaviorHelper extends FallibleItemDispenserBehav
             return newStack;
         }
         // try to add new stack to inventory, if it can't be added, dispense
-        else if (((DispenserBlockEntity) pointer.blockEntity()).addToFirstFreeSlot(newStack) < 0) {
+        if (!pointer.blockEntity().addToFirstFreeSlot(newStack).isEmpty()) {
+            // if the newStack still contains items, then the addToFirstFreeSlot()
+            // did not drain the stack fully -> there are items left to be dispensed
             super.dispenseSilently(pointer, newStack);
         }
         return originalStack;

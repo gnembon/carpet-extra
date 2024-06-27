@@ -49,8 +49,7 @@ public class StripBlocksDispenserBehavior extends FallibleItemDispenserBehavior 
             // use on block, test if sucessful
             if(stack.getItem().useOnBlock(context).isAccepted()) {
                 // damage axe, remove if broken
-                stack.damage(1, world.random, null, () -> stack.setCount(0));
-
+                stack.damage(1, world, null, (item) -> stack.setCount(0));
                 return stack;
             }
         }

@@ -33,6 +33,7 @@
     "MooshroomEntity_StatusEffectAccessorMixin",
     "HoeItem_TilledBlocksAccessorMixin",
     "AxeItem_StrippedBlocksAccessorMixin",
+    "AxeItem_allowStripMixin",
     "FlowerPotBlock_ContentAccessorMixin",
     "BoatItemAccessorMixin",
     "SculkCatalystMixin",
