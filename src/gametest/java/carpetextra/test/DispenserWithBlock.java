@@ -48,6 +48,7 @@ public class DispenserWithBlock {
         CarpetExtraSettings.dispensersPlaceBoatsOnIce = true;
         CarpetExtraSettings.blazeMeal = true;
         CarpetExtraSettings.renewableEndstone = true;
+        CarpetExtraSettings.renewableNetherrack = true;
     }
     
     @AfterBatch(batchId = BATCH)
@@ -60,6 +61,12 @@ public class DispenserWithBlock {
         CarpetExtraSettings.dispensersPlaceBoatsOnIce = false;
         CarpetExtraSettings.blazeMeal = false;
         CarpetExtraSettings.renewableEndstone = false;
+        CarpetExtraSettings.renewableNetherrack = false;
+    }
+    
+    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    public void renewableNetherrack(TestContext ctx) {
+        blockConversionTest(ctx, Items.FIRE_CHARGE, Blocks.COBBLESTONE, Blocks.NETHERRACK, 1, true);
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
