@@ -28,30 +28,10 @@ import net.minecraft.world.World;
 public class BlockPlacer
 {
     public static final ImmutableSet<Property<?>> WHITELISTED_PROPERTIES = ImmutableSet.of(
-            // BooleanProperty:
-            // INVERTED - DaylightDetector
-            // OPEN - Barrel, Door, FenceGate, Trapdoor
-            // PERSISTENT - Leaves
-            // CAN_SUMMON - Shrieker
             Properties.INVERTED,
             Properties.OPEN,
             Properties.PERSISTENT,
             Properties.CAN_SUMMON,
-            // EnumProperty:
-            // ATTACHMENT - Bell
-            // AXIS - Pillar
-            // BED_PART - Beds
-            // BLOCK_HALF - Stairs, Trapdoor
-            // BLOCK_FACE - Button, Grindstone, Lever
-            // CHEST_TYPE - Chest
-            // COMPARATOR_MODE - Comparator
-            // DOOR_HINGE - Door
-            // DOUBLE_BLOCK_HALF - Doors, Plants
-            // ORIENTATION - Crafter
-            // RAIL_SHAPE / STRAIGHT_RAIL_SHAPE - Rails
-            // SLAB_TYPE - Slab - PARTIAL ONLY: TOP and BOTTOM, not DOUBLE
-            // STAIR_SHAPE - Stairs (needed to get the correct state, otherwise the player facing would be a factor)
-            // BLOCK_FACE - Button, Grindstone, Lever
             Properties.ATTACHMENT,
             Properties.AXIS,
             Properties.BED_PART,
@@ -66,17 +46,13 @@ public class BlockPlacer
             Properties.STRAIGHT_RAIL_SHAPE,
             Properties.SLAB_TYPE,
             Properties.STAIR_SHAPE,
-            // IntProperty:
-            // BITES - Cake
-            // DELAY - Repeater
-            // NOTE - NoteBlock
-            // ROTATION - Banner, Sign, Skull
             Properties.BITES,
             Properties.DELAY,
             Properties.NOTE,
             Properties.ROTATION
     );
 
+    // Written by masa
     public static <T extends Comparable<T>> BlockState alternativeBlockPlacementV3(BlockState state, UseContext context)
     {
         int protocolValue = (int) (context.getHitVec().x - (double) context.getPos().getX()) - 2;
@@ -88,7 +64,6 @@ public class BlockPlacer
 
         @Nullable DirectionProperty property = getFirstDirectionProperty(state);
 
-        // DirectionProperty - allow all except: VERTICAL_DIRECTION (PointedDripstone)
         if (property != null && property != Properties.VERTICAL_DIRECTION)
         {
             state = applyDirectionProperty(state, context, property, protocolValue);
@@ -140,7 +115,7 @@ public class BlockPlacer
         }
         catch (Exception e)
         {
-            //Tweakeroo.logger.warn("Exception trying to apply placement protocol value", e);
+            // Exception
         }
 
         return state;
