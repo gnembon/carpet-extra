@@ -21,11 +21,10 @@ public class BlockItemMixin_accurateBlockPlacement
     {
         if (CarpetExtraSettings.accurateBlockPlacement)
         {
-            BlockState tryAlternative = BlockPlacer.alternativeBlockPlacement(block, context);
+            BlockState tryAlternative = BlockPlacer.alternativeBlockPlacementV3(block.getPlacementState(context), BlockPlacer.UseContext.from(context, context.getHand()));
             if (tryAlternative != null)
                 return tryAlternative;
         }
         return block.getPlacementState(context);
     }
-
 }
