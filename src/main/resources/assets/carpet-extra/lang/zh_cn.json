@@ -58,7 +58,7 @@
   "carpet.rule.comparatorReadsClock.desc": "让比较器读取展示框内时钟的时间，而非时钟物品在展示框中的旋转角度。",
 
   // creeperSpawningInJungleTemples
-  "carpet.rule.creeperSpawningInJungleTemples.name": "苦力怕生成于丛林神庙。",
+  "carpet.rule.creeperSpawningInJungleTemples.name": "苦力怕生成于丛林神庙",
   "carpet.rule.creeperSpawningInJungleTemples.desc": "丛林神庙中能且仅能生成苦力怕。",
 
   // disablePlayerCollision
@@ -219,28 +219,4 @@
   //xpPerSculkCatalyst
   "carpet.rule.xpPerSculkCatalyst.name": "幽匿催发体经验值",
   "carpet.rule.xpPerSculkCatalyst.desc": "设置打破幽匿催发体时掉落的经验值。"
-
-
-  // Unknown or Old Rules:
-
-  // updateSuppressionCrashFix
-  "carpet.rule.updateSuppressionCrashFix.name": "更新抑制崩服修复",
-  "carpet.rule.updateSuppressionCrashFix.desc": "阻止因更新抑制导致的服务器崩溃。",
-
-  // dispensersFillBottles
-  "carpet.rule.dispensersFillBottles.name": "发射器填充水瓶",
-  "carpet.rule.dispensersFillBottles.desc": "当发射器前方是水时，发射器将空瓶填满成水瓶。",
-
-  // spongesDryInTheNether
-  "carpet.rule.spongesDryInTheNether.name": "海绵在下界变干",
-  "carpet.rule.spongesDryInTheNether.desc": "湿海绵将会在下界中变干。",
-
-  // renewableLava
-  "carpet.rule.renewableLava.name": "可再生熔岩",
-  "carpet.rule.renewableLava.desc": "被6个熔岩源围绕的黑曜石有概率转换为熔岩。",
-  "carpet.rule.renewableLava.extra.0": "感谢：Skyrising",
-
-  // disablePhantomSpawning
-  "carpet.rule.disablePhantomSpawning.name": "禁止幻翼生成",
-  "carpet.rule.disablePhantomSpawning.desc": "禁止幻翼的生成。"
 }
