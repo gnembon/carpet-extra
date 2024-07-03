@@ -6,7 +6,7 @@
 
   // accurateBlockPlacement
   "carpet.rule.accurateBlockPlacement.name": "精准放置支持",
-  "carpet.rule.accurateBlockPlacement.desc": "启用对Tweakroo mod的tweakAccurateBlockPlacement选项的支持。",
+  "carpet.rule.accurateBlockPlacement.desc": "启用对Tweakeroo mod的tweakAccurateBlockPlacement选项的支持。",
 
   // autoCraftingDropper
   "carpet.rule.autoCraftingDropper.name": "投掷器自动合成",
@@ -137,7 +137,7 @@
   "carpet.rule.flowerPotChunkLoading.name": "花盆区块加载",
   "carpet.rule.flowerPotChunkLoading.desc": "将凋零玫瑰放置于花盆中以常加载其所在的区块。",
   "carpet.rule.flowerPotChunkLoading.extra.0": "如果你启用了这个规则，已存在花盆的区块不会被加载；",
-  "carpet.rule.flowerPotChunkLoading.extra.1": "如果你关闭了这个规则，处于加载状态的花盆区块不会被移除，你需要手动使用/forceload指令来移除它们。",
+  "carpet.rule.flowerPotChunkLoading.extra.1": "如果你关闭了这个规则，处于加载状态的花盆区块不会被移除，你需要手动使用/forceload命令来移除它们。",
   "carpet.rule.flowerPotChunkLoading.extra.2": "所有常加载区块的列表可用`/forceload query`查询。",
 
   // hopperMinecartItemTransfer
@@ -191,7 +191,7 @@
   // repeaterPriorityFix
   "carpet.rule.repeaterPriorityFix.name": "红石中继器优先级修复",
   "carpet.rule.repeaterPriorityFix.desc": "短脉冲不会在某些中继器序列中消失。",
-  "carpet.rule.repeaterPriorityFix.extra.0": "可以说是带回了1.8前的表现",
+  "carpet.rule.repeaterPriorityFix.extra.0": "可以说是带回了1.8前的表现。",
   "carpet.rule.repeaterPriorityFix.extra.1": "修复了[MC-54711](https://bugs.mojang.com/browse/MC-54711)。",
 
   // scaffoldingDistance
@@ -204,7 +204,7 @@
   "carpet.rule.spiderJockeysDropGapples.extra.0": "默认值为0，即不会掉落附魔金苹果。",
 
   // straySpawningInIgloos
-  "carpet.rule.straySpawningInIgloos.name": "流浪者于雪屋生成",
+  "carpet.rule.straySpawningInIgloos.name": "流浪者生成于雪屋",
   "carpet.rule.straySpawningInIgloos.desc": "雪屋中能且仅能生成流浪者。",
 
   // variableWoodDelays
@@ -216,7 +216,7 @@
   "carpet.rule.y0DragonEggBedrockBreaking.desc": "让龙蛋可破除y0处的基岩。",
   "carpet.rule.y0DragonEggBedrockBreaking.extra.0": "需开启dragonEggBedrockBreaking（龙蛋破基岩）规则。",
 
-  //xpPerSculkCatalyst
+  // xpPerSculkCatalyst
   "carpet.rule.xpPerSculkCatalyst.name": "幽匿催发体经验值",
   "carpet.rule.xpPerSculkCatalyst.desc": "设置打破幽匿催发体时掉落的经验值。"
 }
