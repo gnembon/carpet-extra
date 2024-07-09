@@ -31,16 +31,13 @@ public class BlockPlacer
             Properties.INVERTED,
             Properties.OPEN,
             Properties.PERSISTENT,
-            Properties.CAN_SUMMON,
             Properties.ATTACHMENT,
             Properties.AXIS,
-            Properties.BED_PART,
             Properties.BLOCK_HALF,
             Properties.BLOCK_FACE,
             Properties.CHEST_TYPE,
             Properties.COMPARATOR_MODE,
             Properties.DOOR_HINGE,
-            Properties.DOUBLE_BLOCK_HALF,
             Properties.ORIENTATION,
             Properties.RAIL_SHAPE,
             Properties.STRAIGHT_RAIL_SHAPE,
@@ -52,14 +49,14 @@ public class BlockPlacer
             Properties.ROTATION
     );
 
-    // Written by masa
     public static <T extends Comparable<T>> BlockState alternativeBlockPlacementV3(BlockState state, UseContext context)
     {
         int protocolValue = (int) (context.getHitVec().x - (double) context.getPos().getX()) - 2;
+        BlockState oldState = state;
 
         if (protocolValue < 0)
         {
-            return state;
+            return oldState;
         }
 
         @Nullable DirectionProperty property = getFirstDirectionProperty(state);
@@ -71,6 +68,15 @@ public class BlockPlacer
             if (state == null)
             {
                 return null;
+            }
+
+            if (state.canPlaceAt(context.getWorld(), context.getPos()))
+            {
+                oldState = state;
+            }
+            else
+            {
+                state = oldState;
             }
 
             // Consume the bits used for the facing
@@ -106,6 +112,15 @@ public class BlockPlacer
                             value != SlabType.DOUBLE) // don't allow duping slabs by forcing a double slab via the protocol
                         {
                             state = state.with(prop, value);
+
+                            if (state.canPlaceAt(context.getWorld(), context.getPos()))
+                            {
+                                oldState = state;
+                            }
+                            else
+                            {
+                                state = oldState;
+                            }
                         }
 
                         protocolValue >>>= requiredBits;
@@ -118,7 +133,14 @@ public class BlockPlacer
             // Exception
         }
 
-        return state;
+        if (state.canPlaceAt(context.getWorld(), context.getPos()))
+        {
+            return state;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public static BlockState alternativeBlockPlacementV2(Block block, UseContext context)
