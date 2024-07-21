@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import com.google.common.collect.ImmutableSet;
+import carpetextra.CarpetExtraSettings;
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
@@ -30,7 +31,6 @@ public class BlockPlacer
     public static final ImmutableSet<Property<?>> WHITELISTED_PROPERTIES = ImmutableSet.of(
             Properties.INVERTED,
             Properties.OPEN,
-            Properties.PERSISTENT,
             Properties.ATTACHMENT,
             Properties.AXIS,
             Properties.BLOCK_HALF,
@@ -38,6 +38,8 @@ public class BlockPlacer
             Properties.CHEST_TYPE,
             Properties.COMPARATOR_MODE,
             Properties.DOOR_HINGE,
+            Properties.HOPPER_FACING,
+            Properties.HORIZONTAL_FACING,
             Properties.ORIENTATION,
             Properties.RAIL_SHAPE,
             Properties.STRAIGHT_RAIL_SHAPE,
@@ -49,7 +51,17 @@ public class BlockPlacer
             Properties.ROTATION
     );
 
-    public static <T extends Comparable<T>> BlockState alternativeBlockPlacementV3(BlockState state, UseContext context)
+    public static BlockState applyAlternativeBlockPlacement(BlockState state, UseContext context)
+    {
+        switch (CarpetExtraSettings.accurateBlockPlacement)
+        {
+            case "V3" -> { return alternativeBlockPlacementV3(state, context); }
+            case "V2" -> { return alternativeBlockPlacementV2(state.getBlock(), context); }
+            default -> { return state; }
+        }
+    }
+
+    private static <T extends Comparable<T>> BlockState alternativeBlockPlacementV3(BlockState state, UseContext context)
     {
         int protocolValue = (int) (context.getHitVec().x - (double) context.getPos().getX()) - 2;
         BlockState oldState = state;
@@ -143,7 +155,7 @@ public class BlockPlacer
         }
     }
 
-    public static BlockState alternativeBlockPlacementV2(Block block, UseContext context)
+    private static BlockState alternativeBlockPlacementV2(Block block, UseContext context)
     {
         Vec3d hitPos = context.getHitVec();
         BlockPos blockPos = context.getPos();

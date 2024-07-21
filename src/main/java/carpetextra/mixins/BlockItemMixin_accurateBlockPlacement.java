@@ -19,9 +19,9 @@ public class BlockItemMixin_accurateBlockPlacement
     ))
     private BlockState getAlternatePlacement(Block block, ItemPlacementContext context)
     {
-        if (CarpetExtraSettings.accurateBlockPlacement)
+        if (!CarpetExtraSettings.accurateBlockPlacement.equals("off"))
         {
-            BlockState tryAlternative = BlockPlacer.alternativeBlockPlacementV3(block.getPlacementState(context), BlockPlacer.UseContext.from(context, context.getHand()));
+            BlockState tryAlternative = BlockPlacer.applyAlternativeBlockPlacement(block.getPlacementState(context), BlockPlacer.UseContext.from(context, context.getHand()));
             if (tryAlternative != null)
                 return tryAlternative;
         }
