@@ -101,7 +101,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
             for (int column = 0; column < recipeInput.getWidth(); ++column) {
                 int index = column + left + (row + top) * craftingInventory.getWidth();
                 ItemStack itemStack = dispenser.getStack(index);
-                ItemStack itemStack2 = defaultedList.get(column + row * craftingInventory.getWidth());
+                ItemStack itemStack2 = defaultedList.get(column + row * recipeInput.getWidth());
                 if (!itemStack.isEmpty()) {
                     dispenser.removeStack(index, 1);
                     itemStack = dispenser.getStack(index);
