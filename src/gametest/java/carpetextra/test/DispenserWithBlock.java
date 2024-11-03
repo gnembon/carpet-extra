@@ -49,6 +49,7 @@ public class DispenserWithBlock {
         CarpetExtraSettings.blazeMeal = true;
         CarpetExtraSettings.renewableEndstone = true;
         CarpetExtraSettings.renewableNetherrack = true;
+        CarpetExtraSettings.autoCraftingDropper = true; // TODO separate, further testing for this feature
     }
     
     @AfterBatch(batchId = BATCH)
@@ -62,6 +63,7 @@ public class DispenserWithBlock {
         CarpetExtraSettings.blazeMeal = false;
         CarpetExtraSettings.renewableEndstone = false;
         CarpetExtraSettings.renewableNetherrack = false;
+        CarpetExtraSettings.autoCraftingDropper = false;
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
@@ -299,11 +301,44 @@ public class DispenserWithBlock {
         ctx.spawnEntity(EntityType.MINECART, lapis.up());
         
         ctx.pushButton(button);
-        ctx.addFinalTaskWithDuration(4, () -> {
+        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
             ctx.expectEntityAt(entity, lapis.up());
             ctx.dontExpectEntity(EntityType.MINECART);
             ctx.dontExpectEntity(EntityType.ITEM);
             runAll(extras);
+        });
+    }
+    
+    // very basic autocrafting test, for now just to catch simple crashes or malfunctioning stuff
+    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    public void craftCake(TestContext ctx) {
+        Item[] recipe = new Item[] {
+                Items.MILK_BUCKET, Items.MILK_BUCKET, Items.MILK_BUCKET,
+                Items.SUGAR,       Items.EGG,         Items.SUGAR,
+                Items.WHEAT,       Items.WHEAT,       Items.WHEAT
+        };
+        ctx.setBlockState(dispenser, Blocks.DROPPER.getStateWithProperties(ctx.getBlockState(dispenser)));
+        ctx.setBlockState(lapis.up(), Blocks.CRAFTING_TABLE);
+        for (int i = 0; i < 9; i++) {
+            ctx.<DispenserBlockEntity>getBlockEntity(dispenser).setStack(i, recipe[i].getDefaultStack());
+        }
+        ctx.pushButton(button);
+        
+        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
+            ctx.expectItem(Items.CAKE);
+            for (Item item : recipe) ctx.dontExpectItem(item);
+            for (int i = 0; i < 3; i++) {
+                int finalI = i;
+                ctx.<DispenserBlockEntity>checkBlockEntity(dispenser,
+                        disp -> disp.getStack(finalI).getItem() == Items.BUCKET, 
+                        () -> "Must have buckets remaining in dispenser");
+            }
+            for (int i = 3; i < 9; i++) {
+                int finalI = i;
+                ctx.<DispenserBlockEntity>checkBlockEntity(dispenser,
+                        disp -> disp.getStack(finalI).isEmpty(), 
+                        () -> "Must not have anything but the first 3 buckets in dispenser");
+            }
         });
     }
     
