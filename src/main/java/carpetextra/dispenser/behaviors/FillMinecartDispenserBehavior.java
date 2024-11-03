@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
 import net.minecraft.item.ItemStack;
@@ -15,9 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 
 public class FillMinecartDispenserBehavior extends FallibleItemDispenserBehavior {
-    private final AbstractMinecartEntity.Type MINECART_TYPE;
+    private final EntityType<? extends AbstractMinecartEntity> MINECART_TYPE;
 
-    public FillMinecartDispenserBehavior(AbstractMinecartEntity.Type minecartType) {
+    public FillMinecartDispenserBehavior(EntityType<? extends AbstractMinecartEntity> minecartType) {
         this.MINECART_TYPE = minecartType;
     }
 
@@ -34,7 +35,7 @@ public class FillMinecartDispenserBehavior extends FallibleItemDispenserBehavior
         if(!minecarts.isEmpty()) {
             // choose a random minecart in front of dispenser to fill
             MinecartEntity oldMinecart = minecarts.get(world.random.nextInt(minecarts.size()));
-            AbstractMinecartEntity newMinecart = AbstractMinecartEntity.create(world, oldMinecart.getX(), oldMinecart.getY(), oldMinecart.getZ(), this.MINECART_TYPE, ItemStack.EMPTY, null);
+            AbstractMinecartEntity newMinecart = AbstractMinecartEntity.create(world, oldMinecart.getX(), oldMinecart.getY(), oldMinecart.getZ(), this.MINECART_TYPE, SpawnReason.DISPENSER, ItemStack.EMPTY, null);
 
             // Copy data from original minecart to new minecart
             // Possibly missing some things to copy here. Add more if needed

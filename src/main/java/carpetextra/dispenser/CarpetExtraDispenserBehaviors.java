@@ -64,10 +64,10 @@ public class CarpetExtraDispenserBehaviors {
     public static final DispenserBehavior FEED_ANIMAL = new FeedAnimalDispenserBehavior();
     public static final DispenserBehavior FEED_MOOSHROOM = new FeedMooshroomDispenserBehavior();
     // dispensersFillMinecarts
-    public static final DispenserBehavior FILL_MINECART_CHEST = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.CHEST);
-    public static final DispenserBehavior FILL_MINECART_FURNACE = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.FURNACE);
-    public static final DispenserBehavior FILL_MINECART_TNT = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.TNT);
-    public static final DispenserBehavior FILL_MINECART_HOPPER = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.HOPPER);
+    public static final DispenserBehavior FILL_MINECART_CHEST = new FillMinecartDispenserBehavior(EntityType.CHEST_MINECART);
+    public static final DispenserBehavior FILL_MINECART_FURNACE = new FillMinecartDispenserBehavior(EntityType.FURNACE_MINECART);
+    public static final DispenserBehavior FILL_MINECART_TNT = new FillMinecartDispenserBehavior(EntityType.TNT_MINECART);
+    public static final DispenserBehavior FILL_MINECART_HOPPER = new FillMinecartDispenserBehavior(EntityType.HOPPER_MINECART);
     // dispensersMilkAnimals
     public static final DispenserBehavior MILK_ANIMAL = new MilkAnimalDispenserBehavior();
     public static final DispenserBehavior MILK_MOOSHROOM = new MilkMooshroomDispenserBehavior();
