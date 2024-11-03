@@ -5,7 +5,18 @@
   // Rules:
 
   // accurateBlockPlacement
-  "carpet.rule.accurateBlockPlacement.desc": "Client can provide alternative block placement.",
+  "carpet.rule.accurateBlockPlacement.desc": "Client can provide alternative block placement (V3).",
+
+  "carpet.rule.accurateBlockPlacement.extra.0": "This version of accurateBlockPlacement should function the same as Single Player ",
+  "carpet.rule.accurateBlockPlacement.extra.1": "and should be compatible with Advanced rotation Block States such as ",
+  "carpet.rule.accurateBlockPlacement.extra.2": "for rotating the Crafter.  For Easy Place, you may need to set it to (V3) manually.",
+
+  // accurateBlockPlacementLegacy
+  "carpet.rule.accurateBlockPlacementLegacy.desc": "Client can provide alternative block placement (V2).",
+
+  "carpet.rule.accurateBlockPlacementLegacy.extra.0": "This version of accurateBlockPlacement should function the same as before ",
+  "carpet.rule.accurateBlockPlacementLegacy.extra.1": "and it is not compatible with Advanced rotation Block States such as ",
+  "carpet.rule.accurateBlockPlacementLegacy.extra.2": "for rotating the Crafter.  For that, use the new (V3) version.",
 
   // autoCraftingDropper
   "carpet.rule.autoCraftingDropper.desc": "Auto-crafting dropper",
