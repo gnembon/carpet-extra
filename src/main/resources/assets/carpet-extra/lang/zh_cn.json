@@ -49,8 +49,11 @@
   "carpet.rule.renewablePackedIce.name": "可再生浮冰",
   "carpet.rule.renewablePackedIce.desc": "掉落的铁砧压碎多个冰块时会将冰转换为浮冰",
 
-  "carpet.rule.accurateBlockPlacement.name": "准确方块放置支持",
-  "carpet.rule.accurateBlockPlacement.desc": "启用对tweakroo mod的tweakAccurateBlockPlacement选项的支持",
+  "carpet.rule.accurateBlockPlacement.name": "(V3）精确的块放置支持",
+  "carpet.rule.accurateBlockPlacement.desc": "启用（V3）对tweakroo mod的tweakAccurateBlockPlacement选项的支持",
+
+  "carpet.rule.accurateBlockPlacementLegacy.name": "传统（V2）精确块放置支持",
+  "carpet.rule.accurateBlockPlacementLegacy.desc": "启用tweakroo mod的tweakAccurateBlockPlacement选项的旧版 (V2) 支持",
 
   "carpet.rule.dispensersToggleThings.name": "发射器拨动方块",
   "carpet.rule.dispensersToggleThings.desc": "含有木棍的发射器可以拨动各种方块",

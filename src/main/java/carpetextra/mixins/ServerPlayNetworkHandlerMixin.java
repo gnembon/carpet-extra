@@ -16,7 +16,7 @@ public abstract class ServerPlayNetworkHandlerMixin
               require = 0)
     private Vec3d carpetextra_removeHitPosCheck(Vec3d hitVec, Vec3d blockCenter)
     {
-        if (!CarpetExtraSettings.accurateBlockPlacement.equals("off"))
+        if (CarpetExtraSettings.accurateBlockPlacement || CarpetExtraSettings.accurateBlockPlacementLegacy)
         {
             return Vec3d.ZERO;
         }

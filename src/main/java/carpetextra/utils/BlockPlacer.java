@@ -53,11 +53,17 @@ public class BlockPlacer
 
     public static BlockState applyAlternativeBlockPlacement(BlockState state, UseContext context)
     {
-        switch (CarpetExtraSettings.accurateBlockPlacement)
+        if (CarpetExtraSettings.accurateBlockPlacement)
         {
-            case "V3" -> { return alternativeBlockPlacementV3(state, context); }
-            case "V2" -> { return alternativeBlockPlacementV2(state.getBlock(), context); }
-            default -> { return state; }
+            return alternativeBlockPlacementV3(state, context);
+        }
+        else if (CarpetExtraSettings.accurateBlockPlacementLegacy)
+        {
+            return alternativeBlockPlacementV2(state.getBlock(), context);
+        }
+        else
+        {
+            return state;
         }
     }
 

@@ -4,7 +4,6 @@ import carpet.api.settings.Rule;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.Validator;
 import carpet.api.settings.Validators;
-import org.jetbrains.annotations.Nullable;
 import net.minecraft.server.command.ServerCommandSource;
 
 import static carpet.api.settings.RuleCategory.*;
@@ -93,10 +92,14 @@ public class CarpetExtraSettings
     public static boolean renewableIce = false;
 
     @Rule(
-            options = {"off", "V2", "V3"},
             categories = {EXTRA, SURVIVAL}
     )
-    public static String accurateBlockPlacement = "off";
+    public static boolean accurateBlockPlacement = false;
+
+    @Rule(
+            categories = {EXTRA, SURVIVAL}
+    )
+    public static boolean accurateBlockPlacementLegacy = false;
 
     @Rule(
             categories = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER}
