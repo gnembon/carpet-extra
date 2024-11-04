@@ -9,12 +9,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$4")
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$10")
 public abstract class DispenserBehaviorChestMixin
 {
     @Inject(
             method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;",
-            at = @At(value = "INVOKE", shift = At.Shift.BEFORE,
+            at = @At(value = "INVOKE",
+                    shift = At.Shift.BEFORE,
                     target = "Lnet/minecraft/block/dispenser/FallibleItemDispenserBehavior;dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"),
             cancellable = true
     )
