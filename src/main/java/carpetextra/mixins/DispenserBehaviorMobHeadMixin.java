@@ -11,11 +11,12 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPointer;
 
+// FIXME --> CARVED_PUMPKINS for player / mob heads?  (Register Manually?)
 @Mixin(targets = {
         /* mob & player heads */
-        "net/minecraft/block/dispenser/DispenserBehavior$3",
+        "net/minecraft/block/dispenser/DispenserBehavior$11",
         /* wither skull */
-        "net/minecraft/block/dispenser/DispenserBehavior$4"
+        "net/minecraft/block/dispenser/DispenserBehavior$10"
 })
 public abstract class DispenserBehaviorMobHeadMixin extends FallibleItemDispenserBehavior {
     @Inject(

@@ -117,22 +117,22 @@ public class DispenserWithBlock {
 
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void boatOnRegularIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityType.BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityType.OAK_BOAT);
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void boatOnPackedIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityType.BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityType.OAK_BOAT);
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void boatOnBlueIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityType.BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityType.OAK_BOAT);
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void chestBoatOnIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityType.CHEST_BOAT);
+        boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityType.OAK_CHEST_BOAT);
     }
     
     private void boatTest(TestContext ctx, Item item, Block block, EntityType<?> expectedEntity) {

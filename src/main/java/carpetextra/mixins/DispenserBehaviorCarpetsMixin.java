@@ -9,10 +9,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$13")
+// FIXME -- FLINT_AND_STEEL ? (Register this action manually?)
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$7")
 public abstract class DispenserBehaviorCarpetsMixin
 {
-    // FIXME
     @Inject(
             method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;",
             at = @At(value = "INVOKE", shift = At.Shift.BEFORE,
