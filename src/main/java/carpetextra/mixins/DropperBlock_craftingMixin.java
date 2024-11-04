@@ -25,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -32,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(DropperBlock.class)
 public class DropperBlock_craftingMixin extends DispenserBlock
 {
-    private static final Random rand = new Random();
+    @Unique private static final Random rand = new Random();
     protected DropperBlock_craftingMixin(Settings settings)
     {
         super(settings);
@@ -61,7 +62,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         return super.getComparatorOutput(state, world, pos);
     }
 
-    private void spawn(World world, double x, double y, double z, ItemStack stack) {
+    @Unique private void spawn(World world, double x, double y, double z, ItemStack stack) {
         while(!stack.isEmpty()) {
             ItemEntity item = new ItemEntity(world, x, y, z, stack.split(rand.nextInt(21) + 10));
             item.setVelocity(
@@ -93,9 +94,11 @@ public class DropperBlock_craftingMixin extends DispenserBlock
 
         // copied from CraftingResultSlot.onTakeItem()
         CraftingRecipeInput.Positioned positioned = craftingInventory.createPositionedRecipeInput();
+        CraftingRecipeInput input = positioned.input();
         int left = positioned.left();
         int top = positioned.top();
-        DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getRemainingStacks(RecipeType.CRAFTING, recipeInput, world);
+        DefaultedList<ItemStack> defaultedList = world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, recipeInput, world).map((r) ->
+                                                 r.value().getRecipeRemainders(input)).orElseGet(() -> handleInput(input));
 
         for (int row = 0; row < recipeInput.getHeight(); ++row) {
             for (int column = 0; column < recipeInput.getWidth(); ++column) {
@@ -121,5 +124,17 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         }
         world.playSound(null, pos, SoundEvents.ENTITY_VILLAGER_WORK_MASON, SoundCategory.BLOCKS, 0.2f, 2.0f);
         ci.cancel();
+    }
+
+    @Unique private static DefaultedList<ItemStack> handleInput(CraftingRecipeInput input)
+    {
+        DefaultedList<ItemStack> list = DefaultedList.ofSize(input.size(), ItemStack.EMPTY);
+
+        for (int i = 0; i < list.size(); ++i)
+        {
+            list.set(i, input.getStackInSlot(i));
+        }
+
+        return list;
     }
 }

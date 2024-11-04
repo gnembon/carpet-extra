@@ -22,7 +22,7 @@ public abstract class StrayEntityMixin
         if (!CarpetExtraSettings.straySpawningInIgloos) {
             return world.isSkyVisible(pos);
         }
-        Structure structure = world.getRegistryManager().get(RegistryKeys.STRUCTURE).get(StructureKeys.IGLOO);
+        Structure structure = world.getRegistryManager().getOrThrow(RegistryKeys.STRUCTURE).get(StructureKeys.IGLOO);
         return world.isSkyVisible(pos) ||
                        ((ServerWorld)world).getStructureAccessor().getStructureAt(pos,structure).hasChildren();
     }

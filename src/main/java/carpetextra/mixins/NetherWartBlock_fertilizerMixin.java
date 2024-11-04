@@ -7,8 +7,8 @@ import net.minecraft.block.PlantBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,13 +23,13 @@ public abstract class NetherWartBlock_fertilizerMixin extends PlantBlock {
     }
 
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         int age = state.get(NetherWartBlock.AGE);
         if (CarpetExtraSettings.blazeMeal && stack.getItem() == Items.BLAZE_POWDER && age < 3) {
             world.setBlockState(pos, this.getDefaultState().with(NetherWartBlock.AGE, age + 1), NOTIFY_LISTENERS);
             world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, pos, 0);
             if (!player.isCreative()) stack.decrement(1);
-            return ItemActionResult.SUCCESS;
+            return ActionResult.SUCCESS;
         }
         return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
     }
