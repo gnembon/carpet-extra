@@ -12,8 +12,9 @@ import net.minecraft.world.World;
 public class ChunkUtils
 {
     public static final ChunkTicketType<ChunkPos> ENDER_PEARL_TICKET = ChunkTicketType.create("ender_pearl", Comparator.comparingLong(ChunkPos::toLong), 2);
+    public static final ChunkTicketType<ChunkPos> MINECART_TICKET = ChunkTicketType.create("minecart", Comparator.comparingLong(ChunkPos::toLong), 2);
 
-    public static void addEnderPearlChunkTicket(Entity entity)
+    public static void addCustomChunkTicket(Entity entity, ChunkTicketType<ChunkPos> ticketType)
     {
         World world = entity.getEntityWorld();
         Vec3d velocity = entity.getVelocity();
@@ -25,7 +26,7 @@ public class ChunkUtils
             double nx = pos.x + velocity.x;
             double nz = pos.z + velocity.z;
             ChunkPos cp = new ChunkPos(MathHelper.floor(nx) >> 4, MathHelper.floor(nz) >> 4);
-            ((ServerWorld) world).getChunkManager().addTicket(ENDER_PEARL_TICKET, cp, 2, cp);
+            ((ServerWorld) world).getChunkManager().addTicket(ticketType, cp, 2, cp);
         }
     }
 }

@@ -228,6 +228,11 @@ public class CarpetExtraSettings
     public static boolean enderPearlChunkLoading = false;
 
     @Rule(
+            categories = {FEATURE, EXTRA}
+    )
+    public static boolean minecartChunkLoading = false;
+
+    @Rule(
             categories = {FEATURE, EXTRA, SURVIVAL}
     )
     public static boolean betterBonemeal = false;
