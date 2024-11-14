@@ -34,9 +34,9 @@ public class DispenserWithBlock {
     static final String STRUCTURE = "carpet-extra:dispenserbase";
     static final String BATCH = "dispenserwithblock";
     static final int DISPENSER_DELAY = 4;
-    BlockPos lapis = new BlockPos(2, 1, 0);
-    BlockPos button = new BlockPos(0, 2, 0);
-    BlockPos dispenser = new BlockPos(1, 2, 0);
+    BlockPos lapis = new BlockPos(2, 0, 0);
+    BlockPos button = new BlockPos(0, 1, 0);
+    BlockPos dispenser = new BlockPos(1, 1, 0);
     
     @BeforeBatch(batchId = BATCH)
     public void before(ServerWorld world) {
