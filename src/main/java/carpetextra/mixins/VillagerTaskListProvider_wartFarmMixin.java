@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(VillagerTaskListProvider.class)
 public abstract class VillagerTaskListProvider_wartFarmMixin
 {
-    @Shadow protected static Pair<Integer, Task<LivingEntity>> createBusyFollowTask() {return null;};
+    @Shadow private static Pair<Integer, Task<LivingEntity>> createBusyFollowTask() {return null;}
 
     @Redirect(method = "createWorkTasks", at = @At(
             value = "FIELD",

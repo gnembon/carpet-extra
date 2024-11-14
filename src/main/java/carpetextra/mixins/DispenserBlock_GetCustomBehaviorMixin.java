@@ -8,12 +8,13 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import carpet.script.value.Value;
 import carpet.script.value.ValueConversions;
 import carpetextra.dispenser.CarpetExtraDispenserBehaviors;
 import carpetextra.dispenser.DispenserEvent;
+import com.llamalad7.mixinextras.sugar.Local;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
@@ -29,15 +30,14 @@ public abstract class DispenserBlock_GetCustomBehaviorMixin {
     @Shadow @Final public static Map<Item, DispenserBehavior> BEHAVIORS;
 
     @Inject(
-        method = "dispense",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/block/DispenserBlock;getBehaviorForItem(Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/block/dispenser/DispenserBehavior;"
-        ),
-        locals = LocalCapture.CAPTURE_FAILHARD,
-        cancellable = true
+            method = "dispense",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/block/DispenserBlock;getBehaviorForItem(Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/block/dispenser/DispenserBehavior;"
+            ),
+            cancellable = true
     )
-    private void dispenseCustomBehavior(ServerWorld world, BlockState state, BlockPos pos, CallbackInfo ci, DispenserBlockEntity dispenserEntity, BlockPointer pointer, int slot, ItemStack stack) {
+    private void dispenseCustomBehavior(ServerWorld world, BlockState state, BlockPos pos, CallbackInfo ci, @Local DispenserBlockEntity dispenserEntity, @Local BlockPointer pointer, @Local int slot, @Local ItemStack stack) {
         // get custom behavior
         DispenserBehavior behavior = CarpetExtraDispenserBehaviors.getCustomDispenserBehavior(world, pos, pointer, dispenserEntity, stack, BEHAVIORS);
 

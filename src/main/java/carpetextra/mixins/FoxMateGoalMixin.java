@@ -21,14 +21,14 @@ public abstract class FoxMateGoalMixin extends AnimalMateGoal {
         method = "breed()V",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
+            target = "Lnet/minecraft/server/world/ServerWorld;spawnEntity(Lnet/minecraft/entity/Entity;)Z",
             ordinal = 0
         ),
         cancellable = true
     )
     protected void preventDispenserSpawningExperience(CallbackInfo ci) {
         ServerPlayerEntity player = super.animal.getLovingPlayer();
-        if (player == null) {
+        if (player == null && super.mate != null) {
             player = super.mate.getLovingPlayer();
         }
         if (player == null && CarpetExtraSettings.dispensersFeedAnimals) {

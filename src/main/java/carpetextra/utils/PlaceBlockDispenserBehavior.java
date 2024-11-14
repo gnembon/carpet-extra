@@ -1,18 +1,8 @@
 package carpetextra.utils;
 
 import carpetextra.CarpetExtraSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CoralParentBlock;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.FluidFillable;
-import net.minecraft.block.KelpBlock;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.block.ObserverBlock;
-import net.minecraft.block.SeaPickleBlock;
-import net.minecraft.block.SeagrassBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.TurtleEggBlock;
+
+import net.minecraft.block.*;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.BlockHalf;
@@ -128,7 +118,7 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
             state = Block.postProcessState(state, world, pos);
             boolean blockWasPlaced = world.setBlockState(pos, state);
             block.onPlaced(world, pos, state, null, itemStack);
-            world.updateNeighbor(pos, state.getBlock(), pos);
+            world.updateNeighbor(pos, state.getBlock(), null);
             BlockItem.writeNbtToBlockEntity(world, null, pos, itemStack);
             /* copy contents, mark it dirty to save & update comparators */
             BlockEntity blockEntity = world.getBlockEntity(pos);
@@ -160,6 +150,6 @@ public class PlaceBlockDispenserBehavior  extends ItemDispenserBehavior {
 
     private static boolean usePlacementContext(Item item, Block block) {
         return item.getClass() != BlockItem.class || block instanceof SeaPickleBlock || block instanceof TurtleEggBlock ||
-               block instanceof SeagrassBlock || block instanceof KelpBlock || block instanceof CoralParentBlock;
+               block instanceof SeagrassBlock || block instanceof KelpBlock || block instanceof AbstractCoralBlock;
     }
 }

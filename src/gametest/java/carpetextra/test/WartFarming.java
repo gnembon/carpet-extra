@@ -20,8 +20,8 @@ public class WartFarming {
     private static final String STRUCTURE = "carpet-extra:wartbase";
     private static final String BATCH = "wartfarming";
 
-    BlockPos soulSand = new BlockPos(0, 1, 0);
-    BlockPos lapis = new BlockPos(3, 2, 0);
+    BlockPos soulSand = new BlockPos(0, 0, 0);
+    BlockPos lapis = new BlockPos(3, 1, 0);
 
     @BeforeBatch(batchId = BATCH)
     public void before(ServerWorld world) {
