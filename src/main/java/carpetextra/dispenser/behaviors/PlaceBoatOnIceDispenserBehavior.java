@@ -57,7 +57,7 @@ public class PlaceBoatOnIceDispenserBehavior extends FallibleItemDispenserBehavi
             boatEntity.setVariant(boatInfo.getType());
              */
 
-            boatEntity.setYaw(dispenserFacing.asRotation());
+            boatEntity.setYaw(dispenserFacing.getPositiveHorizontalDegrees());
             world.spawnEntity(boatEntity);
             stack.decrement(1);
             return stack;
