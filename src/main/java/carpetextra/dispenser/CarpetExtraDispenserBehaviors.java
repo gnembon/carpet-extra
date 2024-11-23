@@ -35,7 +35,6 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.GoatEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
-import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.BoatItem;
 import net.minecraft.item.HoeItem;
@@ -64,10 +63,10 @@ public class CarpetExtraDispenserBehaviors {
     public static final DispenserBehavior FEED_ANIMAL = new FeedAnimalDispenserBehavior();
     public static final DispenserBehavior FEED_MOOSHROOM = new FeedMooshroomDispenserBehavior();
     // dispensersFillMinecarts
-    public static final DispenserBehavior FILL_MINECART_CHEST = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.CHEST);
-    public static final DispenserBehavior FILL_MINECART_FURNACE = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.FURNACE);
-    public static final DispenserBehavior FILL_MINECART_TNT = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.TNT);
-    public static final DispenserBehavior FILL_MINECART_HOPPER = new FillMinecartDispenserBehavior(AbstractMinecartEntity.Type.HOPPER);
+    public static final DispenserBehavior FILL_MINECART_CHEST = new FillMinecartDispenserBehavior(EntityType.CHEST_MINECART);
+    public static final DispenserBehavior FILL_MINECART_FURNACE = new FillMinecartDispenserBehavior(EntityType.FURNACE_MINECART);
+    public static final DispenserBehavior FILL_MINECART_TNT = new FillMinecartDispenserBehavior(EntityType.TNT_MINECART);
+    public static final DispenserBehavior FILL_MINECART_HOPPER = new FillMinecartDispenserBehavior(EntityType.HOPPER_MINECART);
     // dispensersMilkAnimals
     public static final DispenserBehavior MILK_ANIMAL = new MilkAnimalDispenserBehavior();
     public static final DispenserBehavior MILK_MOOSHROOM = new MilkMooshroomDispenserBehavior();
@@ -110,9 +109,8 @@ public class CarpetExtraDispenserBehaviors {
 
         // chickenShearing
         if(CarpetExtraSettings.chickenShearing && item == Items.SHEARS) {
-            boolean hasShearableChickens = !world.getEntitiesByType(EntityType.CHICKEN, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((chickenEntity) -> {
-                return !((AnimalEntity) chickenEntity).isBaby();
-            })).isEmpty();
+            boolean hasShearableChickens = !world.getEntitiesByType(EntityType.CHICKEN, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((chickenEntity) ->
+                                           !((AnimalEntity) chickenEntity).isBaby())).isEmpty();
 
             if(hasShearableChickens) {
                 return SHEAR_CHICKEN;
@@ -127,18 +125,16 @@ public class CarpetExtraDispenserBehaviors {
         // dispensersFeedAnimals
         if(CarpetExtraSettings.dispensersFeedAnimals) {
             // check for animals that can be bred with the current item being dispensed in front of dispenser
-            boolean hasFeedableAnimals = !world.getEntitiesByClass(AnimalEntity.class, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((animalEntity) -> {
-                return ((AnimalEntity) animalEntity).isBreedingItem(stack);
-            })).isEmpty();
+            boolean hasFeedableAnimals = !world.getEntitiesByClass(AnimalEntity.class, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((animalEntity) ->
+                                         ((AnimalEntity) animalEntity).isBreedingItem(stack))).isEmpty();
 
             if(hasFeedableAnimals) {
                 return FEED_ANIMAL;
             }
 
             // get brown mooshrooms in front of dispenser
-            boolean hasFeedableMooshrooms = !world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) -> {
-                return ((MooshroomEntity) mooshroomEntity).getVariant() == MooshroomEntity.Type.BROWN;
-            })).isEmpty();
+            boolean hasFeedableMooshrooms = !world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) ->
+                                             ((MooshroomEntity) mooshroomEntity).getVariant() == MooshroomEntity.Type.BROWN)).isEmpty();
 
             // check if item is a small flower
             if(hasFeedableMooshrooms && stack.isIn(ItemTags.SMALL_FLOWERS)) {
@@ -173,9 +169,8 @@ public class CarpetExtraDispenserBehaviors {
             // bucket to milk
             if(item == Items.BUCKET) {
                 // check for cows, mooshrooms, or goats in front of dispenser
-                boolean hasMilkable = !world.getEntitiesByClass(AnimalEntity.class, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((animalEntity) -> {
-                    return animalEntity instanceof CowEntity || animalEntity instanceof GoatEntity;
-                })).isEmpty();
+                boolean hasMilkable = !world.getEntitiesByClass(AnimalEntity.class, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((animalEntity) ->
+                                      animalEntity instanceof CowEntity || animalEntity instanceof GoatEntity)).isEmpty();
 
                 if(hasMilkable) {
                     return MILK_ANIMAL;

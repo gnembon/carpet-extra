@@ -89,7 +89,7 @@ public class FeedAnimalDispenserBehavior extends FallibleItemDispenserBehavior {
             animal.playSound(SoundEvents.ENTITY_CAT_EAT, 1.0F, 1.0F);
         }
         else if(type == EntityType.FOX) {
-            animal.playSound(animal.getEatSound(foodStack), 1.0F, 1.0F);
+            animal.playSound(SoundEvents.ENTITY_FOX_EAT, 1.0F, 1.0F);
         }
 
         // remove one item and return
@@ -103,14 +103,10 @@ public class FeedAnimalDispenserBehavior extends FallibleItemDispenserBehavior {
         Item item = foodStack.getItem();
 
         // llamas only breed with hay bales
-        if((type == EntityType.LLAMA || type == EntityType.TRADER_LLAMA) && item != Items.HAY_BLOCK) {
+        if ((type == EntityType.LLAMA || type == EntityType.TRADER_LLAMA) && item != Items.HAY_BLOCK) {
             return false;
         }
         // horses/donkeys/mules only breed with golden carrot, golden apple, or enchanted golden apple
-        else if((type == EntityType.HORSE || type == EntityType.DONKEY || type == EntityType.MULE) && !(item == Items.GOLDEN_CARROT || item == Items.GOLDEN_APPLE || item == Items.ENCHANTED_GOLDEN_APPLE)) {
-            return false;
-        }
-
-        return true;
+        else return (type != EntityType.HORSE && type != EntityType.DONKEY && type != EntityType.MULE) || (item == Items.GOLDEN_CARROT || item == Items.GOLDEN_APPLE || item == Items.ENCHANTED_GOLDEN_APPLE);
     }
 }

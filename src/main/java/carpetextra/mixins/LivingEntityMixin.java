@@ -11,6 +11,7 @@ import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -49,13 +50,16 @@ public abstract class LivingEntityMixin extends Entity
             this.getWorld().setBlockState(below, Blocks.SOUL_SAND.getDefaultState());
         }
     }
-    
+
     @Inject(method = "onDeath", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageSource;getAttacker()Lnet/minecraft/entity/Entity;"))
     private void onOnDeath(DamageSource source, CallbackInfo ci)
     {
-        if ((this.getVehicle() instanceof SpiderEntity) && this.random.nextInt(100) + 1 < CarpetExtraSettings.spiderJockeysDropGapples)
+        if (this.getWorld() instanceof ServerWorld sw)
         {
-            this.dropStack(new ItemStack(Items.ENCHANTED_GOLDEN_APPLE));
+            if ((this.getVehicle() instanceof SpiderEntity) && this.random.nextInt(100) + 1 < CarpetExtraSettings.spiderJockeysDropGapples)
+            {
+                this.dropStack(sw, new ItemStack(Items.ENCHANTED_GOLDEN_APPLE));
+            }
         }
     }
 }

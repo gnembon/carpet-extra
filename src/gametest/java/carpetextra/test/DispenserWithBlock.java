@@ -34,9 +34,9 @@ public class DispenserWithBlock {
     static final String STRUCTURE = "carpet-extra:dispenserbase";
     static final String BATCH = "dispenserwithblock";
     static final int DISPENSER_DELAY = 4;
-    BlockPos lapis = new BlockPos(2, 1, 0);
-    BlockPos button = new BlockPos(0, 2, 0);
-    BlockPos dispenser = new BlockPos(1, 2, 0);
+    BlockPos lapis = new BlockPos(2, 0, 0);
+    BlockPos button = new BlockPos(0, 1, 0);
+    BlockPos dispenser = new BlockPos(1, 1, 0);
     
     @BeforeBatch(batchId = BATCH)
     public void before(ServerWorld world) {
@@ -117,22 +117,22 @@ public class DispenserWithBlock {
 
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void boatOnRegularIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityType.BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityType.OAK_BOAT);
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void boatOnPackedIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityType.BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityType.OAK_BOAT);
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void boatOnBlueIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityType.BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityType.OAK_BOAT);
     }
     
     @GameTest(templateName = STRUCTURE, batchId = BATCH)
     public void chestBoatOnIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityType.CHEST_BOAT);
+        boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityType.OAK_CHEST_BOAT);
     }
     
     private void boatTest(TestContext ctx, Item item, Block block, EntityType<?> expectedEntity) {

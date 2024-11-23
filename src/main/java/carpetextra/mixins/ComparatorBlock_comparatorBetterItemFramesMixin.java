@@ -11,6 +11,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -24,24 +25,25 @@ public abstract class ComparatorBlock_comparatorBetterItemFramesMixin extends Ab
         super(settings);
     }
 
+    @Unique
     private ItemFrameEntity getAttachedItemFrameHorizontal(World world, Direction facing, BlockPos pos) {
         List<ItemFrameEntity> list;
-        list = world.getEntitiesByClass(ItemFrameEntity.class, new Box(pos), (itemFrame) -> {
-            return itemFrame != null && (CarpetExtraSettings.comparatorBetterItemFrames.ordinal() >= 2 || itemFrame.getHorizontalFacing() == facing);
-        });
+        list = world.getEntitiesByClass(ItemFrameEntity.class, new Box(pos), (itemFrame) ->
+                itemFrame != null && (CarpetExtraSettings.comparatorBetterItemFrames.ordinal() >= 2 || itemFrame.getHorizontalFacing() == facing));
         if (list.isEmpty() && CarpetExtraSettings.comparatorBetterItemFrames == ComparatorOptions.EXTENDED) {
             list = world.getEntitiesByClass(ItemFrameEntity.class, new Box(pos).expand(0.3), Objects::nonNull);
         }
         return !list.isEmpty() ? list.get(0) : null;
     }
 
+    @Unique
     private ItemFrameEntity getUnAttachedItemFrameHorizontal(World world, Direction facing, BlockPos pos) {
         // If item frame is sitting in front of the comparator, horizontally or on another block
         List<ItemFrameEntity> list = world.getEntitiesByClass(ItemFrameEntity.class, new Box(pos), Objects::nonNull);
         return !list.isEmpty() ? list.get(0) : null;
     }
 
-    @Inject(method = "getPower", at = @At(value = "INVOKE"), cancellable = true)
+    @Inject(method = "getPower", at = @At(value = "RETURN"), cancellable = true)
     protected void isSolidBlockOrAir(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Integer> cir) {
         if (CarpetExtraSettings.comparatorBetterItemFrames != ComparatorOptions.VANILLA) {
             int i = super.getPower(world, pos, state);

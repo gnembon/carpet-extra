@@ -16,7 +16,7 @@ import net.minecraft.block.enums.ComparatorMode;
 import net.minecraft.block.enums.SlabType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.Hand;
@@ -173,7 +173,7 @@ public class BlockPlacer
 
         // It would be nice if relativeHitX was adjusted in context to original range from 0.0 to 1.0,
         // since some blocks are actually using it.
-        DirectionProperty directionProp = getFirstDirectionProperty(state);
+        EnumProperty<Direction> directionProp = getFirstDirectionProperty(state);
         int protocolValue = ((int) relativeHitX - 2) / 2;
 
         if (directionProp != null)
@@ -292,14 +292,18 @@ public class BlockPlacer
         return state;
     }
 
+    @SuppressWarnings("unchecked")
     @Nullable
-    public static DirectionProperty getFirstDirectionProperty(BlockState state)
+    public static EnumProperty<Direction> getFirstDirectionProperty(BlockState state)
     {
         for (Property<?> prop : state.getProperties())
         {
-            if (prop instanceof DirectionProperty)
+            if (prop instanceof EnumProperty<?> enumProperty)
             {
-                return (DirectionProperty) prop;
+                if (enumProperty.getType().equals(Direction.class))
+                {
+                    return (EnumProperty<Direction>) enumProperty;
+                }
             }
         }
 

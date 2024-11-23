@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPointer;
         /* mob & player heads */
         "net/minecraft/block/dispenser/DispenserBehavior$3",
         /* wither skull */
-        "net/minecraft/block/dispenser/DispenserBehavior$4"
+        "net/minecraft/block/dispenser/DispenserBehavior$5"
 })
 public abstract class DispenserBehaviorMobHeadMixin extends FallibleItemDispenserBehavior {
     @Inject(
