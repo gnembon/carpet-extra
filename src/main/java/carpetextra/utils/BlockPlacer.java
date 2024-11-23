@@ -77,7 +77,7 @@ public class BlockPlacer
             return oldState;
         }
 
-        @Nullable DirectionProperty property = getFirstDirectionProperty(state);
+        @Nullable EnumProperty<Direction> property = getFirstDirectionProperty(state);
 
         if (property != null && property != Properties.VERTICAL_DIRECTION)
         {
@@ -110,7 +110,7 @@ public class BlockPlacer
         {
             for (Property<?> p : propList)
             {
-                if ((p instanceof DirectionProperty) == false &&
+                if (((p instanceof EnumProperty<?> ep) && ep.getType().equals(Direction.class) == false) &&
                     WHITELISTED_PROPERTIES.contains(p))
                 {
                     @SuppressWarnings("unchecked")
@@ -253,7 +253,7 @@ public class BlockPlacer
     }
 
     private static BlockState applyDirectionProperty(BlockState state, UseContext context,
-                                                     DirectionProperty property, int protocolValue)
+                                                     EnumProperty<Direction> property, int protocolValue)
     {
         Direction facingOrig = state.get(property);
         Direction facing = facingOrig;
