@@ -3,6 +3,7 @@ package carpetextra.utils;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import com.google.common.collect.ImmutableSet;
 import carpetextra.CarpetExtraSettings;
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +32,8 @@ public class BlockPlacer
     public static final ImmutableSet<Property<?>> WHITELISTED_PROPERTIES = ImmutableSet.of(
             Properties.INVERTED,
             Properties.OPEN,
+            Properties.POWERED,
+            Properties.LOCKED,
             Properties.ATTACHMENT,
             Properties.AXIS,
             Properties.BLOCK_HALF,
@@ -38,6 +41,7 @@ public class BlockPlacer
             Properties.CHEST_TYPE,
             Properties.COMPARATOR_MODE,
             Properties.DOOR_HINGE,
+            Properties.FACING,
             Properties.HOPPER_FACING,
             Properties.HORIZONTAL_FACING,
             Properties.ORIENTATION,
@@ -77,11 +81,11 @@ public class BlockPlacer
             return oldState;
         }
 
-        @Nullable EnumProperty<Direction> property = getFirstDirectionProperty(state);
+        Optional<EnumProperty<Direction>> property = getFirstDirectionProperty(state);
 
-        if (property != null && property != Properties.VERTICAL_DIRECTION)
+        if (property.isPresent() && property.get() != Properties.VERTICAL_DIRECTION)
         {
-            state = applyDirectionProperty(state, context, property, protocolValue);
+            state = applyDirectionProperty(state, context, property.get(), protocolValue);
 
             if (state == null)
             {
@@ -110,7 +114,7 @@ public class BlockPlacer
         {
             for (Property<?> p : propList)
             {
-                if (((p instanceof EnumProperty<?> ep) && ep.getType().equals(Direction.class) == false) &&
+                if (property.isPresent() && !property.get().equals(p) &&
                     WHITELISTED_PROPERTIES.contains(p))
                 {
                     @SuppressWarnings("unchecked")
@@ -173,12 +177,12 @@ public class BlockPlacer
 
         // It would be nice if relativeHitX was adjusted in context to original range from 0.0 to 1.0,
         // since some blocks are actually using it.
-        EnumProperty<Direction> directionProp = getFirstDirectionProperty(state);
+        Optional<EnumProperty<Direction>> directionProp = getFirstDirectionProperty(state);
         int protocolValue = ((int) relativeHitX - 2) / 2;
 
-        if (directionProp != null)
+        if (directionProp.isPresent())
         {
-            Direction origFacing = state.get(directionProp);
+            Direction origFacing = state.get(directionProp.get());
             Direction facing = origFacing;
             int facingIndex = protocolValue & 0xF;
 
@@ -191,12 +195,12 @@ public class BlockPlacer
                 facing = Direction.byId(facingIndex);
             }
 
-            if (directionProp.getValues().contains(facing) == false)
+            if (directionProp.get().getValues().contains(facing) == false)
             {
                 facing = context.getEntity().getHorizontalFacing().getOpposite();
             }
 
-            if (facing != origFacing && directionProp.getValues().contains(facing))
+            if (facing != origFacing && directionProp.get().getValues().contains(facing))
             {
                 if (state.getBlock() instanceof BedBlock)
                 {
@@ -208,7 +212,7 @@ public class BlockPlacer
                     }
                 }
 
-                state = state.with(directionProp, facing);
+                state = state.with(directionProp.get(), facing);
             }
         }
         else if (state.contains(Properties.AXIS))
@@ -293,21 +297,17 @@ public class BlockPlacer
     }
 
     @SuppressWarnings("unchecked")
-    @Nullable
-    public static EnumProperty<Direction> getFirstDirectionProperty(BlockState state)
+    public static Optional<EnumProperty<Direction>> getFirstDirectionProperty(BlockState state)
     {
         for (Property<?> prop : state.getProperties())
         {
-            if (prop instanceof EnumProperty<?> enumProperty)
+            if (prop instanceof EnumProperty<?> ep && ep.getType().equals(Direction.class))
             {
-                if (enumProperty.getType().equals(Direction.class))
-                {
-                    return (EnumProperty<Direction>) enumProperty;
-                }
+                return Optional.of((EnumProperty<Direction>) ep);
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     public static class UseContext
