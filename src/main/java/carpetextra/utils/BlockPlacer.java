@@ -114,7 +114,8 @@ public class BlockPlacer
         {
             for (Property<?> p : propList)
             {
-                if (property.isPresent() && !property.get().equals(p) &&
+                if ((property.isPresent() && !property.get().equals(p)) ||
+                    (property.isEmpty()) &&
                     WHITELISTED_PROPERTIES.contains(p))
                 {
                     @SuppressWarnings("unchecked")
