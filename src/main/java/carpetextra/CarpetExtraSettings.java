@@ -97,6 +97,11 @@ public class CarpetExtraSettings
     public static boolean accurateBlockPlacement = false;
 
     @Rule(
+            categories = {EXTRA, SURVIVAL}
+    )
+    public static boolean accurateBlockPlacementLegacy = false;
+
+    @Rule(
             categories = {EXTRA, EXPERIMENTAL, FEATURE, DISPENSER}
     )
     public static boolean dispensersToggleThings = false;

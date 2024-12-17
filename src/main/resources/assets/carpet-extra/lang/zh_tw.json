@@ -49,8 +49,11 @@
   "carpet.rule.renewablePackedIce.name": "可再生冰磚",
   "carpet.rule.renewablePackedIce.desc": "掉落的鐵砧壓縮多個冰塊時會將冰塊轉為冰磚",
 
-  "carpet.rule.accurateBlockPlacement.name": "準確方塊放置支持",
-  "carpet.rule.accurateBlockPlacement.desc": "啟用對tweakroo mod的tweakAccurateBlockPlacement選項的支持",
+  "carpet.rule.accurateBlockPlacement.name": "(V3) 精確塊放置支持",
+  "carpet.rule.accurateBlockPlacement.desc": "啟用（V3）對tweakroo mod的tweakAccurateBlockPlacement選項的支援",
+
+  "carpet.rule.accurateBlockPlacementLegacy.name": "舊版 (V2) 精確塊放置支持",
+  "carpet.rule.accurateBlockPlacementLegacy.desc": "啟用對tweakroo mod的tweakAccurateBlockPlacement選項的舊版（V2）支持",
 
   "carpet.rule.dispensersToggleThings.name": "發射器使用方塊",
   "carpet.rule.dispensersToggleThings.desc": "含有木棍的發射器可以使用各種方塊元件",
