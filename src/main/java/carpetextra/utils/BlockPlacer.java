@@ -29,11 +29,12 @@ import net.minecraft.world.World;
 
 public class BlockPlacer
 {
+    /**
+     * Whitelist for Block States.  Entries here will be allowed to be placed.
+     */
     public static final ImmutableSet<Property<?>> WHITELISTED_PROPERTIES = ImmutableSet.of(
             Properties.INVERTED,
             Properties.OPEN,
-            Properties.POWERED,
-            Properties.LOCKED,
             Properties.ATTACHMENT,
             Properties.AXIS,
             Properties.BLOCK_HALF,
@@ -53,6 +54,14 @@ public class BlockPlacer
             Properties.DELAY,
             Properties.NOTE,
             Properties.ROTATION
+    );
+
+    /**
+     * BlackList for Block States.  Entries here will be reset to their default value.
+     */
+    public static final ImmutableSet<Property<?>> BLACKLISTED_PROPERTIES = ImmutableSet.of(
+            Properties.WATERLOGGED,
+            Properties.POWERED
     );
 
     public static BlockState applyAlternativeBlockPlacement(BlockState state, UseContext context)
@@ -154,6 +163,19 @@ public class BlockPlacer
         catch (Exception e)
         {
             // Exception
+        }
+
+        // Strip Blacklisted properties, and use the Block's default state.
+        // This needs to be done after the initial loop, or it breaks compatibility
+        for (Property<?> p : BLACKLISTED_PROPERTIES)
+        {
+            if (state.contains(p))
+            {
+                @SuppressWarnings("unchecked")
+                Property<T> prop = (Property<T>) p;
+                BlockState def = state.getBlock().getDefaultState();
+                state = state.with(prop, def.get(prop));
+            }
         }
 
         if (state.canPlaceAt(context.getWorld(), context.getPos()))
