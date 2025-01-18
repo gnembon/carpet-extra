@@ -123,9 +123,13 @@ public class BlockPlacer
         {
             for (Property<?> p : propList)
             {
-                if ((property.isPresent() && !property.get().equals(p)) ||
-                    (property.isEmpty()) &&
-                    WHITELISTED_PROPERTIES.contains(p))
+                if (property.isPresent() && property.get().equals(p))
+                {
+                    // NO-OP
+                    continue;
+                }
+                else if (WHITELISTED_PROPERTIES.contains(p) &&
+                        !BLACKLISTED_PROPERTIES.contains(p))
                 {
                     @SuppressWarnings("unchecked")
                     Property<T> prop = (Property<T>) p;
@@ -166,7 +170,7 @@ public class BlockPlacer
         }
 
         // Strip Blacklisted properties, and use the Block's default state.
-        // This needs to be done after the initial loop, or it breaks compatibility
+        // This needs to be done after the initial loop, or it may break backwards compatibility
         for (Property<?> p : BLACKLISTED_PROPERTIES)
         {
             if (state.contains(p))
