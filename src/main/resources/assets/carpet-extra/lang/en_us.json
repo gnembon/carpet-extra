@@ -114,6 +114,9 @@
   // enderPearlChunkLoading
   "carpet.rule.enderPearlChunkLoading.desc": "Allow horizontally moving Ender Pearls to load chunks as entity ticking.",
 
+  // minecartChunkLoading
+  "carpet.rule.minecartChunkLoading.desc": "Allow horizontally moving Minecarts on rails to load chunks as entity ticking.",
+
   // fallingBlockDispensers
   "carpet.rule.fallingBlockDispensers.desc": "Dispensers/Droppers with a block in front of them when powered will turn that block into a falling block",
 
