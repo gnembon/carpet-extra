@@ -15,7 +15,6 @@
     "AbstractPressurePlateBlock_variableWoodMixin",
     "AbstractButtonBlock_variableWoodMixin",
     "ItemFrameEntity_comparatorReadsClockMixin",
-    "ItemStackMixin",
     "ServerPlayNetworkHandlerMixin",
     "ThrownEntityMixin",
     "BlockItemMixin_accurateBlockPlacement",
