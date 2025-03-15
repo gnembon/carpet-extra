@@ -218,11 +218,6 @@ public class CarpetExtraSettings
     public static int maxSpongeRange = 7;
 
     @Rule(
-            categories = {FEATURE, EXTRA, EXPERIMENTAL}
-    )
-    public static boolean emptyShulkerBoxStackAlways = false;
-
-    @Rule(
             categories = {FEATURE, EXTRA}
     )
     public static boolean enderPearlChunkLoading = false;
