@@ -11,9 +11,10 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPointer;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$4")
+@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$6")
 public abstract class DispenserBehaviorCarvedPumpkinMixin extends FallibleItemDispenserBehavior
 {
+    /* difficult to maintain
     @Inject(
             method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;",
             at = @At("RETURN"),
@@ -26,5 +27,5 @@ public abstract class DispenserBehaviorCarvedPumpkinMixin extends FallibleItemDi
             this.setSuccess(true);
             cir.setReturnValue(PlaceBlockDispenserBehavior.getInstance().dispenseSilently(pointer, stack));
         }
-    }
+    }*/
 }

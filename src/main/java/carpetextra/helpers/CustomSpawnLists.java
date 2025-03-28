@@ -14,8 +14,8 @@ public class CustomSpawnLists
     public static void addExtraSpawnRules()
     {
         SpawnOverrides.addOverride(() -> CarpetExtraSettings.straySpawningInIgloos, SpawnGroup.MONSTER, StructureKeys.IGLOO,
-                StructureSpawns.BoundingBox.STRUCTURE, Pool.of(new SpawnSettings.SpawnEntry(EntityType.STRAY, 1, 1, 1)));
+                StructureSpawns.BoundingBox.STRUCTURE, Pool.of(new SpawnSettings.SpawnEntry(EntityType.STRAY, 1, 1)));
         SpawnOverrides.addOverride(() -> CarpetExtraSettings.creeperSpawningInJungleTemples, SpawnGroup.MONSTER, StructureKeys.JUNGLE_PYRAMID,
-                StructureSpawns.BoundingBox.STRUCTURE, Pool.of(new SpawnSettings.SpawnEntry(EntityType.CREEPER, 1, 1, 1)));
+                StructureSpawns.BoundingBox.STRUCTURE, Pool.of(new SpawnSettings.SpawnEntry(EntityType.CREEPER, 1, 1)));
     }
 }

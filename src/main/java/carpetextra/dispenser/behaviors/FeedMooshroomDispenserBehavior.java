@@ -33,7 +33,7 @@ public class FeedMooshroomDispenserBehavior extends FallibleItemDispenserBehavio
         {
             // get brown mooshrooms in front of dispenser
             List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityType.MOOSHROOM, new Box(frontBlockPos), EntityPredicates.VALID_LIVING_ENTITY.and((mooshroom) -> {
-                return ((MooshroomEntity) mooshroom).getVariant() == MooshroomEntity.Type.BROWN;
+                return ((MooshroomEntity) mooshroom).getVariant() == MooshroomEntity.Variant.BROWN;
             }));
 
             // check all mooshrooms

@@ -14,6 +14,9 @@ import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -28,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Mixin(FarmerVillagerTask.class)
 public abstract class FarmerVillagerTask_wartFarmMixin extends MultiTickTask<VillagerEntity>
@@ -43,18 +47,18 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends MultiTickTask<Vil
 
     @Redirect(method = "shouldRun", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/village/VillagerData;getProfession()Lnet/minecraft/village/VillagerProfession;"
+            target = "Lnet/minecraft/village/VillagerData;profession()Lnet/minecraft/registry/entry/RegistryEntry;"
     ))
-    private VillagerProfession disguiseAsFarmer(VillagerData villagerData)
+    private RegistryEntry<VillagerProfession> disguiseAsFarmer(VillagerData villagerData)
     {
         isFarmingCleric = false;
-        VillagerProfession profession = villagerData.getProfession();
-        if (CarpetExtraSettings.clericsFarmWarts && profession == VillagerProfession.CLERIC)
+        RegistryEntry<VillagerProfession> profession = villagerData.profession();
+        if (CarpetExtraSettings.clericsFarmWarts && profession.matchesKey(VillagerProfession.CLERIC))
         {
             isFarmingCleric = true;
-            return VillagerProfession.FARMER;
+            return Registries.VILLAGER_PROFESSION.getEntry(Registries.VILLAGER_PROFESSION.get(VillagerProfession.FARMER));
         }
-        return profession;
+        return villagerData.profession();
     }
 
     @Inject(method = "isSuitableTarget", at = @At("HEAD"), cancellable = true)

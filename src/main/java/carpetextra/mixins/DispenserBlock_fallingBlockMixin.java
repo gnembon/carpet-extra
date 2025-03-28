@@ -29,14 +29,14 @@ public class DispenserBlock_fallingBlockMixin {
     private void createFallingBlockWithVelocity(World world, BlockPos pos, BlockState state, Vec3d velocity) {
         FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(EntityType.FALLING_BLOCK, world);
         FallingBlockEntityAccessor fallingBlockAccessor = (FallingBlockEntityAccessor)fallingBlockEntity;
-        fallingBlockAccessor.setBlock(state.contains(Properties.WATERLOGGED) ? state.with(Properties.WATERLOGGED, false) : state);
+        fallingBlockAccessor.setBlockState(state.contains(Properties.WATERLOGGED) ? state.with(Properties.WATERLOGGED, false) : state);
         fallingBlockEntity.intersectionChecked = true;
         Vec3d vecPos = Vec3d.ofBottomCenter(pos);
         fallingBlockEntity.setPosition(vecPos);
         fallingBlockEntity.setVelocity(velocity);
-        fallingBlockEntity.prevX = vecPos.x;
-        fallingBlockEntity.prevY = vecPos.y;
-        fallingBlockEntity.prevZ = vecPos.z;
+        fallingBlockEntity.lastX = vecPos.x;
+        fallingBlockEntity.lastY = vecPos.y;
+        fallingBlockEntity.lastZ = vecPos.z;
         fallingBlockEntity.setFallingBlockPos(fallingBlockEntity.getBlockPos());
         world.setBlockState(pos, state.getFluidState().getBlockState(), Block.NOTIFY_ALL);
         world.spawnEntity(fallingBlockEntity);

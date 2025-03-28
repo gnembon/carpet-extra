@@ -17,7 +17,6 @@
     "ItemFrameEntity_comparatorReadsClockMixin",
     "ItemStackMixin",
     "ServerPlayNetworkHandlerMixin",
-    "ThrownEntityMixin",
     "BlockItemMixin_accurateBlockPlacement",
     "HopperMinecartEntity_transferItemsOutFeatureMixin",
     "SpongeBlockMixin",
@@ -25,7 +24,6 @@
     "DispenserBlockEntity_craftingMixin",
 
     "DispenserBlock_GetCustomBehaviorMixin",
-    "DispenserBehaviorCarpetsMixin",
     "DispenserBehaviorChestMixin",
     "DispenserBehaviorGlowstoneMixin",
     "DispenserBehaviorCarvedPumpkinMixin",

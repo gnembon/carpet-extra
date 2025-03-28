@@ -134,7 +134,7 @@ public class CarpetExtraDispenserBehaviors {
 
             // get brown mooshrooms in front of dispenser
             boolean hasFeedableMooshrooms = !world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) ->
-                                             ((MooshroomEntity) mooshroomEntity).getVariant() == MooshroomEntity.Type.BROWN)).isEmpty();
+                                             ((MooshroomEntity) mooshroomEntity).getVariant() == MooshroomEntity.Variant.BROWN)).isEmpty();
 
             // check if item is a small flower
             if(hasFeedableMooshrooms && stack.isIn(ItemTags.SMALL_FLOWERS)) {

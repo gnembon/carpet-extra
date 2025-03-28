@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(CactusBlock.class)
 public abstract class CactusBlock_syncMixin
 {
-    @ModifyConstant(method = "randomTick", require = 2, constant = @Constant(intValue = Block.NO_REDRAW))
+    @ModifyConstant(method = "randomTick", require = 2, constant = @Constant(intValue = Block.SKIP_REDRAW_AND_BLOCK_ENTITY_REPLACED_CALLBACK))
     private int onOnScheduledTick(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)

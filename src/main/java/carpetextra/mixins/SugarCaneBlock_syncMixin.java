@@ -10,11 +10,11 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(SugarCaneBlock.class)
 public abstract class SugarCaneBlock_syncMixin
 {
-    @ModifyConstant(method = "randomTick", require = 2, constant = @Constant(intValue = Block.NO_REDRAW))
+    @ModifyConstant(method = "randomTick", require = 2, constant = @Constant(intValue = Block.SKIP_REDRAW_AND_BLOCK_ENTITY_REPLACED_CALLBACK))
     private int onOnScheduledTick1(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return Block.NO_REDRAW | Block.NOTIFY_LISTENERS;
+            return original | Block.NOTIFY_LISTENERS;
         else
             return original;
     }

@@ -10,11 +10,11 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(SaplingBlock.class)
 public abstract class SaplingBlock_syncMixin
 {
-    @ModifyConstant(method = "generate", constant = @Constant(intValue = Block.NO_REDRAW))
+    @ModifyConstant(method = "generate", constant = @Constant(intValue = Block.SKIP_REDRAW_AND_BLOCK_ENTITY_REPLACED_CALLBACK))
     private int onGenerate(int original)
     {
         if (CarpetExtraSettings.blockStateSyncing)
-            return Block.NO_REDRAW | Block.NOTIFY_LISTENERS;
+            return Block.SKIP_REDRAW_AND_BLOCK_ENTITY_REPLACED_CALLBACK | Block.NOTIFY_LISTENERS;
         else
             return original;
     }
