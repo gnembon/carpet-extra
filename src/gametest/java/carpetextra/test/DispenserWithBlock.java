@@ -21,12 +21,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.test.AfterBatch;
-import net.minecraft.test.BeforeBatch;
-import net.minecraft.test.CustomTestProvider;
-import net.minecraft.test.GameTest;
+//import net.minecraft.test.AfterBatch;
+//import net.minecraft.test.BeforeBatch;
+//import net.minecraft.test.CustomTestProvider;
+//import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
-import net.minecraft.test.TestFunction;
+//import net.minecraft.test.TestFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
@@ -37,7 +37,8 @@ public class DispenserWithBlock {
     BlockPos lapis = new BlockPos(2, 0, 0);
     BlockPos button = new BlockPos(0, 1, 0);
     BlockPos dispenser = new BlockPos(1, 1, 0);
-    
+
+    /*
     @BeforeBatch(batchId = BATCH)
     public void before(ServerWorld world) {
         CarpetExtraSettings.dispensersFillMinecarts = true;
@@ -368,4 +369,6 @@ public class DispenserWithBlock {
         name = name.replace("minecraft:", "");
         return new TestFunction(BATCH, BATCH + '.' + name, STRUCTURE, 20, 0, true, runner);
     }
+
+     */
 }

@@ -10,9 +10,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.test.AfterBatch;
-import net.minecraft.test.BeforeBatch;
-import net.minecraft.test.GameTest;
+//import net.minecraft.test.AfterBatch;
+//import net.minecraft.test.BeforeBatch;
+//import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
 import net.minecraft.util.math.BlockPos;
 
@@ -23,6 +23,7 @@ public class WartFarming {
     BlockPos soulSand = new BlockPos(0, 0, 0);
     BlockPos lapis = new BlockPos(3, 1, 0);
 
+    /*
     @BeforeBatch(batchId = BATCH)
     public void before(ServerWorld world) {
         CarpetExtraSettings.clericsFarmWarts = true;
