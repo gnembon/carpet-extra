@@ -232,13 +232,6 @@ Empty Shulker Boxes will always stack, even inside inventories.
 * Allowed options: `true`, `false`  
 * Categories: `FEATURE`, `EXTRAS`, `EXPERIMENTAL`  
   
-## enderPearlChunkLoading
-Allow horizontally moving Ender Pearls to load chunks as entity ticking.  
-* Type: `Boolean`  
-* Default value: `false`  
-* Allowed options: `true`, `false`  
-* Categories: `FEATURE`, `EXTRAS`  
-  
 ## fallingBlockDispensers
 Dispensers/Droppers with a block in front of them when powered will turn that block into a falling block  
 dispenser & dropper give the same velocity to the falling block like they do in 22w13oneblockatatime  
