@@ -26,8 +26,10 @@ dependencies {
 
 	// for gametests
 	modRuntimeOnly fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
+	modRuntimeOnly fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)
+	modRuntimeOnly fabricApi.module("fabric-registry-sync-v0", project.fabric_api_version)
 	modRuntimeOnly fabricApi.module("fabric-api-base", project.fabric_api_version)
-	modRuntimeOnly fabricApi.module("fabric-gametest-api-v1", project.fabric_api_version)
+	modImplementation fabricApi.module("fabric-gametest-api-v1", project.fabric_api_version)
 }
 
 sourceSets {

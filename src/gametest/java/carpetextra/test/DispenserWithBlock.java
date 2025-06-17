@@ -5,9 +5,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-import carpetextra.CarpetExtraSettings;
+import carpetextra.machinery.DynamicTest;
+import carpetextra.machinery.TestProvider;
 import carpetextra.mixins.AxeItem_StrippedBlocksAccessorMixin;
+import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,64 +23,31 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potions;
-import net.minecraft.server.world.ServerWorld;
-//import net.minecraft.test.AfterBatch;
-//import net.minecraft.test.BeforeBatch;
-//import net.minecraft.test.CustomTestProvider;
-//import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
-//import net.minecraft.test.TestFunction;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
 public class DispenserWithBlock {
     static final String STRUCTURE = "carpet-extra:dispenserbase";
-    static final String BATCH = "dispenserwithblock";
+    static final String GEN_PREFIX = "dispenser_with_block";
+    static final String ENV = "carpet-extra:dispenserwithblock"; // turns rules on
     static final int DISPENSER_DELAY = 4;
     BlockPos lapis = new BlockPos(2, 0, 0);
     BlockPos button = new BlockPos(0, 1, 0);
     BlockPos dispenser = new BlockPos(1, 1, 0);
-
-    /*
-    @BeforeBatch(batchId = BATCH)
-    public void before(ServerWorld world) {
-        CarpetExtraSettings.dispensersFillMinecarts = true;
-        CarpetExtraSettings.dispensersCarvePumpkins = true;
-        CarpetExtraSettings.dispensersStripBlocks = true;
-        CarpetExtraSettings.dispensersTillSoil = true;
-        CarpetExtraSettings.dispensersUseCauldrons = true;
-        CarpetExtraSettings.dispensersPlaceBoatsOnIce = true;
-        CarpetExtraSettings.blazeMeal = true;
-        CarpetExtraSettings.renewableEndstone = true;
-        CarpetExtraSettings.renewableNetherrack = true;
-        CarpetExtraSettings.autoCraftingDropper = true; // TODO separate, further testing for this feature
-    }
     
-    @AfterBatch(batchId = BATCH)
-    public void after(ServerWorld world) {
-        CarpetExtraSettings.dispensersFillMinecarts = false;
-        CarpetExtraSettings.dispensersCarvePumpkins = false;
-        CarpetExtraSettings.dispensersStripBlocks = false;
-        CarpetExtraSettings.dispensersTillSoil = false;
-        CarpetExtraSettings.dispensersUseCauldrons = false;
-        CarpetExtraSettings.dispensersPlaceBoatsOnIce = false;
-        CarpetExtraSettings.blazeMeal = false;
-        CarpetExtraSettings.renewableEndstone = false;
-        CarpetExtraSettings.renewableNetherrack = false;
-        CarpetExtraSettings.autoCraftingDropper = false;
-    }
-    
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void renewableNetherrack(TestContext ctx) {
         blockConversionTest(ctx, Items.FIRE_CHARGE, Blocks.COBBLESTONE, Blocks.NETHERRACK, 1, true);
     }
     
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void renewableEndstone(TestContext ctx) {
         blockConversionTest(ctx, Items.DRAGON_BREATH, Blocks.COBBLESTONE, Blocks.END_STONE, 1, true);
     }
     
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void blazeMeal(TestContext ctx) {
         putInDispenser(ctx, Items.BLAZE_POWDER.getDefaultStack());
         ctx.setBlockState(lapis, Blocks.SOUL_SAND);
@@ -91,7 +61,7 @@ public class DispenserWithBlock {
         });
     }
     
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void blazeMealMaxed(TestContext ctx) {
         putInDispenser(ctx, Items.BLAZE_POWDER.getDefaultStack());
         ctx.setBlockState(lapis, Blocks.SOUL_SAND);
@@ -106,32 +76,32 @@ public class DispenserWithBlock {
         });
     }
     
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void shearPumpkin(TestContext ctx) {
         blockConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, false, () -> ctx.expectItem(Items.PUMPKIN_SEEDS));
     }
 
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void shearPumpkinBreaks(TestContext ctx) {
         blockConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, true, () -> ctx.expectItem(Items.PUMPKIN_SEEDS));
     }
 
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void boatOnRegularIce(TestContext ctx) {
         boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityType.OAK_BOAT);
     }
     
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void boatOnPackedIce(TestContext ctx) {
         boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityType.OAK_BOAT);
     }
     
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void boatOnBlueIce(TestContext ctx) {
         boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityType.OAK_BOAT);
     }
     
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void chestBoatOnIce(TestContext ctx) {
         boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityType.OAK_CHEST_BOAT);
     }
@@ -147,9 +117,9 @@ public class DispenserWithBlock {
         });
     }
 
-    @CustomTestProvider
-    public Collection<TestFunction> stripTests() {
-        List<TestFunction> fns = new ArrayList<>();
+    @TestProvider
+    public Collection<DynamicTest> stripTests() {
+        List<DynamicTest> fns = new ArrayList<>();
         Map<Block, Block> conversions = AxeItem_StrippedBlocksAccessorMixin.getStrippedBlocks();
         
         for (Map.Entry<Block, Block> entry : conversions.entrySet()) {
@@ -177,9 +147,9 @@ public class DispenserWithBlock {
         blockConversionTest(ctx, tool, blockFrom, blockTo, 1, false);
     }
     
-    @CustomTestProvider
-    public Collection<TestFunction> cauldronTests() {
-        List<TestFunction> fns = new ArrayList<>();
+    @TestProvider
+    public Collection<DynamicTest> cauldronTests() {
+        List<DynamicTest> fns = new ArrayList<>();
         for (int i = 0; i < 2; i++) { // 3 is handled separately
             for (int off = -1; off <= 1; off += 2) {
                 int finalOff = off;
@@ -228,9 +198,9 @@ public class DispenserWithBlock {
         return Blocks.WATER_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, level);
     }
 
-    @CustomTestProvider
-    public Collection<TestFunction> tillTests() {
-        List<TestFunction> fns = new ArrayList<>();
+    @TestProvider
+    public Collection<DynamicTest> tillTests() {
+        List<DynamicTest> fns = new ArrayList<>();
         fns.add(makeDispenserTest("tillDirtAbove", (ctx) -> {
             blockConversionTest(ctx, Items.IRON_HOE, Blocks.DIRT, Blocks.FARMLAND, 1, false);
         }));
@@ -276,22 +246,22 @@ public class DispenserWithBlock {
         });
     }
     
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartChest(TestContext ctx) {
         cartTest(ctx, Items.CHEST, EntityType.CHEST_MINECART);
     }
 
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartHopper(TestContext ctx) {
         cartTest(ctx, Items.HOPPER, EntityType.HOPPER_MINECART);
     }
 
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartTnt(TestContext ctx) {
         cartTest(ctx, Items.TNT, EntityType.TNT_MINECART, () -> ctx.dontExpectEntity(EntityType.TNT));
     }
 
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartFurnace(TestContext ctx) {
         cartTest(ctx, Items.FURNACE, EntityType.FURNACE_MINECART);
     }
@@ -311,7 +281,7 @@ public class DispenserWithBlock {
     }
     
     // very basic autocrafting test, for now just to catch simple crashes or malfunctioning stuff
-    @GameTest(templateName = STRUCTURE, batchId = BATCH)
+    @GameTest(structure = STRUCTURE, environment = ENV)
     public void craftCake(TestContext ctx) {
         Item[] recipe = new Item[] {
                 Items.MILK_BUCKET, Items.MILK_BUCKET, Items.MILK_BUCKET,
@@ -321,7 +291,7 @@ public class DispenserWithBlock {
         ctx.setBlockState(dispenser, Blocks.DROPPER.getStateWithProperties(ctx.getBlockState(dispenser)));
         ctx.setBlockState(lapis.up(), Blocks.CRAFTING_TABLE);
         for (int i = 0; i < 9; i++) {
-            ctx.<DispenserBlockEntity>getBlockEntity(dispenser).setStack(i, recipe[i].getDefaultStack());
+            ctx.getBlockEntity(dispenser, DispenserBlockEntity.class).setStack(i, recipe[i].getDefaultStack());
         }
         ctx.pushButton(button);
         
@@ -330,22 +300,23 @@ public class DispenserWithBlock {
             for (Item item : recipe) ctx.dontExpectItem(item);
             for (int i = 0; i < 3; i++) {
                 int finalI = i;
-                ctx.<DispenserBlockEntity>checkBlockEntity(dispenser,
+                
+                ctx.checkBlockEntity(dispenser, DispenserBlockEntity.class,
                         disp -> disp.getStack(finalI).getItem() == Items.BUCKET, 
-                        () -> "Must have buckets remaining in dispenser");
+                        msg("Must have buckets remaining in dispenser"));
             }
             for (int i = 3; i < 9; i++) {
                 int finalI = i;
-                ctx.<DispenserBlockEntity>checkBlockEntity(dispenser,
+                ctx.checkBlockEntity(dispenser, DispenserBlockEntity.class,
                         disp -> disp.getStack(finalI).isEmpty(), 
-                        () -> "Must not have anything but the first 3 buckets in dispenser");
+                        msg("Must not have anything but the first 3 buckets in dispenser"));
             }
         });
     }
     
     // Util
     private void putInDispenser(TestContext ctx, ItemStack item) {
-        ctx.<DispenserBlockEntity>getBlockEntity(dispenser).addToFirstFreeSlot(item);
+        ctx.getBlockEntity(dispenser, DispenserBlockEntity.class).addToFirstFreeSlot(item);
     }
     
     private void putAtOneDurability(TestContext ctx, Item item) {
@@ -355,20 +326,21 @@ public class DispenserWithBlock {
     }
     
     private void checkFirstSlotHas(TestContext ctx, Item item, boolean damaged) {
-        ctx.<DispenserBlockEntity>checkBlockEntity(dispenser, 
+        ctx.checkBlockEntity(dispenser, DispenserBlockEntity.class,
                 disp -> disp.getStack(0).getItem() == item && (!damaged || disp.getStack(0).isDamaged()), 
-                () -> "Must have " + (damaged ? "damaged " : "") + item + " in dispenser");
+                msg("Must have " + (damaged ? "damaged " : "") + item + " in dispenser"));
     }
     
     private void runAll(Runnable... actions) {
         for (Runnable r : actions) r.run();
     }
+    private Supplier<Text> msg(String str) {
+        return () -> Text.literal(str);
+    }
     
     // Setup util
-    private TestFunction makeDispenserTest(String name, Consumer<TestContext> runner) {
-        name = name.replace("minecraft:", "");
-        return new TestFunction(BATCH, BATCH + '.' + name, STRUCTURE, 20, 0, true, runner);
+    private DynamicTest makeDispenserTest(String name, Consumer<TestContext> runner) {
+        name = GEN_PREFIX + '.' + name.replace("minecraft:", "");
+        return new DynamicTest(ENV, name, STRUCTURE, 20, 0, true, runner);
     }
-
-     */
 }

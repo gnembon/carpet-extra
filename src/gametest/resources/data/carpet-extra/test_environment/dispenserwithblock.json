@@ -1,0 +1,57 @@
+{
+    "type": "minecraft:all_of",
+
+    "definitions": [
+        {
+            "type": "carpet:rule",
+			"key": "dispensersFillMinecarts",
+			"value": "true"
+        },
+		{
+		    "type": "carpet:rule",
+			"key": "dispensersCarvePumpkins",
+			"value": "true"
+		},
+		{
+		    "type": "carpet:rule",
+			"key": "dispensersStripBlocks",
+			"value": "true"
+		},
+		{
+		    "type": "carpet:rule",
+			"key": "dispensersTillSoil",
+			"value": "true"
+		},
+		{
+		    "type": "carpet:rule",
+			"key": "dispensersUseCauldrons",
+			"value": "true"
+		},
+		{
+		    "type": "carpet:rule",
+			"key": "dispensersPlaceBoatsOnIce",
+			"value": "true"
+		},
+		{
+		    "type": "carpet:rule",
+			"key": "blazeMeal",
+			"value": "true"
+		},
+		{
+		    "type": "carpet:rule",
+			"key": "renewableEndstone",
+			"value": "true"
+		},
+		{
+		    "type": "carpet:rule",
+			"key": "renewableNetherrack",
+			"value": "true"
+		},
+		{
+		    "type": "carpet:rule",
+			"__comment": "TODO: separate this feature",
+			"key": "autoCraftingDropper",
+			"value": "true"
+		}
+    ]
+}

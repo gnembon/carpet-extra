@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:all_of",
+
+    "definitions": [
+        {
+            "type": "carpet:rule",
+			"key": "clericsFarmWarts",
+			"value": "true"
+        }
+    ]
+}
