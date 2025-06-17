@@ -32,11 +32,11 @@ dependencies {
 	modImplementation "carpet:fabric-carpet:${project.minecraft_version}-${project.carpet_core_version}"
 
 	// for gametests
-	modRuntimeOnly fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
-	modRuntimeOnly fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)
-	modRuntimeOnly fabricApi.module("fabric-registry-sync-v0", project.fabric_api_version)
-	modRuntimeOnly fabricApi.module("fabric-api-base", project.fabric_api_version)
-	modImplementation fabricApi.module("fabric-gametest-api-v1", project.fabric_api_version)
+	modGametestImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
+	modGametestImplementation fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)
+	modGametestImplementation fabricApi.module("fabric-registry-sync-v0", project.fabric_api_version)
+	modGametestImplementation fabricApi.module("fabric-api-base", project.fabric_api_version)
+	modGametestImplementation fabricApi.module("fabric-gametest-api-v1", project.fabric_api_version)
 }
 
 processResources {
