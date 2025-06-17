@@ -18,7 +18,9 @@ import net.minecraft.block.LeveledCauldronBlock;
 import net.minecraft.block.NetherWartBlock;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.component.type.PotionContentsComponent;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -27,6 +29,7 @@ import net.minecraft.test.TestContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.GameMode;
 
 public class DispenserWithBlock {
     static final String STRUCTURE = "carpet-extra:dispenserbase";
@@ -111,9 +114,17 @@ public class DispenserWithBlock {
         ctx.setBlockState(lapis, block);
         
         ctx.pushButton(button);
-        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
+        ctx.runAtTick(DISPENSER_DELAY, () -> {
             ctx.expectEmptyContainer(dispenser);
             ctx.expectEntityAt(expectedEntity, lapis.up());
+            
+            Entity boat = ctx.getEntities(expectedEntity).getFirst();
+            
+            PlayerEntity p = ctx.createMockPlayer(GameMode.SURVIVAL);
+            for (int i = 0; i < 20; i++) p.attack(boat); // just kill doesn't drop it
+            
+            ctx.expectItem(item);
+            ctx.complete();
         });
     }
 
