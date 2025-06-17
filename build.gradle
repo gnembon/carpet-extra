@@ -16,6 +16,13 @@ base {
 version = project.minecraft_version+'-'+project.mod_version
 group = project.maven_group
 
+fabricApi {
+	configureTests {
+		createSourceSet = true
+		modId = "carpet-extra-gametest"
+		eula = true
+	}
+}
 
 dependencies {
 	//to change the versions see the gradle.properties file
@@ -30,44 +37,6 @@ dependencies {
 	modRuntimeOnly fabricApi.module("fabric-registry-sync-v0", project.fabric_api_version)
 	modRuntimeOnly fabricApi.module("fabric-api-base", project.fabric_api_version)
 	modImplementation fabricApi.module("fabric-gametest-api-v1", project.fabric_api_version)
-}
-
-sourceSets {
-	gametest {
-		java {
-			compileClasspath += main.output
-			compileClasspath += main.compileClasspath
-			runtimeClasspath += main.output
-			runtimeClasspath += main.runtimeClasspath
-		}
-	}
-}
-
-loom {
-	runs {
-		gametest {
-			inherit server
-			name "Game Test"
-			vmArg "-Dfabric-api.gametest"
-			//vmArg "-Dmixin.debug.countInjections=true" // gnembon/fabric-carpet#1938
-			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
-			source sourceSets.gametest
-			runDir "build/gametest"
-			ideConfigGenerated = false
-		}
-	}
-	runConfigs.configureEach {
-		// to be able to create and run gametests on regular debug
-		source sourceSets.gametest
-	}
-	mods {
-		"carpet-extra" {
-			sourceSet sourceSets.main
-		}
-		"carpet-extra-gametest" {
-			sourceSet sourceSets.gametest
-		}
-	}
 }
 
 processResources {
