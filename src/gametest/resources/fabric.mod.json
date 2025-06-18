@@ -8,11 +8,14 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "carpetextra.ExportPathChanger"
+      "carpetextra.machinery.TestMachinery"
     ],
     "fabric-gametest": [
       "carpetextra.test.DispenserWithBlock",
       "carpetextra.test.WartFarming"
     ]
-  }
+  },
+  "mixins": [
+    "gametest-machinery.mixins.json"
+  ]
 }

@@ -31,7 +31,7 @@ public abstract class VillagerEntity_wartFarmMixin extends MerchantEntity
     private void canClericGather(ServerWorld world, ItemStack stack, CallbackInfoReturnable<Boolean> cir)
     {
         if (CarpetExtraSettings.clericsFarmWarts && stack.getItem() == Items.NETHER_WART &&
-                getVillagerData().getProfession() == VillagerProfession.CLERIC )
+                getVillagerData().profession().matchesKey(VillagerProfession.CLERIC) )
         {
             cir.setReturnValue(true);
         }
@@ -40,7 +40,7 @@ public abstract class VillagerEntity_wartFarmMixin extends MerchantEntity
     @Inject(method = "hasSeedToPlant", at = @At("HEAD"), cancellable = true)
     private void hasWartsToPlant(CallbackInfoReturnable<Boolean> cir)
     {
-        if (CarpetExtraSettings.clericsFarmWarts && getVillagerData().getProfession() == VillagerProfession.CLERIC )
+        if (CarpetExtraSettings.clericsFarmWarts && getVillagerData().profession().matchesKey(VillagerProfession.CLERIC ))
         {
             cir.setReturnValue(getInventory().containsAny(ImmutableSet.of(Items.NETHER_WART)));
         }

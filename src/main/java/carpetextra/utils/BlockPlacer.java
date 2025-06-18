@@ -219,7 +219,7 @@ public class BlockPlacer
             }
             else if (facingIndex >= 0 && facingIndex <= 5)
             {
-                facing = Direction.byId(facingIndex);
+                facing = Direction.byIndex(facingIndex);
             }
 
             if (directionProp.get().getValues().contains(facing) == false)

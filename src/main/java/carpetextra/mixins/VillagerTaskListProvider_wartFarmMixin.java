@@ -5,6 +5,8 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.brain.task.Task;
 import net.minecraft.entity.ai.brain.task.VillagerTaskListProvider;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.village.VillagerProfession;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,11 +20,11 @@ public abstract class VillagerTaskListProvider_wartFarmMixin
 
     @Redirect(method = "createWorkTasks", at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/village/VillagerProfession;FARMER:Lnet/minecraft/village/VillagerProfession;"
+            target = "Lnet/minecraft/village/VillagerProfession;FARMER:Lnet/minecraft/registry/RegistryKey;"
     ))
-    private static VillagerProfession redirectFarmer(VillagerProfession profession, float f)
+    private static RegistryKey<VillagerProfession> redirectFarmer(RegistryEntry<VillagerProfession> profession, float speed)
     {
-        if (CarpetExtraSettings.clericsFarmWarts && profession == VillagerProfession.CLERIC)
+        if (CarpetExtraSettings.clericsFarmWarts && profession.matchesKey(VillagerProfession.CLERIC))
             return VillagerProfession.CLERIC;
         return VillagerProfession.FARMER;
     }

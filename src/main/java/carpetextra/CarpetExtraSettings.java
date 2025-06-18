@@ -228,11 +228,6 @@ public class CarpetExtraSettings
     public static boolean emptyShulkerBoxStackAlways = false;
 
     @Rule(
-            categories = {FEATURE, EXTRA}
-    )
-    public static boolean enderPearlChunkLoading = false;
-
-    @Rule(
             categories = {FEATURE, EXTRA, SURVIVAL}
     )
     public static boolean betterBonemeal = false;

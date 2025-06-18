@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:all_of",
+
+    "definitions": [
+        {
+            "type": "carpet:rule",
+			"key": "clericsFarmWarts",
+			"value": "true"
+        },
+		{
+			"type": "minecraft:time_of_day",
+			"time": 2500
+		}
+    ]
+}

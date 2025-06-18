@@ -30,6 +30,7 @@ public abstract class DispenserBlockMixin
         Item item = stack.getItem();
         if (CarpetExtraSettings.dispenserPlacesBlocks && !BEHAVIORS.containsKey(item) && item instanceof BlockItem)
         {
+
             if (PlaceBlockDispenserBehavior.canPlace(((BlockItem) item).getBlock()))
             {
                 cir.setReturnValue(PlaceBlockDispenserBehavior.getInstance());

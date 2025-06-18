@@ -13,11 +13,12 @@ import net.minecraft.util.math.BlockPointer;
 
 @Mixin(targets = {
         /* mob & player heads */
-        "net/minecraft/block/dispenser/DispenserBehavior$3",
+        "net/minecraft/block/dispenser/DispenserBehavior$6",
         /* wither skull */
-        "net/minecraft/block/dispenser/DispenserBehavior$5"
+        //"net/minecraft/block/dispenser/DispenserBehavior$7"
 })
 public abstract class DispenserBehaviorMobHeadMixin extends FallibleItemDispenserBehavior {
+    /* difficult to maintain
     @Inject(
             method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;",
             at = @At("RETURN"),
@@ -31,4 +32,5 @@ public abstract class DispenserBehaviorMobHeadMixin extends FallibleItemDispense
             cir.setReturnValue(PlaceBlockDispenserBehavior.getInstance().dispenseSilently(pointer, stack));
         }
     }
+    */
 }

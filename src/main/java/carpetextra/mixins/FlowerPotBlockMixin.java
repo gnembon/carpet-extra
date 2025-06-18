@@ -1,5 +1,6 @@
 package carpetextra.mixins;
 
+import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -45,9 +46,9 @@ public abstract class FlowerPotBlockMixin extends Block
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
         // check if chunk should remove force load when flower pot is broken
         FlowerPotHelper.updateLoadStatus(world, pos, this.content, false);
-        super.onStateReplaced(state, world, pos, newState, moved);
+        super.onStateReplaced(state, world, pos, moved);
     }
 }

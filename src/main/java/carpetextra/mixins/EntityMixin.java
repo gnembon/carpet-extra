@@ -3,6 +3,8 @@ package carpetextra.mixins;
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtDouble;
+import net.minecraft.nbt.NbtFloat;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +20,7 @@ public abstract class EntityMixin
 {
     @Shadow public abstract Box getBoundingBox();
     
-    @Shadow protected abstract NbtList toNbtList(double... doubles_1);
+    //@Shadow protected abstract NbtList toNbtList(double... doubles_1);
     
     @Shadow protected abstract boolean shouldSetPositionOnLoad();
     
@@ -32,6 +34,24 @@ public abstract class EntityMixin
 
     @Shadow protected abstract void refreshPosition();
 
+
+    protected NbtList newDoubleList(final double... values) {
+        final NbtList result = new NbtList();
+        for (final double value : values) {
+            result.add(NbtDouble.of(value));
+        }
+        return result;
+    }
+
+    protected NbtList newFloatList(final float... values) {
+        final NbtList result = new NbtList();
+        for (final float value : values) {
+            result.add(NbtFloat.of(value));
+        }
+        return result;
+    }
+
+
     @Inject(
             method = "writeNbt",
             at = @At(value = "INVOKE", shift = At.Shift.BEFORE, ordinal = 0,
@@ -42,7 +62,7 @@ public abstract class EntityMixin
         if (CarpetExtraSettings.reloadSuffocationFix)
         {
             Box box = this.getBoundingBox();
-            NbtCompound_1.put("CM_Box", this.toNbtList(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ));
+            NbtCompound_1.put("CM_Box", newDoubleList(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ));
         }
     }
     
@@ -64,13 +84,13 @@ public abstract class EntityMixin
             this.refreshPosition();
         }
         
-        if (CarpetExtraSettings.reloadSuffocationFix && NbtCompound_1.contains("CM_Box", 9))
+        if (CarpetExtraSettings.reloadSuffocationFix && NbtCompound_1.contains("CM_Box"))
         {
-            NbtList box_tag = NbtCompound_1.getList("CM_Box", 6);
+            NbtList box_tag = NbtCompound_1.getList("CM_Box").get();
             
-            Box box = new Box(box_tag.getDouble(0), box_tag.getDouble(1),
-                    box_tag.getDouble(2), box_tag.getDouble(3),
-                    box_tag.getDouble(4), box_tag.getDouble(5));
+            Box box = new Box(box_tag.getDouble(0).get(), box_tag.getDouble(1).get(),
+                    box_tag.getDouble(2).get(), box_tag.getDouble(3).get(),
+                    box_tag.getDouble(4).get(), box_tag.getDouble(5).get());
     
             double deltaX = ((box.minX + box.maxX) / 2.0D) - this.getX();
             double deltaY = box.minY - this.getY();

@@ -21,7 +21,7 @@ public class SecondaryPointOfInterestSensor_wartFarmMixin
     @Inject(method = "sense", at = @At("HEAD"), cancellable = true)
     private void notVanillaCleric(ServerWorld world, VillagerEntity villager, CallbackInfo ci)
     {
-        if(!CarpetExtraSettings.clericsFarmWarts && villager.getVillagerData().getProfession() == VillagerProfession.CLERIC)
+        if(!CarpetExtraSettings.clericsFarmWarts && villager.getVillagerData().profession().matchesKey(VillagerProfession.CLERIC))
         {
             // in vanilla we want not to find secondary POI for clerics
             Brain<?> brain = villager.getBrain();
