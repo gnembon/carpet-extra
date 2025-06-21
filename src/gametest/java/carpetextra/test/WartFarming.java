@@ -15,12 +15,12 @@ import net.minecraft.util.math.BlockPos;
 
 public class WartFarming {
     private static final String STRUCTURE = "carpet-extra:wartbase";
-    private static final String ENV = "carpet-extra:warts"; // turns rule on
+    private static final String WART_FARMING_ENABLED = "carpet-extra:warts";
     
     BlockPos soulSand = new BlockPos(0, 0, 0);
     BlockPos lapis = new BlockPos(3, 1, 0);
     
-    @GameTest(environment = ENV, structure = STRUCTURE, maxTicks = 1500)
+    @GameTest(environment = WART_FARMING_ENABLED, structure = STRUCTURE, maxTicks = 1500)
     public void placesWarts(TestContext ctx) {
         ctx.spawnItem(Items.NETHER_WART, lapis);
         ctx.spawnEntity(EntityType.VILLAGER, lapis);
@@ -30,7 +30,7 @@ public class WartFarming {
         });
     }
     
-    @GameTest(environment = ENV, structure = STRUCTURE, maxTicks = 1500)
+    @GameTest(environment = WART_FARMING_ENABLED, structure = STRUCTURE, maxTicks = 1500)
     public void collectsWarts(TestContext ctx) {
         ctx.setBlockState(soulSand.up(), Blocks.NETHER_WART.getDefaultState().with(AGE, MAX_AGE));
         VillagerEntity villager =  ctx.spawnEntity(EntityType.VILLAGER, lapis);
@@ -41,6 +41,17 @@ public class WartFarming {
                     (st) -> Text.literal("Wart not collected"));
             ctx.assertTrue(villager.getInventory().containsAny(Set.of(Items.NETHER_WART)), Text.literal("Villager didn't get warts"));
         });
+    }
+    
+    @GameTest(/* no env */ structure = STRUCTURE, maxTicks = 200)
+    public void doesntPickupWartsWithoutRule(TestContext ctx) {
+        ctx.spawnItem(Items.NETHER_WART, lapis);
+        ctx.spawnEntity(EntityType.VILLAGER, lapis);
+        
+        ctx.runAtEveryTick(() -> {
+            ctx.expectItem(Items.NETHER_WART);
+        });
+        ctx.runAtTick(200, ctx::complete);
     }
     
     /* Too slow
