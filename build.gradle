@@ -20,7 +20,7 @@ fabricApi {
 	configureTests {
 		createSourceSet = true
 		modId = "carpet-extra-gametest"
-		eula = true
+		enableClientGameTests = false
 	}
 }
 
