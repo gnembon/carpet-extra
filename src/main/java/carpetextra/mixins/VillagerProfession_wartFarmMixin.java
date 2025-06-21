@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -42,8 +41,8 @@ public abstract class VillagerProfession_wartFarmMixin
     {
         if (key == VillagerProfession.CLERIC && !handled)
         {
-            handled = true; // recursion otherwise. Probably should just be a redirect but let's see if this works
-            cir.setReturnValue(register(registry, key, heldWorkstation, acquirableWorkstation, ImmutableSet.of(Items.NETHER_WART), ImmutableSet.of(Blocks.SOUL_SAND), workSound));
+            handled = true; // recursion otherwise. Probably should just be a redirect but let's see if this works. Or even better redirect the accessors/accesses so other mod code doesn't break
+            cir.setReturnValue(register(registry, key, heldWorkstation, acquirableWorkstation, gatherableItems, ImmutableSet.of(Blocks.SOUL_SAND), workSound));
         }
     }
 }
