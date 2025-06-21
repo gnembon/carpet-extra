@@ -35,12 +35,14 @@ public abstract class VillagerProfession_wartFarmMixin
     ) {
         throw new AssertionError();
     }
+    private static boolean handled = false;
 
     @Inject(method = "register(Lnet/minecraft/registry/Registry;Lnet/minecraft/registry/RegistryKey;Ljava/util/function/Predicate;Ljava/util/function/Predicate;Lcom/google/common/collect/ImmutableSet;Lcom/google/common/collect/ImmutableSet;Lnet/minecraft/sound/SoundEvent;)Lnet/minecraft/village/VillagerProfession;", cancellable = true, at = @At("HEAD"))
     private static void registerCleric(Registry<VillagerProfession> registry, RegistryKey<VillagerProfession> key, Predicate<RegistryEntry<PointOfInterestType>> heldWorkstation, Predicate<RegistryEntry<PointOfInterestType>> acquirableWorkstation, ImmutableSet<Item> gatherableItems, ImmutableSet<Block> secondaryJobSites, @Nullable SoundEvent workSound, CallbackInfoReturnable<VillagerProfession> cir)
     {
-        if (key.equals("cleric"))
+        if (key == VillagerProfession.CLERIC && !handled)
         {
+            handled = true; // recursion otherwise. Probably should just be a redirect but let's see if this works
             cir.setReturnValue(register(registry, key, heldWorkstation, acquirableWorkstation, ImmutableSet.of(Items.NETHER_WART), ImmutableSet.of(Blocks.SOUL_SAND), workSound));
         }
     }
