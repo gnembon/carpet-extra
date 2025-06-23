@@ -4,16 +4,17 @@ import carpetextra.CarpetExtraSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtDouble;
-import net.minecraft.nbt.NbtFloat;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin
@@ -34,63 +35,61 @@ public abstract class EntityMixin
 
     @Shadow protected abstract void refreshPosition();
 
-
-    protected NbtList newDoubleList(final double... values) {
-        final NbtList result = new NbtList();
+    @Unique
+    protected NbtCompound newDoubleList(final double... values) {
+        NbtList list = new NbtList();
         for (final double value : values) {
-            result.add(NbtDouble.of(value));
+            list.add(NbtDouble.of(value));
         }
+        NbtCompound result = new NbtCompound();
+        result.put("list", list);
         return result;
     }
-
-    protected NbtList newFloatList(final float... values) {
-        final NbtList result = new NbtList();
-        for (final float value : values) {
-            result.add(NbtFloat.of(value));
-        }
-        return result;
-    }
-
 
     @Inject(
-            method = "writeNbt",
+            method = "writeData",
             at = @At(value = "INVOKE", shift = At.Shift.BEFORE, ordinal = 0,
-                    target = "Lnet/minecraft/nbt/NbtCompound;put(Ljava/lang/String;Lnet/minecraft/nbt/NbtElement;)Lnet/minecraft/nbt/NbtElement;")
+                    target = "Lnet/minecraft/storage/WriteView;putDouble(Ljava/lang/String;D)V")
     )
-    private void onToTag(NbtCompound NbtCompound_1, CallbackInfoReturnable<NbtCompound> cir)
+    private void onToTag(WriteView view, CallbackInfo ci)
     {
         if (CarpetExtraSettings.reloadSuffocationFix)
         {
             Box box = this.getBoundingBox();
-            NbtCompound_1.put("CM_Box", newDoubleList(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ));
+            System.out.println("Writing CM box");
+            view.put("CM_Box", NbtCompound.CODEC, newDoubleList(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ));
         }
     }
     
-    @Redirect(method = "readNbt", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;shouldSetPositionOnLoad()Z"))
+    @Redirect(method = "readData", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;shouldSetPositionOnLoad()Z"))
     private boolean cancelShouldSetPositionOnLoad(Entity entity)
     {
         return false;
     }
     
     @Inject(
-            method = "readNbt",
+            method = "readData",
             at = @At(value = "INVOKE", shift = At.Shift.AFTER,
-                    target = "Lnet/minecraft/entity/Entity;readCustomDataFromNbt(Lnet/minecraft/nbt/NbtCompound;)V")
+                    target = "Lnet/minecraft/entity/Entity;readCustomData(Lnet/minecraft/storage/ReadView;)V")
     )
-    private void onFromTag(NbtCompound NbtCompound_1, CallbackInfo ci)
+    private void onFromTag(ReadView view, CallbackInfo ci)
     {
         if (this.shouldSetPositionOnLoad())
         {
             this.refreshPosition();
         }
-        
-        if (CarpetExtraSettings.reloadSuffocationFix && NbtCompound_1.contains("CM_Box"))
+        if (CarpetExtraSettings.reloadSuffocationFix && view.getOptionalReadView("CM_Box").isPresent())
         {
-            NbtList box_tag = NbtCompound_1.getList("CM_Box").get();
+            NbtList boxTag = view.read("CM_Box", NbtCompound.CODEC).orElse(new NbtCompound()).getListOrEmpty("list");
+            if (boxTag.isEmpty()) {
+                System.out.println("Invalid or outdated CM_Box");
+                return; // nothing to do
+            }
+            System.out.println("Handling CM_Box");
             
-            Box box = new Box(box_tag.getDouble(0).get(), box_tag.getDouble(1).get(),
-                    box_tag.getDouble(2).get(), box_tag.getDouble(3).get(),
-                    box_tag.getDouble(4).get(), box_tag.getDouble(5).get());
+            Box box = new Box(boxTag.getDouble(0).get(), boxTag.getDouble(1).get(),
+                    boxTag.getDouble(2).get(), boxTag.getDouble(3).get(),
+                    boxTag.getDouble(4).get(), boxTag.getDouble(5).get());
     
             double deltaX = ((box.minX + box.maxX) / 2.0D) - this.getX();
             double deltaY = box.minY - this.getY();
