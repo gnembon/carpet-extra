@@ -55,7 +55,6 @@ public abstract class EntityMixin
         if (CarpetExtraSettings.reloadSuffocationFix)
         {
             Box box = this.getBoundingBox();
-            System.out.println("Writing CM box");
             fillDoubleAppender(view.getListAppender("CM_Box", Codec.DOUBLE), box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ);
         }
     }
@@ -80,7 +79,6 @@ public abstract class EntityMixin
         if (CarpetExtraSettings.reloadSuffocationFix && view.getOptionalListReadView("CM_Box").isPresent())
         {
             Iterator<Double> boxTag = view.getTypedListView("CM_Box", Codec.DOUBLE).stream().iterator();
-            System.out.println("Handling CM_Box");
             
             Box box = new Box(boxTag.next(), boxTag.next(),
                     boxTag.next(), boxTag.next(),
