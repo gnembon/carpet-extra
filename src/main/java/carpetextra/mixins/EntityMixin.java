@@ -2,12 +2,13 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtDouble;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
+import net.minecraft.storage.WriteView.ListAppender;
 import net.minecraft.util.math.Box;
+
+import java.util.Iterator;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -15,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.mojang.serialization.Codec;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin
@@ -36,14 +39,10 @@ public abstract class EntityMixin
     @Shadow protected abstract void refreshPosition();
 
     @Unique
-    protected NbtCompound newDoubleList(final double... values) {
-        NbtList list = new NbtList();
+    protected void fillDoubleAppender(ListAppender<Double> list, double... values) {
         for (final double value : values) {
-            list.add(NbtDouble.of(value));
+            list.add(value);
         }
-        NbtCompound result = new NbtCompound();
-        result.put("list", list);
-        return result;
     }
 
     @Inject(
@@ -57,7 +56,7 @@ public abstract class EntityMixin
         {
             Box box = this.getBoundingBox();
             System.out.println("Writing CM box");
-            view.put("CM_Box", NbtCompound.CODEC, newDoubleList(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ));
+            fillDoubleAppender(view.getListAppender("CM_Box", Codec.DOUBLE), box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ);
         }
     }
     
@@ -78,18 +77,14 @@ public abstract class EntityMixin
         {
             this.refreshPosition();
         }
-        if (CarpetExtraSettings.reloadSuffocationFix && view.getOptionalReadView("CM_Box").isPresent())
+        if (CarpetExtraSettings.reloadSuffocationFix && view.getOptionalListReadView("CM_Box").isPresent())
         {
-            NbtList boxTag = view.read("CM_Box", NbtCompound.CODEC).orElse(new NbtCompound()).getListOrEmpty("list");
-            if (boxTag.isEmpty()) {
-                System.out.println("Invalid or outdated CM_Box");
-                return; // nothing to do
-            }
+            Iterator<Double> boxTag = view.getTypedListView("CM_Box", Codec.DOUBLE).stream().iterator();
             System.out.println("Handling CM_Box");
             
-            Box box = new Box(boxTag.getDouble(0).get(), boxTag.getDouble(1).get(),
-                    boxTag.getDouble(2).get(), boxTag.getDouble(3).get(),
-                    boxTag.getDouble(4).get(), boxTag.getDouble(5).get());
+            Box box = new Box(boxTag.next(), boxTag.next(),
+                    boxTag.next(), boxTag.next(),
+                    boxTag.next(), boxTag.next());
     
             double deltaX = ((box.minX + box.maxX) / 2.0D) - this.getX();
             double deltaY = box.minY - this.getY();
