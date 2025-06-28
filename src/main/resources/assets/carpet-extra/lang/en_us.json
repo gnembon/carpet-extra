@@ -195,5 +195,8 @@
   "carpet.rule.y0DragonEggBedrockBreaking.extra.0": "Requires dragonEggBedrockBreaking to be set to true.",
 
   //xpPerSculkCatalyst
-  "carpet.rule.xpPerSculkCatalyst.desc": "Sets the amount of xp dropped when breaking a sculk catalyst."
+  "carpet.rule.xpPerSculkCatalyst.desc": "Sets the amount of xp dropped when breaking a sculk catalyst.",
+
+  // giantMushroomReplaceEndPortalFrame
+  "carpet.rule.giantMushroomReplaceEndPortalFrame.desc": "Giant mushroom generation can replace end portal frames."
 }

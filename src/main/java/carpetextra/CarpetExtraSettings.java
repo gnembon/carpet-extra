@@ -269,4 +269,9 @@ public class CarpetExtraSettings
             validators = Validators.NonNegativeNumber.class
     )
     public static int xpPerSculkCatalyst = 5;
+
+    @Rule(
+            categories = {EXTRA, EXPERIMENTAL}
+    )
+    public static boolean giantMushroomReplaceEndPortalFrame = false;
 }
