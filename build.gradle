@@ -20,8 +20,15 @@ fabricApi {
 	configureTests {
 		createSourceSet = true
 		modId = "carpet-extra-gametest"
-		eula = true
+		enableClientGameTests = false
 	}
+}
+
+tasks.named('runGameTest', JavaExec).configure {
+	jvmArgs += [
+		"-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml",
+		"-Dmixin.debug.countInjections=true"
+	]
 }
 
 dependencies {
