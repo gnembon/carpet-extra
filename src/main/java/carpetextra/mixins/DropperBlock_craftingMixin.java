@@ -22,6 +22,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -40,7 +41,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
     }
 
     @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos)
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction)
     {
         if (CarpetExtraSettings.autoCraftingDropper)
         {
@@ -59,7 +60,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
                 }
             }
         }
-        return super.getComparatorOutput(state, world, pos);
+        return super.getComparatorOutput(state, world, pos, direction);
     }
 
     @Unique private void spawn(World world, double x, double y, double z, ItemStack stack) {

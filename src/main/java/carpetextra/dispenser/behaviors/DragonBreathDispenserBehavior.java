@@ -30,7 +30,8 @@ public class DragonBreathDispenserBehavior extends FallibleItemDispenserBehavior
 
             // spawn some dragon breath particles around end stone
             Vec3d center = Vec3d.ofCenter(frontBlockPos);
-            world.spawnParticles(ParticleTypes.DRAGON_BREATH, center.getX(), center.getY(), center.getZ(), 10, 0.5, 0.5, 0.5, 0.01);
+//            TODO: Replace with actual dragons breath particle
+            world.spawnParticles(ParticleTypes.EXPLOSION, center.getX(), center.getY(), center.getZ(), 10, 0.5, 0.5, 0.5, 0.01);
 
             // decrement dragon breath and return
             stack.decrement(1);

@@ -40,21 +40,21 @@ public abstract class LivingEntityMixin extends Entity
             return;
         
         BlockPos pos = BlockPos.ofFloored(this.getX(), this.getY(), this.getZ());
-        BlockState statePos = this.getWorld().getBlockState(pos);
-        
+        BlockState statePos = this.getEntityWorld().getBlockState(pos);
+
         BlockPos below = pos.down(1);
-        BlockState stateBelow = this.getWorld().getBlockState(below);
+        BlockState stateBelow = this.getEntityWorld().getBlockState(below);
         
         if (statePos.getBlock() == Blocks.FIRE && stateBelow.isIn(BlockTags.SAND))
         {
-            this.getWorld().setBlockState(below, Blocks.SOUL_SAND.getDefaultState());
+            this.getEntityWorld().setBlockState(below, Blocks.SOUL_SAND.getDefaultState());
         }
     }
 
     @Inject(method = "onDeath", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageSource;getAttacker()Lnet/minecraft/entity/Entity;"))
     private void onOnDeath(DamageSource source, CallbackInfo ci)
     {
-        if (this.getWorld() instanceof ServerWorld sw)
+        if (this.getEntityWorld() instanceof ServerWorld sw)
         {
             if ((this.getVehicle() instanceof SpiderEntity) && this.random.nextInt(100) + 1 < CarpetExtraSettings.spiderJockeysDropGapples)
             {

@@ -43,7 +43,7 @@ public abstract class FallingBlockMixin extends Block
                 if (!DragonEggBedrockBreaking.fallInstantly &&
                         world.shouldTickEntityAt(pos))
                 {
-                    if (!world.isClient)
+                    if (!world.isClient())
                     {
                         FallingBlockEntity fallingBlock = FallingBlockEntity.spawnFromBlock(world, pos, world.getBlockState(pos) );
                         this.configureFallingBlockEntity(fallingBlock);
