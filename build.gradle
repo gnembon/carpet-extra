@@ -1,11 +1,11 @@
 plugins {
 	id 'fabric-loom' version '1.11-SNAPSHOT'
-	 id 'maven-publish'
+	id 'maven-publish'
 }
 
 repositories {
 	maven {
-		url = 'https://masa.dy.fi/maven'
+		url 'https://masa.dy.fi/maven'
 	}
 }
 
