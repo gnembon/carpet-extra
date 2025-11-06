@@ -12,6 +12,7 @@ import net.minecraft.component.type.SuspiciousStewEffectsComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.EffectParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
@@ -53,7 +54,20 @@ public class FeedMooshroomDispenserBehavior extends FallibleItemDispenserBehavio
 
                         // play sound effect and show particles
                         world.playSound(null, frontBlockPos, SoundEvents.ENTITY_MOOSHROOM_EAT, SoundCategory.NEUTRAL, 2.0F, 1.0F);
-                        world.spawnParticles(ParticleTypes.EFFECT, mooshroom.getX() + mooshroom.getRandom().nextDouble() / 2.0D, mooshroom.getBodyY(0.5D), mooshroom.getZ() + mooshroom.getRandom().nextDouble() / 2.0D, 1, 0.0D, mooshroom.getRandom().nextDouble() / 5.0D, 0.0D, 0.01D);
+                        EffectParticleEffect effectParticleEffect = EffectParticleEffect.of(ParticleTypes.EFFECT, -1, 1.0F);
+                        for (int j = 0; j < 4; j++) {
+                            world.spawnParticles(
+                                    effectParticleEffect,
+                                    mooshroom.getX() + mooshroom.getRandom().nextDouble() / 2.0,
+                                    mooshroom.getBodyY(0.5),
+                                    mooshroom.getZ() + mooshroom.getRandom().nextDouble() / 2.0,
+                                    1,
+                                    0.0,
+                                    mooshroom.getRandom().nextDouble() / 5.0,
+                                    0.0,
+                                    0.1D
+                                );
+                        }
 
                         // remove a flower and return stack
                         stack.decrement(1);

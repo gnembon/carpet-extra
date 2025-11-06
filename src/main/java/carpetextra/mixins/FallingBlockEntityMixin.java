@@ -53,7 +53,7 @@ public abstract class FallingBlockEntityMixin extends Entity
     {
         if (getBlockState().isIn(BlockTags.ANVIL))
         {
-            World world = this.getWorld();
+            World world = this.getEntityWorld();
             if (CarpetExtraSettings.renewableIce)
             {
                 Block below = world.getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();

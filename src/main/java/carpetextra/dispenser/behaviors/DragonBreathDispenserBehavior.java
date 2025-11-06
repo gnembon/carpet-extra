@@ -5,6 +5,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.DragonBreathParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -30,7 +31,7 @@ public class DragonBreathDispenserBehavior extends FallibleItemDispenserBehavior
 
             // spawn some dragon breath particles around end stone
             Vec3d center = Vec3d.ofCenter(frontBlockPos);
-            world.spawnParticles(ParticleTypes.DRAGON_BREATH, center.getX(), center.getY(), center.getZ(), 10, 0.5, 0.5, 0.5, 0.01);
+            world.spawnParticles(DragonBreathParticleEffect.of(ParticleTypes.DRAGON_BREATH, 1), center.getX(), center.getY(), center.getZ(), 10, 0.5, 0.5, 0.5, 0.01);
 
             // decrement dragon breath and return
             stack.decrement(1);

@@ -51,12 +51,12 @@ public abstract class ComparatorBlock_comparatorBetterItemFramesMixin extends Ab
             BlockPos blockPos = pos.offset(direction);
             BlockState blockState = world.getBlockState(blockPos);
             if (blockState.hasComparatorOutput()) {
-                i = blockState.getComparatorOutput(world, blockPos);
+                i = blockState.getComparatorOutput(world, blockPos, direction);
             } else if (i < 15 && blockState.isSolidBlock(world, blockPos)) {
                 blockPos = blockPos.offset(direction);
                 blockState = world.getBlockState(blockPos);
                 ItemFrameEntity itemFrameEntity = getAttachedItemFrameHorizontal(world, direction, blockPos);
-                int j = Math.max(itemFrameEntity == null ? -2147483648 : itemFrameEntity.getComparatorPower(), blockState.hasComparatorOutput() ? blockState.getComparatorOutput(world, blockPos) : -2147483648);
+                int j = Math.max(itemFrameEntity == null ? -2147483648 : itemFrameEntity.getComparatorPower(), blockState.hasComparatorOutput() ? blockState.getComparatorOutput(world, blockPos, direction) : -2147483648);
                 if (j != -2147483648) {
                     i = j;
                 }
