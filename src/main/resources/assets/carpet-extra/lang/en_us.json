@@ -1,4 +1,7 @@
 {
+  //modmenu
+  "modmenu.descriptionTranslation.carpet-extra": "Additional, less vanilla additions to the carpet mod",
+
   // Categories:
   "carpet.category.extras": "extras",
 
