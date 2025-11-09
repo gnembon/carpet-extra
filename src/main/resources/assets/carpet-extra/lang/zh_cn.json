@@ -157,5 +157,8 @@
   "carpet.rule.blazeMeal.extra.0": "可通过发射器或玩家右键动作来催熟",
 
   "carpet.rule.disablePhantomSpawning.name": "禁止幻翼生成",
-  "carpet.rule.disablePhantomSpawning.desc": "禁止幻翼的生成"
+  "carpet.rule.disablePhantomSpawning.desc": "禁止幻翼的生成",
+
+  "carpet.rule.giantMushroomReplaceEndPortalFrame.name": "蘑菇方块允许代替末地传送门框架",
+  "carpet.rule.giantMushroomReplaceEndPortalFrame.desc": "小蘑菇长大时允许代替末地传送门框架"
 }

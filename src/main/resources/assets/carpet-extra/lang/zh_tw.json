@@ -161,5 +161,8 @@
 
   "carpet.rule.renewableIce.name": "可壓縮冰塊",
   "carpet.rule.renewableIce.desc": "當複數冰塊被掉落鐵砧砸到，將會壓縮成更高密度冰",
-  "carpet.rule.renewableIce.extra.0": "霜冰變成普通冰，普通變成冰磚，冰磚變成藍冰"
+  "carpet.rule.renewableIce.extra.0": "霜冰變成普通冰，普通變成冰磚，冰磚變成藍冰",
+
+  "carpet.rule.giantMushroomReplaceEndPortalFrame.name": "蘑菇方塊允許代替末地傳送門框架",
+  "carpet.rule.giantMushroomReplaceEndPortalFrame.desc": "小蘑菇長大時允許代替末地傳送門框架"
 }
