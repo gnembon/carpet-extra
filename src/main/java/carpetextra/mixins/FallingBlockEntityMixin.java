@@ -48,6 +48,7 @@ public abstract class FallingBlockEntityMixin extends Entity
             target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;cancelDrop:Z",
             shift = At.Shift.BEFORE
     ))
+    @SuppressWarnings("resource")
     private void onTick(CallbackInfo ci)
     {
         if (getBlockState().is(BlockTags.ANVIL))

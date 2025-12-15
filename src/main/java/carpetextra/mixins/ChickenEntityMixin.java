@@ -23,6 +23,7 @@ public abstract class ChickenEntityMixin extends Animal
     }
 
     @Override
+    @SuppressWarnings("resource")
     public InteractionResult mobInteract(Player player, InteractionHand hand)
     {
         if (this.level() instanceof ServerLevel sw)

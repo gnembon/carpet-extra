@@ -20,6 +20,7 @@ public abstract class SpiderEntityMixin extends Monster
     }
 
     @Override
+    @SuppressWarnings("resource")
     public void die(DamageSource source)
     {
         if (this.level() instanceof ServerLevel sw)

@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BlazePowderDispenserBehavior extends OptionalDispenseItemBehavior {
     @Override
+    @SuppressWarnings("resource")
     protected ItemStack execute(BlockSource pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerLevel world = pointer.level();

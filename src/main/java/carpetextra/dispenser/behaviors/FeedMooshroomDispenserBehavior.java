@@ -24,6 +24,7 @@ import net.minecraft.world.phys.AABB;
 
 public class FeedMooshroomDispenserBehavior extends OptionalDispenseItemBehavior {
     @Override
+    @SuppressWarnings("resource")
     protected ItemStack execute(BlockSource pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerLevel world = pointer.level();

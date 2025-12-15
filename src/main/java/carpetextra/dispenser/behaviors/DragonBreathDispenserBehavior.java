@@ -16,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class DragonBreathDispenserBehavior extends OptionalDispenseItemBehavior {
     @Override
+    @SuppressWarnings("resource")
     protected ItemStack execute(BlockSource pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerLevel world = pointer.level();

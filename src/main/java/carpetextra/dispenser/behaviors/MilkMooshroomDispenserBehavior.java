@@ -22,6 +22,7 @@ import net.minecraft.world.phys.AABB;
 
 public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
     @Override
+    @SuppressWarnings("resource")
     protected ItemStack execute(BlockSource pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerLevel world = pointer.level();

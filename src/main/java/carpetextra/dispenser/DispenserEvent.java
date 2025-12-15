@@ -19,6 +19,7 @@ public class DispenserEvent extends Event {
         super("extra_dispenser_action", 5, true);
     }
 
+    @SuppressWarnings("resource")
     public static void call(BlockSource pointer, DispenseItemBehavior name, BlockPos pos, Value item, ItemStack resultItem) {
         INSTANCE.handler.call(() -> List.of(
                     new StringValue(getScarpetName(name.getClass().getSimpleName())),

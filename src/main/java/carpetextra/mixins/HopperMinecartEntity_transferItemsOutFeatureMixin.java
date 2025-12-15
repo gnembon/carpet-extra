@@ -56,7 +56,7 @@ public abstract class HopperMinecartEntity_transferItemsOutFeatureMixin extends 
     @Unique private static final Vec3 ascending_north_offset = new Vec3( 0, 1,  1).normalize().scale(-1);
     @Unique private static final Vec3 ascending_south_offset = new Vec3( 0, 1, -1).normalize().scale(-1);
 
-    @Unique private Vec3 getBlockBelowCartOffset() {
+    @Unique @SuppressWarnings("resource") private Vec3 getBlockBelowCartOffset() {
         BlockState state = this.level().getBlockState(BlockPos.containing(this.position()));
         if (state.is(BlockTags.RAILS)) {
             RailShape railShape = state.getValue(((BaseRailBlock)state.getBlock()).getShapeProperty());

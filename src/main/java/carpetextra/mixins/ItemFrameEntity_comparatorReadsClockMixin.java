@@ -25,6 +25,7 @@ public abstract class ItemFrameEntity_comparatorReadsClockMixin extends HangingE
     public abstract ItemStack getItem();
 
     @Inject(method = "getAnalogOutput", at =  @At("HEAD"),cancellable = true)
+    @SuppressWarnings("resource")
     private void giveClockPower(CallbackInfoReturnable<Integer> cir) {
         if(CarpetExtraSettings.comparatorReadsClock && this.getItem().getItem() == Items.CLOCK) {
             int power;
@@ -39,6 +40,7 @@ public abstract class ItemFrameEntity_comparatorReadsClockMixin extends HangingE
     }
 
     private boolean firstTick = true;
+    @SuppressWarnings("resource")
     public void tick() {
         if(CarpetExtraSettings.comparatorReadsClock && this.getItem().getItem() == Items.CLOCK) {
             //This doesn't handle time set commands yet

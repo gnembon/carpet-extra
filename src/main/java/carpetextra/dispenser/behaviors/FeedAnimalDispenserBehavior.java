@@ -19,6 +19,7 @@ import net.minecraft.world.phys.AABB;
 
 public class FeedAnimalDispenserBehavior extends OptionalDispenseItemBehavior {
     @Override
+    @SuppressWarnings("resource")
     protected ItemStack execute(BlockSource pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerLevel world = pointer.level();
@@ -43,6 +44,7 @@ public class FeedAnimalDispenserBehavior extends OptionalDispenseItemBehavior {
         return stack;
     }
 
+    @SuppressWarnings("resource")
     private static ItemStack tryFeed(List<Animal> animals, ItemStack foodStack) {
         // try to feed all adult animals first
         for(Animal animal : animals) {

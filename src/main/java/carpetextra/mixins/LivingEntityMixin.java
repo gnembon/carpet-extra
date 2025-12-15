@@ -34,6 +34,7 @@ public abstract class LivingEntityMixin extends Entity
                     target = "Lnet/minecraft/world/damagesource/DamageSource;getEntity()Lnet/minecraft/world/entity/Entity;",
                     shift = At.Shift.BEFORE)
     )
+    @SuppressWarnings("resource")
     private void convertSandToSoulsand(DamageSource damageSource, CallbackInfo ci)
     {
         if (!CarpetExtraSettings.mobInFireConvertsSandToSoulsand)
@@ -52,6 +53,7 @@ public abstract class LivingEntityMixin extends Entity
     }
 
     @Inject(method = "die", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/DamageSource;getEntity()Lnet/minecraft/world/entity/Entity;"))
+    @SuppressWarnings("resource")
     private void onOnDeath(DamageSource source, CallbackInfo ci)
     {
         if (this.level() instanceof ServerLevel sw)
