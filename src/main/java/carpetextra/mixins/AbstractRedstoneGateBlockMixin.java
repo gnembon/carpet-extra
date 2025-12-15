@@ -1,19 +1,19 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
-import net.minecraft.block.AbstractRedstoneGateBlock;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.DiodeBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(AbstractRedstoneGateBlock.class)
+@Mixin(DiodeBlock.class)
 public abstract class AbstractRedstoneGateBlockMixin
 {
     @Redirect(
-            method = "isTargetNotAligned",
+            method = "shouldPrioritize",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/util/math/Direction;getOpposite()Lnet/minecraft/util/math/Direction;")
+                    target = "Lnet/minecraft/core/Direction;getOpposite()Lnet/minecraft/core/Direction;")
     )
     private Direction onIsTargetNotAligned(Direction direction)
     {

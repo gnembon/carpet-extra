@@ -1,9 +1,9 @@
 package carpetextra.fakes;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemStack;
 
 public interface DispenserBlockEntityInterface
 {
-    public DefaultedList<ItemStack> getInventory();
+    public NonNullList<ItemStack> getInventory();
 }

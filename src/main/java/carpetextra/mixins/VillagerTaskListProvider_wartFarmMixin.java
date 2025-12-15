@@ -2,29 +2,29 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.brain.task.Task;
-import net.minecraft.entity.ai.brain.task.VillagerTaskListProvider;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.village.VillagerProfession;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.behavior.BehaviorControl;
+import net.minecraft.world.entity.ai.behavior.VillagerGoalPackages;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(VillagerTaskListProvider.class)
+@Mixin(VillagerGoalPackages.class)
 public abstract class VillagerTaskListProvider_wartFarmMixin
 {
-    @Shadow private static Pair<Integer, Task<LivingEntity>> createBusyFollowTask() {return null;}
+    @Shadow private static Pair<Integer, BehaviorControl<LivingEntity>> getMinimalLookBehavior() {return null;}
 
-    @Redirect(method = "createWorkTasks", at = @At(
+    @Redirect(method = "getWorkPackage", at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/village/VillagerProfession;FARMER:Lnet/minecraft/registry/RegistryKey;"
+            target = "Lnet/minecraft/world/entity/npc/villager/VillagerProfession;FARMER:Lnet/minecraft/resources/ResourceKey;"
     ))
-    private static RegistryKey<VillagerProfession> redirectFarmer(RegistryEntry<VillagerProfession> profession, float speed)
+    private static ResourceKey<VillagerProfession> redirectFarmer(Holder<VillagerProfession> profession, float speed)
     {
-        if (CarpetExtraSettings.clericsFarmWarts && profession.matchesKey(VillagerProfession.CLERIC))
+        if (CarpetExtraSettings.clericsFarmWarts && profession.is(VillagerProfession.CLERIC))
             return VillagerProfession.CLERIC;
         return VillagerProfession.FARMER;
     }

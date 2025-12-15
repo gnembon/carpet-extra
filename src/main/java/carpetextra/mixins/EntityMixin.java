@@ -1,11 +1,11 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
-import net.minecraft.entity.Entity;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.storage.WriteView.ListAppender;
-import net.minecraft.util.math.Box;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.level.storage.ValueOutput.TypedOutputList;
+import net.minecraft.world.phys.AABB;
 
 import java.util.Iterator;
 
@@ -22,11 +22,11 @@ import com.mojang.serialization.Codec;
 @Mixin(Entity.class)
 public abstract class EntityMixin
 {
-    @Shadow public abstract Box getBoundingBox();
+    @Shadow public abstract AABB getBoundingBox();
     
     //@Shadow protected abstract NbtList toNbtList(double... doubles_1);
     
-    @Shadow protected abstract boolean shouldSetPositionOnLoad();
+    @Shadow protected abstract boolean repositionEntityAfterLoad();
     
     @Shadow public abstract double getX();
     
@@ -34,53 +34,53 @@ public abstract class EntityMixin
     
     @Shadow public abstract double getZ();
     
-    @Shadow public abstract void setBoundingBox(Box box_1);
+    @Shadow public abstract void setBoundingBox(AABB box_1);
 
-    @Shadow protected abstract void refreshPosition();
+    @Shadow protected abstract void reapplyPosition();
 
     @Unique
-    protected void fillDoubleAppender(ListAppender<Double> list, double... values) {
+    protected void fillDoubleAppender(TypedOutputList<Double> list, double... values) {
         for (final double value : values) {
             list.add(value);
         }
     }
 
     @Inject(
-            method = "writeData",
+            method = "saveWithoutId",
             at = @At(value = "INVOKE", shift = At.Shift.BEFORE, ordinal = 0,
-                    target = "Lnet/minecraft/storage/WriteView;putDouble(Ljava/lang/String;D)V")
+                    target = "Lnet/minecraft/world/level/storage/ValueOutput;putDouble(Ljava/lang/String;D)V")
     )
-    private void onToTag(WriteView view, CallbackInfo ci)
+    private void onToTag(ValueOutput view, CallbackInfo ci)
     {
         if (CarpetExtraSettings.reloadSuffocationFix)
         {
-            Box box = this.getBoundingBox();
-            fillDoubleAppender(view.getListAppender("CM_Box", Codec.DOUBLE), box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ);
+            AABB box = this.getBoundingBox();
+            fillDoubleAppender(view.list("CM_Box", Codec.DOUBLE), box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ);
         }
     }
     
-    @Redirect(method = "readData", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;shouldSetPositionOnLoad()Z"))
+    @Redirect(method = "load", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;repositionEntityAfterLoad()Z"))
     private boolean cancelShouldSetPositionOnLoad(Entity entity)
     {
         return false;
     }
     
     @Inject(
-            method = "readData",
+            method = "load",
             at = @At(value = "INVOKE", shift = At.Shift.AFTER,
-                    target = "Lnet/minecraft/entity/Entity;readCustomData(Lnet/minecraft/storage/ReadView;)V")
+                    target = "Lnet/minecraft/world/entity/Entity;readAdditionalSaveData(Lnet/minecraft/world/level/storage/ValueInput;)V")
     )
-    private void onFromTag(ReadView view, CallbackInfo ci)
+    private void onFromTag(ValueInput view, CallbackInfo ci)
     {
-        if (this.shouldSetPositionOnLoad())
+        if (this.repositionEntityAfterLoad())
         {
-            this.refreshPosition();
+            this.reapplyPosition();
         }
-        if (CarpetExtraSettings.reloadSuffocationFix && view.getOptionalListReadView("CM_Box").isPresent())
+        if (CarpetExtraSettings.reloadSuffocationFix && view.childrenList("CM_Box").isPresent())
         {
-            Iterator<Double> boxTag = view.getTypedListView("CM_Box", Codec.DOUBLE).stream().iterator();
+            Iterator<Double> boxTag = view.listOrEmpty("CM_Box", Codec.DOUBLE).stream().iterator();
             
-            Box box = new Box(boxTag.next(), boxTag.next(),
+            AABB box = new AABB(boxTag.next(), boxTag.next(),
                     boxTag.next(), boxTag.next(),
                     boxTag.next(), boxTag.next());
     

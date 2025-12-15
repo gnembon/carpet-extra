@@ -1,34 +1,34 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.WitherSkeletonEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
+import net.minecraft.world.entity.monster.skeleton.Skeleton;
+import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(SkeletonEntity.class)
-public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
+@Mixin(Skeleton.class)
+public abstract class SkeletonEntityMixin extends AbstractSkeleton
 {
-    protected SkeletonEntityMixin(EntityType<? extends AbstractSkeletonEntity> type, World world)
+    protected SkeletonEntityMixin(EntityType<? extends AbstractSkeleton> type, Level world)
     {
         super(type, world);
     }
 
     @Override
-    public void onStruckByLightning(ServerWorld world, LightningEntity entity)
+    public void thunderHit(ServerLevel world, LightningBolt entity)
     {
-        if (!world.isClient() && !this.isRemoved() && CarpetExtraSettings.renewableWitherSkeletons)
+        if (!world.isClientSide() && !this.isRemoved() && CarpetExtraSettings.renewableWitherSkeletons)
         {
-            WitherSkeletonEntity witherSkelly = new WitherSkeletonEntity(EntityType.WITHER_SKELETON, world);
-            witherSkelly.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
-            witherSkelly.initialize(world, world.getLocalDifficulty(witherSkelly.getBlockPos()), SpawnReason.CONVERSION, null);
-            witherSkelly.setAiDisabled(this.isAiDisabled());
+            WitherSkeleton witherSkelly = new WitherSkeleton(EntityType.WITHER_SKELETON, world);
+            witherSkelly.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
+            witherSkelly.finalizeSpawn(world, world.getCurrentDifficultyAt(witherSkelly.blockPosition()), EntitySpawnReason.CONVERSION, null);
+            witherSkelly.setNoAi(this.isNoAi());
 
             if (this.hasCustomName())
             {
@@ -36,21 +36,21 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
                 witherSkelly.setCustomNameVisible(this.isCustomNameVisible());
             }
 
-            world.spawnEntity(witherSkelly);
+            world.addFreshEntity(witherSkelly);
 
             if (getVehicle() != null)
             {
                 Entity mount = getVehicle();
                 this.stopRiding();
-                witherSkelly.extinguish();
-                mount.extinguish();
+                witherSkelly.clearFire();
+                mount.clearFire();
                 witherSkelly.startRiding(mount);
             }
             this.discard();
         }
         else
         {
-            super.onStruckByLightning(world, entity);
+            super.thunderHit(world, entity);
         }
     }
 }

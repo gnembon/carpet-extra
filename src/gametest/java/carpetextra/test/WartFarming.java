@@ -1,17 +1,17 @@
 package carpetextra.test;
 
-import static net.minecraft.block.NetherWartBlock.*;
+import static net.minecraft.world.level.block.NetherWartBlock.*;
 
 import java.util.Set;
 
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.test.TestContext;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 public class WartFarming {
     private static final String STRUCTURE = "carpet-extra:wartbase";
@@ -21,37 +21,37 @@ public class WartFarming {
     BlockPos lapis = new BlockPos(3, 1, 0);
     
     @GameTest(environment = WART_FARMING_ENABLED, structure = STRUCTURE, maxTicks = 1500)
-    public void placesWarts(TestContext ctx) {
+    public void placesWarts(GameTestHelper ctx) {
         ctx.spawnItem(Items.NETHER_WART, lapis);
-        ctx.spawnEntity(EntityType.VILLAGER, lapis);
+        ctx.spawn(EntityType.VILLAGER, lapis);
         
-        ctx.addInstantFinalTask(() -> {
-            ctx.expectBlock(Blocks.NETHER_WART, soulSand.up());
+        ctx.succeedWhen(() -> {
+            ctx.assertBlockPresent(Blocks.NETHER_WART, soulSand.above());
         });
     }
     
     @GameTest(environment = WART_FARMING_ENABLED, structure = STRUCTURE, maxTicks = 1500)
-    public void collectsWarts(TestContext ctx) {
-        ctx.setBlockState(soulSand.up(), Blocks.NETHER_WART.getDefaultState().with(AGE, MAX_AGE));
-        VillagerEntity villager =  ctx.spawnEntity(EntityType.VILLAGER, lapis);
+    public void collectsWarts(GameTestHelper ctx) {
+        ctx.setBlock(soulSand.above(), Blocks.NETHER_WART.defaultBlockState().setValue(AGE, MAX_AGE));
+        Villager villager =  ctx.spawn(EntityType.VILLAGER, lapis);
         
-        ctx.addInstantFinalTask(() -> {
-            ctx.checkBlockState(soulSand.up(),
-                    state -> state.getBlock() != Blocks.NETHER_WART || state.get(AGE) != MAX_AGE, 
-                    (st) -> Text.literal("Wart not collected"));
-            ctx.assertTrue(villager.getInventory().containsAny(Set.of(Items.NETHER_WART)), Text.literal("Villager didn't get warts"));
+        ctx.succeedWhen(() -> {
+            ctx.assertBlockState(soulSand.above(),
+                    state -> state.getBlock() != Blocks.NETHER_WART || state.getValue(AGE) != MAX_AGE, 
+                    (st) -> Component.literal("Wart not collected"));
+            ctx.assertTrue(villager.getInventory().hasAnyOf(Set.of(Items.NETHER_WART)), Component.literal("Villager didn't get warts"));
         });
     }
     
     @GameTest(/* no env */ structure = STRUCTURE, maxTicks = 200)
-    public void doesntPickupWartsWithoutRule(TestContext ctx) {
+    public void doesntPickupWartsWithoutRule(GameTestHelper ctx) {
         ctx.spawnItem(Items.NETHER_WART, lapis);
-        ctx.spawnEntity(EntityType.VILLAGER, lapis);
+        ctx.spawn(EntityType.VILLAGER, lapis);
         
-        ctx.runAtEveryTick(() -> {
-            ctx.expectItem(Items.NETHER_WART);
+        ctx.failIfEver(() -> {
+            ctx.assertItemEntityPresent(Items.NETHER_WART);
         });
-        ctx.runAtTick(200, ctx::complete);
+        ctx.runAtTickTime(200, ctx::succeed);
     }
     
     /* Too slow

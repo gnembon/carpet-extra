@@ -7,14 +7,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import carpet.CarpetServer;
 import carpet.api.settings.InvalidRuleValueException;
 import carpet.api.settings.RuleHelper;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.test.TestEnvironmentDefinition;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.gametest.framework.TestEnvironmentDefinition;
+import net.minecraft.server.level.ServerLevel;
 
 class TestEnvDefinitions {
     public static void runRegistration() {
-        Registry.register(Registries.TEST_ENVIRONMENT_DEFINITION_TYPE, "carpet:rule", CarpetRule.CODEC);
+        Registry.register(BuiltInRegistries.TEST_ENVIRONMENT_DEFINITION_TYPE, "carpet:rule", CarpetRule.CODEC);
     }
     
     public record CarpetRule(String key, String value) implements TestEnvironmentDefinition {
@@ -24,21 +24,21 @@ class TestEnvDefinitions {
                 ).apply(i, CarpetRule::new));
 
         @Override
-        public void setup(ServerWorld world) {
+        public void setup(ServerLevel world) {
             try {
-                CarpetServer.settingsManager.getCarpetRule(key).set(world.getServer().getCommandSource(), value);
+                CarpetServer.settingsManager.getCarpetRule(key).set(world.getServer().createCommandSourceStack(), value);
             } catch (InvalidRuleValueException e) {
                 throw new IllegalArgumentException(e);
             }
         }
 
         @Override
-        public MapCodec<? extends TestEnvironmentDefinition> getCodec() {
+        public MapCodec<? extends TestEnvironmentDefinition> codec() {
             return CODEC;
         }
         @Override
-        public void teardown(ServerWorld world) {
-            RuleHelper.resetToDefault(CarpetServer.settingsManager.getCarpetRule(key), world.getServer().getCommandSource());
+        public void teardown(ServerLevel world) {
+            RuleHelper.resetToDefault(CarpetServer.settingsManager.getCarpetRule(key), world.getServer().createCommandSourceStack());
         }
     }
 }

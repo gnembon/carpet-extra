@@ -6,18 +6,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import carpetextra.utils.PlaceBlockDispenserBehavior;
-import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPointer;
+import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 
 @Mixin(targets = {
-        /* mob & player heads */
-        "net/minecraft/block/dispenser/DispenserBehavior$6",
+        "net/minecraft/core/dispenser/DispenseItemBehavior$14",
         /* wither skull */
         //"net/minecraft/block/dispenser/DispenserBehavior$7"
 })
-public abstract class DispenserBehaviorMobHeadMixin extends FallibleItemDispenserBehavior {
+public abstract class DispenserBehaviorMobHeadMixin extends OptionalDispenseItemBehavior {
     /* difficult to maintain
     @Inject(
             method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;",

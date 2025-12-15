@@ -5,12 +5,12 @@ import java.util.Map;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FlowerPotBlock;
 
 @Mixin(FlowerPotBlock.class)
 public interface FlowerPotBlock_ContentAccessorMixin {
-    @Accessor("CONTENT_TO_POTTED")
+    @Accessor("POTTED_BY_CONTENT")
     static Map<Block, Block> getPottedBlocksMap() {
         throw new AssertionError();
     }

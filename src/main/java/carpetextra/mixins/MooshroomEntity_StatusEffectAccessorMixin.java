@@ -6,18 +6,18 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-import net.minecraft.component.type.SuspiciousStewEffectsComponent;
-import net.minecraft.entity.passive.MooshroomEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.animal.cow.MushroomCow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
 
-@Mixin(MooshroomEntity.class)
+@Mixin(MushroomCow.class)
 public interface MooshroomEntity_StatusEffectAccessorMixin {
     @Accessor("stewEffects")
-    SuspiciousStewEffectsComponent getStewEffects();
+    SuspiciousStewEffects getStewEffects();
 
     @Accessor("stewEffects")
-    void setStewEffects(SuspiciousStewEffectsComponent effect);
+    void setStewEffects(SuspiciousStewEffects effect);
 
-    @Invoker("getStewEffectFrom")
-    Optional<SuspiciousStewEffectsComponent> invokeGetStewEffectFrom(ItemStack flower);
+    @Invoker("getEffectsFromItemStack")
+    Optional<SuspiciousStewEffects> invokeGetStewEffectFrom(ItemStack flower);
 }

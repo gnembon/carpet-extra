@@ -6,11 +6,11 @@ import carpet.script.CarpetEventServer.Event;
 import carpet.script.value.StringValue;
 import carpet.script.value.Value;
 import carpet.script.value.ValueConversions;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.dispenser.DispenserBehavior;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.DispenserBlock;
 
 public class DispenserEvent extends Event {
     private static final DispenserEvent INSTANCE = new DispenserEvent();
@@ -19,15 +19,15 @@ public class DispenserEvent extends Event {
         super("extra_dispenser_action", 5, true);
     }
 
-    public static void call(BlockPointer pointer, DispenserBehavior name, BlockPos pos, Value item, ItemStack resultItem) {
+    public static void call(BlockSource pointer, DispenseItemBehavior name, BlockPos pos, Value item, ItemStack resultItem) {
         INSTANCE.handler.call(() -> List.of(
                     new StringValue(getScarpetName(name.getClass().getSimpleName())),
                     ValueConversions.of(pos),
-                    new StringValue(pointer.state().get(DispenserBlock.FACING).name().toLowerCase()),
+                    new StringValue(pointer.state().getValue(DispenserBlock.FACING).name().toLowerCase()),
                     item, // value directly because it needs to be a snapshot, stack is mutable
-                    ValueConversions.of(resultItem, pointer.world().getRegistryManager())
+                    ValueConversions.of(resultItem, pointer.level().registryAccess())
                 ),
-                () ->  pointer.world().getServer().getCommandSource().withWorld(pointer.world())
+                () ->  pointer.level().getServer().createCommandSourceStack().withLevel(pointer.level())
         );
     }
 

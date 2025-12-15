@@ -3,17 +3,17 @@ package carpetextra.machinery;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.test.FunctionTestInstance;
-import net.minecraft.test.TestContext;
-import net.minecraft.test.TestData;
-import net.minecraft.test.TestEnvironmentDefinition;
-import net.minecraft.test.TestInstance;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.gametest.framework.FunctionGameTestInstance;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.gametest.framework.GameTestInstance;
+import net.minecraft.gametest.framework.TestData;
+import net.minecraft.gametest.framework.TestEnvironmentDefinition;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Rotation;
 
 // slightly extended TestData
 public record DynamicTest(
@@ -23,37 +23,37 @@ public record DynamicTest(
         int maxTicks,
         int setupTicks,
         boolean required,
-        BlockRotation rotation,
+        Rotation rotation,
         boolean manualOnly,
         int maxAttempts,
         int requiredSuccesses,
         boolean skyAccess,
-        Consumer<TestContext> testFunction
+        Consumer<GameTestHelper> testFunction
     ) {
     
-    public DynamicTest(String environment, String name, String structure, int maxTicks, int setupTicks, boolean required, BlockRotation rotation, Consumer<TestContext> runner) {
+    public DynamicTest(String environment, String name, String structure, int maxTicks, int setupTicks, boolean required, Rotation rotation, Consumer<GameTestHelper> runner) {
         this(environment, name, structure, maxTicks, setupTicks, required, rotation, false, 1, 1, false, runner);
     }
 
-    public DynamicTest(String environment, String name, String structure, int maxTicks, int setupTicks, boolean required, Consumer<TestContext> runner) {
-        this(environment, name, structure, maxTicks, setupTicks, required, BlockRotation.NONE, runner);
+    public DynamicTest(String environment, String name, String structure, int maxTicks, int setupTicks, boolean required, Consumer<GameTestHelper> runner) {
+        this(environment, name, structure, maxTicks, setupTicks, required, Rotation.NONE, runner);
     }
 
     // adapted from TestAnnotationLocator.TestMethod
-    public TestInstance testInstance(Registry<TestEnvironmentDefinition> envRegistry) {
-        return new FunctionTestInstance(
-                RegistryKey.of(RegistryKeys.TEST_FUNCTION, identifier()),
+    public GameTestInstance testInstance(Registry<TestEnvironmentDefinition> envRegistry) {
+        return new FunctionGameTestInstance(
+                ResourceKey.create(Registries.TEST_FUNCTION, identifier()),
                 testData(envRegistry)
         );
     }
     
-    TestData<RegistryEntry<TestEnvironmentDefinition>> testData(Registry<TestEnvironmentDefinition> testEnvironmentDefinitionRegistry) {
+    TestData<Holder<TestEnvironmentDefinition>> testData(Registry<TestEnvironmentDefinition> testEnvironmentDefinitionRegistry) {
         DynamicTest gameTest = this;
-        RegistryEntry<TestEnvironmentDefinition> testEnvironment = testEnvironmentDefinitionRegistry.getOrThrow(RegistryKey.of(RegistryKeys.TEST_ENVIRONMENT, Identifier.of(gameTest.environment())));
+        Holder<TestEnvironmentDefinition> testEnvironment = testEnvironmentDefinitionRegistry.getOrThrow(ResourceKey.create(Registries.TEST_ENVIRONMENT, Identifier.parse(gameTest.environment())));
         
         return new TestData<>(
                 testEnvironment,
-                Identifier.of(gameTest.structure()),
+                Identifier.parse(gameTest.structure()),
                 gameTest.maxTicks(),
                 gameTest.setupTicks(),
                 gameTest.required(),
@@ -70,7 +70,7 @@ public record DynamicTest(
     }
     
     public Identifier identifier() {
-        return Identifier.of("carpet-extra-gametest", camelToSnake(name));
+        return Identifier.fromNamespaceAndPath("carpet-extra-gametest", camelToSnake(name));
     }
     
 }

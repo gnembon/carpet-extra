@@ -2,14 +2,14 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import carpetextra.helpers.DragonEggBedrockBreaking;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DragonEggBlock;
-import net.minecraft.block.FallingBlock;
-import net.minecraft.entity.FallingBlockEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DragonEggBlock;
+import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,33 +20,33 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class FallingBlockMixin extends Block
 {
     @Shadow
-    public static boolean canFallThrough(BlockState state)
+    public static boolean isFree(BlockState state)
     {
         throw new AssertionError();
     }
     
-    @Shadow protected abstract void configureFallingBlockEntity(FallingBlockEntity fallingBlockEntity_1);
+    @Shadow protected abstract void falling(FallingBlockEntity fallingBlockEntity_1);
     
-    public FallingBlockMixin(Settings settings)
+    public FallingBlockMixin(Properties settings)
     {
         super(settings);
     }
     
     @SuppressWarnings("ConstantConditions")
-    @Inject(method = "scheduledTick", at = @At("HEAD"), cancellable = true)
-    private void onTryStartFalling(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci)
+    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+    private void onTryStartFalling(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci)
     {
         if (CarpetExtraSettings.dragonEggBedrockBreaking && (FallingBlock)(Object)this instanceof DragonEggBlock)
         {
-            if (canFallThrough(world.getBlockState(pos.down(1))) && pos.getY() >= world.getBottomY())
+            if (isFree(world.getBlockState(pos.below(1))) && pos.getY() >= world.getMinY())
             {
                 if (!DragonEggBedrockBreaking.fallInstantly &&
-                        world.shouldTickEntityAt(pos))
+                        world.isPositionEntityTicking(pos))
                 {
-                    if (!world.isClient())
+                    if (!world.isClientSide())
                     {
-                        FallingBlockEntity fallingBlock = FallingBlockEntity.spawnFromBlock(world, pos, world.getBlockState(pos) );
-                        this.configureFallingBlockEntity(fallingBlock);
+                        FallingBlockEntity fallingBlock = FallingBlockEntity.fall(world, pos, world.getBlockState(pos) );
+                        this.falling(fallingBlock);
                         //serverWorld_1.spawnEntity(fallingBlock);
                     }
                 }
@@ -59,16 +59,16 @@ public abstract class FallingBlockMixin extends Block
 
                     BlockPos blockPos;
                     
-                    int minY = CarpetExtraSettings.y0DragonEggBedrockBreaking ? world.getBottomY() - 1 : world.getBottomY();
+                    int minY = CarpetExtraSettings.y0DragonEggBedrockBreaking ? world.getMinY() - 1 : world.getMinY();
                     
-                    for (blockPos = pos.down(1); canFallThrough(world.getBlockState(blockPos)) && blockPos.getY() > minY; blockPos = blockPos.down(1))
+                    for (blockPos = pos.below(1); isFree(world.getBlockState(blockPos)) && blockPos.getY() > minY; blockPos = blockPos.below(1))
                     {
                         ;
                     }
                     
                     if (blockPos.getY() > minY)
                     {
-                        world.setBlockState(blockPos, this.getDefaultState());
+                        world.setBlockAndUpdate(blockPos, this.defaultBlockState());
                     }
                 }
             }
