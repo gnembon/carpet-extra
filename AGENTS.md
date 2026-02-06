@@ -22,6 +22,22 @@ So publishing a new port typically means:
 - Bump `mod_version` (usually a patch bump) so the published artifact is
   unambiguously newer
 
+## How upstream tags and publishes releases
+
+Upstream (`gnembon/carpet-extra`) uses:
+
+- Lightweight git tags for releases, typically just the mod version
+  number, e.g. `1.4.176`.
+- GitHub Releases whose title follows the pattern:
+  `Carpet Extra <tag> for Minecraft <mc version(s)>`
+  - Examples include single versions (e.g. `1.21.6`) and multi-target
+    releases (e.g. `1.21` and `1.21.1`).
+
+Practical takeaway for this fork:
+
+- Keep `mod_version` as the thing you tag/release.
+- Communicate the Minecraft target(s) in the release title/notes.
+
 ## Files you almost always touch for a port
 
 - `gradle.properties`
