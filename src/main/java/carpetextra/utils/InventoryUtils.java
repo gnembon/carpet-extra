@@ -12,6 +12,6 @@ public class InventoryUtils {
      */
     public static boolean shulkerBoxHasItems(ItemStack stackShulkerBox) {
         ContainerComponent containerComponent = stackShulkerBox.get(DataComponentTypes.CONTAINER);
-        return containerComponent != null && !containerComponent.iterateNonEmpty().iterator().hasNext();
+        return containerComponent != null && containerComponent.iterateNonEmpty().iterator().hasNext();
     }
 }
