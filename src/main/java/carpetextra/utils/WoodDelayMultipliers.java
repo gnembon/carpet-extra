@@ -1,10 +1,8 @@
 package carpetextra.utils;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-
 import java.util.Map;
-
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import it.unimi.dsi.fastutil.objects.Object2FloatMap;
 import it.unimi.dsi.fastutil.objects.Object2FloatOpenHashMap;
 

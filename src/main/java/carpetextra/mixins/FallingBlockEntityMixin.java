@@ -1,17 +1,6 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.FallingBlockEntity;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,6 +8,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(FallingBlockEntity.class)
 public abstract class FallingBlockEntityMixin extends Entity
@@ -33,30 +32,30 @@ public abstract class FallingBlockEntityMixin extends Entity
             Blocks.PACKED_ICE, Blocks.BLUE_ICE
     );
     
-    public FallingBlockEntityMixin(EntityType<?> type, World world)
+    public FallingBlockEntityMixin(EntityType<?> type, Level world)
     {
         super(type, world);
     }
     
-    @Inject(method = "<init>(Lnet/minecraft/world/World;DDDLnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
-    private void onCtor(World world, double x, double y, double z, BlockState state, CallbackInfo ci)
+    @Inject(method = "<init>(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/level/block/state/BlockState;)V", at = @At("RETURN"))
+    private void onCtor(Level world, double x, double y, double z, BlockState state, CallbackInfo ci)
     {
         this.iceCount = 0;
     }
     
     @Inject(method = "tick", cancellable = true, at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/entity/FallingBlockEntity;destroyedOnLanding:Z",
+            target = "Lnet/minecraft/world/entity/item/FallingBlockEntity;cancelDrop:Z",
             shift = At.Shift.BEFORE
     ))
     private void onTick(CallbackInfo ci)
     {
-        if (getBlockState().isIn(BlockTags.ANVIL))
+        if (getBlockState().is(BlockTags.ANVIL))
         {
-            World world = this.getEntityWorld();
+            Level world = this.level();
             if (CarpetExtraSettings.renewableIce)
             {
-                Block below = world.getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();
+                Block below = world.getBlockState(BlockPos.containing(this.getX(), this.getY() - 0.059999999776482582D, this.getZ())).getBlock();
                 if (iceProgression.containsKey(below))
                 {
                     if (currentIce != below)
@@ -66,24 +65,24 @@ public abstract class FallingBlockEntityMixin extends Entity
                     }
                     if (iceCount < 2)
                     {
-                    	world.breakBlock(getBlockPos().down(), false, null);
+                    	world.destroyBlock(blockPosition().below(), false, null);
                         this.setOnGround(false);
                         iceCount++;
                         ci.cancel();
                     }
                     else
                     {
-                        BlockState newBlock = iceProgression.get(below).getDefaultState();
-                        world.setBlockState(getBlockPos().down(), newBlock, 3);
-                        world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, getBlockPos().down(), Block.getRawIdFromState(newBlock));
+                        BlockState newBlock = iceProgression.get(below).defaultBlockState();
+                        world.setBlock(blockPosition().below(), newBlock, 3);
+                        world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, blockPosition().below(), Block.getId(newBlock));
                     }
                 }
             }
 
-            if (CarpetExtraSettings.renewableSand && world.getBlockState(BlockPos.ofFloored(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
+            if (CarpetExtraSettings.renewableSand && world.getBlockState(BlockPos.containing(this.getX(), this.getY() - 0.06, this.getZ())).getBlock() == Blocks.COBBLESTONE)
             {
-            	world.breakBlock(getBlockPos().down(), false);
-            	world.setBlockState(getBlockPos().down(), Blocks.SAND.getDefaultState(), 3);
+            	world.destroyBlock(blockPosition().below(), false);
+            	world.setBlock(blockPosition().below(), Blocks.SAND.defaultBlockState(), 3);
             }
         }
     }

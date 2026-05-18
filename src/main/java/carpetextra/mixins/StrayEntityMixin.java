@@ -1,29 +1,28 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
-import net.minecraft.entity.mob.StrayEntity;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.StructureKeys;
-
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.monster.skeleton.Stray;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(StrayEntity.class)
+@Mixin(Stray.class)
 public abstract class StrayEntityMixin
 {
-    @Redirect(method = "canSpawn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/ServerWorldAccess;isSkyVisible(Lnet/minecraft/util/math/BlockPos;)Z"))
-    private static boolean isSkylightOrIglooVisible(ServerWorldAccess world, BlockPos pos)
+    @Redirect(method = "checkStraySpawnRules", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/ServerLevelAccessor;canSeeSky(Lnet/minecraft/core/BlockPos;)Z"))
+    private static boolean isSkylightOrIglooVisible(ServerLevelAccessor world, BlockPos pos)
     {
         if (!CarpetExtraSettings.straySpawningInIgloos) {
-            return world.isSkyVisible(pos);
+            return world.canSeeSky(pos);
         }
-        Structure structure = world.getRegistryManager().getOrThrow(RegistryKeys.STRUCTURE).get(StructureKeys.IGLOO);
-        return world.isSkyVisible(pos) ||
-                       ((ServerWorld)world).getStructureAccessor().getStructureAt(pos,structure).hasChildren();
+        Structure structure = world.registryAccess().lookupOrThrow(Registries.STRUCTURE).getValue(BuiltinStructures.IGLOO);
+        return world.canSeeSky(pos) ||
+                       ((ServerLevel)world).structureManager().getStructureAt(pos,structure).isValid();
     }
 }

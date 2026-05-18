@@ -1,7 +1,15 @@
 package carpetextra.mixins;
 
 import java.util.Map;
-
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.entity.DispenserBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -15,40 +23,30 @@ import carpetextra.dispenser.CarpetExtraDispenserBehaviors;
 import carpetextra.dispenser.DispenserEvent;
 import com.llamalad7.mixinextras.sugar.Local;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.dispenser.DispenserBehavior;
-import net.minecraft.block.entity.DispenserBlockEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPos;
-
 @Mixin(DispenserBlock.class)
 public abstract class DispenserBlock_GetCustomBehaviorMixin {
-    @Shadow @Final public static Map<Item, DispenserBehavior> BEHAVIORS;
+    @Shadow @Final public static Map<Item, DispenseItemBehavior> DISPENSER_REGISTRY;
 
     @Inject(
-            method = "dispense",
+            method = "dispenseFrom",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/block/DispenserBlock;getBehaviorForItem(Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/block/dispenser/DispenserBehavior;"
+                    target = "Lnet/minecraft/world/level/block/DispenserBlock;getDispenseMethod(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/core/dispenser/DispenseItemBehavior;"
             ),
             cancellable = true
     )
-    private void dispenseCustomBehavior(ServerWorld world, BlockState state, BlockPos pos, CallbackInfo ci, @Local DispenserBlockEntity dispenserEntity, @Local BlockPointer pointer, @Local int slot, @Local ItemStack stack) {
+    private void dispenseCustomBehavior(ServerLevel world, BlockState state, BlockPos pos, CallbackInfo ci, @Local DispenserBlockEntity dispenserEntity, @Local BlockSource pointer, @Local int slot, @Local ItemStack stack) {
         // get custom behavior
-        DispenserBehavior behavior = CarpetExtraDispenserBehaviors.getCustomDispenserBehavior(world, pos, pointer, dispenserEntity, stack, BEHAVIORS);
+        DispenseItemBehavior behavior = CarpetExtraDispenserBehaviors.getCustomDispenserBehavior(world, pos, pointer, dispenserEntity, stack, DISPENSER_REGISTRY);
 
         // check if custom behavior exists
         if (behavior != null) {
             // run custom behavior
             Value previousStackSnapshot = null;
-            if (DispenserEvent.needed()) previousStackSnapshot = ValueConversions.of(stack, world.getRegistryManager());
+            if (DispenserEvent.needed()) previousStackSnapshot = ValueConversions.of(stack, world.registryAccess());
 
             ItemStack resultStack = behavior.dispense(pointer, stack);
-            dispenserEntity.setStack(slot, resultStack);
+            dispenserEntity.setItem(slot, resultStack);
 
             DispenserEvent.call(pointer, behavior, pos, previousStackSnapshot, resultStack);
 

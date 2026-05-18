@@ -3,23 +3,23 @@ package carpetextra.commands;
 import carpetextra.CarpetExtraSettings;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 
-import static net.minecraft.server.command.CommandManager.literal;
+import static net.minecraft.commands.Commands.literal;
 
 public class PingCommand
 {
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher)
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
-        LiteralArgumentBuilder<ServerCommandSource> command = literal("ping").
-                requires( (source) -> CarpetExtraSettings.commandPing && source.isExecutedByPlayer()).
+        LiteralArgumentBuilder<CommandSourceStack> command = literal("ping").
+                requires( (source) -> CarpetExtraSettings.commandPing && source.isPlayer()).
                         executes( c ->
                         {
-                            ServerPlayerEntity player = c.getSource().getPlayer();
-                            int ping = player.networkHandler.getLatency();
-                            c.getSource().sendFeedback(() -> Text.literal("Your ping is: " + ping + " ms"), false);
+                            ServerPlayer player = c.getSource().getPlayer();
+                            int ping = player.connection.latency();
+                            c.getSource().sendSuccess(() -> Component.literal("Your ping is: " + ping + " ms"), false);
                             return 1;
                         });
         

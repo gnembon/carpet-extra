@@ -1,15 +1,12 @@
 package carpetextra.mixins;
 
 import carpetextra.utils.PlaceBlockDispenserBehavior;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPointer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$4")
+@Mixin(targets = "net/minecraft/core/dispenser/DispenseItemBehavior$12")
 public abstract class DispenserBehaviorGlowstoneMixin
 {
     /* difficult to maintain

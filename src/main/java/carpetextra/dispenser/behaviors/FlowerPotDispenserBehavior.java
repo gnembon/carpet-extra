@@ -1,41 +1,41 @@
 package carpetextra.dispenser.behaviors;
 
 import carpetextra.helpers.FlowerPotHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 
-public class FlowerPotDispenserBehavior extends FallibleItemDispenserBehavior {
+public class FlowerPotDispenserBehavior extends OptionalDispenseItemBehavior {
     @Override
-    protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+    protected ItemStack execute(BlockSource pointer, ItemStack stack) {
         this.setSuccess(true);
         Item item = stack.getItem();
-        ServerWorld world = pointer.world();
-        BlockPos frontBlockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
+        ServerLevel world = pointer.level();
+        BlockPos frontBlockPos = pointer.pos().relative(pointer.state().getValue(DispenserBlock.FACING));
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
         FlowerPotBlock frontBlock = (FlowerPotBlock) frontBlockState.getBlock();
 
         // check if flower pot is empty
-        if(frontBlock.getContent() == Blocks.AIR && FlowerPotHelper.isPottable(item)) {
+        if(frontBlock.getPotted() == Blocks.AIR && FlowerPotHelper.isPottable(item)) {
             FlowerPotBlock pottedBlock = FlowerPotHelper.getPottedBlock(item);
 
             // place filled flower pot
-            world.setBlockState(frontBlockPos, pottedBlock.getDefaultState());
-            world.emitGameEvent(null, GameEvent.BLOCK_CHANGE, frontBlockPos);
+            world.setBlockAndUpdate(frontBlockPos, pottedBlock.defaultBlockState());
+            world.gameEvent(null, GameEvent.BLOCK_CHANGE, frontBlockPos);
 
             // check if flower pot should load chunk
-            FlowerPotHelper.updateLoadStatus(world, frontBlockPos, pottedBlock.getContent(), true);
+            FlowerPotHelper.updateLoadStatus(world, frontBlockPos, pottedBlock.getPotted(), true);
 
             // remove flower and return
-            stack.decrement(1);
+            stack.shrink(1);
             return stack;
         }
 

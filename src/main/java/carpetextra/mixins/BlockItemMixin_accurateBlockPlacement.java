@@ -2,10 +2,10 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import carpetextra.utils.BlockPlacer;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -15,9 +15,9 @@ public class BlockItemMixin_accurateBlockPlacement
 {
     @Redirect(method = "getPlacementState", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/block/Block;getPlacementState(Lnet/minecraft/item/ItemPlacementContext;)Lnet/minecraft/block/BlockState;"
+            target = "Lnet/minecraft/world/level/block/Block;getStateForPlacement(Lnet/minecraft/world/item/context/BlockPlaceContext;)Lnet/minecraft/world/level/block/state/BlockState;"
     ))
-    private BlockState getAlternatePlacement(Block block, ItemPlacementContext context)
+    private BlockState getAlternatePlacement(Block block, BlockPlaceContext context)
     {
         if (CarpetExtraSettings.accurateBlockPlacement)
         {
@@ -25,7 +25,7 @@ public class BlockItemMixin_accurateBlockPlacement
             if (tryAlternative != null)
                 return tryAlternative;
         }
-        return block.getPlacementState(context);
+        return block.getStateForPlacement(context);
     }
 
 }

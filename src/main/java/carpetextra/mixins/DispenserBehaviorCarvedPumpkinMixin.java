@@ -6,13 +6,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import carpetextra.utils.PlaceBlockDispenserBehavior;
-import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPointer;
+import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 
-@Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$6")
-public abstract class DispenserBehaviorCarvedPumpkinMixin extends FallibleItemDispenserBehavior
+@Mixin(targets = "net/minecraft/core/dispenser/DispenseItemBehavior$14")
+public abstract class DispenserBehaviorCarvedPumpkinMixin extends OptionalDispenseItemBehavior
 {
     /* difficult to maintain
     @Inject(

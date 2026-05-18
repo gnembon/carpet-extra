@@ -2,22 +2,22 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import carpetextra.fakes.DispenserBlockEntityInterface;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.DispenserBlockEntity;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.DispenserBlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(DispenserBlockEntity.class)
-public abstract class DispenserBlockEntity_craftingMixin extends LootableContainerBlockEntity implements DispenserBlockEntityInterface
+public abstract class DispenserBlockEntity_craftingMixin extends RandomizableContainerBlockEntity implements DispenserBlockEntityInterface
 {
-    @Shadow private DefaultedList<ItemStack> inventory;
+    @Shadow private NonNullList<ItemStack> items;
 
     protected DispenserBlockEntity_craftingMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
@@ -25,26 +25,26 @@ public abstract class DispenserBlockEntity_craftingMixin extends LootableContain
 
 
     @Override
-    public DefaultedList<ItemStack> getInventory()
+    public NonNullList<ItemStack> getInventory()
     {
-        return inventory;
+        return items;
     }
 
     @Override
-    public boolean isValid(int slot, ItemStack stack)
+    public boolean canPlaceItem(int slot, ItemStack stack)
     {
 
-        if (CarpetExtraSettings.autoCraftingDropper && world != null)
+        if (CarpetExtraSettings.autoCraftingDropper && level != null)
         {
-            BlockState state = world.getBlockState(pos);
+            BlockState state = level.getBlockState(worldPosition);
             if (state.getBlock() == Blocks.DROPPER)
             {
-                if (world.getBlockState(pos.offset(state.get(DispenserBlock.FACING))).getBlock() == Blocks.CRAFTING_TABLE)
+                if (level.getBlockState(worldPosition.relative(state.getValue(DispenserBlock.FACING))).getBlock() == Blocks.CRAFTING_TABLE)
                 {
-                    return inventory.get(slot).isEmpty();
+                    return items.get(slot).isEmpty();
                 }
             }
         }
-        return super.isValid(slot, stack);
+        return super.canPlaceItem(slot, stack);
     }
 }

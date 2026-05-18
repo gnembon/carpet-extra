@@ -8,9 +8,8 @@ import carpetextra.helpers.CustomSpawnLists;
 import carpetextra.utils.CarpetExtraTranslations;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.server.command.ServerCommandSource;
-
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
 import java.util.Map;
 
 public class CarpetExtraServer implements CarpetExtension, ModInitializer
@@ -42,7 +41,7 @@ public class CarpetExtraServer implements CarpetExtension, ModInitializer
     }
 
     @Override
-    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess)
+    public void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess)
     {
         // here goes extra stuff
         PingCommand.register(dispatcher);
