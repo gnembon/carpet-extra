@@ -9,16 +9,16 @@ import com.llamalad7.mixinextras.sugar.Local;
 
 import carpetextra.machinery.TestProviderRunner;
 import net.fabricmc.fabric.impl.gametest.FabricGameTestModInitializer;
-import net.minecraft.registry.Registry;
-import net.minecraft.test.TestEnvironmentDefinition;
-import net.minecraft.test.TestInstance;
+import net.minecraft.core.Registry;
+import net.minecraft.gametest.framework.TestEnvironmentDefinition;
+import net.minecraft.gametest.framework.GameTestInstance;
 
 @Mixin(value = FabricGameTestModInitializer.class, remap = false)
 class FabricGametestMixin {
     @Inject(method = "registerDynamicEntries", at = @At("TAIL"))
     private static void addOursToo(CallbackInfo ci, 
-            @Local(name="testInstances") Registry<TestInstance> testInstances,
-            @Local(name="testEnvironmentDefinitionRegistry") Registry<TestEnvironmentDefinition> envRegistry) {
+            @Local(name="testInstances") Registry<GameTestInstance> testInstances,
+            @Local(name="testEnvironmentDefinitionRegistry") Registry<TestEnvironmentDefinition<?>> envRegistry) {
         TestProviderRunner.registerDynamicEntries(testInstances, envRegistry);
     }
 }

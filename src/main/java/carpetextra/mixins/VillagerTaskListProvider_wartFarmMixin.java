@@ -20,7 +20,7 @@ public abstract class VillagerTaskListProvider_wartFarmMixin
 
     @Redirect(method = "getWorkPackage", at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/world/entity/npc/VillagerProfession;FARMER:Lnet/minecraft/resources/ResourceKey;"
+            target = "Lnet/minecraft/world/entity/npc/villager/VillagerProfession;FARMER:Lnet/minecraft/resources/ResourceKey;"
     ))
     private static ResourceKey<VillagerProfession> redirectFarmer(Holder<VillagerProfession> profession, float speed)
     {

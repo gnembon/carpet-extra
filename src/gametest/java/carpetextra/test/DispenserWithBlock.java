@@ -11,25 +11,25 @@ import carpetextra.machinery.DynamicTest;
 import carpetextra.machinery.TestProvider;
 import carpetextra.mixins.AxeItem_StrippedBlocksAccessorMixin;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeveledCauldronBlock;
-import net.minecraft.block.NetherWartBlock;
-import net.minecraft.block.entity.DispenserBlockEntity;
-import net.minecraft.component.type.PotionContentsComponent;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potions;
-import net.minecraft.test.TestContext;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.GameMode;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
+import net.minecraft.world.level.block.NetherWartBlock;
+import net.minecraft.world.level.block.entity.DispenserBlockEntity;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.GameType;
 
 public class DispenserWithBlock {
     static final String STRUCTURE = "carpet-extra:dispenserbase";
@@ -41,90 +41,90 @@ public class DispenserWithBlock {
     BlockPos dispenser = new BlockPos(1, 1, 0);
     
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void renewableNetherrack(TestContext ctx) {
+    public void renewableNetherrack(GameTestHelper ctx) {
         blockConversionTest(ctx, Items.FIRE_CHARGE, Blocks.COBBLESTONE, Blocks.NETHERRACK, 1, true);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void renewableEndstone(TestContext ctx) {
+    public void renewableEndstone(GameTestHelper ctx) {
         blockConversionTest(ctx, Items.DRAGON_BREATH, Blocks.COBBLESTONE, Blocks.END_STONE, 1, true);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void blazeMeal(TestContext ctx) {
-        putInDispenser(ctx, Items.BLAZE_POWDER.getDefaultStack());
-        ctx.setBlockState(lapis, Blocks.SOUL_SAND);
-        ctx.setBlockState(lapis.up(), Blocks.NETHER_WART);
+    public void blazeMeal(GameTestHelper ctx) {
+        putInDispenser(ctx, Items.BLAZE_POWDER.getDefaultInstance());
+        ctx.setBlock(lapis, Blocks.SOUL_SAND);
+        ctx.setBlock(lapis.above(), Blocks.NETHER_WART);
         
-        ctx.pushButton(button);
-        
-        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
-            ctx.expectEmptyContainer(dispenser);
-            ctx.expectBlockProperty(lapis.up(), NetherWartBlock.AGE, 1);
+        ctx.pressButton(button);
+        ctx.succeedOnTickWhen(DISPENSER_DELAY, () -> {
+            ctx.assertContainerEmpty(dispenser);
+            ctx.assertBlockProperty(lapis.above(), NetherWartBlock.AGE, 1);
         });
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void blazeMealMaxed(TestContext ctx) {
-        putInDispenser(ctx, Items.BLAZE_POWDER.getDefaultStack());
-        ctx.setBlockState(lapis, Blocks.SOUL_SAND);
-        ctx.setBlockState(lapis.up(), Blocks.NETHER_WART.getDefaultState().with(NetherWartBlock.AGE, NetherWartBlock.MAX_AGE));
+    public void blazeMealMaxed(GameTestHelper ctx) {
+        putInDispenser(ctx, Items.BLAZE_POWDER.getDefaultInstance());
+        ctx.setBlock(lapis, Blocks.SOUL_SAND);
+        ctx.setBlock(lapis.above(), Blocks.NETHER_WART.defaultBlockState().setValue(NetherWartBlock.AGE, NetherWartBlock.MAX_AGE));
         
-        ctx.pushButton(button);
+        ctx.pressButton(button);
         
-        ctx.runAtTick(DISPENSER_DELAY, () -> {
+        ctx.succeedOnTickWhen(DISPENSER_DELAY, () -> {
             checkFirstSlotHas(ctx, Items.BLAZE_POWDER, false);
-            ctx.expectBlockProperty(lapis.up(), NetherWartBlock.AGE, NetherWartBlock.MAX_AGE);
-            ctx.complete();
+            ctx.assertBlockProperty(lapis.above(), NetherWartBlock.AGE, NetherWartBlock.MAX_AGE);
+            ctx.succeed();
         });
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void shearPumpkin(TestContext ctx) {
-        blockConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, false, () -> ctx.expectItem(Items.PUMPKIN_SEEDS));
+    public void shearPumpkin(GameTestHelper ctx) {
+        blockConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, false, () -> ctx.assertItemEntityPresent(Items.PUMPKIN_SEEDS));
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void shearPumpkinBreaks(TestContext ctx) {
-        blockConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, true, () -> ctx.expectItem(Items.PUMPKIN_SEEDS));
+    public void shearPumpkinBreaks(GameTestHelper ctx) {
+        blockConversionTest(ctx, Items.SHEARS, Blocks.PUMPKIN, Blocks.CARVED_PUMPKIN, 1, true, () -> ctx.assertItemEntityPresent(Items.PUMPKIN_SEEDS));
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void boatOnRegularIce(TestContext ctx) {
+    public void boatOnRegularIce(GameTestHelper ctx) {
         boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityType.OAK_BOAT);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void boatOnPackedIce(TestContext ctx) {
+    public void boatOnPackedIce(GameTestHelper ctx) {
         boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityType.OAK_BOAT);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void boatOnBlueIce(TestContext ctx) {
+    public void boatOnBlueIce(GameTestHelper ctx) {
         boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityType.OAK_BOAT);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void chestBoatOnIce(TestContext ctx) {
+    public void chestBoatOnIce(GameTestHelper ctx) {
         boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityType.OAK_CHEST_BOAT);
     }
     
-    private void boatTest(TestContext ctx, Item item, Block block, EntityType<?> expectedEntity) {
-        putInDispenser(ctx, item.getDefaultStack());
-        ctx.setBlockState(lapis, block);
+    private void boatTest(GameTestHelper ctx, Item item, Block block, EntityType<?> expectedEntity) {
+        putInDispenser(ctx, item.getDefaultInstance());
+        ctx.setBlock(lapis, block);
         
-        ctx.pushButton(button);
-        ctx.runAtTick(DISPENSER_DELAY, () -> {
-            ctx.expectEmptyContainer(dispenser);
-            ctx.expectEntityAt(expectedEntity, lapis.up());
-            
+        ctx.pressButton(button);
+        ctx.runAtTickTime(DISPENSER_DELAY, () -> {
+            ctx.assertContainerEmpty(dispenser);
+            ctx.assertEntityPresent(expectedEntity, lapis.above());
+
+            ctx.getEntities(expectedEntity);
             Entity boat = ctx.getEntities(expectedEntity).getFirst();
             
-            PlayerEntity p = ctx.createMockPlayer(GameMode.SURVIVAL);
+            Player p = ctx.makeMockPlayer(GameType.SURVIVAL);
             for (int i = 0; i < 20; i++) p.attack(boat); // just kill doesn't drop it
             
-            ctx.expectItem(item);
-            ctx.complete();
+            ctx.assertItemEntityPresent(item);
+            ctx.succeed();
         });
     }
 
@@ -154,7 +154,7 @@ public class DispenserWithBlock {
         return fns;
     }
     
-    private void stripTest(TestContext ctx, Item tool, Block blockFrom, Block blockTo) {
+    private void stripTest(GameTestHelper ctx, Item tool, Block blockFrom, Block blockTo) {
         blockConversionTest(ctx, tool, blockFrom, blockTo, 1, false);
     }
     
@@ -166,15 +166,15 @@ public class DispenserWithBlock {
                 int finalOff = off;
                 int adjustedI = off > 0 ? i : i + 1;
                 fns.add(makeDispenserTest("cauldronBottleLvl" + adjustedI + (off > 0 ? "Fill" : "Empty"), ctx -> {
-                    putInDispenser(ctx, finalOff > 0 ? waterBottle() : Items.GLASS_BOTTLE.getDefaultStack());
-                    ctx.setBlockState(lapis.up(), waterCauldronFor(ctx, adjustedI));
-                    BlockPos referencePos = dispenser.down();
-                    ctx.setBlockState(referencePos, waterCauldronFor(ctx, adjustedI + finalOff));
+                    putInDispenser(ctx, finalOff > 0 ? waterBottle() : Items.GLASS_BOTTLE.getDefaultInstance());
+                    ctx.setBlock(lapis.above(), waterCauldronFor(ctx, adjustedI));
+                    BlockPos referencePos = dispenser.below();
+                    ctx.setBlock(referencePos, waterCauldronFor(ctx, adjustedI + finalOff));
                     
-                    ctx.pushButton(button);
+                    ctx.pressButton(button);
                     
-                    ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
-                        ctx.expectSameStates(lapis.up(), referencePos);
+                    ctx.succeedOnTickWhen(DISPENSER_DELAY, () -> {
+                        ctx.assertSameBlockState(lapis.above(), referencePos);
                         checkFirstSlotHas(ctx, finalOff > 0 ? Items.GLASS_BOTTLE : Items.POTION, false);
                     });
                 }));
@@ -199,14 +199,14 @@ public class DispenserWithBlock {
     }
     
     private static ItemStack waterBottle() {
-        return PotionContentsComponent.createStack(Items.POTION, Potions.WATER);
+        return PotionContents.createItemStack(Items.POTION, Potions.WATER);
     }
     
-    private BlockState waterCauldronFor(TestContext ctx, int level) {
+    private BlockState waterCauldronFor(GameTestHelper ctx, int level) {
         if (level == 0) {
-            return Blocks.CAULDRON.getDefaultState();
+            return Blocks.CAULDRON.defaultBlockState();
         }
-        return Blocks.WATER_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, level);
+        return Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, level);
     }
 
     @TestProvider
@@ -225,7 +225,7 @@ public class DispenserWithBlock {
             blockConversionTest(ctx, Items.IRON_HOE, Blocks.COARSE_DIRT, Blocks.DIRT, 0, false);
         }));
         fns.add(makeDispenserTest("tillRootedDirt", (ctx) -> {
-            blockConversionTest(ctx, Items.IRON_HOE, Blocks.ROOTED_DIRT, Blocks.DIRT, 0, false, () -> ctx.expectItem(Items.HANGING_ROOTS));
+            blockConversionTest(ctx, Items.IRON_HOE, Blocks.ROOTED_DIRT, Blocks.DIRT, 0, false, () -> ctx.assertItemEntityPresent(Items.HANGING_ROOTS));
         }));
         
         for (Item hoe : List.of(Items.WOODEN_HOE, Items.STONE_HOE, Items.GOLDEN_HOE, Items.IRON_HOE, Items.DIAMOND_HOE, Items.NETHERITE_HOE)) {
@@ -237,20 +237,20 @@ public class DispenserWithBlock {
         return fns;
     }
 
-    private void blockConversionTest(TestContext ctx, Item tool, Block from, Block to, int offset, boolean putDamaged, Runnable... extras) {
+    private void blockConversionTest(GameTestHelper ctx, Item tool, Block from, Block to, int offset, boolean putDamaged, Runnable... extras) {
         if (putDamaged) {
             putAtOneDurability(ctx, tool);
         } else {
-            putInDispenser(ctx, tool.getDefaultStack());
+            putInDispenser(ctx, tool.getDefaultInstance());
         }
-        ctx.setBlockState(lapis.offset(Direction.UP, offset), from);
-        ctx.pushButton(button);
+        ctx.setBlock(lapis.relative(Direction.UP, offset), from);
+        ctx.pressButton(button);
         
-        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
-            ctx.expectBlock(to, lapis.offset(Direction.UP, offset));
+        ctx.succeedOnTickWhen(DISPENSER_DELAY, () -> {
+            ctx.assertBlockPresent(to, lapis.relative(Direction.UP, offset));
             if (putDamaged) {
-                ctx.expectEmptyContainer(dispenser);
-            } else if (tool.getDefaultStack().isDamageable()) { // otherwise we expect extras to handle it
+                ctx.assertContainerEmpty(dispenser);
+            } else if (tool.getDefaultInstance().isDamageableItem()) { // otherwise we expect extras to handle it
                 checkFirstSlotHas(ctx, tool, true);
             }
             runAll(extras);
@@ -258,99 +258,99 @@ public class DispenserWithBlock {
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void fillMinecartChest(TestContext ctx) {
+    public void fillMinecartChest(GameTestHelper ctx) {
         cartTest(ctx, Items.CHEST, EntityType.CHEST_MINECART);
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void fillMinecartHopper(TestContext ctx) {
+    public void fillMinecartHopper(GameTestHelper ctx) {
         cartTest(ctx, Items.HOPPER, EntityType.HOPPER_MINECART);
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void fillMinecartTnt(TestContext ctx) {
-        cartTest(ctx, Items.TNT, EntityType.TNT_MINECART, () -> ctx.dontExpectEntity(EntityType.TNT));
+    public void fillMinecartTnt(GameTestHelper ctx) {
+        cartTest(ctx, Items.TNT, EntityType.TNT_MINECART, () -> ctx.assertEntityNotPresent(EntityType.TNT));
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void fillMinecartFurnace(TestContext ctx) {
+    public void fillMinecartFurnace(GameTestHelper ctx) {
         cartTest(ctx, Items.FURNACE, EntityType.FURNACE_MINECART);
     }
     
-    private void cartTest(TestContext ctx, Item item, EntityType<?> entity, Runnable... extras) {
-        putInDispenser(ctx, item.getDefaultStack());
-        ctx.setBlockState(lapis.up(), Blocks.RAIL);
-        ctx.spawnEntity(EntityType.MINECART, lapis.up());
+    private void cartTest(GameTestHelper ctx, Item item, EntityType<?> entity, Runnable... extras) {
+        putInDispenser(ctx, item.getDefaultInstance());
+        ctx.setBlock(lapis.above(), Blocks.RAIL);
+        ctx.spawn(EntityType.MINECART, lapis.above());
         
-        ctx.pushButton(button);
-        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
-            ctx.expectEntityAt(entity, lapis.up());
-            ctx.dontExpectEntity(EntityType.MINECART);
-            ctx.dontExpectEntity(EntityType.ITEM);
+        ctx.pressButton(button);
+        ctx.succeedOnTickWhen(DISPENSER_DELAY, () -> {
+            ctx.assertEntityPresent(entity, lapis.above());
+            ctx.assertEntityNotPresent(EntityType.MINECART);
+            ctx.assertEntityNotPresent(EntityType.ITEM);
             runAll(extras);
         });
     }
     
     // very basic autocrafting test, for now just to catch simple crashes or malfunctioning stuff
     @GameTest(structure = STRUCTURE, environment = ENV)
-    public void craftCake(TestContext ctx) {
+    public void craftCake(GameTestHelper ctx) {
         Item[] recipe = new Item[] {
                 Items.MILK_BUCKET, Items.MILK_BUCKET, Items.MILK_BUCKET,
                 Items.SUGAR,       Items.EGG,         Items.SUGAR,
                 Items.WHEAT,       Items.WHEAT,       Items.WHEAT
         };
-        ctx.setBlockState(dispenser, Blocks.DROPPER.getStateWithProperties(ctx.getBlockState(dispenser)));
-        ctx.setBlockState(lapis.up(), Blocks.CRAFTING_TABLE);
+        ctx.setBlock(dispenser, Blocks.DROPPER.withPropertiesOf(ctx.getBlockState(dispenser)));
+        ctx.setBlock(lapis.above(), Blocks.CRAFTING_TABLE);
         for (int i = 0; i < 9; i++) {
-            ctx.getBlockEntity(dispenser, DispenserBlockEntity.class).setStack(i, recipe[i].getDefaultStack());
+            ctx.getBlockEntity(dispenser, DispenserBlockEntity.class).setItem(i, recipe[i].getDefaultInstance());
         }
-        ctx.pushButton(button);
+        ctx.pressButton(button);
         
-        ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
-            ctx.expectItem(Items.CAKE);
-            for (Item item : recipe) ctx.dontExpectItem(item);
+        ctx.succeedOnTickWhen(DISPENSER_DELAY, () -> {
+            ctx.assertItemEntityPresent(Items.CAKE);
+            for (Item item : recipe) ctx.assertItemEntityNotPresent(item);
             for (int i = 0; i < 3; i++) {
                 int finalI = i;
                 
-                ctx.checkBlockEntity(dispenser, DispenserBlockEntity.class,
-                        disp -> disp.getStack(finalI).getItem() == Items.BUCKET, 
+                ctx.assertBlockEntityData(dispenser, DispenserBlockEntity.class,
+                        disp -> disp.getItem(finalI).getItem() == Items.BUCKET,
                         msg("Must have buckets remaining in dispenser"));
             }
             for (int i = 3; i < 9; i++) {
                 int finalI = i;
-                ctx.checkBlockEntity(dispenser, DispenserBlockEntity.class,
-                        disp -> disp.getStack(finalI).isEmpty(), 
+                ctx.assertBlockEntityData(dispenser, DispenserBlockEntity.class,
+                        disp -> disp.getItem(finalI).isEmpty(),
                         msg("Must not have anything but the first 3 buckets in dispenser"));
             }
         });
     }
     
     // Util
-    private void putInDispenser(TestContext ctx, ItemStack item) {
-        ctx.getBlockEntity(dispenser, DispenserBlockEntity.class).addToFirstFreeSlot(item);
+    private void putInDispenser(GameTestHelper ctx, ItemStack item) {
+        ctx.getBlockEntity(dispenser, DispenserBlockEntity.class).insertItem(item);
     }
     
-    private void putAtOneDurability(TestContext ctx, Item item) {
-        ItemStack stack = item.getDefaultStack();
-        stack.setDamage(stack.getMaxDamage() - 1);
+    private void putAtOneDurability(GameTestHelper ctx, Item item) {
+        ItemStack stack = item.getDefaultInstance();
+        stack.setDamageValue(stack.getMaxDamage() - 1);
         putInDispenser(ctx, stack);
     }
     
-    private void checkFirstSlotHas(TestContext ctx, Item item, boolean damaged) {
-        ctx.checkBlockEntity(dispenser, DispenserBlockEntity.class,
-                disp -> disp.getStack(0).getItem() == item && (!damaged || disp.getStack(0).isDamaged()), 
+    private void checkFirstSlotHas(GameTestHelper ctx, Item item, boolean damaged) {
+        ctx.assertBlockEntityData(dispenser, DispenserBlockEntity.class,
+                disp -> disp.getItem(0).getItem() == item && (!damaged || disp.getItem(0).isDamaged()),
                 msg("Must have " + (damaged ? "damaged " : "") + item + " in dispenser"));
     }
     
     private void runAll(Runnable... actions) {
         for (Runnable r : actions) r.run();
     }
-    private Supplier<Text> msg(String str) {
-        return () -> Text.literal(str);
+    private Supplier<Component> msg(String str) {
+        return () -> Component.literal(str);
     }
     
     // Setup util
-    private DynamicTest makeDispenserTest(String name, Consumer<TestContext> runner) {
+    private DynamicTest makeDispenserTest(String name, Consumer<GameTestHelper> runner) {
         name = GEN_PREFIX + '.' + name.replace("minecraft:", "");
         return new DynamicTest(ENV, name, STRUCTURE, 20, 0, true, runner);
     }

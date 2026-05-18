@@ -26,8 +26,6 @@
     "DispenserBlock_GetCustomBehaviorMixin",
     "DispenserBehaviorChestMixin",
     "DispenserBehaviorGlowstoneMixin",
-    "DispenserBehaviorCarvedPumpkinMixin",
-    "DispenserBehaviorMobHeadMixin",
     "MooshroomEntity_StatusEffectAccessorMixin",
     "HoeItem_TilledBlocksAccessorMixin",
     "AxeItem_StrippedBlocksAccessorMixin",

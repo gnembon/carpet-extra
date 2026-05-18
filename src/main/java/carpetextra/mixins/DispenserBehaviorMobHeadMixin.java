@@ -8,11 +8,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import carpetextra.utils.PlaceBlockDispenserBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 
-@Mixin(targets = {
-        "net/minecraft/core/dispenser/DispenseItemBehavior$14",
+//@Mixin(targets = {
+//        "net/minecraft/core/dispenser/DispenseItemBehavior$14",
         /* wither skull */
         //"net/minecraft/block/dispenser/DispenserBehavior$7"
-})
+//})
 public abstract class DispenserBehaviorMobHeadMixin extends OptionalDispenseItemBehavior {
     /* difficult to maintain
     @Inject(

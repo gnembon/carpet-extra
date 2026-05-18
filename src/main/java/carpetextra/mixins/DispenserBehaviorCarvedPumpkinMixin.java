@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import carpetextra.utils.PlaceBlockDispenserBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 
-@Mixin(targets = "net/minecraft/core/dispenser/DispenseItemBehavior$14")
+//@Mixin(targets = "net/minecraft/core/dispenser/DispenseItemBehavior$14")
 public abstract class DispenserBehaviorCarvedPumpkinMixin extends OptionalDispenseItemBehavior
 {
     /* difficult to maintain

@@ -8,10 +8,10 @@ import java.util.List;
 import net.fabricmc.fabric.api.gametest.v1.CustomTestMethodInvoker;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.test.TestEnvironmentDefinition;
-import net.minecraft.test.TestInstance;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.gametest.framework.TestEnvironmentDefinition;
+import net.minecraft.gametest.framework.GameTestInstance;
 
 // note: adapted from Fabric API implementation
 public class TestProviderRunner {
@@ -44,14 +44,14 @@ public class TestProviderRunner {
         }
         
         for (DynamicTest test : generated) {
-            Registry.register(Registries.TEST_FUNCTION, test.identifier(), test.testFunction());
+            Registry.register(BuiltInRegistries.TEST_FUNCTION, test.identifier(), test.testFunction());
         }
         
     }
     
-    public static void registerDynamicEntries(Registry<TestInstance> testInstances, Registry<TestEnvironmentDefinition> envRegistry) {
+    public static void registerDynamicEntries(Registry<GameTestInstance> testInstances, Registry<TestEnvironmentDefinition<?>> envRegistry) {
         for (DynamicTest test : generated) {
-            TestInstance testInstance = test.testInstance(envRegistry);
+            GameTestInstance testInstance = test.testInstance(envRegistry);
             Registry.register(testInstances, test.identifier(), testInstance);
         }
     }

@@ -18,20 +18,20 @@ group = project.maven_group
 
 // @TODO v26.1.2 temp disabled, Because test model is not updated
 
-//fabricApi {
-//	configureTests {
-//		createSourceSet = true
-//		modId = "carpet-extra-gametest"
-//		enableClientGameTests = false
-//	}
-//}
+fabricApi {
+	configureTests {
+		createSourceSet = true
+		modId = "carpet-extra-gametest"
+		enableClientGameTests = false
+	}
+}
 
-//tasks.named('runGameTest', JavaExec).configure {
-//	jvmArgs += [
-//		"-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml",
-//		"-Dmixin.debug.countInjections=true"
-//	]
-//}
+tasks.named('runGameTest', JavaExec).configure {
+	jvmArgs += [
+		"-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml",
+		"-Dmixin.debug.countInjections=true"
+	]
+}
 
 dependencies {
 	//to change the versions see the gradle.properties file
@@ -43,18 +43,18 @@ dependencies {
 
 	// for gametests
     // @TODO v26.1.2 temp disabled, Because gametest model is not updated
-//    gametestImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
-//    gametestImplementation fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)
-//    gametestImplementation fabricApi.module("fabric-registry-sync-v0", project.fabric_api_version)
-//    gametestImplementation fabricApi.module("fabric-api-base", project.fabric_api_version)
-//    gametestImplementation fabricApi.module("fabric-gametest-api-v1", project.fabric_api_version)
+    gametestImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
+    gametestImplementation fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)
+    gametestImplementation fabricApi.module("fabric-registry-sync-v0", project.fabric_api_version)
+    gametestImplementation fabricApi.module("fabric-api-base", project.fabric_api_version)
+    gametestImplementation fabricApi.module("fabric-gametest-api-v1", project.fabric_api_version)
 }
 
 processResources {
 	inputs.property "version", project.version
 
 	filesMatching("fabric.mod.json") {
-		expand "version": project.mod_version
+		expand "version": project.version
 	}
 }
 

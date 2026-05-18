@@ -46,7 +46,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Behavior<Villager
 
     @Redirect(method = "checkExtraStartConditions", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/npc/VillagerData;profession()Lnet/minecraft/core/Holder;"
+            target = "Lnet/minecraft/world/entity/npc/villager/VillagerData;profession()Lnet/minecraft/core/Holder;"
     ))
     private Holder<VillagerProfession> disguiseAsFarmer(VillagerData villagerData)
     {
@@ -107,7 +107,7 @@ public abstract class FarmerVillagerTask_wartFarmMixin extends Behavior<Villager
 
     @Redirect(method = "tick", at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/SimpleContainer;size()I"
+            target = "Lnet/minecraft/world/SimpleContainer;getContainerSize()I"
     ))
     private int plantWart(SimpleContainer basicInventory, ServerLevel serverWorld, Villager villagerEntity, long l)
     {
