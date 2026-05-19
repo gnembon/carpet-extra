@@ -71,7 +71,7 @@ public class DispenserWithBlock {
         
         ctx.pressButton(button);
         
-        ctx.succeedOnTickWhen(DISPENSER_DELAY, () -> {
+        ctx.runAtTickTime(DISPENSER_DELAY, () -> {
             checkFirstSlotHas(ctx, Items.BLAZE_POWDER, false);
             ctx.assertBlockProperty(lapis.above(), NetherWartBlock.AGE, NetherWartBlock.MAX_AGE);
             ctx.succeed();

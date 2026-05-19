@@ -16,8 +16,6 @@ base {
 version = project.minecraft_version+'-'+project.mod_version
 group = project.maven_group
 
-// @TODO v26.1.2 temp disabled, Because test model is not updated
-
 fabricApi {
 	configureTests {
 		createSourceSet = true
@@ -38,11 +36,10 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    // @TODO v26.1.2 temp use local file, Because test model is not updated
+    // @TODO v26.1.2 temp use local file, Because download failed
     implementation files("libs/fabric-carpet-26.1+v260402.jar")
 
 	// for gametests
-    // @TODO v26.1.2 temp disabled, Because gametest model is not updated
     gametestImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
     gametestImplementation fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)
     gametestImplementation fabricApi.module("fabric-registry-sync-v0", project.fabric_api_version)
