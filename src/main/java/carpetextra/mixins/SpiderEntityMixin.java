@@ -22,7 +22,7 @@ public abstract class SpiderEntityMixin extends HostileEntity
     @Override
     public void onDeath(DamageSource source)
     {
-        if (this.getWorld() instanceof ServerWorld sw)
+        if (this.getEntityWorld() instanceof ServerWorld sw)
         {
             if (this.hasPassengers() && this.random.nextInt(100) + 1 < CarpetExtraSettings.spiderJockeysDropGapples)
             {

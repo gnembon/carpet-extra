@@ -23,7 +23,7 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
     @Override
     public void onStruckByLightning(ServerWorld world, LightningEntity entity)
     {
-        if (!world.isClient && !this.isRemoved() && CarpetExtraSettings.renewableWitherSkeletons)
+        if (!world.isClient() && !this.isRemoved() && CarpetExtraSettings.renewableWitherSkeletons)
         {
             WitherSkeletonEntity witherSkelly = new WitherSkeletonEntity(EntityType.WITHER_SKELETON, world);
             witherSkelly.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
@@ -44,7 +44,7 @@ public abstract class SkeletonEntityMixin extends AbstractSkeletonEntity
                 this.stopRiding();
                 witherSkelly.extinguish();
                 mount.extinguish();
-                witherSkelly.startRiding(mount, true);
+                witherSkelly.startRiding(mount);
             }
             this.discard();
         }

@@ -25,12 +25,12 @@ public abstract class ChickenEntityMixin extends AnimalEntity
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand)
     {
-        if (this.getWorld() instanceof ServerWorld sw)
+        if (this.getEntityWorld() instanceof ServerWorld sw)
         {
             ItemStack stack = player.getStackInHand(hand);
             if (CarpetExtraSettings.chickenShearing && stack.getItem() == Items.SHEARS && !this.isBaby())
             {
-                boolean tookDamage = this.damage(sw, player.getWorld().getDamageSources().generic(), 1);
+                boolean tookDamage = this.damage(sw, player.getEntityWorld().getDamageSources().generic(), 1);
                 if (tookDamage)
                 {
                     this.dropItem(sw, Items.FEATHER);
