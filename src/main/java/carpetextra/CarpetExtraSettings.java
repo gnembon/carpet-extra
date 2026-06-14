@@ -21,6 +21,7 @@ public class CarpetExtraSettings
     }
 
     public static final String EXTRA = "extras";
+    public static final String GRIEFING = "griefing";
 
     public static class validatorScaffoldingDistance extends Validator<Integer> {
         @Override
@@ -269,4 +270,39 @@ public class CarpetExtraSettings
             validators = Validators.NonNegativeNumber.class
     )
     public static int xpPerSculkCatalyst = 5;
+
+    @Rule(
+            categories = {EXTRA, FEATURE, GRIEFING}
+    )
+    public static boolean disableFarmlandMobTrampling = false;
+
+    @Rule(
+            categories = {EXTRA, FEATURE, GRIEFING}
+    )
+    public static boolean disableFarmlandPlayerTrampling = false;
+
+    @Rule(
+            categories = {EXTRA, FEATURE, GRIEFING}
+    )
+    public static boolean disableCreeperGriefing = false;
+
+    @Rule(
+            categories = {EXTRA, FEATURE, GRIEFING}
+    )
+    public static boolean disableZombieBreakDoor = false;
+
+    @Rule(
+            categories = {EXTRA, FEATURE, GRIEFING}
+    )
+    public static boolean disableEndermanPickupBlock = false;
+
+    @Rule(
+            categories = {EXTRA, FEATURE, GRIEFING}
+    )
+    public static boolean disableGhastFireballGriefing = false;
+
+    @Rule(
+            categories = {EXTRA, FEATURE, GRIEFING}
+    )
+    public static boolean disableRavagerGriefing = false;
 }

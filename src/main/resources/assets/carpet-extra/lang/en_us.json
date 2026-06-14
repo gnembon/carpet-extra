@@ -1,6 +1,7 @@
 {
   // Categories:
   "carpet.category.extras": "extras",
+  "carpet.category.griefing": "mob griefing",
 
   // Rules:
 
@@ -195,5 +196,21 @@
   "carpet.rule.y0DragonEggBedrockBreaking.extra.0": "Requires dragonEggBedrockBreaking to be set to true.",
 
   //xpPerSculkCatalyst
-  "carpet.rule.xpPerSculkCatalyst.desc": "Sets the amount of xp dropped when breaking a sculk catalyst."
+  "carpet.rule.xpPerSculkCatalyst.desc": "Sets the amount of xp dropped when breaking a sculk catalyst.",
+
+
+  "carpet.rule.disableFarmlandMobTrampling.desc": "Prevents farmland from being trampled by non-player mob",
+
+  "carpet.rule.disableFarmlandPlayerTrampling.desc": "Prevents farmland from being trampled by player",
+
+  "carpet.rule.disableCreeperGriefing.desc": "Prevents Creeper explosions from destroying blocks",
+  "carpet.rule.disableCreeperGriefing.extra.0": "Prevents monster attacks from affecting armor stand, painting, item frame, and item entity",
+
+  "carpet.rule.disableZombieBreakDoor.desc": "Prevents Zombie from breaking wooden door",
+
+  "carpet.rule.disableEndermanPickupBlock.desc": "Prevents Enderman from pick up and place block",
+
+  "carpet.rule.disableGhastFireballGriefing.desc": "Prevents Ghast fireball explosion from destroying blocks",
+
+  "carpet.rule.disableRavagerGriefing.desc": "Prevents Ravager from destroy leaves and crop plants"
 }

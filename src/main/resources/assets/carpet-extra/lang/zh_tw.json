@@ -1,5 +1,6 @@
 {
   "carpet.category.extras": "扩展",
+  "carpet.category.griefing": "生物破壞性",
 
   "carpet.rule.scaffoldingDistance.name": "鷹架距離上限",
   "carpet.rule.scaffoldingDistance.desc": "鷹架水平延伸距離上限",
@@ -161,5 +162,27 @@
 
   "carpet.rule.renewableIce.name": "可壓縮冰塊",
   "carpet.rule.renewableIce.desc": "當複數冰塊被掉落鐵砧砸到，將會壓縮成更高密度冰",
-  "carpet.rule.renewableIce.extra.0": "霜冰變成普通冰，普通變成冰磚，冰磚變成藍冰"
+  "carpet.rule.renewableIce.extra.0": "霜冰變成普通冰，普通變成冰磚，冰磚變成藍冰",
+
+  "carpet.rule.disableFarmlandMobTrampling.name": "禁止生物踩壞農地",
+  "carpet.rule.disableFarmlandMobTrampling.desc": "防止農地被非玩家生物踩壞",
+
+  "carpet.rule.disableFarmlandPlayerTrampling.name": "禁止玩家踩壞農地",
+  "carpet.rule.disableFarmlandPlayerTrampling.desc": "防止農地被玩家踩壞",
+
+  "carpet.rule.disableCreeperGriefing.name": "禁止苦力怕破壞",
+  "carpet.rule.disableCreeperGriefing.desc": "阻止苦力怕的爆炸摧毀方塊",
+  "carpet.rule.disableCreeperGriefing.extra.0": "阻止怪物的攻擊對盔甲架、畫、物品展示框、物品實體造成影響",
+
+  "carpet.rule.disableZombieBreakDoor.name": "禁止殭屍拆門",
+  "carpet.rule.disableZombieBreakDoor.desc": "阻止殭屍破壞木門",
+
+  "carpet.rule.disableEndermanPickupBlock.name": "禁止終界使者搬運方塊",
+  "carpet.rule.disableEndermanPickupBlock.desc": "阻止終界使者拾取、放置方塊",
+
+  "carpet.rule.disableGhastFireballGriefing.name": "禁止惡魂火球破壞",
+  "carpet.rule.disableGhastFireballGriefing.desc": "阻止惡魂火球的爆炸摧毀方塊",
+
+  "carpet.rule.disableRavagerGriefing.name": "阻止劫毀獸破壞",
+  "carpet.rule.disableRavagerGriefing.desc": "阻止劫毀獸破壞樹葉、作物植株"
 }

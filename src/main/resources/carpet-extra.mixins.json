@@ -62,7 +62,18 @@
     "TurtleMateGoalMixin",
     "VillagerEntity_wartFarmMixin",
     "VillagerProfession_wartFarmMixin",
-    "VillagerTaskListProvider_wartFarmMixin"
+    "VillagerTaskListProvider_wartFarmMixin",
+    "griefing.ArmorStandMixin",
+    "griefing.BlockAttachedEntityMixin",
+    "griefing.BreakDoorGoalMixin",
+    "griefing.CreeperExplodeMixin",
+    "griefing.EnderManPickUpBlockMixin",
+    "griefing.EnderManPlaceBlockMixin",
+    "griefing.ExplosionImplMixin",
+    "griefing.FarmlandBlockMixin",
+    "griefing.GhastFireballMixin",
+    "griefing.ItemEntityMixin",
+    "griefing.RavagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

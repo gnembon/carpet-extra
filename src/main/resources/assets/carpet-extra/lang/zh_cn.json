@@ -1,5 +1,6 @@
 {
   "carpet.category.extras": "扩展",
+  "carpet.category.griefing": "生物破坏性",
 
   "carpet.rule.scaffoldingDistance.name": "脚手架距离上限",
   "carpet.rule.scaffoldingDistance.desc": "脚手架水平扩展的距离上限",
@@ -157,5 +158,30 @@
   "carpet.rule.blazeMeal.extra.0": "可通过发射器或玩家右键动作来催熟",
 
   "carpet.rule.disablePhantomSpawning.name": "禁止幻翼生成",
-  "carpet.rule.disablePhantomSpawning.desc": "禁止幻翼的生成"
+  "carpet.rule.disablePhantomSpawning.desc": "禁止幻翼的生成",
+
+  "carpet.rule.disableFarmlandMobTrampling.name": "禁止生物踩坏耕地",
+
+
+
+  "carpet.rule.disableFarmlandMobTrampling.desc": "防止耕地被非玩家生物踩坏",
+
+  "carpet.rule.disableFarmlandPlayerTrampling.name": "禁止玩家踩坏耕地",
+  "carpet.rule.disableFarmlandPlayerTrampling.desc": "防止耕地被玩家踩坏",
+
+  "carpet.rule.disableCreeperGriefing.name": "禁止苦力怕破坏",
+  "carpet.rule.disableCreeperGriefing.desc": "阻止苦力怕的爆炸摧毁方块",
+  "carpet.rule.disableCreeperGriefing.extra.0": "阻止怪物的攻击对盔甲架、画、物品展示框、物品实体造成影响",
+
+  "carpet.rule.disableZombieBreakDoor.name": "禁止僵尸拆门",
+  "carpet.rule.disableZombieBreakDoor.desc": "阻止僵尸破坏木门",
+
+  "carpet.rule.disableEndermanPickupBlock.name": "禁止末影人搬运方块",
+  "carpet.rule.disableEndermanPickupBlock.desc": "阻止末影人拾取、放置方块",
+
+  "carpet.rule.disableGhastFireballGriefing.name": "禁止恶魂火球破坏",
+  "carpet.rule.disableGhastFireballGriefing.desc": "阻止恶魂火球的爆炸摧毁方块",
+
+  "carpet.rule.disableRavagerGriefing.name": "阻止劫掠兽破坏",
+  "carpet.rule.disableRavagerGriefing.desc": "阻止劫掠兽破坏树叶、作物植株"
 }
