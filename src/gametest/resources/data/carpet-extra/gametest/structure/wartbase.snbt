@@ -1,0 +1,34 @@
+{
+    DataVersion: 3953,
+    size: [5, 4, 1],
+    data: [
+        {pos: [0, 0, 0], state: "minecraft:soul_sand"},
+        {pos: [1, 0, 0], state: "minecraft:stone"},
+        {pos: [2, 0, 0], state: "minecraft:stone"},
+        {pos: [3, 0, 0], state: "minecraft:lapis_block"},
+        {pos: [4, 0, 0], state: "minecraft:stone"},
+        {pos: [0, 1, 0], state: "minecraft:air"},
+        {pos: [1, 1, 0], state: "minecraft:air"},
+        {pos: [2, 1, 0], state: "minecraft:air"},
+        {pos: [3, 1, 0], state: "minecraft:air"},
+        {pos: [4, 1, 0], state: "minecraft:brewing_stand{has_bottle_0:false,has_bottle_1:false,has_bottle_2:false}", nbt: {BrewTime: 0s, Fuel: 0b, Items: [], id: "minecraft:brewing_stand"}},
+        {pos: [0, 2, 0], state: "minecraft:air"},
+        {pos: [1, 2, 0], state: "minecraft:air"},
+        {pos: [2, 2, 0], state: "minecraft:air"},
+        {pos: [3, 2, 0], state: "minecraft:air"},
+        {pos: [4, 2, 0], state: "minecraft:air"},
+        {pos: [0, 3, 0], state: "minecraft:air"},
+        {pos: [1, 3, 0], state: "minecraft:air"},
+        {pos: [2, 3, 0], state: "minecraft:air"},
+        {pos: [3, 3, 0], state: "minecraft:air"},
+        {pos: [4, 3, 0], state: "minecraft:air"}
+    ],
+    entities: [],
+    palette: [
+        "minecraft:stone",
+        "minecraft:lapis_block",
+        "minecraft:soul_sand",
+        "minecraft:air",
+        "minecraft:brewing_stand{has_bottle_0:false,has_bottle_1:false,has_bottle_2:false}"
+    ]
+}

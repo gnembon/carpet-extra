@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "carpet-extra",
+  "version": "${version}",
+
+  "name": "Carpet Extra",
+  "description": "Additional, less vanilla additions to the carpet mod",
+  "authors": [
+    "gnembon, DeadlyMC, ImUrX, 2No2Name, ..."
+  ],
+  "contact": {
+    "homepage": "https://github.com/gnembon/carpet-extra",
+    "issues": "https://github.com/gnembon/carpet-extra/issues",
+    "sources": "https://github.com/gnembon/carpet-extra"
+  },
+
+  "icon": "assets/carpet-extra/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "carpetextra.CarpetExtraServer"
+    ]
+  },
+  "mixins": [
+    "carpet-extra.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "carpet": ">=1.4.169",
+    "minecraft": ">=1.21.5",
+    "java": ">=21"
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "carpet"
+    }
+  }
+}

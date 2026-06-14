@@ -1,0 +1,23 @@
+{
+    DataVersion: 3953,
+    size: [3, 3, 1],
+    data: [
+        {pos: [0, 0, 0], state: "minecraft:white_concrete"},
+        {pos: [1, 0, 0], state: "minecraft:white_concrete"},
+        {pos: [2, 0, 0], state: "minecraft:lapis_block"},
+        {pos: [0, 1, 0], state: "minecraft:stone_button{face:wall,facing:west,powered:false}"},
+        {pos: [1, 1, 0], state: "minecraft:dispenser{facing:east,triggered:false}", nbt: {Items: [], id: "minecraft:dispenser"}},
+        {pos: [2, 1, 0], state: "minecraft:air"},
+        {pos: [0, 2, 0], state: "minecraft:air"},
+        {pos: [1, 2, 0], state: "minecraft:white_concrete"},
+        {pos: [2, 2, 0], state: "minecraft:air"}
+    ],
+    entities: [],
+    palette: [
+        "minecraft:white_concrete",
+        "minecraft:lapis_block",
+        "minecraft:stone_button{face:wall,facing:west,powered:false}",
+        "minecraft:air",
+        "minecraft:dispenser{facing:east,triggered:false}"
+    ]
+}
