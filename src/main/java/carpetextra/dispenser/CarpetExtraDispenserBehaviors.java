@@ -1,6 +1,7 @@
 package carpetextra.dispenser;
 
 import java.util.Map;
+<<<<<<< HEAD
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
@@ -29,6 +30,9 @@ import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+=======
+
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 import carpetextra.CarpetExtraSettings;
 import carpetextra.dispenser.behaviors.BlazePowderDispenserBehavior;
 import carpetextra.dispenser.behaviors.CarvePumpkinDispenserBehavior;
@@ -49,10 +53,42 @@ import carpetextra.dispenser.behaviors.StripBlocksDispenserBehavior;
 import carpetextra.dispenser.behaviors.TillSoilDispenserBehavior;
 import carpetextra.dispenser.behaviors.ToggleBlockDispenserBehavior;
 import carpetextra.helpers.FlowerPotHelper;
+<<<<<<< HEAD
+=======
+import net.minecraft.block.AbstractCauldronBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.dispenser.DispenserBehavior;
+import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.GoatEntity;
+import net.minecraft.entity.passive.MooshroomEntity;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.BoatItem;
+import net.minecraft.item.HoeItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.ShearsItem;
+import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
 public class CarpetExtraDispenserBehaviors {
     // instances of custom dispenser behaviors
     // blazeMeal
+<<<<<<< HEAD
     public static final DispenseItemBehavior BLAZE_MEAL = new BlazePowderDispenserBehavior();
     // chickenShearing
     public static final DispenseItemBehavior SHEAR_CHICKEN = new ShearChickenDispenserBehavior();
@@ -87,12 +123,49 @@ public class CarpetExtraDispenserBehaviors {
     public static final DispenseItemBehavior FIRE_CHARGE_NETHERRACK = new FireChargeDispenserBehavior();
     // dispensersPlaceBoatsOnIce
     public static final DispenseItemBehavior PLACE_BOAT_ON_ICE = new PlaceBoatOnIceDispenserBehavior();
+=======
+    public static final DispenserBehavior BLAZE_MEAL = new BlazePowderDispenserBehavior();
+    // chickenShearing
+    public static final DispenserBehavior SHEAR_CHICKEN = new ShearChickenDispenserBehavior();
+    // dispensersCarvePumpkins
+    public static final DispenserBehavior CARVE_PUMPKIN = new CarvePumpkinDispenserBehavior();
+    // dispensersFeedAnimals
+    public static final DispenserBehavior FEED_ANIMAL = new FeedAnimalDispenserBehavior();
+    public static final DispenserBehavior FEED_MOOSHROOM = new FeedMooshroomDispenserBehavior();
+    // dispensersFillMinecarts
+    public static final DispenserBehavior FILL_MINECART_CHEST = new FillMinecartDispenserBehavior(EntityType.CHEST_MINECART);
+    public static final DispenserBehavior FILL_MINECART_FURNACE = new FillMinecartDispenserBehavior(EntityType.FURNACE_MINECART);
+    public static final DispenserBehavior FILL_MINECART_TNT = new FillMinecartDispenserBehavior(EntityType.TNT_MINECART);
+    public static final DispenserBehavior FILL_MINECART_HOPPER = new FillMinecartDispenserBehavior(EntityType.HOPPER_MINECART);
+    // dispensersMilkAnimals
+    public static final DispenserBehavior MILK_ANIMAL = new MilkAnimalDispenserBehavior();
+    public static final DispenserBehavior MILK_MOOSHROOM = new MilkMooshroomDispenserBehavior();
+    // dispensersPotPlants
+    public static final DispenserBehavior FILL_FLOWER_POT = new FlowerPotDispenserBehavior();
+    // dispensersStripBlocks
+    public static final DispenserBehavior STRIP_BLOCK = new StripBlocksDispenserBehavior();
+    // dispensersTillSoil
+    public static final DispenserBehavior TILL_SOIL = new TillSoilDispenserBehavior();
+    // dispensersToggleThings
+    public static final DispenserBehavior TOGGLE_BLOCK = new ToggleBlockDispenserBehavior();
+    // dispensersUseCauldrons
+    public static final DispenserBehavior CAULDRON_FILLING_BUCKET = new CauldronFillingDispenserBehavior();
+    public static final DispenserBehavior CAULDRON_EMPTYING_BUCKET = new CauldronEmptyingDispenserBehavior();
+    public static final DispenserBehavior CAULDRON_WATER = new CauldronWaterDispenserBehavior();
+    // renewableEndstone
+    public static final DispenserBehavior DRAGON_BREATH_ENDSTONE = new DragonBreathDispenserBehavior();
+    // renewableNetherrack
+    public static final DispenserBehavior FIRE_CHARGE_NETHERRACK = new FireChargeDispenserBehavior();
+    // dispensersPlaceBoatsOnIce
+    public static final DispenserBehavior PLACE_BOAT_ON_ICE = new PlaceBoatOnIceDispenserBehavior();
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
 
     // get custom dispenser behavior
     // this checks conditions such as the item and certain block or entity being in front of the dispenser to decide which rule to return
     // if the conditions for the rule match, it returns the instance of the dispenser behavior
     // returns null to fallback to vanilla (or another mod's) behavior for the given item
+<<<<<<< HEAD
     public static DispenseItemBehavior getCustomDispenserBehavior(ServerLevel world, BlockPos pos, BlockSource pointer, DispenserBlockEntity dispenserBlockEntity, ItemStack stack, Map<Item, DispenseItemBehavior> VANILLA_BEHAVIORS) {
         Item item = stack.getItem();
         Direction dispenserFacing = pointer.state().getValue(DispenserBlock.FACING);
@@ -100,6 +173,15 @@ public class CarpetExtraDispenserBehaviors {
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
         Block frontBlock = frontBlockState.getBlock();
         AABB frontBlockBox = new AABB(frontBlockPos);
+=======
+    public static DispenserBehavior getCustomDispenserBehavior(ServerWorld world, BlockPos pos, BlockPointer pointer, DispenserBlockEntity dispenserBlockEntity, ItemStack stack, Map<Item, DispenserBehavior> VANILLA_BEHAVIORS) {
+        Item item = stack.getItem();
+        Direction dispenserFacing = pointer.state().get(DispenserBlock.FACING);
+        BlockPos frontBlockPos = pos.offset(dispenserFacing);
+        BlockState frontBlockState = world.getBlockState(frontBlockPos);
+        Block frontBlock = frontBlockState.getBlock();
+        Box frontBlockBox = new Box(frontBlockPos);
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
         // blazeMeal
         if(CarpetExtraSettings.blazeMeal && item == Items.BLAZE_POWDER && frontBlock == Blocks.NETHER_WART) {
@@ -108,8 +190,13 @@ public class CarpetExtraDispenserBehaviors {
 
         // chickenShearing
         if(CarpetExtraSettings.chickenShearing && item == Items.SHEARS) {
+<<<<<<< HEAD
             boolean hasShearableChickens = !world.getEntities(EntityType.CHICKEN, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((chickenEntity) ->
                                            !((Animal) chickenEntity).isBaby())).isEmpty();
+=======
+            boolean hasShearableChickens = !world.getEntitiesByType(EntityType.CHICKEN, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((chickenEntity) ->
+                                           !((AnimalEntity) chickenEntity).isBaby())).isEmpty();
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
             if(hasShearableChickens) {
                 return SHEAR_CHICKEN;
@@ -124,19 +211,32 @@ public class CarpetExtraDispenserBehaviors {
         // dispensersFeedAnimals
         if(CarpetExtraSettings.dispensersFeedAnimals) {
             // check for animals that can be bred with the current item being dispensed in front of dispenser
+<<<<<<< HEAD
             boolean hasFeedableAnimals = !world.getEntitiesOfClass(Animal.class, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((animalEntity) ->
                                          ((Animal) animalEntity).isFood(stack))).isEmpty();
+=======
+            boolean hasFeedableAnimals = !world.getEntitiesByClass(AnimalEntity.class, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((animalEntity) ->
+                                         ((AnimalEntity) animalEntity).isBreedingItem(stack))).isEmpty();
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
             if(hasFeedableAnimals) {
                 return FEED_ANIMAL;
             }
 
             // get brown mooshrooms in front of dispenser
+<<<<<<< HEAD
             boolean hasFeedableMooshrooms = !world.getEntities(EntityType.MOOSHROOM, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((mooshroomEntity) ->
                                              ((MushroomCow) mooshroomEntity).getVariant() == MushroomCow.Variant.BROWN)).isEmpty();
 
             // check if item is a small flower
             if(hasFeedableMooshrooms && stack.is(ItemTags.SMALL_FLOWERS)) {
+=======
+            boolean hasFeedableMooshrooms = !world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((mooshroomEntity) ->
+                                             ((MooshroomEntity) mooshroomEntity).getVariant() == MooshroomEntity.Variant.BROWN)).isEmpty();
+
+            // check if item is a small flower
+            if(hasFeedableMooshrooms && stack.isIn(ItemTags.SMALL_FLOWERS)) {
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
                 return FEED_MOOSHROOM;
             }
         }
@@ -144,7 +244,11 @@ public class CarpetExtraDispenserBehaviors {
         // dispensersFillMinecarts
         if(CarpetExtraSettings.dispensersFillMinecarts) {
             // check for minecarts with no riders in front of dispenser
+<<<<<<< HEAD
             boolean hasMinecarts = !world.getEntities(EntityType.MINECART, frontBlockBox, EntitySelector.ENTITY_NOT_BEING_RIDDEN).isEmpty();
+=======
+            boolean hasMinecarts = !world.getEntitiesByType(EntityType.MINECART, frontBlockBox, EntityPredicates.NOT_MOUNTED).isEmpty();
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
             // if a minecart exist, return dispenser behavior according to item type
             if(hasMinecarts) {
@@ -168,8 +272,13 @@ public class CarpetExtraDispenserBehaviors {
             // bucket to milk
             if(item == Items.BUCKET) {
                 // check for cows, mooshrooms, or goats in front of dispenser
+<<<<<<< HEAD
                 boolean hasMilkable = !world.getEntitiesOfClass(Animal.class, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((animalEntity) ->
                                       animalEntity instanceof Cow || animalEntity instanceof Goat)).isEmpty();
+=======
+                boolean hasMilkable = !world.getEntitiesByClass(AnimalEntity.class, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((animalEntity) ->
+                                      animalEntity instanceof CowEntity || animalEntity instanceof GoatEntity)).isEmpty();
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
                 if(hasMilkable) {
                     return MILK_ANIMAL;
@@ -178,7 +287,11 @@ public class CarpetExtraDispenserBehaviors {
             // bowl to stew
             else if(item == Items.BOWL) {
                 // check for mooshrooms in front of dispenser
+<<<<<<< HEAD
                 boolean hasMooshroom = !world.getEntities(EntityType.MOOSHROOM, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE).isEmpty();
+=======
+                boolean hasMooshroom = !world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY).isEmpty();
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
                 if(hasMooshroom) {
                     return MILK_MOOSHROOM;
@@ -200,7 +313,11 @@ public class CarpetExtraDispenserBehaviors {
         if(CarpetExtraSettings.dispensersTillSoil && item instanceof HoeItem) {
             // check block in front of dispenser and one block down
             for(int i = 0; i < 2; i++) {
+<<<<<<< HEAD
                 BlockPos hoeBlockPos = frontBlockPos.below(i);
+=======
+                BlockPos hoeBlockPos = frontBlockPos.down(i);
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
                 Block hoeBlock = world.getBlockState(hoeBlockPos).getBlock();
 
                 // check if block is in tilled blocks, or is farmland (to prevent hoe being dispensed when you don't want it to)
@@ -243,8 +360,13 @@ public class CarpetExtraDispenserBehaviors {
 
         // dispensersPlaceBoatsOnIce
         if (CarpetExtraSettings.dispensersPlaceBoatsOnIce && item instanceof BoatItem && frontBlock == Blocks.AIR) {
+<<<<<<< HEAD
             BlockPos blockBelowFrontBlockPos = frontBlockPos.below();
             if (world.getBlockState(blockBelowFrontBlockPos).is(BlockTags.ICE)) {
+=======
+            BlockPos blockBelowFrontBlockPos = frontBlockPos.down();
+            if (world.getBlockState(blockBelowFrontBlockPos).isIn(BlockTags.ICE)) {
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
                 return PLACE_BOAT_ON_ICE;
             }
         }

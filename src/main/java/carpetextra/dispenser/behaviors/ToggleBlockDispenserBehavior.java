@@ -1,6 +1,7 @@
 package carpetextra.dispenser.behaviors;
 
 import java.util.Set;
+<<<<<<< HEAD
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
@@ -15,6 +16,23 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ToggleBlockDispenserBehavior extends OptionalDispenseItemBehavior {
+=======
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
+
+public class ToggleBlockDispenserBehavior extends FallibleItemDispenserBehavior {
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
     public static final Set<Block> TOGGLEABLE_BLOCKS = Set.of(
         Blocks.OAK_BUTTON,
         Blocks.SPRUCE_BUTTON,
@@ -41,19 +59,34 @@ public class ToggleBlockDispenserBehavior extends OptionalDispenseItemBehavior {
     );
 
     @Override
+<<<<<<< HEAD
     protected ItemStack execute(BlockSource pointer, ItemStack stack) {
         this.setSuccess(true);
         ServerLevel world = pointer.level();
         Direction dispenserFacing = pointer.state().getValue(DispenserBlock.FACING);
         BlockPos frontBlockPos = pointer.pos().relative(dispenserFacing);
+=======
+    protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+        this.setSuccess(true);
+        ServerWorld world = pointer.world();
+        Direction dispenserFacing = pointer.state().get(DispenserBlock.FACING);
+        BlockPos frontBlockPos = pointer.pos().offset(dispenserFacing);
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
         BlockState frontBlockState = world.getBlockState(frontBlockPos);
 
         // check if block can be toggled
         if (TOGGLEABLE_BLOCKS.contains(frontBlockState.getBlock())) {
+<<<<<<< HEAD
             BlockHitResult hitResult = new BlockHitResult(Vec3.atLowerCornerOf(frontBlockPos), dispenserFacing.getOpposite(), frontBlockPos, false);
 
             // use on block, test if successful
             if (frontBlockState.useWithoutItem(world, null, hitResult).consumesAction()) {
+=======
+            BlockHitResult hitResult = new BlockHitResult(Vec3d.of(frontBlockPos), dispenserFacing.getOpposite(), frontBlockPos, false);
+
+            // use on block, test if successful
+            if (frontBlockState.onUse(world, null, hitResult).isAccepted()) {
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
                 return stack;
             }
         }

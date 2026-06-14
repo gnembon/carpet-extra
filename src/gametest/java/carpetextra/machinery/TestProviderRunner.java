@@ -8,10 +8,17 @@ import java.util.List;
 import net.fabricmc.fabric.api.gametest.v1.CustomTestMethodInvoker;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
+<<<<<<< HEAD
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTestInstance;
 import net.minecraft.gametest.framework.TestEnvironmentDefinition;
+=======
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.test.TestEnvironmentDefinition;
+import net.minecraft.test.TestInstance;
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
 // note: adapted from Fabric API implementation
 public class TestProviderRunner {
@@ -44,14 +51,24 @@ public class TestProviderRunner {
         }
         
         for (DynamicTest test : generated) {
+<<<<<<< HEAD
             Registry.register(BuiltInRegistries.TEST_FUNCTION, test.identifier(), test.testFunction());
+=======
+            Registry.register(Registries.TEST_FUNCTION, test.identifier(), test.testFunction());
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
         }
         
     }
     
+<<<<<<< HEAD
     public static void registerDynamicEntries(Registry<GameTestInstance> testInstances, Registry<TestEnvironmentDefinition> envRegistry) {
         for (DynamicTest test : generated) {
             GameTestInstance testInstance = test.testInstance(envRegistry);
+=======
+    public static void registerDynamicEntries(Registry<TestInstance> testInstances, Registry<TestEnvironmentDefinition> envRegistry) {
+        for (DynamicTest test : generated) {
+            TestInstance testInstance = test.testInstance(envRegistry);
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
             Registry.register(testInstances, test.identifier(), testInstance);
         }
     }

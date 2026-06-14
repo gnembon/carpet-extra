@@ -1,5 +1,9 @@
 plugins {
+<<<<<<< HEAD
 	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+=======
+	id 'fabric-loom' version '1.11-SNAPSHOT'
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 	id 'maven-publish'
 }
 
@@ -34,7 +38,11 @@ tasks.named('runGameTest', JavaExec).configure {
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+<<<<<<< HEAD
 	mappings loom.officialMojangMappings()
+=======
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "carpet:fabric-carpet:${project.minecraft_version}-${project.carpet_core_version}"
 

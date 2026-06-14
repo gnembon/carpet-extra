@@ -1,6 +1,7 @@
 package carpetextra.dispenser.behaviors;
 
 import java.util.List;
+<<<<<<< HEAD
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
@@ -35,6 +36,43 @@ public class ShearChickenDispenserBehavior extends OptionalDispenseItemBehavior 
 
                 // damage shears, remove if broken
                 stack.hurtAndBreak(1, world, null, (item) -> stack.setCount(0));
+=======
+
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+
+public class ShearChickenDispenserBehavior extends FallibleItemDispenserBehavior {
+    @Override
+    protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+        this.setSuccess(true);
+        ServerWorld world = pointer.world();
+        BlockPos frontBlockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
+        Box frontBlockBox = new Box(frontBlockPos);
+
+        // get adult chickens in front of dispenser
+        List<ChickenEntity> chickens = world.getEntitiesByType(EntityType.CHICKEN, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((chickenEntity) -> !((AnimalEntity) chickenEntity).isBaby()));
+
+        if(!chickens.isEmpty()) {
+            // choose a random chicken in front of dispenser to shear
+            ChickenEntity chicken = chickens.get(world.random.nextInt(chickens.size()));
+
+            // damage chicken, drop feather if successful
+            if(chicken.damage(world, world.getDamageSources().generic(), 1)) {
+                chicken.dropItem(world, Items.FEATHER);
+
+                // damage shears, remove if broken
+                stack.damage(1, world, null, (item) -> stack.setCount(0));
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
                 // return shears
                 return stack;

@@ -4,7 +4,11 @@ import carpet.api.settings.Rule;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.Validator;
 import carpet.api.settings.Validators;
+<<<<<<< HEAD
 import net.minecraft.commands.CommandSourceStack;
+=======
+import net.minecraft.server.command.ServerCommandSource;
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
 import static carpet.api.settings.RuleCategory.*;
 
@@ -24,7 +28,11 @@ public class CarpetExtraSettings
 
     public static class validatorScaffoldingDistance extends Validator<Integer> {
         @Override
+<<<<<<< HEAD
         public Integer validate(CommandSourceStack source, CarpetRule<Integer> currentRule, Integer newValue, String string) {
+=======
+        public Integer validate(ServerCommandSource source, CarpetRule<Integer> currentRule, Integer newValue, String string) {
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
             return newValue >= 0 && newValue <= 7 ? newValue : null;
         }
 
@@ -181,7 +189,11 @@ public class CarpetExtraSettings
     public static class ValidateSpiderJokeyDropChance extends Validator<Integer>
     {
         @Override
+<<<<<<< HEAD
         public Integer validate(CommandSourceStack source, CarpetRule<Integer> currentRule, Integer newValue, String string)
+=======
+        public Integer validate(ServerCommandSource source, CarpetRule<Integer> currentRule, Integer newValue, String string)
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
         {
             return newValue >= 0 && newValue <= 100 ? newValue : null;
         }

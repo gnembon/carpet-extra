@@ -1,6 +1,7 @@
 package carpetextra.dispenser.behaviors;
 
 import java.util.List;
+<<<<<<< HEAD
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
@@ -30,6 +31,38 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
         // get non-baby mooshrooms in front of dispenser
         List<MushroomCow> mooshrooms = world.getEntities(EntityType.MOOSHROOM, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((entity) -> {
             return !((MushroomCow) entity).isBaby();
+=======
+
+import carpetextra.dispenser.DispenserBehaviorHelper;
+import carpetextra.mixins.MooshroomEntity_StatusEffectAccessorMixin;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.SuspiciousStewEffectsComponent;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.MooshroomEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+
+public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
+    @Override
+    protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
+        this.setSuccess(true);
+        ServerWorld world = pointer.world();
+        BlockPos frontBlockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
+        Box frontBlockBox = new Box(frontBlockPos);
+
+        // get non-baby mooshrooms in front of dispenser
+        List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((entity) -> {
+            return !((MooshroomEntity) entity).isBaby();
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
         }));
 
         if(!mooshrooms.isEmpty()) {
@@ -37,10 +70,17 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
             ItemStack stewStack = getStewType(mooshrooms);
 
             // get milking sound effect depending if stew is sus
+<<<<<<< HEAD
             SoundEvent stewMilkSound = stewStack.getItem() == Items.SUSPICIOUS_STEW ? SoundEvents.MOOSHROOM_MILK_SUSPICIOUSLY : SoundEvents.MOOSHROOM_MILK;
 
             // play sound
             world.playSound(null, frontBlockPos, stewMilkSound, SoundSource.NEUTRAL, 1.0F, 1.0F);
+=======
+            SoundEvent stewMilkSound = stewStack.getItem() == Items.SUSPICIOUS_STEW ? SoundEvents.ENTITY_MOOSHROOM_SUSPICIOUS_MILK : SoundEvents.ENTITY_MOOSHROOM_MILK;
+
+            // play sound
+            world.playSound(null, frontBlockPos, stewMilkSound, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
             // add or dispense stew
             return this.addOrDispense(pointer, stack, stewStack);
@@ -51,6 +91,7 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
         return stack;
     }
 
+<<<<<<< HEAD
     private static ItemStack getStewType(List<MushroomCow> mooshrooms) {
         // check each mooshroom for stew effect, return suspicious stew of that type if exists
         for (MushroomCow mooshroom : mooshrooms) {
@@ -61,6 +102,18 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
                 // create suspicious stew and add mooshroom's stew effect to it
                 ItemStack stewStack = new ItemStack(Items.SUSPICIOUS_STEW);
                 stewStack.set(DataComponents.SUSPICIOUS_STEW_EFFECTS, stewEffects);
+=======
+    private static ItemStack getStewType(List<MooshroomEntity> mooshrooms) {
+        // check each mooshroom for stew effect, return suspicious stew of that type if exists
+        for (MooshroomEntity mooshroom : mooshrooms) {
+            // from MooshroomEntity#interact
+            MooshroomEntity_StatusEffectAccessorMixin mooshroomAccessor = (MooshroomEntity_StatusEffectAccessorMixin) mooshroom;
+            SuspiciousStewEffectsComponent stewEffects = mooshroomAccessor.getStewEffects();
+            if (stewEffects != null) {
+                // create suspicious stew and add mooshroom's stew effect to it
+                ItemStack stewStack = new ItemStack(Items.SUSPICIOUS_STEW);
+                stewStack.set(DataComponentTypes.SUSPICIOUS_STEW_EFFECTS, stewEffects);
+>>>>>>> 2c8a9d9bb40e35f5b45335521c6557886b381adf
 
                 // clear mooshroom's stew effect
                 mooshroomAccessor.setStewEffects(null);
