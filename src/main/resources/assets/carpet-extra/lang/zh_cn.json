@@ -182,6 +182,6 @@
   "carpet.rule.disableGhastFireballGriefing.name": "禁止恶魂火球破坏",
   "carpet.rule.disableGhastFireballGriefing.desc": "阻止恶魂火球的爆炸摧毁方块",
 
-  "carpet.rule.disableRavagerGriefing.name": "阻止劫掠兽破坏",
+  "carpet.rule.disableRavagerGriefing.name": "禁止劫掠兽破坏",
   "carpet.rule.disableRavagerGriefing.desc": "阻止劫掠兽破坏树叶、作物植株"
 }
