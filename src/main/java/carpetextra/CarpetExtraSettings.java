@@ -305,4 +305,9 @@ public class CarpetExtraSettings
             categories = {EXTRA, FEATURE, GRIEFING}
     )
     public static boolean disableRavagerGriefing = false;
+
+    @Rule(
+            categories = {EXTRA, EXPERIMENTAL, FEATURE}
+    )
+    public static boolean renewableDeepslate = false;
 }

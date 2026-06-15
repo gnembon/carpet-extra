@@ -199,18 +199,20 @@
   "carpet.rule.xpPerSculkCatalyst.desc": "Sets the amount of xp dropped when breaking a sculk catalyst.",
 
 
-  "carpet.rule.disableFarmlandMobTrampling.desc": "Prevents farmland from being trampled by non-player mob",
+  "carpet.rule.disableFarmlandMobTrampling.desc": "Prevents farmland from being trampled by non-player mob.",
 
-  "carpet.rule.disableFarmlandPlayerTrampling.desc": "Prevents farmland from being trampled by player",
+  "carpet.rule.disableFarmlandPlayerTrampling.desc": "Prevents farmland from being trampled by player.",
 
-  "carpet.rule.disableCreeperGriefing.desc": "Prevents Creeper explosions from destroying blocks",
-  "carpet.rule.disableCreeperGriefing.extra.0": "Prevents monster attacks from affecting armor stand, painting, item frame, and item entity",
+  "carpet.rule.disableCreeperGriefing.desc": "Prevents Creeper explosions from destroying blocks.",
+  "carpet.rule.disableCreeperGriefing.extra.0": "Prevents monster attacks from affecting armor stand, painting, item frame, and item entities.",
 
-  "carpet.rule.disableZombieBreakDoor.desc": "Prevents Zombie from breaking wooden door",
+  "carpet.rule.disableZombieBreakDoor.desc": "Prevents Zombie from breaking wooden doors.",
 
-  "carpet.rule.disableEndermanPickupBlock.desc": "Prevents Enderman from pick up and place block",
+  "carpet.rule.disableEndermanPickupBlock.desc": "Prevents Enderman from pick up and place blocks.",
 
-  "carpet.rule.disableGhastFireballGriefing.desc": "Prevents Ghast fireball explosion from destroying blocks",
+  "carpet.rule.disableGhastFireballGriefing.desc": "Prevents Ghast fireball explosion from destroying blocks.",
 
-  "carpet.rule.disableRavagerGriefing.desc": "Prevents Ravager from destroy leaves and crop plants"
+  "carpet.rule.disableRavagerGriefing.desc": "Prevents Ravager from destroy leaves and crop plants.",
+
+  "carpet.rule.renewableDeepslate.desc": "When a lava flow interacts with water at Y<0, it turns into deepslate or cobbled deepslate."
 }

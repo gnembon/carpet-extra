@@ -161,9 +161,6 @@
   "carpet.rule.disablePhantomSpawning.desc": "禁止幻翼的生成",
 
   "carpet.rule.disableFarmlandMobTrampling.name": "禁止生物踩坏耕地",
-
-
-
   "carpet.rule.disableFarmlandMobTrampling.desc": "防止耕地被非玩家生物踩坏",
 
   "carpet.rule.disableFarmlandPlayerTrampling.name": "禁止玩家踩坏耕地",
@@ -183,5 +180,8 @@
   "carpet.rule.disableGhastFireballGriefing.desc": "阻止恶魂火球的爆炸摧毁方块",
 
   "carpet.rule.disableRavagerGriefing.name": "禁止劫掠兽破坏",
-  "carpet.rule.disableRavagerGriefing.desc": "阻止劫掠兽破坏树叶、作物植株"
+  "carpet.rule.disableRavagerGriefing.desc": "阻止劫掠兽破坏树叶、作物植株",
+
+  "carpet.rule.renewableDeepslate.name": "可再生深板岩",
+  "carpet.rule.renewableDeepslate.desc": "当熔岩流在Y<0的位置与水互动时，形成深板岩或深板岩圆石"
 }

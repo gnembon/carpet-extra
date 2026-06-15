@@ -184,5 +184,8 @@
   "carpet.rule.disableGhastFireballGriefing.desc": "阻止惡魂火球的爆炸摧毀方塊",
 
   "carpet.rule.disableRavagerGriefing.name": "禁止劫毀獸破壞",
-  "carpet.rule.disableRavagerGriefing.desc": "阻止劫毀獸破壞樹葉、作物植株"
+  "carpet.rule.disableRavagerGriefing.desc": "阻止劫毀獸破壞樹葉、作物植株",
+
+  "carpet.rule.renewableDeepslate.name": "可再生深板岩",
+  "carpet.rule.renewableDeepslate.desc": "當岩漿流在Y<0的位置與水互動時，形成深板岩或深板岩圓石"
 }
