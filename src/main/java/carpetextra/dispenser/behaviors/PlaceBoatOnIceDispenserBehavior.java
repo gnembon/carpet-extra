@@ -42,7 +42,7 @@ public class PlaceBoatOnIceDispenserBehavior extends OptionalDispenseItemBehavio
             AbstractBoat boatEntity = boatType.create(world, EntitySpawnReason.DISPENSER);
 
             boatEntity.setInitialPos(x, y, z);
-            EntityType.createDefaultStackConfig(world, stack, null).accept(boatEntity);
+            EntityType.createDefaultStackConfig(world, stack, null).apply(boatEntity);
             boatEntity.setYRot(facing.toYRot());
 
             world.addFreshEntity(boatEntity);

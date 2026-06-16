@@ -10,9 +10,12 @@ import net.minecraft.core.particles.SpellParticleOption;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockItemTags;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.cow.MushroomCow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.SuspiciousStewEffects;
@@ -28,10 +31,10 @@ public class FeedMooshroomDispenserBehavior extends OptionalDispenseItemBehavior
         BlockPos frontBlockPos = pointer.pos().relative(pointer.state().getValue(DispenserBlock.FACING));
 
         // check if item is in SMALL_FLOWERS item tag
-        if(stack.is(ItemTags.SMALL_FLOWERS))
+        if(stack.is(BlockItemTags.SMALL_FLOWERS.item()))
         {
             // get brown mooshrooms in front of dispenser
-            List<MushroomCow> mooshrooms = world.getEntities(EntityType.MOOSHROOM, new AABB(frontBlockPos), EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((mooshroom) -> {
+            List<MushroomCow> mooshrooms = world.getEntities(EntityTypes.MOOSHROOM, new AABB(frontBlockPos), EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((mooshroom) -> {
                 return ((MushroomCow) mooshroom).getVariant() == MushroomCow.Variant.BROWN;
             }));
 

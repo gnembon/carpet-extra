@@ -6,10 +6,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockItemTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.cow.Cow;
 import net.minecraft.world.entity.animal.cow.MushroomCow;
@@ -62,10 +64,10 @@ public class CarpetExtraDispenserBehaviors {
     public static final DispenseItemBehavior FEED_ANIMAL = new FeedAnimalDispenserBehavior();
     public static final DispenseItemBehavior FEED_MOOSHROOM = new FeedMooshroomDispenserBehavior();
     // dispensersFillMinecarts
-    public static final DispenseItemBehavior FILL_MINECART_CHEST = new FillMinecartDispenserBehavior(EntityType.CHEST_MINECART);
-    public static final DispenseItemBehavior FILL_MINECART_FURNACE = new FillMinecartDispenserBehavior(EntityType.FURNACE_MINECART);
-    public static final DispenseItemBehavior FILL_MINECART_TNT = new FillMinecartDispenserBehavior(EntityType.TNT_MINECART);
-    public static final DispenseItemBehavior FILL_MINECART_HOPPER = new FillMinecartDispenserBehavior(EntityType.HOPPER_MINECART);
+    public static final DispenseItemBehavior FILL_MINECART_CHEST = new FillMinecartDispenserBehavior(EntityTypes.CHEST_MINECART);
+    public static final DispenseItemBehavior FILL_MINECART_FURNACE = new FillMinecartDispenserBehavior(EntityTypes.FURNACE_MINECART);
+    public static final DispenseItemBehavior FILL_MINECART_TNT = new FillMinecartDispenserBehavior(EntityTypes.TNT_MINECART);
+    public static final DispenseItemBehavior FILL_MINECART_HOPPER = new FillMinecartDispenserBehavior(EntityTypes.HOPPER_MINECART);
     // dispensersMilkAnimals
     public static final DispenseItemBehavior MILK_ANIMAL = new MilkAnimalDispenserBehavior();
     public static final DispenseItemBehavior MILK_MOOSHROOM = new MilkMooshroomDispenserBehavior();
@@ -108,7 +110,7 @@ public class CarpetExtraDispenserBehaviors {
 
         // chickenShearing
         if(CarpetExtraSettings.chickenShearing && item == Items.SHEARS) {
-            boolean hasShearableChickens = !world.getEntities(EntityType.CHICKEN, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((chickenEntity) ->
+            boolean hasShearableChickens = !world.getEntities(EntityTypes.CHICKEN, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((chickenEntity) ->
                                            !((Animal) chickenEntity).isBaby())).isEmpty();
 
             if(hasShearableChickens) {
@@ -132,11 +134,11 @@ public class CarpetExtraDispenserBehaviors {
             }
 
             // get brown mooshrooms in front of dispenser
-            boolean hasFeedableMooshrooms = !world.getEntities(EntityType.MOOSHROOM, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((mooshroomEntity) ->
+            boolean hasFeedableMooshrooms = !world.getEntities(EntityTypes.MOOSHROOM, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((mooshroomEntity) ->
                                              ((MushroomCow) mooshroomEntity).getVariant() == MushroomCow.Variant.BROWN)).isEmpty();
 
             // check if item is a small flower
-            if(hasFeedableMooshrooms && stack.is(ItemTags.SMALL_FLOWERS)) {
+            if(hasFeedableMooshrooms && stack.is(BlockItemTags.SMALL_FLOWERS.item())) {
                 return FEED_MOOSHROOM;
             }
         }
@@ -144,7 +146,7 @@ public class CarpetExtraDispenserBehaviors {
         // dispensersFillMinecarts
         if(CarpetExtraSettings.dispensersFillMinecarts) {
             // check for minecarts with no riders in front of dispenser
-            boolean hasMinecarts = !world.getEntities(EntityType.MINECART, frontBlockBox, EntitySelector.ENTITY_NOT_BEING_RIDDEN).isEmpty();
+            boolean hasMinecarts = !world.getEntities(EntityTypes.MINECART, frontBlockBox, EntitySelector.ENTITY_NOT_BEING_RIDDEN).isEmpty();
 
             // if a minecart exist, return dispenser behavior according to item type
             if(hasMinecarts) {
@@ -178,7 +180,7 @@ public class CarpetExtraDispenserBehaviors {
             // bowl to stew
             else if(item == Items.BOWL) {
                 // check for mooshrooms in front of dispenser
-                boolean hasMooshroom = !world.getEntities(EntityType.MOOSHROOM, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE).isEmpty();
+                boolean hasMooshroom = !world.getEntities(EntityTypes.MOOSHROOM, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE).isEmpty();
 
                 if(hasMooshroom) {
                     return MILK_MOOSHROOM;

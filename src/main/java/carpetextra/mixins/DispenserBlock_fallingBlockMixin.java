@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -27,7 +28,7 @@ public class DispenserBlock_fallingBlockMixin {
     private static final Vec3 INITIAL_VELOCITY = new Vec3(0.0, 0.1, 0.0);
 
     private void createFallingBlockWithVelocity(Level world, BlockPos pos, BlockState state, Vec3 velocity) {
-        FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(EntityType.FALLING_BLOCK, world);
+        FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(EntityTypes.FALLING_BLOCK, world);
         FallingBlockEntityAccessor fallingBlockAccessor = (FallingBlockEntityAccessor)fallingBlockEntity;
         fallingBlockAccessor.setBlockState(state.hasProperty(BlockStateProperties.WATERLOGGED) ? state.setValue(BlockStateProperties.WATERLOGGED, false) : state);
         fallingBlockEntity.blocksBuilding = true;

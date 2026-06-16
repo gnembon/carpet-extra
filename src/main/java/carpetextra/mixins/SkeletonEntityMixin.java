@@ -2,10 +2,7 @@ package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
 import net.minecraft.world.entity.monster.skeleton.Skeleton;
 import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
@@ -25,7 +22,7 @@ public abstract class SkeletonEntityMixin extends AbstractSkeleton
     {
         if (!world.isClientSide() && !this.isRemoved() && CarpetExtraSettings.renewableWitherSkeletons)
         {
-            WitherSkeleton witherSkelly = new WitherSkeleton(EntityType.WITHER_SKELETON, world);
+            WitherSkeleton witherSkelly = new WitherSkeleton(EntityTypes.WITHER_SKELETON, world);
             witherSkelly.snapTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
             witherSkelly.finalizeSpawn(world, world.getCurrentDifficultyAt(witherSkelly.blockPosition()), EntitySpawnReason.CONVERSION, null);
             witherSkelly.setNoAi(this.isNoAi());

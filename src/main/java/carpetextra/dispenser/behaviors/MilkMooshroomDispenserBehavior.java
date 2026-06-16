@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.cow.MushroomCow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -28,7 +29,7 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
         AABB frontBlockBox = new AABB(frontBlockPos);
 
         // get non-baby mooshrooms in front of dispenser
-        List<MushroomCow> mooshrooms = world.getEntities(EntityType.MOOSHROOM, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((entity) -> {
+        List<MushroomCow> mooshrooms = world.getEntities(EntityTypes.MOOSHROOM, frontBlockBox, EntitySelector.LIVING_ENTITY_STILL_ALIVE.and((entity) -> {
             return !((MushroomCow) entity).isBaby();
         }));
 

@@ -12,6 +12,7 @@ import carpetextra.machinery.TestProvider;
 import carpetextra.mixins.AxeItem_StrippedBlocksAccessorMixin;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -90,22 +91,22 @@ public class DispenserWithBlock {
 
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void boatOnRegularIce(GameTestHelper ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityType.OAK_BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityTypes.OAK_BOAT);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void boatOnPackedIce(GameTestHelper ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityType.OAK_BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityTypes.OAK_BOAT);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void boatOnBlueIce(GameTestHelper ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityType.OAK_BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityTypes.OAK_BOAT);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void chestBoatOnIce(GameTestHelper ctx) {
-        boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityType.OAK_CHEST_BOAT);
+        boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityTypes.OAK_CHEST_BOAT);
     }
     
     private void boatTest(GameTestHelper ctx, Item item, Block block, EntityType<?> expectedEntity) {
@@ -145,10 +146,10 @@ public class DispenserWithBlock {
         }
         // Copper. There's no way I'm adding all the coppers
         fns.add(makeDispenserTest("stripDeoxidateCopper", (ctx) -> {
-            stripTest(ctx, Items.IRON_AXE, Blocks.WEATHERED_COPPER, Blocks.EXPOSED_COPPER);
+            stripTest(ctx, Items.IRON_AXE, Blocks.COPPER_BLOCK.weathering().weathered(), Blocks.COPPER_BLOCK.weathering().exposed());
         }));
         fns.add(makeDispenserTest("stripUnwaxCopper", (ctx) -> {
-            stripTest(ctx, Items.IRON_AXE, Blocks.WAXED_COPPER_BLOCK, Blocks.COPPER_BLOCK);
+            stripTest(ctx, Items.IRON_AXE, Blocks.COPPER_BLOCK.waxed().unaffected(), Blocks.COPPER_BLOCK.weathering().unaffected());
         }));
         
         return fns;
@@ -259,34 +260,34 @@ public class DispenserWithBlock {
     
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartChest(GameTestHelper ctx) {
-        cartTest(ctx, Items.CHEST, EntityType.CHEST_MINECART);
+        cartTest(ctx, Items.CHEST, EntityTypes.CHEST_MINECART);
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartHopper(GameTestHelper ctx) {
-        cartTest(ctx, Items.HOPPER, EntityType.HOPPER_MINECART);
+        cartTest(ctx, Items.HOPPER, EntityTypes.HOPPER_MINECART);
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartTnt(GameTestHelper ctx) {
-        cartTest(ctx, Items.TNT, EntityType.TNT_MINECART, () -> ctx.assertEntityNotPresent(EntityType.TNT));
+        cartTest(ctx, Items.TNT, EntityTypes.TNT_MINECART, () -> ctx.assertEntityNotPresent(EntityTypes.TNT));
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartFurnace(GameTestHelper ctx) {
-        cartTest(ctx, Items.FURNACE, EntityType.FURNACE_MINECART);
+        cartTest(ctx, Items.FURNACE, EntityTypes.FURNACE_MINECART);
     }
     
     private void cartTest(GameTestHelper ctx, Item item, EntityType<?> entity, Runnable... extras) {
         putInDispenser(ctx, item.getDefaultInstance());
         ctx.setBlock(lapis.above(), Blocks.RAIL);
-        ctx.spawn(EntityType.MINECART, lapis.above());
+        ctx.spawn(EntityTypes.MINECART, lapis.above());
         
         ctx.pressButton(button);
         ctx.succeedOnTickWhen(DISPENSER_DELAY, () -> {
             ctx.assertEntityPresent(entity, lapis.above());
-            ctx.assertEntityNotPresent(EntityType.MINECART);
-            ctx.assertEntityNotPresent(EntityType.ITEM);
+            ctx.assertEntityNotPresent(EntityTypes.MINECART);
+            ctx.assertEntityNotPresent(EntityTypes.ITEM);
             runAll(extras);
         });
     }

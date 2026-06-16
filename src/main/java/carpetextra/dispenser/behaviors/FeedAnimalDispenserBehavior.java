@@ -11,10 +11,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.feline.Cat;
 import net.minecraft.world.entity.animal.feline.CatSoundVariant;
-import net.minecraft.world.entity.animal.feline.CatSoundVariants;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -84,12 +83,12 @@ public class FeedAnimalDispenserBehavior extends OptionalDispenseItemBehavior {
         EntityType<?> type = animal.getType();
 
         // axolotl returns water bucket if fed tropical fish bucket
-        if(type == EntityType.AXOLOTL && foodStack.getItem() == Items.TROPICAL_FISH_BUCKET) {
+        if(type == EntityTypes.AXOLOTL && foodStack.getItem() == Items.TROPICAL_FISH_BUCKET) {
             return new ItemStack(Items.WATER_BUCKET);
         }
 
         // cats and foxes play a sound when being fed
-        if(type == EntityType.CAT) {
+        if(type == EntityTypes.CAT) {
             Holder<CatSoundVariant> csv = animal.get(DataComponents.CAT_SOUND_VARIANT);
             if (csv != null) {
                 if (animal.isBaby()) {
@@ -99,7 +98,7 @@ public class FeedAnimalDispenserBehavior extends OptionalDispenseItemBehavior {
                 }
             }
         }
-        else if(type == EntityType.FOX) {
+        else if(type == EntityTypes.FOX) {
             animal.playSound(SoundEvents.FOX_EAT, 1.0F, 1.0F);
         }
 
@@ -114,10 +113,10 @@ public class FeedAnimalDispenserBehavior extends OptionalDispenseItemBehavior {
         Item item = foodStack.getItem();
 
         // llamas only breed with hay bales
-        if ((type == EntityType.LLAMA || type == EntityType.TRADER_LLAMA) && item != Items.HAY_BLOCK) {
+        if ((type == EntityTypes.LLAMA || type == EntityTypes.TRADER_LLAMA) && item != Items.HAY_BLOCK) {
             return false;
         }
         // horses/donkeys/mules only breed with golden carrot, golden apple, or enchanted golden apple
-        else return (type != EntityType.HORSE && type != EntityType.DONKEY && type != EntityType.MULE) || (item == Items.GOLDEN_CARROT || item == Items.GOLDEN_APPLE || item == Items.ENCHANTED_GOLDEN_APPLE);
+        else return (type != EntityTypes.HORSE && type != EntityTypes.DONKEY && type != EntityTypes.MULE) || (item == Items.GOLDEN_CARROT || item == Items.GOLDEN_APPLE || item == Items.ENCHANTED_GOLDEN_APPLE);
     }
 }

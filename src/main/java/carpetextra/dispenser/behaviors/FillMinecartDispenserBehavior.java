@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.minecart.Minecart;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +30,7 @@ public class FillMinecartDispenserBehavior extends OptionalDispenseItemBehavior 
         AABB frontBlockBox = new AABB(frontBlockPos);
 
         // get non-mounted minecarts in front of dispenser
-        List<Minecart> minecarts = world.getEntities(EntityType.MINECART, frontBlockBox, EntitySelector.ENTITY_NOT_BEING_RIDDEN);
+        List<Minecart> minecarts = world.getEntities(EntityTypes.MINECART, frontBlockBox, EntitySelector.ENTITY_NOT_BEING_RIDDEN);
 
         if(!minecarts.isEmpty()) {
             // choose a random minecart in front of dispenser to fill

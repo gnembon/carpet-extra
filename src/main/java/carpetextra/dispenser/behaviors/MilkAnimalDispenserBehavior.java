@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.cow.Cow;
 import net.minecraft.world.entity.animal.goat.Goat;
@@ -45,7 +46,7 @@ public class MilkAnimalDispenserBehavior extends DispenserBehaviorHelper {
     }
 
     private static SoundEvent getMilkSound(Animal animal) {
-        if(animal.getType() == EntityType.GOAT) {
+        if(animal.getType() == EntityTypes.GOAT) {
             return ((Goat) animal).isScreamingGoat() ? SoundEvents.GOAT_SCREAMING_MILK : SoundEvents.GOAT_MILK;
         }
         return SoundEvents.COW_MILK;

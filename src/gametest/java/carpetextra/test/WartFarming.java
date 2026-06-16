@@ -4,6 +4,7 @@ package carpetextra.test;
 import java.util.Set;
 
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.EntityType;
@@ -23,7 +24,7 @@ public class WartFarming {
     @GameTest(environment = WART_FARMING_ENABLED, structure = STRUCTURE, maxTicks = 1500)
     public void placesWarts(GameTestHelper ctx) {
         ctx.spawnItem(Items.NETHER_WART, lapis);
-        ctx.spawn(EntityType.VILLAGER, lapis);
+        ctx.spawn(EntityTypes.VILLAGER, lapis);
         
         ctx.succeedWhen(() -> {
             ctx.assertBlockPresent(Blocks.NETHER_WART, soulSand.above());
@@ -33,7 +34,7 @@ public class WartFarming {
     @GameTest(environment = WART_FARMING_ENABLED, structure = STRUCTURE, maxTicks = 1500)
     public void collectsWarts(GameTestHelper ctx) {
         ctx.setBlock(soulSand.above(), Blocks.NETHER_WART.defaultBlockState().setValue(NetherWartBlock.AGE, NetherWartBlock.MAX_AGE));
-        Villager villager =  ctx.spawn(EntityType.VILLAGER, lapis);
+        Villager villager =  ctx.spawn(EntityTypes.VILLAGER, lapis);
         
         ctx.succeedWhen(() -> {
             ctx.assertBlockState(soulSand.above(),
@@ -46,7 +47,7 @@ public class WartFarming {
     @GameTest(/* no env */ structure = STRUCTURE, maxTicks = 200)
     public void doesntPickupWartsWithoutRule(GameTestHelper ctx) {
         ctx.spawnItem(Items.NETHER_WART, lapis);
-        ctx.spawn(EntityType.VILLAGER, lapis);
+        ctx.spawn(EntityTypes.VILLAGER, lapis);
         
         ctx.onEachTick(() -> {
             ctx.assertItemEntityPresent(Items.NETHER_WART);

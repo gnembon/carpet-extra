@@ -38,7 +38,7 @@ dependencies {
 
     // @TODO v26.1.2 temp use local file, Because download failed
 //    modImplementation "carpet:fabric-carpet:${project.minecraft_version}-${project.carpet_core_version}"
-    implementation files("libs/fabric-carpet-26.1+v260402.jar")
+    implementation files("libs/fabric-carpet-26.2-beta-5+v260609.jar")
 
 	// for gametests
     gametestImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
