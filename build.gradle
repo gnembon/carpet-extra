@@ -1,11 +1,11 @@
 plugins {
-	id 'fabric-loom' version '1.11-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom-remap' version '1.15-SNAPSHOT'
 	id 'maven-publish'
 }
 
 repositories {
 	maven {
-		url 'https://masa.dy.fi/maven'
+		url = 'https://masa.dy.fi/maven'
 	}
 }
 
@@ -61,6 +61,13 @@ tasks.withType(JavaCompile).configureEach {
 	options.encoding = "UTF-8"
 
 	it.options.release = 21
+}
+
+loom {
+	mixin {
+	  // When disabled tiny remapper will be used to remap Mixins instead of the AP. (Disabled by default in Loom 1.12+)
+	  useLegacyMixinAp = true
+  	}
 }
 
 java {
