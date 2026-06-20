@@ -42,7 +42,7 @@ public abstract class CactusBlock_fertilizerMixin implements Fertilizable
     private int countCactusAbove(BlockView world, BlockPos pos)
     {
         int i;
-        for (i = 0; i < 2 && world.getBlockState(pos.up(i + 1)).isOf(Blocks.CACTUS); ++i)
+        for (i = 0; i < 2 && world.getBlockState(pos.up(i + 1)).is(Blocks.CACTUS); ++i)
         {
         }
         return i;
@@ -51,7 +51,7 @@ public abstract class CactusBlock_fertilizerMixin implements Fertilizable
     private int countCactusBelow(BlockView world, BlockPos pos)
     {
         int i;
-        for (i = 0; i < 2 && world.getBlockState(pos.down(i + 1)).isOf(Blocks.CACTUS); ++i)
+        for (i = 0; i < 2 && world.getBlockState(pos.down(i + 1)).is(Blocks.CACTUS); ++i)
         {
         }
         return i;

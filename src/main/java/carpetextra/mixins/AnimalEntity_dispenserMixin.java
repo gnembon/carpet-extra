@@ -1,6 +1,7 @@
 package carpetextra.mixins;
 
 import carpetextra.CarpetExtraSettings;
+import carpetextra.fakes.AnimalEntityInterface;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -12,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AnimalEntity.class)
-public abstract class AnimalEntity_dispenserMixin
+public abstract class AnimalEntity_dispenserMixin implements AnimalEntityInterface
 {
     @Shadow /*@Nullable*/ public abstract ServerPlayerEntity getLovingPlayer();
 
@@ -33,5 +34,12 @@ public abstract class AnimalEntity_dispenserMixin
         if(serverPlayerEntity_1 == null && CarpetExtraSettings.dispensersFeedAnimals) {
             ci.cancel();
         }
+    }
+    
+    @Shadow protected abstract void playEatSound();
+    
+    @Override
+    public void cm$playEatSound() {
+        playEatSound();
     }
 }

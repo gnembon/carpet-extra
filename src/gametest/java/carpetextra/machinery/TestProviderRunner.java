@@ -49,7 +49,7 @@ public class TestProviderRunner {
         
     }
     
-    public static void registerDynamicEntries(Registry<TestInstance> testInstances, Registry<TestEnvironmentDefinition> envRegistry) {
+    public static void registerDynamicEntries(Registry<TestInstance> testInstances, Registry<TestEnvironmentDefinition<?>> envRegistry) {
         for (DynamicTest test : generated) {
             TestInstance testInstance = test.testInstance(envRegistry);
             Registry.register(testInstances, test.identifier(), testInstance);

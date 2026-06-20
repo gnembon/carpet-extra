@@ -26,7 +26,7 @@ public class FireChargeDispenserBehavior extends FallibleItemDispenserBehavior {
             world.setBlockState(frontBlockPos, Blocks.NETHERRACK.getDefaultState());
 
             // play fire charge use sound
-            world.playSound(null, frontBlockPos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1.0F, (world.random.nextFloat() - world.random.nextFloat()) * 0.2F + 1.0F);
+            world.playSound(null, frontBlockPos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1.0F, (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.2F + 1.0F);
 
             // spawn some flame particles around netherrack
             Vec3d center = Vec3d.ofCenter(frontBlockPos);

@@ -13,9 +13,9 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.crafting.CraftingRecipe;
 import net.minecraft.recipe.input.CraftingRecipeInput;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -90,7 +90,7 @@ public class DropperBlock_craftingMixin extends DispenserBlock
         if (recipe == null) return;
         // crafting it
         Vec3d target = Vec3d.ofBottomCenter(front).add(0.0, 0.2, 0.0);
-        ItemStack result = recipe.value().craft(recipeInput, world.getRegistryManager());
+        ItemStack result = recipe.value().craft(recipeInput);
         spawn(world, target.x, target.y, target.z, result);
 
         // copied from CraftingResultSlot.onTakeItem()

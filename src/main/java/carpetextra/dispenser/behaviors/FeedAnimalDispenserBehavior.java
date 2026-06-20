@@ -2,6 +2,7 @@ package carpetextra.dispenser.behaviors;
 
 import java.util.List;
 
+import carpetextra.fakes.AnimalEntityInterface;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
@@ -12,7 +13,6 @@ import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -84,13 +84,7 @@ public class FeedAnimalDispenserBehavior extends FallibleItemDispenserBehavior {
             return new ItemStack(Items.WATER_BUCKET);
         }
 
-        // cats and foxes play a sound when being fed
-        if(type == EntityType.CAT) {
-            animal.playSound(SoundEvents.ENTITY_CAT_EAT, 1.0F, 1.0F);
-        }
-        else if(type == EntityType.FOX) {
-            animal.playSound(SoundEvents.ENTITY_FOX_EAT, 1.0F, 1.0F);
-        }
+        ((AnimalEntityInterface)animal).cm$playEatSound();
 
         // remove one item and return
         foodStack.decrement(1);

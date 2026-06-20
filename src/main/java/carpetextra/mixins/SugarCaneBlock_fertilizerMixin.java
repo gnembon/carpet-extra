@@ -37,18 +37,15 @@ public abstract class SugarCaneBlock_fertilizerMixin implements Fertilizable
     private int countSugarCaneAbove(BlockView world, BlockPos pos)
     {
         int i;
-        for (i = 0; i < 2 && world.getBlockState(pos.up(i + 1)).isOf(Blocks.SUGAR_CANE); ++i)
-        {
-        }
+        for (i = 0; i < 2 && world.getBlockState(pos.up(i + 1)).is(Blocks.SUGAR_CANE); ++i);
         return i;
     }
     
     private int countSugarCaneBelow(BlockView world, BlockPos pos)
     {
         int i;
-        for (i = 0; i < 2 && world.getBlockState(pos.down(i + 1)).isOf(Blocks.SUGAR_CANE); ++i)
-        {
-        }
+        for (i = 0; i < 2 && world.getBlockState(pos.down(i + 1)).is(Blocks.SUGAR_CANE); ++i);
+        
         return i;
     }
 }

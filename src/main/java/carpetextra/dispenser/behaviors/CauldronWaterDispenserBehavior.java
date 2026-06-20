@@ -67,7 +67,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
                     return this.addOrDispense(pointer, stack, undyedShulkerBox);
                 }
             }
-            if (stack.isIn(ItemTags.DYEABLE)) {
+            if (stack.isIn(ItemTags.CAULDRON_CAN_REMOVE_DYE)) {
                 // check if dyeable item has color
                 if (stack.contains(DataComponentTypes.DYED_COLOR)) {
                     // decrease cauldron level
@@ -132,7 +132,7 @@ public class CauldronWaterDispenserBehavior extends DispenserBehaviorHelper {
         if (Block.getBlockFromItem(item) instanceof ShulkerBoxBlock) {
             return item != Items.SHULKER_BOX; // dyed Shulkers only
         }
-        if (stack.isIn(ItemTags.DYEABLE)) {
+        if (stack.isIn(ItemTags.CAULDRON_CAN_REMOVE_DYE)) {
             return stack.getComponents().contains(DataComponentTypes.DYED_COLOR);
         }
         return false;

@@ -18,7 +18,7 @@ class FabricGametestMixin {
     @Inject(method = "registerDynamicEntries", at = @At("TAIL"))
     private static void addOursToo(CallbackInfo ci, 
             @Local(name="testInstances") Registry<TestInstance> testInstances,
-            @Local(name="testEnvironmentDefinitionRegistry") Registry<TestEnvironmentDefinition> envRegistry) {
+            @Local(name="testEnvironmentDefinitionRegistry") Registry<TestEnvironmentDefinition<?>> envRegistry) {
         TestProviderRunner.registerDynamicEntries(testInstances, envRegistry);
     }
 }

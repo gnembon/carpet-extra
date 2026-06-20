@@ -1,11 +1,15 @@
 plugins {
-	id 'net.fabricmc.fabric-loom-remap' version '1.15-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom-remap' version '1.17-SNAPSHOT'
 	id 'maven-publish'
 }
 
 repositories {
 	maven {
 		url = 'https://masa.dy.fi/maven'
+	}
+	maven {
+		// For deobf yarn, until I've had time to review PRs in old mappings (to not break them)
+		url = 'https://repo.codemc.io/repository/relativitymc/'
 	}
 }
 
@@ -32,14 +36,14 @@ tasks.named('runGameTest', JavaExec).configure {
 }
 
 dependencies {
-	//to change the versions see the gradle.properties file
+	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	mappings "org.relativitymc:modern-yarn:${project.modern_yarn_version}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "carpet:fabric-carpet:${project.minecraft_version}-${project.carpet_core_version}"
+	modImplementation "carpet:fabric-carpet:${project.carpet_core_version}"
 
 	// for gametests
-	modGametestImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
+	modGametestImplementation fabricApi.module("fabric-resource-loader-v1", project.fabric_api_version)
 	modGametestImplementation fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)
 	modGametestImplementation fabricApi.module("fabric-registry-sync-v0", project.fabric_api_version)
 	modGametestImplementation fabricApi.module("fabric-api-base", project.fabric_api_version)
@@ -60,14 +64,13 @@ processResources {
 tasks.withType(JavaCompile).configureEach {
 	options.encoding = "UTF-8"
 
-	it.options.release = 21
+	it.options.release = 25
 }
 
 loom {
-	mixin {
-	  // When disabled tiny remapper will be used to remap Mixins instead of the AP. (Disabled by default in Loom 1.12+)
-	  useLegacyMixinAp = true
-  	}
+	// For modern yarn
+	useIntermediateMappings = true
+	intermediaryUrl = 'https://repo.codemc.io/repository/relativitymc/org/relativitymc/intermediary/%1$s/intermediary-%1$s-v2.jar'
 }
 
 java {
@@ -76,8 +79,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {

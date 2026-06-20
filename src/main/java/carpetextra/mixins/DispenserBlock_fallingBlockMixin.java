@@ -52,8 +52,8 @@ public class DispenserBlock_fallingBlockMixin {
             Direction direction = state.get(DispenserBlock.FACING);
             BlockPos facingPos = pos.offset(direction);
             BlockState facingState = world.getBlockState(facingPos);
-            if (!facingState.isAir() && (!facingState.isOf(Blocks.WATER) && !facingState.isOf(Blocks.LAVA) || facingState.getFluidState().isStill())) {
-                Vec3d velocity = (state.isOf(Blocks.DROPPER) ? INITIAL_VELOCITY : INITIAL_VELOCITY.add(Vec3d.of((direction).getVector())));
+            if (!facingState.isAir() && (!facingState.is(Blocks.WATER) && !facingState.is(Blocks.LAVA) || facingState.getFluidState().isStill())) {
+                Vec3d velocity = (state.is(Blocks.DROPPER) ? INITIAL_VELOCITY : INITIAL_VELOCITY.add(Vec3d.of((direction).getVector())));
                 createFallingBlockWithVelocity(world, facingPos, facingState, velocity);
                 ci.cancel();
             }

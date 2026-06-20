@@ -28,14 +28,14 @@ public class ShearChickenDispenserBehavior extends FallibleItemDispenserBehavior
 
         if(!chickens.isEmpty()) {
             // choose a random chicken in front of dispenser to shear
-            ChickenEntity chicken = chickens.get(world.random.nextInt(chickens.size()));
+            ChickenEntity chicken = chickens.get(world.getRandom().nextInt(chickens.size()));
 
             // damage chicken, drop feather if successful
             if(chicken.damage(world, world.getDamageSources().generic(), 1)) {
                 chicken.dropItem(world, Items.FEATHER);
 
                 // damage shears, remove if broken
-                stack.damage(1, world, null, (item) -> stack.setCount(0));
+                stack.damage(1, world, null, (_) -> stack.setCount(0));
 
                 // return shears
                 return stack;

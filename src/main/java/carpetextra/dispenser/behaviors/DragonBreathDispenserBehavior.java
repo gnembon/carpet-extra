@@ -27,7 +27,7 @@ public class DragonBreathDispenserBehavior extends FallibleItemDispenserBehavior
             world.setBlockState(frontBlockPos, Blocks.END_STONE.getDefaultState());
 
             // play dragon fireball shoot sound
-            world.playSound(null, frontBlockPos, SoundEvents.ENTITY_ENDER_DRAGON_SHOOT, SoundCategory.BLOCKS, 1.0F, (world.random.nextFloat() - world.random.nextFloat()) * 0.2F + 1.0F);
+            world.playSound(null, frontBlockPos, SoundEvents.ENTITY_ENDER_DRAGON_SHOOT, SoundCategory.BLOCKS, 1.0F, (world.getRandom().nextFloat() - world.getRandom().nextFloat()) * 0.2F + 1.0F);
 
             // spawn some dragon breath particles around end stone
             Vec3d center = Vec3d.ofCenter(frontBlockPos);

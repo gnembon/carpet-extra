@@ -33,7 +33,7 @@ public class MilkAnimalDispenserBehavior extends DispenserBehaviorHelper {
 
         if(!milkableAnimals.isEmpty()) {
             // play milking sound for a random animal in front of dispenser
-            AnimalEntity milkAnimal = milkableAnimals.get(world.random.nextInt(milkableAnimals.size()));
+            AnimalEntity milkAnimal = milkableAnimals.get(world.getRandom().nextInt(milkableAnimals.size()));
             world.playSound(null, frontBlockPos, getMilkSound(milkAnimal), SoundCategory.NEUTRAL, 1.0F, 1.0F);
 
             // add or dispense milk bucket stack
