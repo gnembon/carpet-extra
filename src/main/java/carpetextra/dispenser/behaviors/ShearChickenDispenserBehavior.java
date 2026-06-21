@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityTypes;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.item.ItemStack;
@@ -24,7 +24,7 @@ public class ShearChickenDispenserBehavior extends FallibleItemDispenserBehavior
         Box frontBlockBox = new Box(frontBlockPos);
 
         // get adult chickens in front of dispenser
-        List<ChickenEntity> chickens = world.getEntitiesByType(EntityType.CHICKEN, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((chickenEntity) -> !((AnimalEntity) chickenEntity).isBaby()));
+        List<ChickenEntity> chickens = world.getEntitiesByType(EntityTypes.CHICKEN, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((chickenEntity) -> !((AnimalEntity) chickenEntity).isBaby()));
 
         if(!chickens.isEmpty()) {
             // choose a random chicken in front of dispenser to shear

@@ -1,5 +1,5 @@
 plugins {
-	id 'net.fabricmc.fabric-loom-remap' version '1.17-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -11,6 +11,7 @@ repositories {
 		// For deobf yarn, until I've had time to review PRs in old mappings (to not break them)
 		url = 'https://repo.codemc.io/repository/relativitymc/'
 	}
+	mavenLocal() // TODO remove once fabric-carpet@8563bef68ac5d6ec8cea08fef825653f05d3786a is published
 }
 
 base {

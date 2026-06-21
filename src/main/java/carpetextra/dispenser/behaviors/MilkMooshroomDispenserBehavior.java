@@ -7,7 +7,7 @@ import carpetextra.mixins.MooshroomEntity_StatusEffectAccessorMixin;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.SuspiciousStewEffectsComponent;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityTypes;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -29,7 +29,7 @@ public class MilkMooshroomDispenserBehavior extends DispenserBehaviorHelper {
         Box frontBlockBox = new Box(frontBlockPos);
 
         // get non-baby mooshrooms in front of dispenser
-        List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityType.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((entity) -> {
+        List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityTypes.MOOSHROOM, frontBlockBox, EntityPredicates.VALID_LIVING_ENTITY.and((entity) -> {
             return !((MooshroomEntity) entity).isBaby();
         }));
 

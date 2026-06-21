@@ -4,7 +4,7 @@ import java.util.List;
 
 import carpetextra.dispenser.DispenserBehaviorHelper;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityTypes;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.GoatEntity;
@@ -46,7 +46,7 @@ public class MilkAnimalDispenserBehavior extends DispenserBehaviorHelper {
     }
 
     private static SoundEvent getMilkSound(AnimalEntity animal) {
-        if(animal.getType() == EntityType.GOAT) {
+        if(animal.getType() == EntityTypes.GOAT) {
             return ((GoatEntity) animal).isScreaming() ? SoundEvents.ENTITY_GOAT_SCREAMING_MILK : SoundEvents.ENTITY_GOAT_MILK;
         }
         return SoundEvents.ENTITY_COW_MILK;

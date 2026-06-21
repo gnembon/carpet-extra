@@ -6,6 +6,7 @@ import carpetextra.fakes.AnimalEntityInterface;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityTypes;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -80,7 +81,7 @@ public class FeedAnimalDispenserBehavior extends FallibleItemDispenserBehavior {
         EntityType<?> type = animal.getType();
 
         // axolotl returns water bucket if fed tropical fish bucket
-        if(type == EntityType.AXOLOTL && foodStack.getItem() == Items.TROPICAL_FISH_BUCKET) {
+        if(type == EntityTypes.AXOLOTL && foodStack.getItem() == Items.TROPICAL_FISH_BUCKET) {
             return new ItemStack(Items.WATER_BUCKET);
         }
 
@@ -97,10 +98,10 @@ public class FeedAnimalDispenserBehavior extends FallibleItemDispenserBehavior {
         Item item = foodStack.getItem();
 
         // llamas only breed with hay bales
-        if ((type == EntityType.LLAMA || type == EntityType.TRADER_LLAMA) && item != Items.HAY_BLOCK) {
+        if ((type == EntityTypes.LLAMA || type == EntityTypes.TRADER_LLAMA) && item != Items.HAY_BLOCK) {
             return false;
         }
         // horses/donkeys/mules only breed with golden carrot, golden apple, or enchanted golden apple
-        else return (type != EntityType.HORSE && type != EntityType.DONKEY && type != EntityType.MULE) || (item == Items.GOLDEN_CARROT || item == Items.GOLDEN_APPLE || item == Items.ENCHANTED_GOLDEN_APPLE);
+        else return (type != EntityTypes.HORSE && type != EntityTypes.DONKEY && type != EntityTypes.MULE) || (item == Items.GOLDEN_CARROT || item == Items.GOLDEN_APPLE || item == Items.ENCHANTED_GOLDEN_APPLE);
     }
 }

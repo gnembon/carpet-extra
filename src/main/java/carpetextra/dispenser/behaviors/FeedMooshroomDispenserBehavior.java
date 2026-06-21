@@ -3,13 +3,12 @@ package carpetextra.dispenser.behaviors;
 import java.util.List;
 import java.util.Optional;
 
-import net.minecraft.registry.tag.ItemTags;
-
 import carpetextra.mixins.MooshroomEntity_StatusEffectAccessorMixin;
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.SuspiciousStewIngredient;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.component.type.SuspiciousStewEffectsComponent;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityTypes;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.EffectParticleEffect;
@@ -30,10 +29,10 @@ public class FeedMooshroomDispenserBehavior extends FallibleItemDispenserBehavio
         BlockPos frontBlockPos = pointer.pos().offset(pointer.state().get(DispenserBlock.FACING));
 
         // check if item is in SMALL_FLOWERS item tag
-        if(stack.isIn(ItemTags.SMALL_FLOWERS))
+        if (SuspiciousStewIngredient.of(stack.getItem()) != null)
         {
             // get brown mooshrooms in front of dispenser
-            List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityType.MOOSHROOM, new Box(frontBlockPos), EntityPredicates.VALID_LIVING_ENTITY.and((mooshroom) -> {
+            List<MooshroomEntity> mooshrooms = world.getEntitiesByType(EntityTypes.MOOSHROOM, new Box(frontBlockPos), EntityPredicates.VALID_LIVING_ENTITY.and((mooshroom) -> {
                 return ((MooshroomEntity) mooshroom).getVariant() == MooshroomEntity.Variant.BROWN;
             }));
 

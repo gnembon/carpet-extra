@@ -6,7 +6,7 @@ import java.util.Set;
 
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityTypes;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.test.TestContext;
@@ -23,7 +23,7 @@ public class WartFarming {
     @GameTest(environment = WART_FARMING_ENABLED, structure = STRUCTURE, maxTicks = 1500)
     public void placesWarts(TestContext ctx) {
         ctx.spawnItem(Items.NETHER_WART, lapis);
-        ctx.spawnEntity(EntityType.VILLAGER, lapis);
+        ctx.spawnEntity(EntityTypes.VILLAGER, lapis);
         
         ctx.addInstantFinalTask(() -> {
             ctx.expectBlock(Blocks.NETHER_WART, soulSand.up());
@@ -33,12 +33,12 @@ public class WartFarming {
     @GameTest(environment = WART_FARMING_ENABLED, structure = STRUCTURE, maxTicks = 1500)
     public void collectsWarts(TestContext ctx) {
         ctx.setBlockState(soulSand.up(), Blocks.NETHER_WART.getDefaultState().with(AGE, MAX_AGE));
-        VillagerEntity villager =  ctx.spawnEntity(EntityType.VILLAGER, lapis);
+        VillagerEntity villager =  ctx.spawnEntity(EntityTypes.VILLAGER, lapis);
         
         ctx.addInstantFinalTask(() -> {
             ctx.checkBlockState(soulSand.up(),
                     state -> state.getBlock() != Blocks.NETHER_WART || state.get(AGE) != MAX_AGE, 
-                    (st) -> Text.literal("Wart not collected"));
+                    _ -> Text.literal("Wart not collected"));
             ctx.assertTrue(villager.getInventory().containsAny(Set.of(Items.NETHER_WART)), Text.literal("Villager didn't get warts"));
         });
     }
@@ -46,7 +46,7 @@ public class WartFarming {
     @GameTest(/* no env */ structure = STRUCTURE, maxTicks = 200)
     public void doesntPickupWartsWithoutRule(TestContext ctx) {
         ctx.spawnItem(Items.NETHER_WART, lapis);
-        ctx.spawnEntity(EntityType.VILLAGER, lapis);
+        ctx.spawnEntity(EntityTypes.VILLAGER, lapis);
         
         ctx.runAtEveryTick(() -> {
             ctx.expectItem(Items.NETHER_WART);

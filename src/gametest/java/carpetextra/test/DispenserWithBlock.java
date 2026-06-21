@@ -20,6 +20,7 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EntityTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -91,22 +92,22 @@ public class DispenserWithBlock {
 
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void boatOnRegularIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityType.OAK_BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.ICE, EntityTypes.OAK_BOAT);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void boatOnPackedIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityType.OAK_BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.PACKED_ICE, EntityTypes.OAK_BOAT);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void boatOnBlueIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityType.OAK_BOAT);
+        boatTest(ctx, Items.OAK_BOAT, Blocks.BLUE_ICE, EntityTypes.OAK_BOAT);
     }
     
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void chestBoatOnIce(TestContext ctx) {
-        boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityType.OAK_CHEST_BOAT);
+        boatTest(ctx, Items.OAK_CHEST_BOAT, Blocks.ICE, EntityTypes.OAK_CHEST_BOAT);
     }
     
     private void boatTest(TestContext ctx, Item item, Block block, EntityType<?> expectedEntity) {
@@ -143,12 +144,12 @@ public class DispenserWithBlock {
                 stripTest(ctx, tool, Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG);
             }));
         }
-        // Copper. There's no way I'm adding all the coppers
+        // Copper. There's no way I'm adding all the coppers. TODO maybe now that they are grouped and with a common type?
         fns.add(makeDispenserTest("stripDeoxidateCopper", (ctx) -> {
-            stripTest(ctx, Items.IRON_AXE, Blocks.WEATHERED_COPPER, Blocks.EXPOSED_COPPER);
+            stripTest(ctx, Items.IRON_AXE, Blocks.COPPER_BLOCKS.weathering().weathered(), Blocks.COPPER_BLOCKS.weathering().exposed());
         }));
         fns.add(makeDispenserTest("stripUnwaxCopper", (ctx) -> {
-            stripTest(ctx, Items.IRON_AXE, Blocks.WAXED_COPPER_BLOCK, Blocks.COPPER_BLOCK);
+            stripTest(ctx, Items.IRON_AXE, Blocks.COPPER_BLOCKS.waxed().unaffected(), Blocks.COPPER_BLOCKS.weathering().unaffected());
         }));
         
         return fns;
@@ -259,34 +260,34 @@ public class DispenserWithBlock {
     
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartChest(TestContext ctx) {
-        cartTest(ctx, Items.CHEST, EntityType.CHEST_MINECART);
+        cartTest(ctx, Items.CHEST, EntityTypes.CHEST_MINECART);
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartHopper(TestContext ctx) {
-        cartTest(ctx, Items.HOPPER, EntityType.HOPPER_MINECART);
+        cartTest(ctx, Items.HOPPER, EntityTypes.HOPPER_MINECART);
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartTnt(TestContext ctx) {
-        cartTest(ctx, Items.TNT, EntityType.TNT_MINECART, () -> ctx.dontExpectEntity(EntityType.TNT));
+        cartTest(ctx, Items.TNT, EntityTypes.TNT_MINECART, () -> ctx.dontExpectEntity(EntityTypes.TNT));
     }
 
     @GameTest(structure = STRUCTURE, environment = ENV)
     public void fillMinecartFurnace(TestContext ctx) {
-        cartTest(ctx, Items.FURNACE, EntityType.FURNACE_MINECART);
+        cartTest(ctx, Items.FURNACE, EntityTypes.FURNACE_MINECART);
     }
     
     private void cartTest(TestContext ctx, Item item, EntityType<?> entity, Runnable... extras) {
         putInDispenser(ctx, item.getDefaultStack());
         ctx.setBlockState(lapis.up(), Blocks.RAIL);
-        ctx.spawnEntity(EntityType.MINECART, lapis.up());
+        ctx.spawnEntity(EntityTypes.MINECART, lapis.up());
         
         ctx.pushButton(button);
         ctx.addFinalTaskWithDuration(DISPENSER_DELAY, () -> {
             ctx.expectEntityAt(entity, lapis.up());
-            ctx.dontExpectEntity(EntityType.MINECART);
-            ctx.dontExpectEntity(EntityType.ITEM);
+            ctx.dontExpectEntity(EntityTypes.MINECART);
+            ctx.dontExpectEntity(EntityTypes.ITEM);
             runAll(extras);
         });
     }

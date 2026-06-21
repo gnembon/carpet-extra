@@ -42,7 +42,7 @@ public class CauldronFillingDispenserBehavior extends FallibleItemDispenserBehav
                 return new ItemStack(Items.BUCKET);
             }
             // powder snow
-            else if(item == Items.POWDER_SNOW_BUCKET) {
+            else if(item == Items.POWDER_SNOW) {
                 BlockState cauldronState = Blocks.POWDER_SNOW_CAULDRON.getDefaultState().with(LeveledCauldronBlock.LEVEL, 3);
                 setCauldron(world, frontBlockPos, cauldronState, SoundEvents.ITEM_BUCKET_EMPTY_POWDER_SNOW);
                 return new ItemStack(Items.BUCKET);

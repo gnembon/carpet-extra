@@ -12,8 +12,8 @@ import net.minecraft.test.TestContext;
 import net.minecraft.test.TestData;
 import net.minecraft.test.TestEnvironmentDefinition;
 import net.minecraft.test.TestInstance;
-import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockRotation;
 
 // slightly extended TestData
 public record DynamicTest(

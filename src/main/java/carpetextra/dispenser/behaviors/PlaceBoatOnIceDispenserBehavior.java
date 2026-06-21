@@ -42,7 +42,7 @@ public class PlaceBoatOnIceDispenserBehavior extends FallibleItemDispenserBehavi
             AbstractBoatEntity boatEntity = boatType.create(world, SpawnReason.DISPENSER);
 
             boatEntity.initPosition(x, y, z);
-            EntityType.copier(world, stack, null).accept(boatEntity);
+            EntityType.copier(world, stack, null).initialize(boatEntity);
             boatEntity.setYaw(facing.getPositiveHorizontalDegrees());
 
             world.spawnEntity(boatEntity);

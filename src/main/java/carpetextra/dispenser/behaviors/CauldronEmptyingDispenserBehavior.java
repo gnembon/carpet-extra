@@ -40,7 +40,7 @@ public class CauldronEmptyingDispenserBehavior extends DispenserBehaviorHelper {
             // powder snow
             else if(frontBlock == Blocks.POWDER_SNOW_CAULDRON) {
                 setCauldron(world, frontBlockPos, SoundEvents.ITEM_BUCKET_FILL_POWDER_SNOW);
-                return this.addOrDispense(pointer, stack, new ItemStack(Items.POWDER_SNOW_BUCKET));
+                return this.addOrDispense(pointer, stack, new ItemStack(Items.POWDER_SNOW));
             }
         }
 
