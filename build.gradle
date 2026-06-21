@@ -7,10 +7,12 @@ repositories {
 	maven {
 		url = 'https://masa.dy.fi/maven'
 	}
-	maven {
-		// For deobf yarn, until I've had time to review PRs in old mappings (to not break them)
-		url = 'https://repo.codemc.io/repository/relativitymc/'
-		content {
+	// For deobf yarn, until I've had time to review PRs in old mappings (to not break them)
+	exclusiveContent {
+		forRepository {
+			maven { url = "https://repo.codemc.io/repository/relativitymc/" }
+		}
+		filter {
 			includeGroup "org.relativitymc"
 		}
 	}
