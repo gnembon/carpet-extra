@@ -14,7 +14,7 @@ repositories {
 			includeGroup "org.relativitymc"
 		}
 	}
-	mavenLocal() // TODO remove once fabric-carpet@8563bef68ac5d6ec8cea08fef825653f05d3786a is published
+	maven { url = 'https://jitpack.io' } // TODO remove once fabric-carpet@8563bef68ac5d6ec8cea08fef825653f05d3786a is published
 }
 
 base {
@@ -44,7 +44,7 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "org.relativitymc:modern-yarn:${project.modern_yarn_version}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "carpet:fabric-carpet:${project.carpet_core_version}"
+	modImplementation "com.github.gnembon:fabric-carpet:8563bef68a" // TODO revert once fabric-carpet@8563bef68ac5d6ec8cea08fef825653f05d3786a is published
 
 	// for gametests
 	modGametestImplementation fabricApi.module("fabric-resource-loader-v1", project.fabric_api_version)
