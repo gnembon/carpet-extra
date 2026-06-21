@@ -67,7 +67,8 @@
     "CactusBlock_fertilizerMixin",
     "LilyPadBlock_fertilizerMixin",
     "DispenserBlock_fallingBlockMixin",
-    "FallingBlockEntityAccessor"
+    "FallingBlockEntityAccessor",
+    "GiantMushroomReplaceEndPortalFrameMixin"
   ],
   "injectors": {
     "defaultRequire": 1
