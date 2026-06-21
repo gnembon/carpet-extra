@@ -26,6 +26,7 @@ public class CarpetExtraTranslations
         } catch (IOException e) {
             return Collections.emptyMap();
         }
+        @SuppressWarnings("deprecation") // gson won't ever drop this
         Gson gson = new GsonBuilder().setLenient().create(); // lenient allows for comments
         return gson.fromJson(jsonData, new TypeToken<Map<String, String>>() {}.getType());
     }
