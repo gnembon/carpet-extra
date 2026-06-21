@@ -23,7 +23,7 @@ base {
 	archivesName = project.archives_base_name
 }
 
-version = project.minecraft_version+'-'+project.mod_version
+version = project.mod_version
 group = project.maven_group
 
 fabricApi {
