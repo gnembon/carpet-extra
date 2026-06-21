@@ -10,6 +10,9 @@ repositories {
 	maven {
 		// For deobf yarn, until I've had time to review PRs in old mappings (to not break them)
 		url = 'https://repo.codemc.io/repository/relativitymc/'
+		content {
+			includeGroup "org.relativitymc"
+		}
 	}
 	mavenLocal() // TODO remove once fabric-carpet@8563bef68ac5d6ec8cea08fef825653f05d3786a is published
 }
