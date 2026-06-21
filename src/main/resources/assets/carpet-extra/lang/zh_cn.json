@@ -1,161 +1,202 @@
 {
+  //modmenu
+  "modmenu.descriptionTranslation.carpet-extra": "Additional, less vanilla additions to the carpet mod",
+
+  // Categories:
   "carpet.category.extras": "扩展",
 
-  "carpet.rule.scaffoldingDistance.name": "脚手架距离上限",
-  "carpet.rule.scaffoldingDistance.desc": "脚手架水平扩展的距离上限",
+  // Rules:
 
-  "carpet.rule.pistonRedirectsRedstone.name": "活塞重定向红石粉",
-  "carpet.rule.pistonRedirectsRedstone.desc": "活塞以及粘性活塞可以重定向红石粉指向",
+  // accurateBlockPlacement
+  "carpet.rule.accurateBlockPlacement.desc": "启用对tweakroo mod的tweakAccurateBlockPlacement选项的支持",
 
-  "carpet.rule.updateSuppressionCrashFix.name": "更新抑制崩服修复",
-  "carpet.rule.updateSuppressionCrashFix.desc": "抑制因更新抑制导致的服务器崩溃",
-
-  "carpet.rule.autoCraftingDropper.name": "投掷器自动合成",
+  // autoCraftingDropper
   "carpet.rule.autoCraftingDropper.desc": "指向工作台的投掷器可以合成物品",
+
   "carpet.rule.autoCraftingDropper.extra.0": "当一个投掷器指向工作台时，若该投掷器的3x3空间中存在一个合法的配方，",
   "carpet.rule.autoCraftingDropper.extra.1": "则在它被激活时，它会合成这个配方，并丢出产物",
   "carpet.rule.autoCraftingDropper.extra.2": "对于这类指向工作台的投掷器，它们输出比较器信号的逻辑被修改，信号强度与被填充的格子数量相关",
   "carpet.rule.autoCraftingDropper.extra.3": "除此之外，当使用漏斗、投掷器以及发射器向它们输入时，它们每个槽位最多仅接受一个物品",
 
-  "carpet.rule.dispenserPlacesBlocks.name": "发射器放置方块",
-  "carpet.rule.dispenserPlacesBlocks.desc": "发射器可放置方块",
+  // betterBonemeal
+  "carpet.rule.betterBonemeal.desc": "骨粉可以用来催熟甘蔗、仙人掌和睡莲",
 
-  "carpet.rule.variableWoodDelays.name": "木质元件可变延迟",
-  "carpet.rule.variableWoodDelays.desc": "木质压力板、按钮将因其种类不同而拥有不同的延迟",
+  // blazeMeal
+  "carpet.rule.blazeMeal.desc": "烈焰粉可以催熟下界疣",
 
-  "carpet.rule.comparatorReadsClock.name": "比较器读取时钟",
-  "carpet.rule.comparatorReadsClock.desc": "让比较器读取展示框内钟的时间，而非钟物品在展示框中的旋转角度",
+  "carpet.rule.blazeMeal.extra.0": "可通过发射器或玩家右键动作来催熟",
 
-  "carpet.rule.hopperMinecartItemTransfer.name": "漏斗矿车输出物品",
-  "carpet.rule.hopperMinecartItemTransfer.desc": "让漏斗矿车可以向其下方容器输出物品",
-
-  "carpet.rule.commandPing.name": "延迟测试",
-  "carpet.rule.commandPing.desc": "启用`/ping`命令让玩家可获得他们的网络延迟",
-
-  "carpet.rule.dispensersFillBottles.name": "发射器填充水瓶",
-  "carpet.rule.dispensersFillBottles.desc": "当发射器前方是水时，发射器将空瓶填满成水瓶",
-
-  "carpet.rule.dispensersFillMinecarts.name": "发射器组装矿车",
-  "carpet.rule.dispensersFillMinecarts.desc": "发射器可将漏斗、箱子、TNT以及熔炉放入矿车中",
-
-  "carpet.rule.spongesDryInTheNether.name": "海绵在下界变干",
-  "carpet.rule.spongesDryInTheNether.desc": "湿海绵将会在下界中变干",
-
-  "carpet.rule.clericsFarmWarts.name": "牧师收获下界疣",
-  "carpet.rule.clericsFarmWarts.desc": "让牧师可以收获下界疣",
-  "carpet.rule.clericsFarmWarts.extra.0": "同时这也会让它们能够捡起下界疣物品",
-  "carpet.rule.clericsFarmWarts.extra.1": "以及让它们寻路至灵魂沙",
-
-  "carpet.rule.renewablePackedIce.name": "可再生浮冰",
-  "carpet.rule.renewablePackedIce.desc": "掉落的铁砧压碎多个冰块时会将冰转换为浮冰",
-
-  "carpet.rule.accurateBlockPlacement.name": "准确方块放置支持",
-  "carpet.rule.accurateBlockPlacement.desc": "启用对tweakroo mod的tweakAccurateBlockPlacement选项的支持",
-
-  "carpet.rule.dispensersToggleThings.name": "发射器拨动方块",
-  "carpet.rule.dispensersToggleThings.desc": "含有木棍的发射器可以拨动各种方块",
-  "carpet.rule.dispensersToggleThings.extra.0": "对按钮、红石粉、音符盒、红石比较器、红石中继器以及阳光传感器等有效",
-
-  "carpet.rule.dispensersTillSoil.name": "发射器锄地",
-  "carpet.rule.dispensersTillSoil.desc": "发射器可使用锄来锄地",
-
-  "carpet.rule.dispensersFeedAnimals.name": "发射器喂食动物",
-  "carpet.rule.dispensersFeedAnimals.desc": "发射器可喂食动物",
-
-  "carpet.rule.disablePlayerCollision.name": "禁用玩家碰撞",
-  "carpet.rule.disablePlayerCollision.desc": "禁用玩家实体的碰撞",
-
-  "carpet.rule.renewableLava.name": "可再生岩浆",
-  "carpet.rule.renewableLava.desc": "被6个岩浆源围绕的黑曜石有概率转换为岩浆",
-  "carpet.rule.renewableLava.extra.0": "感谢：Skyrising",
-
-  "carpet.rule.doubleRetraction.name": "活塞双重收回",
-  "carpet.rule.doubleRetraction.desc": "重新实现1.8版本中活塞的双重收回",
-  "carpet.rule.doubleRetraction.extra.0": "让活塞无副作用地得到双重收回的能力",
-
-  "carpet.rule.blockStateSyncing.name": "方块状态同步",
+  // blockStateSyncing
   "carpet.rule.blockStateSyncing.desc": "修复F3调试界面中某些方块的方块状态不被更新",
+
   "carpet.rule.blockStateSyncing.extra.0": "可能会增加网络负载",
   "carpet.rule.blockStateSyncing.extra.1": "影响方块：仙人掌、甘蔗、树苗、漏斗、发射器以及投掷器",
 
-  "carpet.rule.renewableSand.name": "可再生沙子",
-  "carpet.rule.renewableSand.desc": "被铁砧砸到的圆石会变成沙子",
+  // chickenShearing
+  "carpet.rule.chickenShearing.desc": "你可以用剪刀从鸡的身上剪下羽毛。注意！每次你剪鸡毛时鸡都会受伤！",
 
-  "carpet.rule.dragonEggBedrockBreaking.name": "龙蛋破基岩",
+  "carpet.rule.chickenShearing.extra.0": "未成年的鸡不能被剪下羽毛",
+  "carpet.rule.chickenShearing.extra.1": "也适用于发射器",
+
+  // clericsFarmWarts
+  "carpet.rule.clericsFarmWarts.desc": "让牧师可以收获下界疣",
+
+  "carpet.rule.clericsFarmWarts.extra.0": "这也将允许它们捡起疣块物品，并且能够寻路至灵魂沙",
+
+  // commandPing
+  "carpet.rule.commandPing.desc": "启用`/ping`命令让玩家可获得他们的网络延迟",
+
+  // comparatorBetterItemFrames
+  "carpet.rule.comparatorBetterItemFrames.desc": "允许比较器检测前方水平放置的物品框以及前方方块上方的物品框",
+
+  "carpet.rule.comparatorBetterItemFrames.extra.0": "背后：允许比较器检测其背后的方块中的物品框",
+  "carpet.rule.comparatorBetterItemFrames.extra.1": "宽松：允许比较器检测其背后完整方块内的任何物品框",
+  "carpet.rule.comparatorBetterItemFrames.extra.2": "扩展：允许比较器检测其背后完整方块上的物品框",
+
+  // comparatorReadsClock
+  "carpet.rule.comparatorReadsClock.desc": "让比较器读取展示框内钟的时间，而非钟物品在展示框中的旋转角度",
+
+  // creeperSpawningInJungleTemples
+  "carpet.rule.creeperSpawningInJungleTemples.desc": "只有苦力怕会在丛林神庙中生成",
+
+  // disablePlayerCollision
+  "carpet.rule.disablePlayerCollision.desc": "禁用玩家实体的碰撞",
+
+  // dispenserPlacesBlocks
+  "carpet.rule.dispenserPlacesBlocks.desc": "发射器可放置方块",
+
+  // dispensersCarvePumpkins
+  "carpet.rule.dispensersCarvePumpkins.desc": "含有剪刀的发射器可以雕刻南瓜",
+
+  // dispensersFeedAnimals
+  "carpet.rule.dispensersFeedAnimals.desc": "如果给予发射器动物的繁殖物品，发射器可喂食动物",
+
+  "carpet.rule.dispensersFeedAnimals.extra.0": "也可以给棕色哞菇喂食花朵，使其产生谜之炖菜的效果",
+
+  // dispensersFillMinecarts
+  "carpet.rule.dispensersFillMinecarts.desc": "发射器可将漏斗、箱子、TNT以及熔炉放入矿车中",
+
+  // dispensersMilkAnimals
+  "carpet.rule.dispensersMilkAnimals.desc": "发射器中有空桶，它可以给牛、哞菇和山羊挤奶，还可以用碗从哞菇那里获取蘑菇或谜之炖菜",
+
+  // dispensersPlaceBoatsOnIce
+  "carpet.rule.dispensersPlaceBoatsOnIce.desc": "发射器可以在冰面上放置船",
+
+  // dispensersPotPlants
+  "carpet.rule.dispensersPotPlants.desc": "发射器可以将花放入花盆",
+
+  // dispensersStripBlocks
+  "carpet.rule.dispensersStripBlocks.desc": "发射器可使用斧头来剥落方块",
+
+  "carpet.rule.dispensersStripBlocks.extra.0": "可以剥落原木、去除氧化和去蜡",
+
+  // dispensersTillSoil
+  "carpet.rule.dispensersTillSoil.desc": "发射器可使用锄来锄地",
+
+  // dispensersToggleThings
+  "carpet.rule.dispensersToggleThings.desc": "含有木棍的发射器可以拨动各种方块",
+
+  "carpet.rule.dispensersToggleThings.extra.0": "适用于按钮、红石、音符盒、红石比较器、",
+  "carpet.rule.dispensersToggleThings.extra.1": "红石中继器、阳光探测器等",
+
+  // dispensersUseCauldrons
+  "carpet.rule.dispensersUseCauldrons.desc": "发射器可以用桶或瓶子清空/填充炼药锅，也可以为皮革盔甲/潜影盒/旗帜去除染色",
+
+  // doubleRetraction
+  "carpet.rule.doubleRetraction.desc": "重新实现1.8版本中活塞的双重收回",
+
+  "carpet.rule.doubleRetraction.extra.0": "使活塞能够无副作用地双重缩回",
+  "carpet.rule.doubleRetraction.extra.1": "修复 [MC-88959](https://bugs.mojang.com/browse/MC-88959).",
+
+  // dragonEggBedrockBreaking
   "carpet.rule.dragonEggBedrockBreaking.desc": "重新引入1.12的龙蛋破基岩机制",
 
-  "carpet.rule.fireChargeConvertsToNetherrack.name": "烈焰弹转换圆石至下界岩",
-  "carpet.rule.fireChargeConvertsToNetherrack.desc": "发射器中的烈焰弹可将圆石转换为下界岩",
-  "carpet.rule.fireChargeConvertsToNetherrack.extra.0": "感谢：Skyrising",
+  // emptyShulkerBoxStackAlways
+  "carpet.rule.emptyShulkerBoxStackAlways.desc": "让空潜影盒总能堆叠起来，包括在物品栏中",
 
-  "carpet.rule.chickenShearing.name": "剪鸡毛",
-  "carpet.rule.chickenShearing.desc": "你可以用剪刀从鸡的身上剪下羽毛。注意！每次你剪鸡毛时鸡都会受伤！",
-  "carpet.rule.chickenShearing.extra.0": "未成年的鸡不能被剪下羽毛",
+  // enderPearlChunkLoading
+  "carpet.rule.enderPearlChunkLoading.desc": "让水平移动的末影珍珠可以强加载区块",
 
-  "carpet.rule.mobInFireConvertsSandToSoulsand.name": "着火的生物将沙子转换为灵魂沙",
-  "carpet.rule.mobInFireConvertsSandToSoulsand.desc": "当生物死于沙子上的火焰时，沙子将会转换为灵魂沙",
+  // fallingBlockDispensers
+  "carpet.rule.fallingBlockDispensers.desc": "如果发射器/投掷器前方有方块且被激活，它会将该方块变成下落方块",
 
-  "carpet.rule.flowerPotChunkLoading.name": "花盆区块加载",
+  "carpet.rule.fallingBlockDispensers.extra.0": "发射器和投掷器给予下落方块的速度与22w13oneblockatatime中的速度相同",
+
+  // flowerPotChunkLoading
   "carpet.rule.flowerPotChunkLoading.desc": "将凋零玫瑰放置于花盆中以常加载其所在的区块",
+
   "carpet.rule.flowerPotChunkLoading.extra.0": "如果你启用了这个规则，已存在花盆的区块不会被加载",
   "carpet.rule.flowerPotChunkLoading.extra.1": "如果你关闭了这个规则，处于加载状态的花盆区块不会被移除，你需要手动使用/forceload指令来移除它们",
   "carpet.rule.flowerPotChunkLoading.extra.2": "所有常加载区块的列表可用`/forceload query`查询",
 
-  "carpet.rule.reloadSuffocationFix.name": "重载窒息修复",
-  "carpet.rule.reloadSuffocationFix.desc": "让生物不会在区块重载后卡进方块里",
-  "carpet.rule.reloadSuffocationFix.extra.0": "生物表现可能会有轻微的不同",
-  "carpet.rule.reloadSuffocationFix.extra.1": "修复了[MC-2025](https://bugs.mojang.com/browse/MC-2025)",
+  // hopperMinecartItemTransfer
+  "carpet.rule.hopperMinecartItemTransfer.desc": "让漏斗矿车可以向其下方容器输出物品",
 
-  "carpet.rule.dispensersMilkCows.name": "发射器挤奶",
-  "carpet.rule.dispensersMilkCows.desc": "发射器可使用空桶给牛挤奶，也可以使用碗给蘑菇牛挤蘑菇煲",
-
-  "carpet.rule.repeaterPriorityFix.name": "红石中继器优先级修复",
-  "carpet.rule.repeaterPriorityFix.desc": "短脉冲不会在某些中继器序列中消失",
-  "carpet.rule.repeaterPriorityFix.extra.0": "可以说是带回了1.8前的表现",
-  "carpet.rule.repeaterPriorityFix.extra.1": "修复了[MC-54711](https://bugs.mojang.com/browse/MC-54711)",
-
-  "carpet.rule.straySpawningInIgloos.name": "流浪者于雪屋生成",
-  "carpet.rule.straySpawningInIgloos.desc": "雪屋中能且仅能生成流浪者",
-
-  "carpet.rule.renewableWitherSkeletons.name": "可再生凋灵骷髅",
-  "carpet.rule.renewableWitherSkeletons.desc": "被闪电击中的骷髅会转换为凋灵骷髅",
-
-  "carpet.rule.creeperSpawningInJungleTemples.name": "爬行者于雪屋生成",
-  "carpet.rule.creeperSpawningInJungleTemples.desc": "雪屋中能且仅能生成爬行者",
-
-  "carpet.rule.y0DragonEggBedrockBreaking.name": "y0龙蛋破基岩",
-  "carpet.rule.y0DragonEggBedrockBreaking.desc": "让龙蛋可破除y0基岩",
-  "carpet.rule.y0DragonEggBedrockBreaking.extra.0": "需开启dragonEggBedrockBreaking(龙蛋破基岩)规则",
-
-  "carpet.rule.spiderJockeysDropGapples.name": "蜘蛛骑士掉落附魔金苹果",
-  "carpet.rule.spiderJockeysDropGapples.desc": "让骷髅骑士有一定概率掉落附魔金苹果",
-  "carpet.rule.spiderJockeysDropGapples.extra.0": "默认值为0，即不会掉落附魔金苹果",
-
-  "carpet.rule.dragonsBreathConvertsCobbleToEndstone.name": "龙息转换圆石至末地石",
-  "carpet.rule.dragonsBreathConvertsCobbleToEndstone.desc": "发射器中的龙息可将圆石转换为末地石",
-
-  "carpet.rule.maxSpongeSuck.name": "海绵吸水量",
-  "carpet.rule.maxSpongeSuck.desc": "海绵的最大吸水量",
-
-  "carpet.rule.maxSpongeRange.name": "海绵吸水距离",
+  // maxSpongeRange
   "carpet.rule.maxSpongeRange.desc": "海绵吸水的最大偏移距离",
 
-  "carpet.rule.emptyShulkerBoxStackAlways.name": "空潜影盒总能堆叠",
-  "carpet.rule.emptyShulkerBoxStackAlways.desc": "让空潜影盒总能堆叠起来，包括在物品栏中",
+  // maxSpongeSuck
+  "carpet.rule.maxSpongeSuck.desc": "海绵的最大吸水量",
 
-  "carpet.rule.enderPearlChunkLoading.name": "末影珍珠区块加载",
-  "carpet.rule.enderPearlChunkLoading.desc": "让水平移动的末影珍珠可以强加载区块",
+  // mobInFireConvertsSandToSoulsand
+  "carpet.rule.mobInFireConvertsSandToSoulsand.desc": "当生物死于沙子上的火焰时，沙子将会转换为灵魂沙",
 
-  "carpet.rule.betterBonemeal.name": "更好的骨粉",
-  "carpet.rule.betterBonemeal.desc": "骨粉可被用于催熟仙人掌及甘蔗",
+  // pistonRedirectsRedstone
+  "carpet.rule.pistonRedirectsRedstone.desc": "活塞以及粘性活塞可以重定向红石粉指向",
 
-  "carpet.rule.dispensersCarvePumpkins.name": "发射器雕刻南瓜",
-  "carpet.rule.dispensersCarvePumpkins.desc": "含有剪刀的发射器可以雕刻南瓜",
+  "carpet.rule.pistonRedirectsRedstone.extra.0": "在缩回时，它们会有视觉上闪烁",
+  "carpet.rule.pistonRedirectsRedstone.extra.1": "但这只是为了最小化使其工作所需的更改",
 
-  "carpet.rule.blazeMeal.name": "烈焰粉肥料",
-  "carpet.rule.blazeMeal.desc": "烈焰粉可以催熟下界疣",
-  "carpet.rule.blazeMeal.extra.0": "可通过发射器或玩家右键动作来催熟",
+  // reloadSuffocationFix
+  "carpet.rule.reloadSuffocationFix.desc": "让生物不会在区块重载后卡进方块里",
 
-  "carpet.rule.disablePhantomSpawning.name": "禁止幻翼生成",
-  "carpet.rule.disablePhantomSpawning.desc": "禁止幻翼的生成"
+  "carpet.rule.reloadSuffocationFix.extra.0": "生物表现可能会有轻微的不同",
+  "carpet.rule.reloadSuffocationFix.extra.1": "修复 [MC-2025](https://bugs.mojang.com/browse/MC-2025).",
+
+  // renewableEndstone
+  "carpet.rule.renewableEndstone.desc": "发射器中的龙息可以将圆石转化为末地石",
+
+  // renewableIce
+  "carpet.rule.renewableIce.desc": "多个冰被下落的铁砧碾碎后会形成更密集的冰",
+
+  "carpet.rule.renewableIce.extra.0": "霜冻冰会变成冰，冰会变成浮冰，浮冰会变成蓝冰",
+
+  // renewableNetherrack
+  "carpet.rule.renewableNetherrack.desc": "发射器中的火药箭可以将圆石转化为下界岩",
+
+  "carpet.rule.renewableNetherrack.extra.0": "致谢：Skyrising",
+
+  // renewableSand
+  "carpet.rule.renewableSand.desc": "被铁砧砸到的圆石会变成沙子",
+
+  // renewableWitherSkeletons
+  "carpet.rule.renewableWitherSkeletons.desc": "被闪电击中的骷髅会转换为凋灵骷髅",
+
+  // repeaterPriorityFix
+  "carpet.rule.repeaterPriorityFix.desc": "短脉冲不会在某些中继器序列中消失",
+
+  "carpet.rule.repeaterPriorityFix.extra.0": "可以说是带回了1.8前的表现",
+  "carpet.rule.repeaterPriorityFix.extra.1": "修复 [MC-54711](https://bugs.mojang.com/browse/MC-54711).",
+
+  // scaffoldingDistance
+  "carpet.rule.scaffoldingDistance.desc": "脚手架水平扩展的距离上限",
+
+  // spiderJockeysDropGapples
+  "carpet.rule.spiderJockeysDropGapples.desc": "让骷髅骑士有一定概率掉落附魔金苹果",
+
+  "carpet.rule.spiderJockeysDropGapples.extra.0": "默认值为0，即不会掉落附魔金苹果",
+
+  // straySpawningInIgloos
+  "carpet.rule.straySpawningInIgloos.desc": "雪屋中能且仅能生成流浪者",
+
+  // variableWoodDelays
+  "carpet.rule.variableWoodDelays.desc": "木质压力板、按钮将因其种类不同而拥有不同的延迟",
+
+  // y0DragonEggBedrockBreaking
+  "carpet.rule.y0DragonEggBedrockBreaking.desc": "让龙蛋可破除y0基岩",
+
+  "carpet.rule.y0DragonEggBedrockBreaking.extra.0": "需开启dragonEggBedrockBreaking(龙蛋破基岩)规则",
+
+  //xpPerSculkCatalyst
+  "carpet.rule.xpPerSculkCatalyst.desc": "设置破坏幽匿催发体时掉落的经验值数量"
 }
