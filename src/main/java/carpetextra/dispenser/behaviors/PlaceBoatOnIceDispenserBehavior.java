@@ -1,9 +1,6 @@
 package carpetextra.dispenser.behaviors;
 
 import carpetextra.mixins.BoatItemAccessorMixin;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.entity.EntityType;
@@ -21,10 +18,10 @@ public class PlaceBoatOnIceDispenserBehavior extends FallibleItemDispenserBehavi
 
     @Override
     public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-        this.setSuccess(true);
+        this.setSuccess(false);
         ServerWorld world = pointer.world();
         Direction facing = pointer.state().get(DispenserBlock.FACING);
-        
+
         BoatItemAccessorMixin boatInfo = (BoatItemAccessorMixin) stack.getItem();
         EntityType<? extends AbstractBoatEntity> boatType = boatInfo.getType();
 
@@ -34,24 +31,27 @@ public class PlaceBoatOnIceDispenserBehavior extends FallibleItemDispenserBehavi
         double y = vec3d.getY() + facing.getOffsetY() * 1.125F;
         double z = vec3d.getZ() + facing.getOffsetZ() * d;
 
-        BlockPos frontBlockPos = pointer.pos().offset(facing);
-        Block frontBlock = world.getBlockState(frontBlockPos).getBlock();
-        BlockState stateBelowFront = world.getBlockState(frontBlockPos.down());
+        BlockPos frontPos = pointer.pos().offset(facing);
+        boolean iceInFront = world.getBlockState(frontPos).isIn(BlockTags.ICE);
+        boolean airInFront = world.getBlockState(frontPos).isAir();
+        boolean iceBelowFront = world.getBlockState(frontPos.down()).isIn(BlockTags.ICE);
 
-        if (frontBlock == Blocks.AIR && stateBelowFront.isIn(BlockTags.ICE)) {
-            AbstractBoatEntity boatEntity = boatType.create(world, SpawnReason.DISPENSER);
-
-            boatEntity.initPosition(x, y, z);
-            EntityType.copier(world, stack, null).accept(boatEntity);
-            boatEntity.setYaw(facing.getPositiveHorizontalDegrees());
-
-            world.spawnEntity(boatEntity);
-            stack.decrement(1);
+        if (!(iceInFront || (airInFront && iceBelowFront))) {
             return stack;
         }
 
-        // fail to dispense
-        this.setSuccess(false);
+        double h = iceInFront ? 1.0 : 0.0;
+
+        AbstractBoatEntity boat = boatType.create(world, SpawnReason.DISPENSER);
+        if (boat != null) {
+            boat.initPosition(x, y + h, z);
+            EntityType.copier(world, stack, null).accept(boat);
+            boat.setYaw(facing.getPositiveHorizontalDegrees());
+            world.spawnEntity(boat);
+            stack.decrement(1);
+            this.setSuccess(true);
+        }
+
         return stack;
     }
 }
