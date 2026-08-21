@@ -243,9 +243,14 @@ public class CarpetExtraDispenserBehaviors {
         }
 
         // dispensersPlaceBoatsOnIce
-        if (CarpetExtraSettings.dispensersPlaceBoatsOnIce && item instanceof BoatItem && frontBlock == Blocks.AIR) {
-            BlockPos blockBelowFrontBlockPos = frontBlockPos.down();
-            if (world.getBlockState(blockBelowFrontBlockPos).isIn(BlockTags.ICE)) {
+        if (CarpetExtraSettings.dispensersPlaceBoatsOnIce && item instanceof BoatItem) {
+            BlockState frontState = world.getBlockState(frontBlockPos);
+
+            boolean iceInFront = frontState.isIn(BlockTags.ICE);
+            boolean airInFront = frontState.isAir();
+            boolean iceBelowFront = world.getBlockState(frontBlockPos.down()).isIn(BlockTags.ICE);
+
+            if (iceInFront || (airInFront && iceBelowFront)) {
                 return PLACE_BOAT_ON_ICE;
             }
         }
