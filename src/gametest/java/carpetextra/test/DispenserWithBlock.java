@@ -9,7 +9,6 @@ import java.util.function.Supplier;
 
 import carpetextra.machinery.DynamicTest;
 import carpetextra.machinery.TestProvider;
-import carpetextra.mixins.AxeItem_StrippedBlocksAccessorMixin;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -132,7 +131,13 @@ public class DispenserWithBlock {
     @TestProvider
     public Collection<DynamicTest> stripTests() {
         List<DynamicTest> fns = new ArrayList<>();
-        Map<Block, Block> conversions = AxeItem_StrippedBlocksAccessorMixin.getStrippedBlocks();
+        Map<Block, Block> conversions = new java.util.LinkedHashMap<>();
+        for (Block b : net.minecraft.registry.Registries.BLOCK) {
+            net.minecraft.util.Identifier id = net.minecraft.registry.Registries.BLOCK.getId(b);
+            if (id.getPath().startsWith("stripped_")) continue;
+            net.minecraft.util.Identifier strippedId = id.withPath("stripped_" + id.getPath());
+            net.minecraft.registry.Registries.BLOCK.getOptionalValue(strippedId).ifPresent(r -> conversions.put(b, r));
+        }
         
         for (Map.Entry<Block, Block> entry : conversions.entrySet()) {
             fns.add(makeDispenserTest("strip_" + entry.getKey().asItem(), (ctx) -> {

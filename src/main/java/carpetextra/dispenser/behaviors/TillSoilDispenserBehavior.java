@@ -3,7 +3,7 @@ package carpetextra.dispenser.behaviors;
 import java.util.Set;
 
 import carpetextra.dispenser.DispenserItemUsageContext;
-import carpetextra.mixins.HoeItem_TilledBlocksAccessorMixin;
+import carpetextra.helpers.BlockTransformHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
@@ -18,8 +18,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class TillSoilDispenserBehavior extends FallibleItemDispenserBehavior {
-    public static final Set<Block> TILLED_BLOCKS = HoeItem_TilledBlocksAccessorMixin.getTilledBlocks().keySet();
-
     @Override
     protected ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
         this.setSuccess(true);
@@ -34,7 +32,7 @@ public class TillSoilDispenserBehavior extends FallibleItemDispenserBehavior {
             Block hoeBlock = hoeBlockState.getBlock();
 
             // check if hoe can be used on block
-            if(TILLED_BLOCKS.contains(hoeBlock)) {
+            if(BlockTransformHelper.canTransform(world, hoeBlockPos, stack)) {
                 BlockHitResult hitResult = new BlockHitResult(Vec3d.of(hoeBlockPos), dispenserFacing.getOpposite(), hoeBlockPos, false);
                 ItemUsageContext context = new DispenserItemUsageContext(world, stack, hitResult);
 
