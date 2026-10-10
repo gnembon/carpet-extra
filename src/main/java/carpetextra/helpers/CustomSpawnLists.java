@@ -14,8 +14,8 @@ public class CustomSpawnLists
     public static void addExtraSpawnRules()
     {
         SpawnOverrides.addOverride(() -> CarpetExtraSettings.straySpawningInIgloos, SpawnGroup.MONSTER, StructureKeys.IGLOO,
-                StructureSpawns.BoundingBox.STRUCTURE, WeightedPool.of(new SpawnSettings.SpawnEntry(EntityTypes.STRAY, 1, 1)));
+                StructureSpawns.BoundingBox.STRUCTURE, WeightedPool.of(new SpawnSettings.SpawnEntry(EntityTypes.STRAY, net.minecraft.util.math.intprovider.ConstantIntProvider.create(1))));
         SpawnOverrides.addOverride(() -> CarpetExtraSettings.creeperSpawningInJungleTemples, SpawnGroup.MONSTER, StructureKeys.JUNGLE_PYRAMID,
-                StructureSpawns.BoundingBox.STRUCTURE, WeightedPool.of(new SpawnSettings.SpawnEntry(EntityTypes.CREEPER, 1, 1)));
+                StructureSpawns.BoundingBox.STRUCTURE, WeightedPool.of(new SpawnSettings.SpawnEntry(EntityTypes.CREEPER, net.minecraft.util.math.intprovider.ConstantIntProvider.create(1))));
     }
 }

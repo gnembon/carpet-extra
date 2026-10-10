@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class CactusBlock_fertilizerMixin implements Fertilizable
 {
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state)
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, net.minecraft.block.FertilizationCause cause)
     {
         int i = this.countCactusAbove(world, pos);
         int j = this.countCactusBelow(world, pos);
@@ -25,13 +25,13 @@ public abstract class CactusBlock_fertilizerMixin implements Fertilizable
     }
     
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state, net.minecraft.block.FertilizationCause cause)
     {
         return true;
     }
     
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, net.minecraft.block.FertilizationCause cause)
     {
         int i = this.countCactusAbove(world, pos);
         BlockPos growPos = pos.up(i + 1);

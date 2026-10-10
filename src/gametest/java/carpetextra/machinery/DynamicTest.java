@@ -54,6 +54,7 @@ public record DynamicTest(
         
         return new TestData<>(
                 testEnvironment,
+                net.minecraft.world.World.OVERWORLD,
                 Identifier.of(gameTest.structure()),
                 gameTest.maxTicks(),
                 gameTest.setupTicks(),

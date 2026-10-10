@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class SugarCaneBlock_fertilizerMixin implements Fertilizable
 {
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state)
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, net.minecraft.block.FertilizationCause cause)
     {
         int i = this.countSugarCaneAbove(world, pos);
         int j = this.countSugarCaneBelow(world, pos);
@@ -22,13 +22,13 @@ public abstract class SugarCaneBlock_fertilizerMixin implements Fertilizable
     }
     
     @Override
-    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state)
+    public boolean canGrow(World world, Random random, BlockPos pos, BlockState state, net.minecraft.block.FertilizationCause cause)
     {
         return true;
     }
     
     @Override
-    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state)
+    public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state, net.minecraft.block.FertilizationCause cause)
     {
         int i = this.countSugarCaneAbove(world, pos);
         world.setBlockState(pos.up(i + 1), Blocks.SUGAR_CANE.getDefaultState());
